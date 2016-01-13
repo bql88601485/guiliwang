@@ -30,6 +30,8 @@
 #import "IndexBannerCell.h"
 #import "B0_IndexRecommendGoodsCell_iPhone.h"
 #import "HomeModelOneCell.h"
+#import "B0_IndexCategoryCell_iPhoneTwo.h"
+#import "B0_IndexCategoryCell_iPhoneOne.h"
 #pragma mark -
 
 @interface B0_IndexBoard_iPhone()
@@ -87,6 +89,7 @@ ON_CREATE_VIEWS( signal )
     
     self.list.lineCount = 1;
     self.list.animationDuration = 0.25f;
+    
     
     self.list.whenReloading = ^
     {
@@ -171,12 +174,14 @@ ON_CREATE_VIEWS( signal )
             
             for (NSArray *list in newCargories) {
                 
-                CATEGORY *tmpObject = [[CATEGORY alloc] init];
-                tmpObject.id = objec.id;
-                tmpObject.name = objec.name;
-                tmpObject.goods = list;
-                
-                [allData addObject:tmpObject];
+                if ([list isKindOfClass:[NSArray class]]) {
+                    CATEGORY *tmpObject = [[CATEGORY alloc] init];
+                    tmpObject.id = objec.id;
+                    tmpObject.name = objec.name;
+                    tmpObject.goods = list;
+                    
+                    [allData addObject:tmpObject];
+                }
             }
         }
         
@@ -186,9 +191,16 @@ ON_CREATE_VIEWS( signal )
         for ( int i = 0; i < allData.count; i++ )
         {
             BeeUIScrollItem * categoryItem = self.list.items[ i + offset ];
-            categoryItem.clazz = [B0_IndexCategoryCell_iPhone class];
-            categoryItem.data = [allData safeObjectAtIndex:i];
-            categoryItem.size = CGSizeMake( self.list.width, 210.0f );
+            CATEGORY *object = [allData safeObjectAtIndex:i];
+            if (object.goods.count == 1) {
+                categoryItem.clazz = [B0_IndexCategoryCell_iPhoneOne class];
+            }else if (object.goods.count == 2){
+                categoryItem.clazz = [B0_IndexCategoryCell_iPhoneTwo class];
+            }else if (object.goods.count == 3){
+                categoryItem.clazz = [B0_IndexCategoryCell_iPhone class];
+            }
+            categoryItem.data = object;
+            categoryItem.size = CGSizeMake( self.list.width, 180.0f );
             categoryItem.rule = BeeUIScrollLayoutRule_Line;
             categoryItem.insets = UIEdgeInsetsMake(0, 0, 0, 0);
         }

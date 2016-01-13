@@ -535,6 +535,10 @@
 		41485AE81AC504B1003FD9DF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41485AE71AC504B1003FD9DF /* CoreTelephony.framework */; };
 		41485AEA1AC50524003FD9DF /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41485AE91AC50524003FD9DF /* libstdc++.dylib */; };
 		41485AEC1AC50540003FD9DF /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41485AEB1AC50540003FD9DF /* libiconv.dylib */; };
+		525119CC1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 525119C71C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.m */; };
+		525119CD1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml in Resources */ = {isa = PBXBuildFile; fileRef = 525119C81C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml */; };
+		525119CE1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 525119CA1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.m */; };
+		525119CF1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.xml in Resources */ = {isa = PBXBuildFile; fileRef = 525119CB1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.xml */; };
 		526229561C04C77400641CB0 /* sns_icon_22@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 526229541C04C77400641CB0 /* sns_icon_22@2x.png */; };
 		526229571C04C77400641CB0 /* sns_icon_24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 526229551C04C77400641CB0 /* sns_icon_24@2x.png */; };
 		6302390C177C1676004C052D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 630236B1177C1675004C052D /* AppDelegate.m */; };
@@ -1740,6 +1744,12 @@
 		41485AE71AC504B1003FD9DF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		41485AE91AC50524003FD9DF /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		41485AEB1AC50540003FD9DF /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		525119C61C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B0_IndexCategoryCell_iPhoneTwo.h; sourceTree = "<group>"; };
+		525119C71C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B0_IndexCategoryCell_iPhoneTwo.m; sourceTree = "<group>"; };
+		525119C81C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = B0_IndexCategoryCell_iPhoneTwo.xml; sourceTree = "<group>"; };
+		525119C91C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B0_IndexCategoryCell_iPhoneOne.h; sourceTree = "<group>"; };
+		525119CA1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B0_IndexCategoryCell_iPhoneOne.m; sourceTree = "<group>"; };
+		525119CB1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = B0_IndexCategoryCell_iPhoneOne.xml; sourceTree = "<group>"; };
 		526229541C04C77400641CB0 /* sns_icon_22@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sns_icon_22@2x.png"; sourceTree = "<group>"; };
 		526229551C04C77400641CB0 /* sns_icon_24@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sns_icon_24@2x.png"; sourceTree = "<group>"; };
 		630236B0177C1675004C052D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -3238,6 +3248,12 @@
 				414857121AC4FCFD003FD9DF /* B0_IndexCategoryCell_iPhone.h */,
 				414857131AC4FCFD003FD9DF /* B0_IndexCategoryCell_iPhone.m */,
 				414857141AC4FCFD003FD9DF /* B0_IndexCategoryCell_iPhone.xml */,
+				525119C61C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.h */,
+				525119C71C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.m */,
+				525119C81C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml */,
+				525119C91C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.h */,
+				525119CA1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.m */,
+				525119CB1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.xml */,
 				414857151AC4FCFD003FD9DF /* B0_IndexRecommendCell_iPhone.h */,
 				414857161AC4FCFD003FD9DF /* B0_IndexRecommendCell_iPhone.m */,
 				414857171AC4FCFD003FD9DF /* B0_IndexRecommendCell_iPhone.xml */,
@@ -5962,6 +5978,7 @@
 				E56C747A1C31264100EE0630 /* 03@2x.png in Resources */,
 				414859391AC4FCFE003FD9DF /* tuitional_img_5_2@2x.png in Resources */,
 				414858D31AC4FCFE003FD9DF /* log_in_key_icon@2x.png in Resources */,
+				525119CF1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.xml in Resources */,
 				414859001AC4FCFE003FD9DF /* shopping_cart_act_logo.png in Resources */,
 				E5383F261C04276D0076488D /* Icon-60.png in Resources */,
 				414858E91AC4FCFE003FD9DF /* profile_refresh_receipt_icon.png in Resources */,
@@ -6040,6 +6057,7 @@
 				414858891AC4FCFE003FD9DF /* cell_bg_header@2x.png in Resources */,
 				414859C81AC4FCFE003FD9DF /* E2_PendingShippedCell_iPhone.xml in Resources */,
 				414859C01AC4FCFE003FD9DF /* E1_PendingPaymentBoard_iPhone.xml in Resources */,
+				525119CD1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml in Resources */,
 				414858501AC4FCFE003FD9DF /* CommonCountdownCell.xml in Resources */,
 				414858E21AC4FCFE003FD9DF /* profile_refresh_camera_icon@2x.png in Resources */,
 				414859AA1AC4FCFE003FD9DF /* D0_SearchCategory_iPhone.xml in Resources */,
@@ -6157,6 +6175,7 @@
 				9D67CB371A4A7EAA003ABA05 /* UILabel+BeeUILayout.m in Sources */,
 				414859E71AC4FCFE003FD9DF /* F0_AddressListCell_iPhone.m in Sources */,
 				4148595F1AC4FCFE003FD9DF /* B1_ProductListSearchBarCell_iPhone.m in Sources */,
+				525119CE1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.m in Sources */,
 				9D67CB9D1A4A7EAB003ABA05 /* NSObject+BeeMacros.mm in Sources */,
 				414859511AC4FCFE003FD9DF /* B0_IndexRecommendGoodsCell_iPhone.m in Sources */,
 				9D67CB0E1A4A7EAA003ABA05 /* Bee_UIWebView.m in Sources */,
@@ -6525,6 +6544,7 @@
 				9D67CB891A4A7EAB003ABA05 /* NSObject+BeeDatabase.m in Sources */,
 				414859491AC4FCFE003FD9DF /* B0_BannerPhotoCell_iPhone.m in Sources */,
 				4148594F1AC4FCFE003FD9DF /* B0_IndexRecommendCell_iPhone.m in Sources */,
+				525119CC1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneTwo.m in Sources */,
 				41485A5D1AC4FDF4003FD9DF /* CommentModel.m in Sources */,
 				9D67CB171A4A7EAA003ABA05 /* UIView+SwipeGesture.m in Sources */,
 				9D67CBA61A4A7EAB003ABA05 /* NSTimer+BeeExtension.mm in Sources */,

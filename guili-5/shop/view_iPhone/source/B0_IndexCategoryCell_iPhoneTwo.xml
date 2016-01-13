@@ -1,47 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ui namespace="B0_IndexCategoryCell_iPhone">
+<ui namespace="B0_IndexCategoryCell_iPhoneTwo">
     <col class="cate-title">
         <label class="cate-image"/>
         <label id="cate_name" class="cate-name">-</label>
     </col>
-    <row class="category-wrapper">
-        <row class="category-group">
-            <image class="category-group-bg"/>
-            <col class="category-group-mid">
-                <row class="category-goods">
-                    <image id="goods-image1" class="category-goods-image"/>
-                    <col class="category-left">
-                        <label id="goods-title1" class="category-goods-title"></label>
-                        <label id="goods-price1" class="category-goods-price"></label>
-                    </col>
-                    <button id="goods1" class="mask"></button>
-                </row>
-            </col>
-            <col class="category-group-mid">
-                <row class="category-goods">
-                    <image id="goods-image2" class="category-goods-image"/>
-                    <col class="category-left">
-                        <label id="goods-title2" class="category-goods-title"></label>
-                        <label id="goods-price2" class="category-goods-price"></label>
-                    </col>
-                    <button id="goods2" class="mask"></button>
-                </row>
-            </col>
-            <col class="category-group-mid">
-                <row class="category-goods">
-                    <image id="goods-image3" class="category-goods-image"/>
-                    <col class="category-left">
-                        <label id="goods-title3" class="category-goods-title"></label>
-                        <label id="goods-price3" class="category-goods-price"></label>
-                    </col>
-                    <button id="goods3" class="mask"></button>
-                </row>
-            </col>
+    
+    <row class="category-group">
+        <image class="category-group-bg"/>
+        <col class="category-group-mid">
+            <row class="category-goods">
+                <image id="goods-image1" class="category-goods-image"/>
+                <col class="category-left">
+                    <label id="goods-title1" class="category-goods-title"></label>
+                    <label id="goods-price1" class="category-goods-price"></label>
+                </col>
+                <button id="goods1" class="mask"></button>
+            </row>
             <view class="v-line1"/>
-            <view class="v-line2"/>
-            <!--            <view class="h-line"/>-->
-        </row>
+        </col>
+        <col class="category-group-mid">
+            <row class="category-goods">
+                <image id="goods-image2" class="category-goods-image"/>
+                <col class="category-left">
+                    <label id="goods-title2" class="category-goods-title"></label>
+                    <label id="goods-price2" class="category-goods-price"></label>
+                </col>
+                <button id="goods2" class="mask"></button>
+            </row>
+        </col>
+        
+        <!--            <view class="h-line"/>-->
     </row>
+    
     
     <style>
         
@@ -106,15 +96,15 @@
         }
         
         .category-group-left {
-        width: 33%;
+        width: 50%;
         height: 186px;
         }
         .category-group-mid{
-        width: 33%;
+        width: 50%;
         height: 186px;
         }
         .category-group-right {
-        width: 34%;
+        width: 50%;
         height: 186px;
         }
         
@@ -168,7 +158,7 @@
         width: 1px;
         height: 150px;
         position: absolute;
-        left: 103px;
+        right: 1px;
         top: 8px;
         background-color: #ccc 0.4;
         }
