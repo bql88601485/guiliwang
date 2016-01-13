@@ -29,7 +29,6 @@
 #import "IndexCategoryTabCell.h"
 #import "IndexBannerCell.h"
 #import "B0_IndexRecommendGoodsCell_iPhone.h"
-#import "HomeModelOneCell.h"
 #import "B0_IndexCategoryCell_iPhoneTwo.h"
 #import "B0_IndexCategoryCell_iPhoneOne.h"
 #pragma mark -
@@ -450,7 +449,7 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhone, GOODS1_TOUCHED, signal )
     
     if ( category )
     {
-        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:1];
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:0];
         
         if ( goods )
         {
@@ -470,7 +469,7 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhone, GOODS2_TOUCHED, signal )
     
     if ( category )
     {
-        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:2];
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:1];
         
         if ( goods )
         {
@@ -486,7 +485,7 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhone, GOODS3_TOUCHED, signal )
     
     if ( category )
     {
-        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:3];
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:2];
         
         if ( goods )
         {
@@ -496,13 +495,18 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhone, GOODS3_TOUCHED, signal )
         }
     }
 }
-ON_SIGNAL3( B0_IndexCategoryCell_iPhone, GOODS4_TOUCHED, signal )
+//sss
+
+/**
+ * 首页-分类商品-商品2，点击事件触发时执行的操作
+ */
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, GOODS1_TOUCHED, signal )
 {
     CATEGORY * category = signal.sourceCell.data;
     
     if ( category )
     {
-        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:4];
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:0];
         
         if ( goods )
         {
@@ -512,6 +516,44 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhone, GOODS4_TOUCHED, signal )
         }
     }
 }
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, GOODS2_TOUCHED, signal )
+{
+    CATEGORY * category = signal.sourceCell.data;
+    
+    if ( category )
+    {
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:1];
+        
+        if ( goods )
+        {
+            B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
+            board.goodsModel.goods_id = goods.id;
+            [self.stack pushBoard:board animated:YES];
+        }
+    }
+}
+
+
+
+//ss
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, GOODS1_TOUCHED, signal )
+{
+    CATEGORY * category = signal.sourceCell.data;
+    
+    if ( category )
+    {
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:0];
+        
+        if ( goods )
+        {
+            B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
+            board.goodsModel.goods_id = goods.id;
+            [self.stack pushBoard:board animated:YES];
+        }
+    }
+}
+
+
 
 ON_SIGNAL3( IndexCategoryTabCell, tea_button, signal )
 {

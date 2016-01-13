@@ -22,8 +22,6 @@
 DEF_SIGNAL( CATEGORY_TOUCHED )
 DEF_SIGNAL( GOODS1_TOUCHED )
 DEF_SIGNAL( GOODS2_TOUCHED )
-DEF_SIGNAL( GOODS3_TOUCHED )
-DEF_SIGNAL( GOODS4_TOUCHED )
 
 SUPPORT_RESOURCE_LOADING( YES )
 SUPPORT_AUTOMATIC_LAYOUT( YES )
@@ -91,20 +89,6 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, goods2, signal )
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {
         [self sendUISignal:self.GOODS2_TOUCHED];
-    }
-}
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, goods3, signal )
-{
-    if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
-    {
-        [self sendUISignal:self.GOODS3_TOUCHED];
-    }
-}
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, goods4, signal )
-{
-    if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
-    {
-        [self sendUISignal:self.GOODS4_TOUCHED];
     }
 }
 

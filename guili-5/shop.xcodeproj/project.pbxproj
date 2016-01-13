@@ -993,8 +993,6 @@
 		E56C747D1C31264100EE0630 /* 06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E56C74711C31264100EE0630 /* 06@2x.png */; };
 		E56C747F1C313E7F00EE0630 /* drd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E56C747E1C313E7F00EE0630 /* drd@2x.png */; };
 		E57817621C4623D0004A4431 /* footer_category_active_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E57817611C4623D0004A4431 /* footer_category_active_icon@2x.png */; };
-		E57817661C4653B2004A4431 /* HomeModelOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E57817641C4653B2004A4431 /* HomeModelOneCell.m */; };
-		E57817671C4653B2004A4431 /* HomeModelOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E57817651C4653B2004A4431 /* HomeModelOneCell.xib */; };
 		E58F7FA91C071CBE00A0393E /* A0_SigninBoard_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E58F7FA81C071CBE00A0393E /* A0_SigninBoard_iPhone.xib */; };
 		E58F7FAB1C071D1900A0393E /* denglu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E58F7FAA1C071D1900A0393E /* denglu.jpg */; };
 		E58F7FBA1C0736BD00A0393E /* Icon180@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58F7FB91C0736BD00A0393E /* Icon180@2x.png */; };
@@ -2695,9 +2693,6 @@
 		E56C74711C31264100EE0630 /* 06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06@2x.png"; sourceTree = "<group>"; };
 		E56C747E1C313E7F00EE0630 /* drd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drd@2x.png"; sourceTree = "<group>"; };
 		E57817611C4623D0004A4431 /* footer_category_active_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "footer_category_active_icon@2x.png"; sourceTree = "<group>"; };
-		E57817631C4653B2004A4431 /* HomeModelOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeModelOneCell.h; sourceTree = "<group>"; };
-		E57817641C4653B2004A4431 /* HomeModelOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeModelOneCell.m; sourceTree = "<group>"; };
-		E57817651C4653B2004A4431 /* HomeModelOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeModelOneCell.xib; sourceTree = "<group>"; };
 		E58F7FA81C071CBE00A0393E /* A0_SigninBoard_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = A0_SigninBoard_iPhone.xib; sourceTree = "<group>"; };
 		E58F7FAA1C071D1900A0393E /* denglu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = denglu.jpg; sourceTree = "<group>"; };
 		E58F7FB91C0736BD00A0393E /* Icon180@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon180@2x.png"; sourceTree = "<group>"; };
@@ -3242,9 +3237,6 @@
 				4148570F1AC4FCFD003FD9DF /* B0_IndexBoard_iPhone.h */,
 				414857101AC4FCFD003FD9DF /* B0_IndexBoard_iPhone.m */,
 				414857111AC4FCFD003FD9DF /* B0_IndexBoard_iPhone.xml */,
-				E57817631C4653B2004A4431 /* HomeModelOneCell.h */,
-				E57817641C4653B2004A4431 /* HomeModelOneCell.m */,
-				E57817651C4653B2004A4431 /* HomeModelOneCell.xib */,
 				414857121AC4FCFD003FD9DF /* B0_IndexCategoryCell_iPhone.h */,
 				414857131AC4FCFD003FD9DF /* B0_IndexCategoryCell_iPhone.m */,
 				414857141AC4FCFD003FD9DF /* B0_IndexCategoryCell_iPhone.xml */,
@@ -5910,7 +5902,6 @@
 				4148587A1AC4FCFE003FD9DF /* body_cont_bg@2x.png in Resources */,
 				E58F7FA91C071CBE00A0393E /* A0_SigninBoard_iPhone.xib in Resources */,
 				414859521AC4FCFE003FD9DF /* B0_IndexRecommendGoodsCell_iPhone.xml in Resources */,
-				E57817671C4653B2004A4431 /* HomeModelOneCell.xib in Resources */,
 				1848BD9518B4D8690007238A /* UMFeedbackViewController.xib in Resources */,
 				4148591C1AC4FCFE003FD9DF /* trade_info_cont_bg3@2x.png in Resources */,
 				4148592E1AC4FCFE003FD9DF /* tuitional_img_1@2x.png in Resources */,
@@ -6748,7 +6739,6 @@
 				41485A731AC4FDF4003FD9DF /* UserModel.m in Sources */,
 				9D67CB8D1A4A7EAB003ABA05 /* Bee_Performance.mm in Sources */,
 				9D67C6411A4A7BBC003ABA05 /* ServiceUPPayPlugin.m in Sources */,
-				E57817661C4653B2004A4431 /* HomeModelOneCell.m in Sources */,
 				41485A6B1AC4FDF4003FD9DF /* model.m in Sources */,
 				9D67CB591A4A7EAB003ABA05 /* Bee_ViewModel.mm in Sources */,
 				41485A5F1AC4FDF4003FD9DF /* ExpressModel.m in Sources */,
