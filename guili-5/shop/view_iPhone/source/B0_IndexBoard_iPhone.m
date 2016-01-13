@@ -96,7 +96,7 @@ ON_CREATE_VIEWS( signal )
         self.list.total += self.bannerModel.goods.count ? 1 : 0;
         self.list.total+=1;//分类
         self.list.total+=1;//积分商城
-        self.list.total += self.categoryModel.categories.count;
+        
         
         int offset = 0;
         
@@ -180,7 +180,7 @@ ON_CREATE_VIEWS( signal )
             }
         }
         
-        
+        self.list.total += allData.count;
         
         
         for ( int i = 0; i < allData.count; i++ )
