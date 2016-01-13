@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui namespace="TopMenuListCell">
+    <row class="filter-wrapper">
+        <image class="filter-bg"/>
+        
+            <col class="menu-item">
+                <row class="filter-item">
+                    <label id="item1" class="filter-title">商品介绍</label>
+                    
+                    <image id="item-indicator1" class="filter-indicator"/>
+                    <button id="item_button1" class="filter-button"/>
+                </row>
+                <image class="filter-seprator"/>
+            </col>
+            
+            <col class="menu-item">
+                <row class="filter-item">
+                    <label id="item2" class="filter-title">图文详情</label>
+                    
+                    <image id="item-indicator2" class="filter-indicator"/>
+                    <button id="item_button2" class="filter-button"/>
+                </row>
+                <image class="filter-seprator"/>
+            </col>
+            
+            
+            <col class="menu-item">
+                <row class="filter-item">
+                    <label id="item3" class="filter-title">基本参数</label>
+                    
+                    <image id="item-indicator3" class="filter-indicator"/>
+                    <button id="item_button3" class="filter-button"/>
+                </row>
+                <image class="filter-seprator"/>
+            </col>
+            
+            <!--col class="menu-item">
+                <row class="filter-item">
+                    <label id="item4" class="filter-title">商品评论</label>
+                    
+                    <image id="item-indicator4" class="filter-indicator"/>
+                    <button id="item_button4" class="filter-button"/>
+                </row>
+                <image class="filter-seprator"/>
+            </col-->
+        
+    </row>
+   
+  <style type="text/css">
+    .filter-wrapper {
+    height: 100%;
+    width: 100%;
+    v-align: center;
+    }
+    
+    .menu-item{
+    width:33.33%;
+    height:100%;
+    }
+    
+    
+    .filter-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    }
+    
+    
+    .filter-indicator {
+    float: center;
+    width: 100%;
+    height: 4px;
+    v-float: bottom;
+    image: url(button_red);
+    }
+    
+    .filter-item {
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    }
+    
+    .filter-seprator {
+    height: 90%;
+    width: 2px;
+    image: url(item_grid_filter_bg_line.png);
+    }
+    .filter-title-active{
+    color: red;
+    }
+    .filter-title {
+    float:center;
+    width: 100%;
+    height: 100%;
+    color: #999;
+    font-size: 12px;
+    font-weight: lighter;
+    text-align: center;
+    }
+    
+    .filter-title-selected {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: right;
+    }
+    
+    
+    
+    .filter-button {
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    }
+  </style>
+</ui>

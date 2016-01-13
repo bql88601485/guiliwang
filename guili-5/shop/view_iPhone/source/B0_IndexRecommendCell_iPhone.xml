@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui namespace="B0_IndexRecommendCell_iPhone">
+    <image id="recommend-goods-bg"/>
+	<col class="wrapper">
+		<row class="line">
+			<view id="goods-1" type="B0_IndexRecommendGoodsCell_iPhone" class="cell-left"/>
+			<view id="goods-2" type="B0_IndexRecommendGoodsCell_iPhone" class="cell-right"/>
+            <view class="v-line"/>
+            <view class="h-line"/>
+		</row>
+		<row class="line">
+			<view id="goods-3" type="B0_IndexRecommendGoodsCell_iPhone" class="cell-left"/>
+			<view id="goods-4" type="B0_IndexRecommendGoodsCell_iPhone" class="cell-right"/>
+		</row>
+        
+	</col>
+    <style>
+        .wrapper {
+			width: 100%;
+			height: auto;
+			align: center;
+			margin-top: 5px;
+        }
+        #recommend-goods-bg {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        image: url(body_cont_bg.png);
+        image-mode: stretch;
+        padding: 4px;
+        }
+        .line {
+			width: 100%;
+			height: auto;
+			v-align: center;
+        }
+        
+        .cell-left {
+			width: 50%;
+			height: 100px;
+			padding-left: 2px;
+        }
+
+		.cell-right {
+			width: 50%;
+			height: 100px;
+			padding-right: 2px;
+        }
+        
+        
+        .v-line {
+        width: 1px;
+        height: 184px;
+        position: absolute;
+        left: 158px;
+        top: 8px;
+        background-color: #ccc 0.4;
+        }
+        
+        .h-line {
+        width: 304px;
+        height: 1px;
+        position: absolute;
+        left: 8px;
+        top: 100px;
+        background-color: #ccc 0.4;
+        }
+	</style>
+</ui>

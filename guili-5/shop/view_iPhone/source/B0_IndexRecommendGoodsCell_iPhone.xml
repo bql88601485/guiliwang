@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ui namespace="B0_IndexRecommendGoodsCell_iPhone">
+    
+    <row id="mask" class="goods-wrapper">
+        <label id="title" class="title"></label>
+        <image id="recommend-goods-image"/>
+    </row>
+	
+    <style>
+        
+        
+        
+        .goods-wrapper {
+			width: 100%;
+			height: 100%;
+        }
+        .title{
+        margin-left:10px;
+        width:40px;
+        height:100%;
+        font-size:16px;
+        color:red; 
+        line-break: char-wrap;
+        line-num: 2;
+        }
+		
+
+        #recommend-goods-image {
+        margin-left:10px;
+        
+			width: 80px;
+			height: 100%;
+			
+			<!--border-radius: 10;-->
+			padding: 4px;
+			image-mode: fit;
+			image-loading: gray;
+        }
+
+
+
+    </style>
+</ui>

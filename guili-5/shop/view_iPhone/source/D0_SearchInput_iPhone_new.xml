@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui namespace="D0_SearchInput_iPhone_new">
+    
+    <row class="container">
+        
+        <row class="search-input-wrapper">
+            <!--<image class="search-input-bg"/>-->
+            <image class="search-bg"/>
+            <image class="search-icon"/>
+            <input id="search-input" ></input>
+        </row>
+        
+        
+        <image class="logo"/>
+    </row>
+    
+    <style>
+        .container {
+        width: 100%;
+        height: 100%;
+        v-align: center;
+        margin-left: 1px;
+        }
+        .logo{
+        position:absolute;
+        image-src:url(guililogo);
+        width:auto;
+        left:0px;
+        top:0px;
+        }
+        .search-input-wrapper {
+        
+        margin-left: 50px;
+        width: 255px;
+        height: 29px;
+        v-align: center;
+        }
+        .search-icon {
+        width: 14px;
+        height: 15px;
+        margin-left: 5px;
+        image: url(searcher_new_search_icon.png);
+        }
+        .search-bg {
+        position:absolute;
+        width:100%;
+        border-radius:15px;
+        background-color:#7D7DFF;
+        }
+        
+        #search-input {
+        width: 220px;
+        height: 100%;
+        font-size: 14px;
+        margin-left: 5px;
+        color:white;
+        input-clear: editing;
+        input-return-key: search;
+        }
+        
+        
+       
+        
+    </style>
+    
+</ui>

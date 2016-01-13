@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui namespace="B2_ProductDetailSlideCell_iPhone">
+    
+    <col class="container">
+        <col class="slide-wrapper">
+            
+            <image id="slide-image"/>
+        </col>
+    </col>
+    
+    <style>
+        .container {
+        width: 100%;
+        height: 234px;
+        }
+        
+        .slide-wrapper {
+        
+        width: 100%;
+        height: 234px;
+        }
+        
+        
+        
+        #slide-image {
+        
+        width: 100%;
+        height: 234px;
+        image-mode: stretch;
+        image-loading: gray;
+        }
+    </style>
+</ui>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui namespace="IndexBannerCell">
+    
+    <row class="wrapper">
+        <image id="bg" class="Icon_Image"/>
+        <label class="line" ></label>
+        <label class="text" >贵阳主城区当日直达快到报! [详情]</label>
+    </row>
+  <style type="text/css">
+    .wrapper {
+        width: 100%;
+        height: 32px;
+    }
+    #bg {
+    image: url(drd.png);
+    image-mode: stretch;
+    width:60;
+    height:100%;
+    left: 20px;
+    
+    }
+    
+    .line{
+    width: 0.5;
+    height: 60%;
+    top:5px;
+    background-color:#f1f2f4;
+    left: 10px;
+    }
+    
+    .text{
+    left:10px;
+    color:#7e7f7e;
+    }
+    
+  </style>
+</ui>
