@@ -45,6 +45,9 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
         if (category.change > 0) {
             $(@"#cate_image").HIDE();
             $(@"#cate_name").HIDE();
+        }else{
+            $(@"#cate_image").SHOW();
+            $(@"#cate_name").SHOW();
         }
         
         
@@ -59,6 +62,7 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
         if (![goods.market_price isEqualToString:@"￥0.0"]){
             $(@"#goods-old1").SHOW();
             $(@"#goods-old1").TEXT( goods.market_price );
+            $(@"#goods-subprice-line").SHOW();
         }else{
             $(@"#goods-old1").HIDE();
             $(@"#goods-subprice-line").HIDE();
@@ -79,6 +83,7 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
         if (![goods.market_price isEqualToString:@"￥0.0"]) {
             $(@"#goods-old2").SHOW();
             $(@"#goods-old2").TEXT( goods.market_price );
+            $(@"#goods-subprice-line2").SHOW();
         }else{
             $(@"#goods-old2").HIDE();
             $(@"#goods-subprice-line2").HIDE();
