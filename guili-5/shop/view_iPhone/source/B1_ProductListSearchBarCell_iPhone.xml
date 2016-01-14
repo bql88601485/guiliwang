@@ -5,7 +5,7 @@
             <!--<image class="search-input-bg"/>-->
             <image class="search-bg"/>
             <image class="search-icon"/>
-            <input id="search-input" ></input>
+            <input id="search-input" placeholder="@{search_input}"></input>
         </row>
     </row>
     

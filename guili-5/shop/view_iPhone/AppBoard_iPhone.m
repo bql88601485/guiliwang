@@ -89,7 +89,7 @@ ON_SIGNAL2( BeeUIBoard, signal )
         self.view.backgroundColor = [UIColor whiteColor];
 
 		bee.ui.router[self.TAB_HOME]	= [B0_IndexBoard_iPhone class];
-		bee.ui.router[self.TAB_SEARCH]	= [D0_SearchBoard_iPhone class];
+		bee.ui.router[self.TAB_SEARCH]	= [B1_ProductListBoard_iPhone class];
 		bee.ui.router[self.TAB_CART]	= [C0_ShoppingCartBoard_iPhone class];
 		bee.ui.router[self.TAB_USER]	= [E0_ProfileBoard_iPhone sharedInstance];
 		

@@ -35,7 +35,7 @@
                 <image class="filter-seprator"/>
             </col>
             
-            <!--col class="menu-item">
+            <col class="menu-item">
                 <row class="filter-item">
                     <label id="item4" class="filter-title">商品评论</label>
                     
@@ -43,7 +43,7 @@
                     <button id="item_button4" class="filter-button"/>
                 </row>
                 <image class="filter-seprator"/>
-            </col-->
+            </col>
         
     </row>
    
@@ -55,7 +55,7 @@
     }
     
     .menu-item{
-    width:33.33%;
+    width:25%;
     height:100%;
     }
     

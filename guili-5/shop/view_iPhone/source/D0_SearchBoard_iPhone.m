@@ -11,7 +11,7 @@
 //
 //  Powered by BeeFramework
 //
-	
+
 #import "D0_SearchBoard_iPhone.h"
 #import "D1_CategoryBoard_iPhone.h"
 #import "B1_ProductListBoard_iPhone.h"
@@ -31,7 +31,7 @@
 
 @interface D0_SearchBoard_iPhone()
 {
-	NSTimer *	_timer;
+    NSTimer *	_timer;
 }
 @end
 
@@ -48,12 +48,12 @@ DEF_MODEL( SearchCategoryModel, searchCategoryModel )
 
 - (void)load
 {
-	self.searchCategoryModel = [SearchCategoryModel modelWithObserver:self];
+    self.searchCategoryModel = [SearchCategoryModel modelWithObserver:self];
 }
 
 - (void)unload
 {
-	SAFE_RELEASE_MODEL( self.searchCategoryModel );
+    SAFE_RELEASE_MODEL( self.searchCategoryModel );
 }
 
 #pragma mark -
@@ -88,7 +88,7 @@ ON_DELETE_VIEWS( signal )
 {
     [_timer invalidate];
     _timer = nil;
-
+    
     self.list = nil;
 }
 
@@ -100,11 +100,11 @@ ON_WILL_APPEAR( signal )
 {
     [bee.ui.appBoard showTabbar];
     
-	self.navigationBarTitle = [[D0_SearchInput_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44.0f)];
+    self.navigationBarTitle = [[D0_SearchInput_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44.0f)];
     $(self.navigationBarTitle).FIND(@"#search-input").TEXT(@"贵州 礼品");
     [self.searchCategoryModel reload];
     [[CartModel sharedInstance] reload];
-
+    
     [self.list reloadData];
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -121,13 +121,13 @@ ON_DID_APPEAR( signal )
 
 ON_WILL_DISAPPEAR( signal )
 {
-	bee.services.siri.STOP();
+    bee.services.siri.STOP();
     
     [self dismissModalViewAnimated:YES];
     
     [bee.ui.appBoard hideTabbar];
-	
-	[CartModel sharedInstance].loaded = NO;
+    
+    [CartModel sharedInstance].loaded = NO;
 }
 
 ON_DID_DISAPPEAR( signal )
@@ -148,14 +148,14 @@ ON_RIGHT_BUTTON_TOUCHED( signal )
 
 ON_SIGNAL2( BeeUITextField, signal )
 {
-	BeeUITextField * textField = (BeeUITextField *)signal.source;
-	
-	if ( [signal is:BeeUITextField.RETURN] )
-	{
-		[textField endEditing:YES];
-
+    BeeUITextField * textField = (BeeUITextField *)signal.source;
+    
+    if ( [signal is:BeeUITextField.RETURN] )
+    {
+        [textField endEditing:YES];
+        
         [self doSearch:textField.text];
-	}
+    }
 }
 
 #pragma mark - D0_SearchInput_iPhone
@@ -193,158 +193,158 @@ ON_SIGNAL3( D0_SearchRecoder_iPhone, voice, signal )
  */
 ON_SIGNAL3( D0_SearchCategory_iPhone, mask, signal )
 {
-	TOP_CATEGORY * category = signal.sourceCell.data;
-	if ( category )
-	{
-		if ( category.children && category.children.count )
-		{
-			D1_CategoryBoard_iPhone * board = [D1_CategoryBoard_iPhone board];
-			board.category = category;
-			[self.stack pushBoard:board animated:YES];
-		}
-		else
-		{
-			B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
-			board.category = category.name;
-			board.searchByHotModel.filter.category_id = category.id;
-			board.searchByCheapestModel.filter.category_id = category.id;
-			board.searchByExpensiveModel.filter.category_id = category.id;
-			[self.stack pushBoard:board animated:YES];
-		}
-	}
+    TOP_CATEGORY * category = signal.sourceCell.data;
+    if ( category )
+    {
+        if ( category.children && category.children.count )
+        {
+            D1_CategoryBoard_iPhone * board = [D1_CategoryBoard_iPhone board];
+            board.category = category;
+            [self.stack pushBoard:board animated:YES];
+        }
+        else
+        {
+            B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
+            board.category = category.name;
+            board.searchByHotModel.filter.category_id = category.id;
+            board.searchByCheapestModel.filter.category_id = category.id;
+            board.searchByExpensiveModel.filter.category_id = category.id;
+            [self.stack pushBoard:board animated:YES];
+        }
+    }
 }
 
 #pragma mark -
 
 - (void)doSearch:(NSString *)keyword
 {
-	$(self.navigationBarTitle).FIND( @"search-input" ).TEXT( keyword );
-
+    $(self.navigationBarTitle).FIND( @"search-input" ).TEXT( keyword );
+    
     if ( keyword.length )
-	{
-		B1_ProductListBoard_iPhone * board = [[[B1_ProductListBoard_iPhone alloc] init] autorelease];
-		board.searchByHotModel.filter.keywords = keyword;
-		board.searchByCheapestModel.filter.keywords = keyword;
-		board.searchByExpensiveModel.filter.keywords = keyword;
-		[self.stack pushBoard:board animated:YES];
-	}
+    {
+        B1_ProductListBoard_iPhone * board = [[[B1_ProductListBoard_iPhone alloc] init] autorelease];
+        board.searchByHotModel.filter.keywords = keyword;
+        board.searchByCheapestModel.filter.keywords = keyword;
+        board.searchByExpensiveModel.filter.keywords = keyword;
+        [self.stack pushBoard:board animated:YES];
+    }
 }
 
 #pragma mark - IFlySpeechRecognizer
 
 - (void)beginVoiceRecord
 {
-	ALIAS( bee.services.siri, siri );
-	
-	siri.whenStart = ^
-	{
-		[_timer invalidate];
-		_timer = [NSTimer scheduledTimerWithTimeInterval:5.0f
-												  target:self
-												selector:@selector(onVoiceTimeout)
-												userInfo:nil
-												 repeats:NO];
-		
-		$(self.navigationBarTitle).FIND( @"#search-input" ).BLUR();
-		
-		D0_SearchRecoder_iPhone * recorder = [[[D0_SearchRecoder_iPhone alloc] init] autorelease];
-		if ( recorder )
-		{
-			recorder.frame = self.view.bounds;
-			$(recorder).FIND(@"#voice-tips").TEXT( __TEXT(@"recording") );
-			$(recorder).FIND(@"#voice").SELECT();
-			[self presentModalView:recorder animated:YES];
-		}
-	};
-	
-	siri.whenFailed = ^
-	{
-		[_timer invalidate];
-		_timer = nil;
-
-		[self dismissModalViewAnimated:YES];
-		[self presentFailureTips:__TEXT(@"failed_to_reco")];
-	};
-
-	siri.whenRecognized = ^
-	{
-		[_timer invalidate];
-		_timer = nil;
-
-		D0_SearchRecoder_iPhone * recorder = (D0_SearchRecoder_iPhone *)self.modalView;
-		if ( recorder )
-		{
-			$(recorder).FIND(@"#voice-tips").TEXT( __TEXT(@"searching") );
-			$(recorder).FIND(@"#voice").UNSELECT();
-		}
-		
-		[self dismissModalViewAnimated:YES];
-
-		NSMutableString * keywords = [NSMutableString string];
-		
-		for ( NSString * result in siri.results )
-		{
-			[keywords appendFormat:@"%@ ", result];
-		}
-
-		[self doSearch:keywords];
-	};
-	
-	siri.whenCancelled = ^
-	{
-		[_timer invalidate];
-		_timer = nil;
-
-		[self dismissModalViewAnimated:YES];
-	};
-	
-	siri.START();
+    ALIAS( bee.services.siri, siri );
+    
+    siri.whenStart = ^
+    {
+        [_timer invalidate];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:5.0f
+                                                  target:self
+                                                selector:@selector(onVoiceTimeout)
+                                                userInfo:nil
+                                                 repeats:NO];
+        
+        $(self.navigationBarTitle).FIND( @"#search-input" ).BLUR();
+        
+        D0_SearchRecoder_iPhone * recorder = [[[D0_SearchRecoder_iPhone alloc] init] autorelease];
+        if ( recorder )
+        {
+            recorder.frame = self.view.bounds;
+            $(recorder).FIND(@"#voice-tips").TEXT( __TEXT(@"recording") );
+            $(recorder).FIND(@"#voice").SELECT();
+            [self presentModalView:recorder animated:YES];
+        }
+    };
+    
+    siri.whenFailed = ^
+    {
+        [_timer invalidate];
+        _timer = nil;
+        
+        [self dismissModalViewAnimated:YES];
+        [self presentFailureTips:__TEXT(@"failed_to_reco")];
+    };
+    
+    siri.whenRecognized = ^
+    {
+        [_timer invalidate];
+        _timer = nil;
+        
+        D0_SearchRecoder_iPhone * recorder = (D0_SearchRecoder_iPhone *)self.modalView;
+        if ( recorder )
+        {
+            $(recorder).FIND(@"#voice-tips").TEXT( __TEXT(@"searching") );
+            $(recorder).FIND(@"#voice").UNSELECT();
+        }
+        
+        [self dismissModalViewAnimated:YES];
+        
+        NSMutableString * keywords = [NSMutableString string];
+        
+        for ( NSString * result in siri.results )
+        {
+            [keywords appendFormat:@"%@ ", result];
+        }
+        
+        [self doSearch:keywords];
+    };
+    
+    siri.whenCancelled = ^
+    {
+        [_timer invalidate];
+        _timer = nil;
+        
+        [self dismissModalViewAnimated:YES];
+    };
+    
+    siri.START();
 }
 
 - (void)endVoiceRecording
 {
-	[_timer invalidate];
-	_timer = nil;
+    [_timer invalidate];
+    _timer = nil;
     
-	bee.services.siri.STOP();
+    bee.services.siri.STOP();
 }
 
 - (void)cancelVoiceRecording
 {
-	[_timer invalidate];
-	_timer = nil;
-	
-	bee.services.siri.CANCEL();
+    [_timer invalidate];
+    _timer = nil;
+    
+    bee.services.siri.CANCEL();
 }
 
 - (void)onVoiceTimeout
 {
-	_timer = nil;
-	
-	bee.services.siri.STOP();
+    _timer = nil;
+    
+    bee.services.siri.STOP();
 }
 
 #pragma mark -
 
 ON_MESSAGE3( API, category, msg )
 {
-	if ( msg.sending )
-	{
-		if ( NO == self.searchCategoryModel.loaded )
-		{
-			[self presentLoadingTips:__TEXT(@"tips_loading")];
-		}
-	}
-	else
-	{
-		[self dismissTips];
-		[self dismissModalViewAnimated:YES];
-	}
-
-	if ( msg.succeed )
-	{
-		[self.list asyncReloadData];
-	}
+    if ( msg.sending )
+    {
+        if ( NO == self.searchCategoryModel.loaded )
+        {
+            [self presentLoadingTips:__TEXT(@"tips_loading")];
+        }
+    }
+    else
+    {
+        [self dismissTips];
+        [self dismissModalViewAnimated:YES];
+    }
+    
+    if ( msg.succeed )
+    {
+        [self.list asyncReloadData];
+    }
 }
 
 @end

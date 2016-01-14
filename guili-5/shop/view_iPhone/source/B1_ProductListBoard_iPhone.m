@@ -11,7 +11,7 @@
 //
 //  Powered by BeeFramework
 //
-	
+
 #import "B1_ProductListBoard_iPhone.h"
 #import "B2_ProductDetailBoard_iPhone.h"
 #import "B1_ProductListCartCell_iPhone.h"
@@ -28,13 +28,13 @@
 #import "CommonPullLoader.h"
 #import "CommonFootLoader.h"
 #import "CommonNoResultCell.h"
-
+#import "D0_SearchInput_iPhone.h"
 #pragma mark -
 
 @interface B1_ProductListBoard_iPhone()
 {
-	B1_ProductListSearchBarCell_iPhone *	_titleSearch;
-	B1_ProductListSearchBackgroundCell_iPhone * _searchBackground;
+    B1_ProductListSearchBarCell_iPhone *	_titleSearch;
+    B1_ProductListSearchBackgroundCell_iPhone * _searchBackground;
 }
 @end
 
@@ -64,25 +64,25 @@ DEF_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 
 - (void)load
 {
-	self.tabIndex = self.TAB_CHEAPEST;
-	
-	self.searchByHotModel = [SearchModel modelWithObserver:self];
-	self.searchByHotModel.filter.sort_by = SEARCH_ORDER_BY_HOT;
-
-	self.searchByCheapestModel = [SearchModel modelWithObserver:self];
-	self.searchByCheapestModel.filter.sort_by = SEARCH_ORDER_BY_CHEAPEST;
-
-	self.searchByExpensiveModel = [SearchModel modelWithObserver:self];
-	self.searchByExpensiveModel.filter.sort_by = SEARCH_ORDER_BY_EXPENSIVE;
+    self.tabIndex = self.TAB_CHEAPEST;
+    
+    self.searchByHotModel = [SearchModel modelWithObserver:self];
+    self.searchByHotModel.filter.sort_by = SEARCH_ORDER_BY_HOT;
+    
+    self.searchByCheapestModel = [SearchModel modelWithObserver:self];
+    self.searchByCheapestModel.filter.sort_by = SEARCH_ORDER_BY_CHEAPEST;
+    
+    self.searchByExpensiveModel = [SearchModel modelWithObserver:self];
+    self.searchByExpensiveModel.filter.sort_by = SEARCH_ORDER_BY_EXPENSIVE;
 }
 
 - (void)unload
 {
-	SAFE_RELEASE_MODEL( self.searchByHotModel );
-	SAFE_RELEASE_MODEL( self.searchByCheapestModel );
-	SAFE_RELEASE_MODEL( self.searchByExpensiveModel );
-	
-	self.category = nil;
+    SAFE_RELEASE_MODEL( self.searchByHotModel );
+    SAFE_RELEASE_MODEL( self.searchByCheapestModel );
+    SAFE_RELEASE_MODEL( self.searchByExpensiveModel );
+    
+    self.category = nil;
 }
 
 #pragma mark -
@@ -90,9 +90,8 @@ DEF_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 ON_CREATE_VIEWS( signal )
 {
     [self showNavigationBarAnimated:NO];
-    [self showBarButton:BeeUINavigationBar.LEFT image:[UIImage imageNamed:@"nav_back.png"]];
     [self showBarButton:BeeUINavigationBar.RIGHT title:__TEXT(@"filter") image:[UIImage imageNamed:@"nav_right.png"]];
-
+    
     self.currentMode = self.MODE_GRID;
     
     @weakify(self);
@@ -105,7 +104,7 @@ ON_CREATE_VIEWS( signal )
     
     self.list.lineCount = 2;
     self.list.animationDuration = 0.25f;
-
+    
     self.list.whenReloading = ^
     {
         @normalize(self);
@@ -162,7 +161,7 @@ ON_CREATE_VIEWS( signal )
     self.list.whenReachBottom = ^
     {
         @normalize(self);
-     
+        
         [[self currentModel] nextPage];
     };
     
@@ -182,15 +181,14 @@ ON_LAYOUT_VIEWS( signal )
 
 ON_WILL_APPEAR( signal )
 {
-//	[self.list reloadData];
-	
-    [bee.ui.appBoard hideTabbar];
+    //	[self.list reloadData];
+    [bee.ui.appBoard showTabbar];
     
     if ( nil == _titleSearch )
     {
-		_searchBackground = [[B1_ProductListSearchBackgroundCell_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
-		[self.view insertSubview:_searchBackground atIndex:self.view.subviews.count];
-		
+        _searchBackground = [[B1_ProductListSearchBackgroundCell_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
+        [self.view insertSubview:_searchBackground atIndex:self.view.subviews.count];
+        
         _titleSearch = [[B1_ProductListSearchBarCell_iPhone alloc] initWithFrame:CGRectZero];
         for (UIView * vi in _titleSearch.subviews) {
             if([vi isKindOfClass:[UITextField class]]){
@@ -201,35 +199,47 @@ ON_WILL_APPEAR( signal )
             
         }
         _titleSearch.frame = CGRectMake(0, 0, self.view.width, 44.0f);
-        $(_titleSearch).FIND(@"#search-input").TEXT(@"贵州 礼品");
+        //        $(_titleSearch).FIND(@"#search-input").TEXT(@"贵州 礼品");
         self.navigationBarTitle = _titleSearch;
     }
+    
+    //    self.navigationBarTitle = [[D0_SearchInput_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44.0f)];
+    //    $(self.navigationBarTitle).FIND(@"#search-input").TEXT(@"贵州 礼品");
+    
     
     [self updateViews];
     
     [[CartModel sharedInstance] addObserver:self];
     
     [[CartModel sharedInstance] reload];
-
+    
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-
+    
     NSString *sea=$(_titleSearch).FIND(@"#search-input").text;
     if ([sea isEqualToString:@"贵州 礼品"]) {
         $(_titleSearch).FIND(@"#search-input").TEXT(@"");
     }
     
 }
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    
+    [self doSearch:textField.text];
+    
+    return YES;
+}
 ON_DID_APPEAR( signal )
 {
     [self updateDatas];
-	
+    
     [self.list reloadData];
 }
 
 ON_WILL_DISAPPEAR( signal )
 {
-	[CartModel sharedInstance].loaded = NO;
+    [CartModel sharedInstance].loaded = NO;
     [[CartModel sharedInstance] removeObserver:self];
 }
 
@@ -258,39 +268,39 @@ ON_RIGHT_BUTTON_TOUCHED( signal )
 ON_SIGNAL2( BeeUIBoard, signal )
 {
     if ( [signal is:BeeUIBoard.MODALVIEW_DID_HIDDEN] )
-	{
-		[self.list reloadData];
-		[self updateDatas];
-	}
+    {
+        [self.list reloadData];
+        [self updateDatas];
+    }
 }
 
 #pragma mark - BeeUITextField
 
 ON_SIGNAL2( BeeUITextField, signal )
 {
-	BeeUITextField * textField = (BeeUITextField *)signal.source;
-	
-	if ( [signal is:BeeUITextField.RETURN] )
-	{
-		[textField endEditing:YES];
+    BeeUITextField * textField = (BeeUITextField *)signal.source;
+    
+    if ( [signal is:BeeUITextField.RETURN] )
+    {
+        [textField endEditing:YES];
         
         [self doSearch:textField.text];
-	}
+    }
     
-	if ( [signal is:BeeUITextField.WILL_ACTIVE] )
-	{
-		_searchBackground.hidden = NO;
-		[self hideBarButton:BeeUINavigationBar.RIGHT];
-		_titleSearch.frame = CGRectMake(0, 0, self.view.width, 44.0f);
-	}
-	
-	if ( [signal is:BeeUITextField.WILL_DEACTIVE] )
-	{
-		_searchBackground.hidden = YES;
-		[self showBarButton:BeeUINavigationBar.RIGHT title:__TEXT(@"filter") image:[UIImage imageNamed:@"nav_right.png"]];
-		_titleSearch.frame = CGRectMake(0, 0, self.view.width, 44.0f);
-	}
-
+    if ( [signal is:BeeUITextField.WILL_ACTIVE] )
+    {
+        _searchBackground.hidden = NO;
+        [self hideBarButton:BeeUINavigationBar.RIGHT];
+        _titleSearch.frame = CGRectMake(0, 0, self.view.width, 44.0f);
+    }
+    
+    if ( [signal is:BeeUITextField.WILL_DEACTIVE] )
+    {
+        _searchBackground.hidden = YES;
+        [self showBarButton:BeeUINavigationBar.RIGHT title:__TEXT(@"filter") image:[UIImage imageNamed:@"nav_right.png"]];
+        _titleSearch.frame = CGRectMake(0, 0, self.view.width, 44.0f);
+    }
+    
 }
 
 #pragma mark - B1_ProductListGridCell_iPhone
@@ -301,12 +311,12 @@ ON_SIGNAL2( BeeUITextField, signal )
 ON_SIGNAL2( B1_ProductListGridCell_iPhone, signal )
 {
     SIMPLE_GOODS * goods = signal.sourceCell.data;
-	if ( goods )
-	{
-		B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
-		board.goodsModel.goods_id = goods.goods_id;
-		[self.stack pushBoard:board animated:YES];
-	}
+    if ( goods )
+    {
+        B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
+        board.goodsModel.goods_id = goods.goods_id;
+        [self.stack pushBoard:board animated:YES];
+    }
 }
 
 #pragma mark - B1_ProductListLargeCell_Phone
@@ -317,12 +327,12 @@ ON_SIGNAL2( B1_ProductListGridCell_iPhone, signal )
 ON_SIGNAL2( B1_ProductListLargeCell_Phone, signal )
 {
     SIMPLE_GOODS * goods = signal.sourceCell.data;
-	if ( goods )
-	{
-		B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
-		board.goodsModel.goods_id = goods.goods_id;
-		[self.stack pushBoard:board animated:YES];
-	}
+    if ( goods )
+    {
+        B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
+        board.goodsModel.goods_id = goods.goods_id;
+        [self.stack pushBoard:board animated:YES];
+    }
 }
 
 #pragma mark - B1_ProductListFilterCell_iPhone
@@ -333,13 +343,13 @@ ON_SIGNAL2( B1_ProductListLargeCell_Phone, signal )
 
 ON_SIGNAL3( B1_ProductListFilterCell_iPhone, item_popular_button, signal )
 {
-	if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
-	{
-		self.tabIndex = self.TAB_HOT;
-		
-		[self updateViews];
-		[self updateDatas];
-	}
+    if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
+    {
+        self.tabIndex = self.TAB_HOT;
+        
+        [self updateViews];
+        [self updateDatas];
+    }
 }
 
 /**
@@ -347,13 +357,13 @@ ON_SIGNAL3( B1_ProductListFilterCell_iPhone, item_popular_button, signal )
  */
 ON_SIGNAL3( B1_ProductListFilterCell_iPhone, item_cheap_button, signal )
 {
-	if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
-	{
-		self.tabIndex = self.TAB_CHEAPEST;
-		
-		[self updateViews];
-		[self updateDatas];
-	}
+    if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
+    {
+        self.tabIndex = self.TAB_CHEAPEST;
+        
+        [self updateViews];
+        [self updateDatas];
+    }
 }
 
 /**
@@ -361,13 +371,13 @@ ON_SIGNAL3( B1_ProductListFilterCell_iPhone, item_cheap_button, signal )
  */
 ON_SIGNAL3( B1_ProductListFilterCell_iPhone, item_expensive_button, signal )
 {
-	if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
-	{
-		self.tabIndex = self.TAB_EXPENSIVE;
-		
-		[self updateViews];
-		[self updateDatas];
-	}
+    if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
+    {
+        self.tabIndex = self.TAB_EXPENSIVE;
+        
+        [self updateViews];
+        [self updateDatas];
+    }
 }
 
 #pragma mark - B1_ProductListCartCell_iPhone
@@ -377,147 +387,147 @@ ON_SIGNAL3( B1_ProductListFilterCell_iPhone, item_expensive_button, signal )
  */
 ON_SIGNAL3( B1_ProductListCartCell_iPhone, cart, signal )
 {
-	C0_ShoppingCartBoard_iPhone * board = [C0_ShoppingCartBoard_iPhone board];
-	[self.stack pushBoard:board animated:YES];
+    C0_ShoppingCartBoard_iPhone * board = [C0_ShoppingCartBoard_iPhone board];
+    [self.stack pushBoard:board animated:YES];
 }
 
 #pragma mark -
 
 - (void)doSearch:(NSString *)keyword
 {
-
-//    if ( 0 == keyword.length )
-//    {
-//		// [self presentFailureTips:@"请输入正确的关键字"];
-//        return;
-//    }
+    
+    //    if ( 0 == keyword.length )
+    //    {
+    //		// [self presentFailureTips:@"请输入正确的关键字"];
+    //        return;
+    //    }
     
     self.searchByHotModel.filter.keywords = keyword;
     self.searchByCheapestModel.filter.keywords = keyword;
     self.searchByExpensiveModel.filter.keywords = keyword;
-
+    
     [self updateDatas];
 }
 
 - (void)updateViews
 {
-//    if ( self.MODE_GRID == self.currentMode )
-//    {
-//        [self showBarButton:BeeUINavigationBar.RIGHT image:[UIImage imageNamed:@"item_graph_header_view_icon.png"]];
-//    }
-//    else if ( self.MODE_LARGE == self.currentMode )
-//    {
-//        [self showBarButton:BeeUINavigationBar.RIGHT image:[UIImage imageNamed:@"item_grid_header_view_icon.png"]];
-//    }
+    //    if ( self.MODE_GRID == self.currentMode )
+    //    {
+    //        [self showBarButton:BeeUINavigationBar.RIGHT image:[UIImage imageNamed:@"item_graph_header_view_icon.png"]];
+    //    }
+    //    else if ( self.MODE_LARGE == self.currentMode )
+    //    {
+    //        [self showBarButton:BeeUINavigationBar.RIGHT image:[UIImage imageNamed:@"item_grid_header_view_icon.png"]];
+    //    }
     
-	NSUInteger count = 0;
-	
-	for ( CART_GOODS * goods in [CartModel sharedInstance].goods )
-	{
-		count += goods.goods_number.intValue;
-	}
-	
-	self.listcart.data = __INT( count );
-
-	if ( self.TAB_HOT == self.tabIndex )
-	{
-		[_filter selectTab1];
-	}
-	else if ( self.TAB_CHEAPEST == self.tabIndex )
-	{
-		[_filter selectTab2];
-	}
-	else if ( self.TAB_EXPENSIVE == self.tabIndex )
-	{
-		[_filter selectTab3];
-	}
-
-	$(_titleSearch).FIND( @"#search-input" ).TEXT( [self currentModel].filter.keywords );
-
-
+    NSUInteger count = 0;
+    
+    for ( CART_GOODS * goods in [CartModel sharedInstance].goods )
+    {
+        count += goods.goods_number.intValue;
+    }
+    
+    self.listcart.data = __INT( count );
+    
+    if ( self.TAB_HOT == self.tabIndex )
+    {
+        [_filter selectTab1];
+    }
+    else if ( self.TAB_CHEAPEST == self.tabIndex )
+    {
+        [_filter selectTab2];
+    }
+    else if ( self.TAB_EXPENSIVE == self.tabIndex )
+    {
+        [_filter selectTab3];
+    }
+    
+    $(_titleSearch).FIND( @"#search-input" ).TEXT( [self currentModel].filter.keywords );
+    
+    
     [self.list asyncReloadData];
 }
 
 - (void)updateDatas
 {
-	[[self currentModel] firstPage];
+    [[self currentModel] firstPage];
 }
 
 #pragma mark -
 
 - (SearchModel *)currentModel
 {
-	if ( self.TAB_HOT == self.tabIndex )
-	{
-		return self.searchByHotModel;
-	}
-	else if ( self.TAB_CHEAPEST == self.tabIndex )
-	{
-		return self.searchByCheapestModel;
-	}
-	else if ( self.TAB_EXPENSIVE == self.tabIndex )
-	{
-		return self.searchByExpensiveModel;
-	}
-	
-	return self.searchByHotModel;
+    if ( self.TAB_HOT == self.tabIndex )
+    {
+        return self.searchByHotModel;
+    }
+    else if ( self.TAB_CHEAPEST == self.tabIndex )
+    {
+        return self.searchByCheapestModel;
+    }
+    else if ( self.TAB_EXPENSIVE == self.tabIndex )
+    {
+        return self.searchByExpensiveModel;
+    }
+    
+    return self.searchByHotModel;
 }
 
 #pragma mark -
 
 ON_NOTIFICATION3( CartModel, UPDATED, n )
 {
-	NSUInteger count = 0;
-	
-	for ( CART_GOODS * goods in [CartModel sharedInstance].goods )
-	{
-		count += goods.goods_number.intValue;
-	}
-	
-	self.listcart.data = __INT( count );
+    NSUInteger count = 0;
+    
+    for ( CART_GOODS * goods in [CartModel sharedInstance].goods )
+    {
+        count += goods.goods_number.intValue;
+    }
+    
+    self.listcart.data = __INT( count );
 }
 
 #pragma mark -
 
 ON_MESSAGE3( API, search, msg )
 {
-	if ( msg.sending )
-	{
-		if ( NO == [self currentModel].loaded )
-		{
-			[self presentLoadingTips:__TEXT(@"tips_loading")];
-		}
-
-		[self.list setFooterLoading:([self currentModel].goods.count ? YES : NO)];
-	}
-	else
-	{
-		[self.list setHeaderLoading:NO];
-		[self.list setFooterLoading:NO];
-
-		[self dismissTips];
-	}
-
-	if ( msg.succeed )
-	{
-		STATUS * status = msg.GET_OUTPUT(@"status");
-		
-		if ( status && status.succeed.boolValue )
-		{
-			[self.list setFooterMore:[self currentModel].more];
+    if ( msg.sending )
+    {
+        if ( NO == [self currentModel].loaded )
+        {
+            [self presentLoadingTips:__TEXT(@"tips_loading")];
+        }
+        
+        [self.list setFooterLoading:([self currentModel].goods.count ? YES : NO)];
+    }
+    else
+    {
+        [self.list setHeaderLoading:NO];
+        [self.list setFooterLoading:NO];
+        
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS * status = msg.GET_OUTPUT(@"status");
+        
+        if ( status && status.succeed.boolValue )
+        {
+            [self.list setFooterMore:[self currentModel].more];
             
-		
-			[self.list asyncReloadData];
-		}
-		else
-		{
-			[self showErrorTips:msg];
-		}
-	}
-	else if ( msg.failed )
-	{
-		[self showErrorTips:msg];
-	}
+            
+            [self.list asyncReloadData];
+        }
+        else
+        {
+            [self showErrorTips:msg];
+        }
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
 }
 
 @end
