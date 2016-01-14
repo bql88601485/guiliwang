@@ -171,6 +171,8 @@ ON_CREATE_VIEWS( signal )
                 
             }
             
+            int change = 0;
+            
             for (NSArray *list in newCargories) {
                 
                 if ([list isKindOfClass:[NSArray class]]) {
@@ -178,8 +180,9 @@ ON_CREATE_VIEWS( signal )
                     tmpObject.id = objec.id;
                     tmpObject.name = objec.name;
                     tmpObject.goods = list;
-                    
+                    tmpObject.change = change;
                     [allData addObject:tmpObject];
+                    change++;
                 }
             }
         }

@@ -171,6 +171,7 @@ enum RANK_LEVEL
 @property (nonatomic, retain) NSArray *		goods;
 @property (nonatomic, retain) NSString *		name;
 @property (nonatomic, retain) NSNumber *		id;
+@property  (nonatomic, assign) int      change;
 @end
 
 @interface TOP_CATEGORY : NSObject

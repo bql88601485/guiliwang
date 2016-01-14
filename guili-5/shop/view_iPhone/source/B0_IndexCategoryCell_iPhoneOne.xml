@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ui namespace="B0_IndexCategoryCell_iPhoneOne">
     <col class="cate-title">
-        <label class="cate-image"/>
+        <label class="cate-image" id="cate_image"/>
         <label id="cate_name" class="cate-name">-</label>
     </col>
     <row class="category-wrapper">
@@ -12,7 +12,13 @@
                     <image id="goods-image1" class="category-goods-image"/>
                     <col class="category-left">
                         <label id="goods-title1" class="category-goods-title"></label>
-                        <label id="goods-price1" class="category-goods-price"></label>
+                        <row class="goods-subprice-wrapper">
+                            <label id="goods-price1" class="category-goods-price"></label>
+                            <row class="goods-subprice-wrapper_">
+                                <label id="goods-old1" class="category-goods-old"></label>
+                                <view id="goods-subprice-line"/>
+                            </row>
+                        </row>
                     </col>
                     <button id="goods1" class="mask"></button>
                 </row>
@@ -122,7 +128,7 @@
         }
         
         .category-goods-price {
-        width: 100%;
+        width: 50%;
         height: auto;
         margin-top: 4px;
         font-size: 10px;
@@ -132,10 +138,20 @@
         line-break: clip;
         line-num: 2;
         }
-        
+        .category-goods-old {
+        width: 50%;
+        height: auto;
+        margin-top: 4px;
+        font-size: 10px;
+        font-weight: bold;
+        color: #666;
+        text-align: left;
+        line-break: clip;
+        line-num: 2;
+        }
         .category-goods-image {
         width: 100%;
-        height: 90px;
+        height: 100px;
         border-radius: 0px;
         margin-left: 0px;
         image-mode: fit;
@@ -166,6 +182,25 @@
         left: 103px;
         top: 92px;
         background-color: #ccc 0.4;
+        }
+        
+        .goods-subprice-wrapper {
+        width: 100%;
+        height: auto;
+        }
+        .goods-subprice-wrapper_{
+        width: 100%;
+        height: auto;
+        }
+        
+        
+        #goods-subprice-line {
+        height: 1px;
+        width: 50px;
+        background-color: #666;
+        position: absolute;
+        left: 0px;
+        top: 10px;
         }
         
     </style>

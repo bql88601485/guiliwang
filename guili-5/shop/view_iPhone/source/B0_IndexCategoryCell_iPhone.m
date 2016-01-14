@@ -44,6 +44,10 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
     {
         $(@"#cate_name").TEXT( category.name );
         
+        if (category.change > 0) {
+            $(@"#cate_image").HIDE();
+            $(@"#cate_name").HIDE();
+        }
         
         if ( category.goods.count >= 1 )
         {
@@ -57,6 +61,17 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
             
             $(@"#goods-image1").SHOW();
             $(@"#goods-image1").IMAGE( goods.img.thumbURL );
+            
+            
+            if (![goods.market_price isEqualToString:@"￥0.0"]){
+                $(@"#goods-old1").SHOW();
+                $(@"#goods-old1").TEXT( goods.market_price );
+            }else{
+                $(@"#goods-old1").HIDE();
+                $(@"#goods-subprice-line").HIDE();
+            }
+            
+            
         }
         else
         {
@@ -77,6 +92,14 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
             
             $(@"#goods-image2").SHOW();
             $(@"#goods-image2").IMAGE( goods.img.thumbURL );
+            
+            if (![goods.market_price isEqualToString:@"￥0.0"]){
+                $(@"#goods-old2").SHOW();
+                $(@"#goods-old2").TEXT( goods.market_price );
+            }else{
+                $(@"#goods-old2").HIDE();
+                $(@"#goods-subprice-line2").HIDE();
+            }
         }
         else
         {
@@ -97,6 +120,15 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
             
             $(@"#goods-image3").SHOW();
             $(@"#goods-image3").IMAGE( goods.img.thumbURL );
+            
+            
+            if (![goods.market_price isEqualToString:@"￥0.0"]){
+                $(@"#goods-old3").SHOW();
+                $(@"#goods-old3").TEXT( goods.market_price );
+            }else{
+                $(@"#goods-old3").HIDE();
+                $(@"#goods-subprice-line3").HIDE();
+            }
         }
         else
         {

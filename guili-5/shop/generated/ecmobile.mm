@@ -103,7 +103,7 @@ CONVERT_PROPERTY_CLASS( goods_attr, GOOD_ATTR );
 @synthesize id = _id;
 @synthesize goods = _goods;
 @synthesize name = _name;
-
+@synthesize change = _change;
 
 CONVERT_PROPERTY_CLASS( goods, SIMPLE_GOODS );
 

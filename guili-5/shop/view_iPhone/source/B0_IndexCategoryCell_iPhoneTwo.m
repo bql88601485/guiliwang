@@ -42,6 +42,11 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
     {
         $(@"#cate_name").TEXT( category.name );
         
+        if (category.change > 0) {
+            $(@"#cate_image").HIDE();
+            $(@"#cate_name").HIDE();
+        }
+        
         
         SIMPLE_GOODS * goods = [category.goods objectAtIndex:0];
         
@@ -50,6 +55,14 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
         
         $(@"#goods-price1").SHOW();
         $(@"#goods-price1").TEXT( goods.shop_price );
+        
+        if (![goods.market_price isEqualToString:@"￥0.0"]){
+            $(@"#goods-old1").SHOW();
+            $(@"#goods-old1").TEXT( goods.market_price );
+        }else{
+            $(@"#goods-old1").HIDE();
+            $(@"#goods-subprice-line").HIDE();
+        }
         
         $(@"#goods-image1").SHOW();
         $(@"#goods-image1").IMAGE( goods.img.thumbURL );
@@ -62,6 +75,16 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
         
         $(@"#goods-price2").SHOW();
         $(@"#goods-price2").TEXT( goods.shop_price );
+        
+        if (![goods.market_price isEqualToString:@"￥0.0"]) {
+            $(@"#goods-old2").SHOW();
+            $(@"#goods-old2").TEXT( goods.market_price );
+        }else{
+            $(@"#goods-old2").HIDE();
+            $(@"#goods-subprice-line2").HIDE();
+        }
+        
+        
         
         $(@"#goods-image2").SHOW();
         $(@"#goods-image2").IMAGE( goods.img.thumbURL );

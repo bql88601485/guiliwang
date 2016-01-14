@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ui namespace="B0_IndexCategoryCell_iPhoneTwo">
     <col class="cate-title">
-        <label class="cate-image"/>
+        <label class="cate-image" id="cate_image"/>
         <label id="cate_name" class="cate-name">-</label>
     </col>
     
@@ -12,7 +12,13 @@
                 <image id="goods-image1" class="category-goods-image"/>
                 <col class="category-left">
                     <label id="goods-title1" class="category-goods-title"></label>
-                    <label id="goods-price1" class="category-goods-price"></label>
+                    <row class="goods-subprice-wrapper">
+                        <label id="goods-price1" class="category-goods-price"></label>
+                        <row class="goods-subprice-wrapper_">
+                            <label id="goods-old1" class="category-goods-old"></label>
+                            <view id="goods-subprice-line"/>
+                        </row>
+                    </row>
                 </col>
                 <button id="goods1" class="mask"></button>
             </row>
@@ -23,7 +29,13 @@
                 <image id="goods-image2" class="category-goods-image"/>
                 <col class="category-left">
                     <label id="goods-title2" class="category-goods-title"></label>
-                    <label id="goods-price2" class="category-goods-price"></label>
+                    <row class="goods-subprice-wrapper2">
+                        <label id="goods-price2" class="category-goods-price"></label>
+                        <row class="goods-subprice-wrapper_2">
+                            <label id="goods-old2" class="category-goods-old"></label>
+                            <view id="goods-subprice-line2"/>
+                        </row>
+                    </row>
                 </col>
                 <button id="goods2" class="mask"></button>
             </row>
@@ -134,12 +146,24 @@
         }
         
         .category-goods-price {
-        width: 100%;
+        width: 50%;
         height: auto;
         margin-top: 4px;
         font-size: 10px;
         font-weight: bold;
         color: #c00;
+        text-align: left;
+        line-break: clip;
+        line-num: 2;
+        }
+        
+        .category-goods-old {
+        width: 100%;
+        height: auto;
+        margin-top: 4px;
+        font-size: 10px;
+        font-weight: bold;
+        color: #666;
         text-align: left;
         line-break: clip;
         line-num: 2;
@@ -179,6 +203,46 @@
         top: 92px;
         background-color: #ccc 0.4;
         }
+        
+        .goods-subprice-wrapper {
+        width: 100%;
+        height: auto;
+        }
+        .goods-subprice-wrapper_{
+        width: 100%;
+        height: auto;
+        }
+        
+        
+        #goods-subprice-line {
+        height: 1px;
+        width: 50px;
+        background-color: #666;
+        position: absolute;
+        left: 0px;
+        top: 10px;
+        }
+        
+        
+        .goods-subprice-wrapper2 {
+        width: 100%;
+        height: auto;
+        }
+        .goods-subprice-wrapper_2{
+        width: 100%;
+        height: auto;
+        }
+        
+        
+        #goods-subprice-line2 {
+        height: 1px;
+        width: 50px;
+        background-color: #666;
+        position: absolute;
+        left: 0px;
+        top: 10px;
+        }
+        
         
     </style>
 </ui>
