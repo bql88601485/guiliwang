@@ -47,10 +47,10 @@ DEF_PACKAGE( BeePackage_UI, BeeUIRouter, router );
 
 @interface BeeUIRouterItem : NSObject
 {
-	NSUInteger		_order;
-	NSNumber *		_type;
-	NSObject *		_value;
-	BeeUIStack *	_stack;
+    NSUInteger		_order;
+    NSNumber *		_type;
+    NSObject *		_value;
+    BeeUIStack *	_stack;
 }
 
 AS_NUMBER( TYPE_UNKNOWN )		// unknown
@@ -85,63 +85,63 @@ DEF_NUMBER( TYPE_STACK,		3 )	// stack
 
 - (id)init
 {
-	self = [super init];
-	if ( self )
-	{
-		self.type = self.TYPE_UNKNOWN;
-	}
-	return self;
+    self = [super init];
+    if ( self )
+    {
+        self.type = self.TYPE_UNKNOWN;
+    }
+    return self;
 }
 
 - (BOOL)buildStack
 {
-	if ( nil == self.stack )
-	{
-		if ( [self.type isEqualToNumber:self.TYPE_CLASS] )
-		{
-			Class clazz = NSClassFromString( (NSString *)self.value );
-			id instance = nil;
-
-			if ( [clazz respondsToSelector:@selector(sharedInstance)] )
-			{
-				instance = [clazz sharedInstance];
-			}
-			else
-			{
-				instance = [[[clazz alloc] init] autorelease];
-			}
-
-			if ( [clazz isSubclassOfClass:[UINavigationController class]] )
-			{
-				self.stack = instance;
-			}
-			else if ( [clazz isSubclassOfClass:[BeeUIBoard class]] )
-			{
-				self.stack = [BeeUIStack stackWithFirstBoard:instance];
-			}
-		}
-		else if ( [self.type isEqualToNumber:self.TYPE_BOARD] )
-		{
-			if ( [self.value isKindOfClass:[BeeUIBoard class]] )
-			{
-				self.stack = [BeeUIStack stackWithFirstBoard:(BeeUIBoard *)self.value];
-			}
-		}
-		
-		self.stack.name = self.rule;
-	}
-
-	return self.stack ? YES : NO;
+    if ( nil == self.stack )
+    {
+        if ( [self.type isEqualToNumber:self.TYPE_CLASS] )
+        {
+            Class clazz = NSClassFromString( (NSString *)self.value );
+            id instance = nil;
+            
+            if ( [clazz respondsToSelector:@selector(sharedInstance)] )
+            {
+                instance = [clazz sharedInstance];
+            }
+            else
+            {
+                instance = [[[clazz alloc] init] autorelease];
+            }
+            
+            if ( [clazz isSubclassOfClass:[UINavigationController class]] )
+            {
+                self.stack = instance;
+            }
+            else if ( [clazz isSubclassOfClass:[BeeUIBoard class]] )
+            {
+                self.stack = [BeeUIStack stackWithFirstBoard:instance];
+            }
+        }
+        else if ( [self.type isEqualToNumber:self.TYPE_BOARD] )
+        {
+            if ( [self.value isKindOfClass:[BeeUIBoard class]] )
+            {
+                self.stack = [BeeUIStack stackWithFirstBoard:(BeeUIBoard *)self.value];
+            }
+        }
+        
+        self.stack.name = self.rule;
+    }
+    
+    return self.stack ? YES : NO;
 }
 
 - (void)dealloc
 {
-	self.rule = nil;
-	self.type = nil;
-	self.value = nil;
-	self.stack = nil;
-
-	[super dealloc];
+    self.rule = nil;
+    self.type = nil;
+    self.value = nil;
+    self.stack = nil;
+    
+    [super dealloc];
 }
 
 @end
@@ -150,10 +150,10 @@ DEF_NUMBER( TYPE_STACK,		3 )	// stack
 
 @interface BeeUIRouter()
 {
-	BeeUIRouterEffect		_effect;
-	NSUInteger				_seed;
-	NSString *				_url;
-	NSMutableDictionary *	_mapping;
+    BeeUIRouterEffect		_effect;
+    NSUInteger				_seed;
+    NSString *				_url;
+    NSMutableDictionary *	_mapping;
 }
 
 @property (nonatomic, assign) NSUInteger			seed;
@@ -184,492 +184,492 @@ DEF_SINGLETON( BeeUIRouter )
 
 - (void)load
 {
-	_seed = 0;
-	_effect = BeeUIRouterEffectNone;
-	_mapping = [[NSMutableDictionary alloc] init];
-
-	[self observeNotification:UIApplicationDidEnterBackgroundNotification];
-	[self observeNotification:UIApplicationWillEnterForegroundNotification];
-//	[self observeNotification:UIApplicationDidFinishLaunchingNotification];
+    _seed = 0;
+    _effect = BeeUIRouterEffectNone;
+    _mapping = [[NSMutableDictionary alloc] init];
+    
+    [self observeNotification:UIApplicationDidEnterBackgroundNotification];
+    [self observeNotification:UIApplicationWillEnterForegroundNotification];
+    //	[self observeNotification:UIApplicationDidFinishLaunchingNotification];
 }
 
 - (void)unload
 {	
-	[self unobserveAllNotifications];
-
-	[_mapping removeAllObjects];
-	[_mapping release];
-	_mapping = nil;
-	
-	[_url release];
-	_url = nil;
+    [self unobserveAllNotifications];
+    
+    [_mapping removeAllObjects];
+    [_mapping release];
+    _mapping = nil;
+    
+    [_url release];
+    _url = nil;
 }
 
 - (void)map:(NSString *)rule toClass:(Class)clazz
 {
-	if ( nil == rule || nil == clazz )
-		return;
-
-	BeeUIRouterItem * item = [_mapping objectForKey:rule];
-	if ( nil == item )
-	{
-		item = [[[BeeUIRouterItem alloc] init] autorelease];
-		if ( item )
-		{
-			item.order = self.seed++;
-			item.rule = rule;
-			item.type = BeeUIRouterItem.TYPE_CLASS;
-			item.value = [clazz description];
-
-			[_mapping setObject:item forKey:rule];
-		}
-	}
+    if ( nil == rule || nil == clazz )
+        return;
+    
+    BeeUIRouterItem * item = [_mapping objectForKey:rule];
+    if ( nil == item )
+    {
+        item = [[[BeeUIRouterItem alloc] init] autorelease];
+        if ( item )
+        {
+            item.order = self.seed++;
+            item.rule = rule;
+            item.type = BeeUIRouterItem.TYPE_CLASS;
+            item.value = [clazz description];
+            
+            [_mapping setObject:item forKey:rule];
+        }
+    }
 }
 
 - (void)map:(NSString *)rule toBoard:(BeeUIBoard *)board
 {
-	if ( nil == rule || nil == board )
-		return;
-
-	BeeUIRouterItem * item = [_mapping objectForKey:rule];
-	if ( nil == item )
-	{
-		item = [[[BeeUIRouterItem alloc] init] autorelease];
-		if ( item )
-		{
-			item.order = self.seed++;
-			item.rule = rule;
-			item.type = BeeUIRouterItem.TYPE_BOARD;
-			item.value = board;
-
-			[_mapping setObject:item forKey:rule];
-		}
-	}
+    if ( nil == rule || nil == board )
+        return;
+    
+    BeeUIRouterItem * item = [_mapping objectForKey:rule];
+    if ( nil == item )
+    {
+        item = [[[BeeUIRouterItem alloc] init] autorelease];
+        if ( item )
+        {
+            item.order = self.seed++;
+            item.rule = rule;
+            item.type = BeeUIRouterItem.TYPE_BOARD;
+            item.value = board;
+            
+            [_mapping setObject:item forKey:rule];
+        }
+    }
 }
 
 - (void)map:(NSString *)rule toStack:(BeeUIStack *)stack
 {
-	if ( nil == rule || nil == stack )
-		return;
-	
-	BeeUIRouterItem * item = [_mapping objectForKey:rule];
-	if ( nil == item )
-	{
-		item = [[[BeeUIRouterItem alloc] init] autorelease];
-		if ( item )
-		{
-			item.order = self.seed++;
-			item.rule = rule;
-			item.type = BeeUIRouterItem.TYPE_STACK;
-			item.value = stack;
-			
-			[_mapping setObject:item forKey:rule];
-		}
-	}
+    if ( nil == rule || nil == stack )
+        return;
+    
+    BeeUIRouterItem * item = [_mapping objectForKey:rule];
+    if ( nil == item )
+    {
+        item = [[[BeeUIRouterItem alloc] init] autorelease];
+        if ( item )
+        {
+            item.order = self.seed++;
+            item.rule = rule;
+            item.type = BeeUIRouterItem.TYPE_STACK;
+            item.value = stack;
+            
+            [_mapping setObject:item forKey:rule];
+        }
+    }
 }
 
 - (BOOL)open:(NSString *)url
 {
-	return [self open:url animated:NO];
+    return [self open:url animated:NO];
 }
 
 - (BOOL)open:(NSString *)url animated:(BOOL)animated
 {
-	if ( 0 == url.length )
-		return NO;
-
-//	if ( [url isEqualToString:self.url] )
-//		return YES;
-
-	BeeUIRouterItem * curItem = self.url.length ? [_mapping objectForKey:self.url] : nil;
-	BeeUIRouterItem * newItem = [_mapping objectForKey:url];
-
-	if ( curItem == newItem )
-		return NO;
-	
-	if ( animated )
-	{
-		if ( BeeUIRouterEffectNone == _effect )
-		{
-			CATransition * transition = [CATransition animation];
-			[transition setDuration:0.3f];
-			[transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-			[transition setType:kCATransitionFade];
-			[self.view.layer addAnimation:transition forKey:nil];
-		}
-		else if ( BeeUIRouterEffectPush == _effect )
-		{
-			if ( curItem.order == newItem.order )
-			{
-				CATransition * transition = [CATransition animation];
-				[transition setDuration:0.3f];
-				[transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-				[transition setType:kCATransitionFade];
-				[self.view.layer addAnimation:transition forKey:nil];
-			}
-			else if ( curItem.order < newItem.order )
-			{
-				CATransition * transition = [CATransition animation];
-				[transition setDuration:0.3f];
-				[transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
-				[transition setType:kCATransitionMoveIn];
-				[transition setSubtype:kCATransitionFromRight];
-				[self.view.layer addAnimation:transition forKey:nil];
-			}
-			else
-			{
-				CATransition * transition = [CATransition animation];
-				[transition setDuration:0.3f];
-				[transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
-				[transition setType:kCATransitionMoveIn];
-				[transition setSubtype:kCATransitionFromLeft];
-				[self.view.layer addAnimation:transition forKey:nil];
-			}
-		}
-	}
-
-	[self postNotification:BeeUIRouter.STACK_WILL_CHANGE];
-	[self sendUISignal:BeeUIRouter.WILL_CHANGE];
-
-	for ( BeeUIRouterItem * item in _mapping.allValues )
-	{
-		if ( [item.rule isEqualToString:url] )
-			continue;
-
-		if ( item.stack )
-		{
-			[item.stack.view setHidden:YES];
-		}
-	}
-
-	if ( curItem )
-	{
-		BeeUIStack * stack = curItem.stack;
-		if ( stack )
-		{
-			[stack viewWillDisappear:NO];
-			[stack viewDidDisappear:NO];
-		}
-	}
-	
-	self.url = url;
-
-	if ( newItem )
-	{
-		if ( nil == newItem.stack )
-		{
-			BOOL succeed = [newItem buildStack];
-			if ( succeed )
-			{
-				[self.view addSubview:newItem.stack.view];
-			}
-		}
-		
-		if ( newItem.stack )
-		{
-			[self.view bringSubviewToFront:newItem.stack.view];
-
-			[newItem.stack.view setHidden:NO];
-			[newItem.stack viewWillAppear:NO];
-			[newItem.stack viewDidAppear:NO];
-		}
-	}
-
-//    [self viewWillAppear:NO];
-//    [self viewDidAppear:NO];
-
-	[self postNotification:self.STACK_DID_CHANGED];
-	[self sendUISignal:self.DID_CHANGED];
-
-	return YES;
+    if ( 0 == url.length )
+        return NO;
+    
+    //	if ( [url isEqualToString:self.url] )
+    //		return YES;
+    
+    BeeUIRouterItem * curItem = self.url.length ? [_mapping objectForKey:self.url] : nil;
+    BeeUIRouterItem * newItem = [_mapping objectForKey:url];
+    
+    if ( curItem == newItem )
+        return NO;
+    
+    if ( animated )
+    {
+        if ( BeeUIRouterEffectNone == _effect )
+        {
+            CATransition * transition = [CATransition animation];
+            [transition setDuration:0.3f];
+            [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+            [transition setType:kCATransitionFade];
+            [self.view.layer addAnimation:transition forKey:nil];
+        }
+        else if ( BeeUIRouterEffectPush == _effect )
+        {
+            if ( curItem.order == newItem.order )
+            {
+                CATransition * transition = [CATransition animation];
+                [transition setDuration:0.3f];
+                [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+                [transition setType:kCATransitionFade];
+                [self.view.layer addAnimation:transition forKey:nil];
+            }
+            else if ( curItem.order < newItem.order )
+            {
+                CATransition * transition = [CATransition animation];
+                [transition setDuration:0.3f];
+                [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+                [transition setType:kCATransitionMoveIn];
+                [transition setSubtype:kCATransitionFromRight];
+                [self.view.layer addAnimation:transition forKey:nil];
+            }
+            else
+            {
+                CATransition * transition = [CATransition animation];
+                [transition setDuration:0.3f];
+                [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+                [transition setType:kCATransitionMoveIn];
+                [transition setSubtype:kCATransitionFromLeft];
+                [self.view.layer addAnimation:transition forKey:nil];
+            }
+        }
+    }
+    
+    [self postNotification:BeeUIRouter.STACK_WILL_CHANGE];
+    [self sendUISignal:BeeUIRouter.WILL_CHANGE];
+    
+    for ( BeeUIRouterItem * item in _mapping.allValues )
+    {
+        if ( [item.rule isEqualToString:url] )
+            continue;
+        
+        if ( item.stack )
+        {
+            [item.stack.view setHidden:YES];
+        }
+    }
+    
+    if ( curItem )
+    {
+        BeeUIStack * stack = curItem.stack;
+        if ( stack )
+        {
+            [stack viewWillDisappear:NO];
+            [stack viewDidDisappear:NO];
+        }
+    }
+    
+    self.url = url;
+    
+    if ( newItem )
+    {
+        if ( nil == newItem.stack )
+        {
+            BOOL succeed = [newItem buildStack];
+            if ( succeed )
+            {
+                [self.view addSubview:newItem.stack.view];
+            }
+        }
+        
+        if ( newItem.stack )
+        {
+            [self.view bringSubviewToFront:newItem.stack.view];
+            
+            [newItem.stack.view setHidden:NO];
+            [newItem.stack viewWillAppear:NO];
+            [newItem.stack viewDidAppear:NO];
+        }
+    }
+    
+    //    [self viewWillAppear:NO];
+    //    [self viewDidAppear:NO];
+    
+    [self postNotification:self.STACK_DID_CHANGED];
+    [self sendUISignal:self.DID_CHANGED];
+    
+    return YES;
 }
 
 - (BOOL)openExternal:(NSString *)url
 {
-	// TODO:
-	
-	return NO;
+    // TODO:
+    
+    return NO;
 }
 
 - (BOOL)openExternal:(NSString *)url withParams:(NSDictionary *)dict
 {
-	// TODO:
-	
-	return NO;
+    // TODO:
+    
+    return NO;
 }
 
 - (void)close:(NSString *)url
 {
     for ( BeeUIRouterItem * item in _mapping.allValues )
-	{
-		if ( [item.rule isEqualToString:url] )
-		{
+    {
+        if ( [item.rule isEqualToString:url] )
+        {
             if ( item.stack )
             {
                 [item.stack.view removeFromSuperview];
                 item.stack = nil;
-
+                
                 [_mapping removeObjectForKey:item.rule];
-				break;
+                break;
             }
         }
-	}
+    }
 }
 
 - (BeeUIBoard *)currentBoard
 {
-	BeeUIStack * stack = [self currentStack];
-	if ( stack )
-	{
-		return stack.topBoard;
-	}
-	
-	return nil;
+    BeeUIStack * stack = [self currentStack];
+    if ( stack )
+    {
+        return stack.topBoard;
+    }
+    
+    return nil;
 }
 
 - (BeeUIStack *)currentStack
 {
-	BeeUIRouterItem * currentItem = self.url.length ? [_mapping objectForKey:self.url] : nil;
-	if ( currentItem )
-	{
-		return currentItem.stack;
-	}
-	
-	return nil;
+    BeeUIRouterItem * currentItem = self.url.length ? [_mapping objectForKey:self.url] : nil;
+    if ( currentItem )
+    {
+        return currentItem.stack;
+    }
+    
+    return nil;
 }
 
 - (NSArray *)stacks
 {
-	NSMutableArray * array = [NSMutableArray nonRetainingArray];
-	
-	for ( BeeUIRouterItem * item in _mapping.allValues )
-	{
-		if ( item.stack )
-		{
-			[array addObject:item.stack];
-		}
-	}
-
-	return array;
+    NSMutableArray * array = [NSMutableArray nonRetainingArray];
+    
+    for ( BeeUIRouterItem * item in _mapping.allValues )
+    {
+        if ( item.stack )
+        {
+            [array addObject:item.stack];
+        }
+    }
+    
+    return array;
 }
 
 - (void)buildStacks
 {
-	for ( BeeUIRouterItem * item in _mapping.allValues )
-	{
-		if ( nil == item.stack )
-		{
-			BOOL succeed = [item buildStack];
-			if ( succeed )
-			{
-				[self.view addSubview:item.stack.view];
-			}
-		}
-	}
+    for ( BeeUIRouterItem * item in _mapping.allValues )
+    {
+        if ( nil == item.stack )
+        {
+            BOOL succeed = [item buildStack];
+            if ( succeed )
+            {
+                [self.view addSubview:item.stack.view];
+            }
+        }
+    }
 }
 
 - (void)clear
 {
     for ( BeeUIRouterItem * item in _mapping.allValues )
-	{
+    {
         if ( item.stack )
-		{
+        {
             [item.stack.view removeFromSuperview];
-		}
+        }
     }
-
+    
     [_mapping removeAllObjects];
 }
 
 - (id)objectForKeyedSubscript:(id)key
 {
-	if ( nil == key )
-		return nil;
-	
-	BeeUIRouterItem * item = [_mapping objectForKey:key];
-	if ( item )
-	{
-		return item.stack;
-	}
-	
-	return nil;
+    if ( nil == key )
+        return nil;
+    
+    BeeUIRouterItem * item = [_mapping objectForKey:key];
+    if ( item )
+    {
+        return item.stack;
+    }
+    
+    return nil;
 }
 
 - (void)setObject:(id)obj forKeyedSubscript:(id)key
 {
-	if ( nil == key || nil == obj )
-		return;
-	
-	if ( [obj isKindOfClass:[BeeUIBoard class]] )
-	{
-		[self map:key toBoard:obj];
-	}
-	else
-	{
-		[self map:key toClass:obj];
-	}
+    if ( nil == key || nil == obj )
+        return;
+    
+    if ( [obj isKindOfClass:[BeeUIBoard class]] )
+    {
+        [self map:key toBoard:obj];
+    }
+    else
+    {
+        [self map:key toClass:obj];
+    }
 }
 
 #pragma mark -
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-	for ( BeeUIRouterItem * item in _mapping.allValues )
-	{
-		if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
-		{
-			[item.stack willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-		}
-	}
+    for ( BeeUIRouterItem * item in _mapping.allValues )
+    {
+        if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
+        {
+            [item.stack willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+        }
+    }
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	for ( BeeUIRouterItem * item in _mapping.allValues )
-	{
-		if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
-		{
-			[item.stack didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-		}
-	}
+    for ( BeeUIRouterItem * item in _mapping.allValues )
+    {
+        if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
+        {
+            [item.stack didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+        }
+    }
 }
 
 #pragma mark -
 
 - (void)handleNotification:(NSNotification *)notification
 {
-	if ( [notification is:UIApplicationDidEnterBackgroundNotification] )
-	{
-		for ( BeeUIRouterItem * item in _mapping.allValues )
-		{
-			if ( item.stack )
-			{
-				[item.stack __enterBackground];
-			}
-		}
-	}
-	else if ( [notification is:UIApplicationWillEnterForegroundNotification] )
-	{
-		for ( BeeUIRouterItem * item in _mapping.allValues )
-		{
-			if ( item.stack )
-			{
-				[item.stack __enterForeground];
-			}
-		}
-	}
-	else if ( [notification is:UIApplicationWillChangeStatusBarOrientationNotification] )
-	{
-		NSNumber * newOrientation = [(NSDictionary *)notification.userInfo objectForKey:UIApplicationStatusBarOrientationUserInfoKey];
-
-		for ( BeeUIRouterItem * item in _mapping.allValues )
-		{
-			if ( item.stack )
-			{
-				[item.stack willRotateToInterfaceOrientation:newOrientation.intValue duration:0.0f];
-			}
-		}
-	}
-	else if ( [notification is:UIApplicationDidChangeStatusBarOrientationNotification] )
-	{
-		NSNumber * oldOrientation = [(NSDictionary *)notification.userInfo objectForKey:UIApplicationStatusBarOrientationUserInfoKey];
-		
-		for ( BeeUIRouterItem * item in _mapping.allValues )
-		{
-			if ( item.stack )
-			{
-				[item.stack didRotateFromInterfaceOrientation:oldOrientation.intValue];
-			}
-		}
-	}
+    if ( [notification is:UIApplicationDidEnterBackgroundNotification] )
+    {
+        for ( BeeUIRouterItem * item in _mapping.allValues )
+        {
+            if ( item.stack )
+            {
+                [item.stack __enterBackground];
+            }
+        }
+    }
+    else if ( [notification is:UIApplicationWillEnterForegroundNotification] )
+    {
+        for ( BeeUIRouterItem * item in _mapping.allValues )
+        {
+            if ( item.stack )
+            {
+                [item.stack __enterForeground];
+            }
+        }
+    }
+    else if ( [notification is:UIApplicationWillChangeStatusBarOrientationNotification] )
+    {
+        NSNumber * newOrientation = [(NSDictionary *)notification.userInfo objectForKey:UIApplicationStatusBarOrientationUserInfoKey];
+        
+        for ( BeeUIRouterItem * item in _mapping.allValues )
+        {
+            if ( item.stack )
+            {
+                [item.stack willRotateToInterfaceOrientation:newOrientation.intValue duration:0.0f];
+            }
+        }
+    }
+    else if ( [notification is:UIApplicationDidChangeStatusBarOrientationNotification] )
+    {
+        NSNumber * oldOrientation = [(NSDictionary *)notification.userInfo objectForKey:UIApplicationStatusBarOrientationUserInfoKey];
+        
+        for ( BeeUIRouterItem * item in _mapping.allValues )
+        {
+            if ( item.stack )
+            {
+                [item.stack didRotateFromInterfaceOrientation:oldOrientation.intValue];
+            }
+        }
+    }
 }
 
 #pragma mark -
 
 - (void)handleUISignal:(BeeUISignal *)signal
 {
-	SIGNAL_FORWARD( signal );
-
-	if ( signal.source == self )
-	{
-		if ( [signal isKindOf:BeeUIBoard.SIGNAL] )
-		{
-			if ( [signal is:BeeUIBoard.CREATE_VIEWS] )
-			{
-				// TODO:
-				
-				self.allowedLandscape = YES;
-				self.allowedPortrait = YES;
-
-				[self observeNotification:UIApplicationWillChangeStatusBarOrientationNotification];
-				[self observeNotification:UIApplicationDidChangeStatusBarOrientationNotification];
-			}
-			else if ( [signal is:BeeUIBoard.DELETE_VIEWS] )
-			{
-				// TODO:
-
-				[self unobserveAllNotifications];
-			}
-
-			if ( _mapping )
-			{
-				for ( BeeUIRouterItem * item in _mapping.allValues )
-				{
-					if ( item.stack )
-					{
-						if ( [signal is:BeeUIBoard.CREATE_VIEWS] )
-						{
-							// TODO:
-						}
-						else if ( [signal is:BeeUIBoard.DELETE_VIEWS] )
-						{
-							// TODO:
-						}
-						else if ( [signal is:BeeUIBoard.LAYOUT_VIEWS] )
-						{
-							if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
-							{
-								CGRect bounds = self.view.bounds;
-								item.stack.view.frame = bounds;
-							}
-						}
-						else if ( [signal is:BeeUIBoard.WILL_APPEAR] )
-						{
-							if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
-							{
-								[item.stack viewWillAppear:NO];
-							}
-						}
-						else if ( [signal is:BeeUIBoard.DID_APPEAR] )
-						{
-							if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
-							{
-								[item.stack viewDidAppear:NO];
-							}
-						}
-						else if ( [signal is:BeeUIBoard.WILL_DISAPPEAR] )
-						{
-							if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
-							{
-								[item.stack viewWillDisappear:NO];
-							}
-						}
-						else if ( [signal is:BeeUIBoard.DID_DISAPPEAR] )
-						{
-							if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
-							{
-								[item.stack viewDidDisappear:NO];
-							}
-						}
-					}
-				}
-			}
-		}
-		else
-		{
-			// TODO:
-		}
-	}
+    SIGNAL_FORWARD( signal );
+    
+    if ( signal.source == self )
+    {
+        if ( [signal isKindOf:BeeUIBoard.SIGNAL] )
+        {
+            if ( [signal is:BeeUIBoard.CREATE_VIEWS] )
+            {
+                // TODO:
+                
+                self.allowedLandscape = YES;
+                self.allowedPortrait = YES;
+                
+                [self observeNotification:UIApplicationWillChangeStatusBarOrientationNotification];
+                [self observeNotification:UIApplicationDidChangeStatusBarOrientationNotification];
+            }
+            else if ( [signal is:BeeUIBoard.DELETE_VIEWS] )
+            {
+                // TODO:
+                
+                [self unobserveAllNotifications];
+            }
+            
+            if ( _mapping )
+            {
+                for ( BeeUIRouterItem * item in _mapping.allValues )
+                {
+                    if ( item.stack )
+                    {
+                        if ( [signal is:BeeUIBoard.CREATE_VIEWS] )
+                        {
+                            // TODO:
+                        }
+                        else if ( [signal is:BeeUIBoard.DELETE_VIEWS] )
+                        {
+                            // TODO:
+                        }
+                        else if ( [signal is:BeeUIBoard.LAYOUT_VIEWS] )
+                        {
+                            if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
+                            {
+                                CGRect bounds = self.view.bounds;
+                                item.stack.view.frame = bounds;
+                            }
+                        }
+                        else if ( [signal is:BeeUIBoard.WILL_APPEAR] )
+                        {
+                            if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
+                            {
+                                [item.stack viewWillAppear:NO];
+                            }
+                        }
+                        else if ( [signal is:BeeUIBoard.DID_APPEAR] )
+                        {
+                            if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
+                            {
+                                [item.stack viewDidAppear:NO];
+                            }
+                        }
+                        else if ( [signal is:BeeUIBoard.WILL_DISAPPEAR] )
+                        {
+                            if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
+                            {
+                                [item.stack viewWillDisappear:NO];
+                            }
+                        }
+                        else if ( [signal is:BeeUIBoard.DID_DISAPPEAR] )
+                        {
+                            if ( [item.stack isViewLoaded] && NO == item.stack.view.hidden )
+                            {
+                                [item.stack viewDidDisappear:NO];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            // TODO:
+        }
+    }
 }
 
 @end

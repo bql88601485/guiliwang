@@ -92,6 +92,10 @@ ON_CREATE_VIEWS( signal )
     [self showNavigationBarAnimated:NO];
     [self showBarButton:BeeUINavigationBar.RIGHT title:__TEXT(@"filter") image:[UIImage imageNamed:@"nav_right.png"]];
     
+    if (_isfromHome) {
+        [self showBarButton:BeeUINavigationBar.LEFT image:[UIImage imageNamed:@"nav_back.png"]];
+        [self setTitle:self.category];
+    }
     self.currentMode = self.MODE_GRID;
     
     @weakify(self);
@@ -182,7 +186,12 @@ ON_LAYOUT_VIEWS( signal )
 ON_WILL_APPEAR( signal )
 {
     //	[self.list reloadData];
-    [bee.ui.appBoard showTabbar];
+    if (_isfromHome) {
+        [bee.ui.appBoard hideTabbar];
+    }else{
+        [bee.ui.appBoard showTabbar];
+    }
+    
     
     if ( nil == _titleSearch )
     {
@@ -212,6 +221,7 @@ ON_WILL_APPEAR( signal )
     [[CartModel sharedInstance] addObserver:self];
     
     [[CartModel sharedInstance] reload];
+    
     
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{

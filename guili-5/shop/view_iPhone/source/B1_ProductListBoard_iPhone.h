@@ -11,7 +11,7 @@
 //
 //  Powered by BeeFramework
 //
-	
+
 #import "Bee.h"
 #import "BaseBoard_iPhone.h"
 
@@ -47,5 +47,7 @@ AS_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 @property (nonatomic, retain) SearchModel *		searchByHotModel;
 @property (nonatomic, retain) SearchModel *		searchByCheapestModel;
 @property (nonatomic, retain) SearchModel *		searchByExpensiveModel;
+
+@property (nonatomic, assign) BOOL isfromHome;
 
 @end

@@ -290,6 +290,7 @@ ON_SIGNAL2( UIView, signal ){
         board.searchByHotModel.filter.intro = keyword;
         board.searchByCheapestModel.filter.intro = keyword;
         board.searchByExpensiveModel.filter.intro = keyword;
+        board.isfromHome = YES;
         [self.stack pushBoard:board animated:YES];
     }
 }
@@ -303,6 +304,7 @@ ON_SIGNAL2( UIView, signal ){
         board.searchByHotModel.filter.keywords = keyword;
         board.searchByCheapestModel.filter.keywords = keyword;
         board.searchByExpensiveModel.filter.keywords = keyword;
+        board.isfromHome = YES;
         [self.stack pushBoard:board animated:YES];
     }
 }
@@ -402,6 +404,7 @@ ON_SIGNAL3( B0_BannerPhotoCell_iPhone, mask, signal )
             board.searchByHotModel.filter.brand_id = banner.action_id;
             board.searchByCheapestModel.filter.brand_id = banner.action_id;
             board.searchByExpensiveModel.filter.brand_id = banner.action_id;
+            board.isfromHome = YES;
             [self.stack pushBoard:board animated:YES];
         }
         else if ( [banner.action isEqualToString:BANNER_ACTION_CATEGORY] )
@@ -411,6 +414,7 @@ ON_SIGNAL3( B0_BannerPhotoCell_iPhone, mask, signal )
             board.searchByHotModel.filter.category_id = banner.action_id;
             board.searchByCheapestModel.filter.category_id = banner.action_id;
             board.searchByExpensiveModel.filter.category_id = banner.action_id;
+            board.isfromHome = YES;
             [self.stack pushBoard:board animated:YES];
         }
         else
@@ -439,6 +443,7 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhone, CATEGORY_TOUCHED, signal )
         board.searchByHotModel.filter.category_id = category.id;
         board.searchByCheapestModel.filter.category_id = category.id;
         board.searchByExpensiveModel.filter.category_id = category.id;
+        board.isfromHome = YES;
         [self.stack pushBoard:board animated:YES];
     }
 }
@@ -558,6 +563,16 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, GOODS1_TOUCHED, signal )
 
 
 
+ON_SIGNAL3( IndexCategoryTabCell, seasoning_button, signal )
+{
+    B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
+    board.category = @"调料";
+    board.searchByHotModel.filter.category_id =@(140);
+    board.searchByCheapestModel.filter.category_id = @(140);
+    board.searchByExpensiveModel.filter.category_id = @(140);
+    board.isfromHome = YES;
+    [self.stack pushBoard:board animated:YES];
+}
 ON_SIGNAL3( IndexCategoryTabCell, tea_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
@@ -565,6 +580,7 @@ ON_SIGNAL3( IndexCategoryTabCell, tea_button, signal )
     board.searchByHotModel.filter.category_id =@(61);
     board.searchByCheapestModel.filter.category_id = @(61);
     board.searchByExpensiveModel.filter.category_id = @(61);
+    board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
 ON_SIGNAL3( IndexCategoryTabCell, food_button, signal )
@@ -574,6 +590,7 @@ ON_SIGNAL3( IndexCategoryTabCell, food_button, signal )
     board.searchByHotModel.filter.category_id =@(62);
     board.searchByCheapestModel.filter.category_id = @(62);
     board.searchByExpensiveModel.filter.category_id = @(62);
+    board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
 ON_SIGNAL3( IndexCategoryTabCell, drink_button, signal )
@@ -583,6 +600,7 @@ ON_SIGNAL3( IndexCategoryTabCell, drink_button, signal )
     board.searchByHotModel.filter.category_id =@(63);
     board.searchByCheapestModel.filter.category_id = @(63);
     board.searchByExpensiveModel.filter.category_id = @(63);
+    board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
 ON_SIGNAL3( IndexCategoryTabCell, health_button, signal )
@@ -592,6 +610,8 @@ ON_SIGNAL3( IndexCategoryTabCell, health_button, signal )
     board.searchByHotModel.filter.category_id =@(112);
     board.searchByCheapestModel.filter.category_id = @(112);
     board.searchByExpensiveModel.filter.category_id = @(112);
+    board.isfromHome = YES;
+    board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
 ON_SIGNAL3( IndexCategoryTabCell, art_button, signal )
@@ -601,6 +621,7 @@ ON_SIGNAL3( IndexCategoryTabCell, art_button, signal )
     board.searchByHotModel.filter.category_id =@(136);
     board.searchByCheapestModel.filter.category_id = @(136);
     board.searchByExpensiveModel.filter.category_id = @(136);
+    board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
 #pragma mark - B0_IndexRecommendGoodsCell_iPhone

@@ -11,7 +11,7 @@
 //
 //  Powered by BeeFramework
 //
-	
+
 #import "D1_CategoryBoard_iPhone.h"
 #import "D0_SearchBoard_iPhone.h"
 #import "B1_ProductListBoard_iPhone.h"
@@ -37,7 +37,7 @@ DEF_OUTLET( BeeUIScrollView, list )
 
 - (void)unload
 {
-	self.category = nil;
+    self.category = nil;
 }
 
 #pragma mark -
@@ -47,7 +47,7 @@ ON_CREATE_VIEWS( signal )
     self.navigationBarTitle = self.category.name;
     [self showNavigationBarAnimated:NO];
     [self showBarButton:BeeUINavigationBar.LEFT image:[UIImage imageNamed:@"nav_back.png"]];
-
+    
     @weakify(self);
     
     self.list.lineCount = 1;
@@ -58,7 +58,7 @@ ON_CREATE_VIEWS( signal )
         @normalize(self);
         
         self.list.total = self.category.children.count;
-                
+        
         for ( int i = 0; i < self.category.children.count; i++ )
         {
             BeeUIScrollItem * item = self.list.items[i];
@@ -110,14 +110,15 @@ ON_RIGHT_BUTTON_TOUCHED( signal )
 
 ON_SIGNAL3( D0_SearchCategory_iPhone, mask, signal )
 {
-	CATEGORY * category = signal.sourceCell.data;
-	
-	B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
-	board.category = category.name;
-	board.searchByHotModel.filter.category_id = category.id;
-	board.searchByCheapestModel.filter.category_id = category.id;
-	board.searchByExpensiveModel.filter.category_id = category.id;
-	[self.stack pushBoard:board animated:YES];
+    CATEGORY * category = signal.sourceCell.data;
+    
+    B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
+    board.category = category.name;
+    board.searchByHotModel.filter.category_id = category.id;
+    board.searchByCheapestModel.filter.category_id = category.id;
+    board.searchByExpensiveModel.filter.category_id = category.id;
+    board.isfromHome = YES;
+    [self.stack pushBoard:board animated:YES];
 }
 
 @end

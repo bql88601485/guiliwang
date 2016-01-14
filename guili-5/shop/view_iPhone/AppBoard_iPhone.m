@@ -70,53 +70,53 @@ DEF_MODEL( UserModel,	userModel )
 
 - (void)load
 {
-	self.configModel = [ConfigModel modelWithObserver:self];
-	self.userModel = [UserModel modelWithObserver:self];
+    self.configModel = [ConfigModel modelWithObserver:self];
+    self.userModel = [UserModel modelWithObserver:self];
 }
 
 - (void)unload
 {
-	SAFE_RELEASE_MODEL( self.configModel );
-	SAFE_RELEASE_MODEL( self.userModel );
+    SAFE_RELEASE_MODEL( self.configModel );
+    SAFE_RELEASE_MODEL( self.userModel );
 }
 
 #pragma mark -
 
 ON_SIGNAL2( BeeUIBoard, signal )
 {
-	if ( [signal is:BeeUIBoard.CREATE_VIEWS] )
-	{
+    if ( [signal is:BeeUIBoard.CREATE_VIEWS] )
+    {
         self.view.backgroundColor = [UIColor whiteColor];
-
-		bee.ui.router[self.TAB_HOME]	= [B0_IndexBoard_iPhone class];
-		bee.ui.router[self.TAB_SEARCH]	= [B1_ProductListBoard_iPhone class];
-		bee.ui.router[self.TAB_CART]	= [C0_ShoppingCartBoard_iPhone class];
-		bee.ui.router[self.TAB_USER]	= [E0_ProfileBoard_iPhone sharedInstance];
-		
-		[self.view addSubview:bee.ui.router.view];
-		[self.view addSubview:bee.ui.tabbar];
-
-		[bee.ui.router open:self.TAB_HOME animated:YES];
-
-		[self observeNotification:BeeUIRouter.STACK_DID_CHANGED];
-		[self observeNotification:UserModel.LOGIN];
-		[self observeNotification:UserModel.LOGOUT];
-		[self observeNotification:UserModel.KICKOUT];
-//		[self observeNotification:BeeNetworkReachability.WIFI_REACHABLE];
-//		[self observeNotification:BeeNetworkReachability.WLAN_REACHABLE];
-//		[self observeNotification:BeeNetworkReachability.UNREACHABLE];
-
+        
+        bee.ui.router[self.TAB_HOME]	= [B0_IndexBoard_iPhone class];
+        bee.ui.router[self.TAB_SEARCH]	= [B1_ProductListBoard_iPhone class];
+        bee.ui.router[self.TAB_CART]	= [C0_ShoppingCartBoard_iPhone class];
+        bee.ui.router[self.TAB_USER]	= [E0_ProfileBoard_iPhone sharedInstance];
+        
+        [self.view addSubview:bee.ui.router.view];
+        [self.view addSubview:bee.ui.tabbar];
+        
+        [bee.ui.router open:self.TAB_HOME animated:YES];
+        
+        [self observeNotification:BeeUIRouter.STACK_DID_CHANGED];
+        [self observeNotification:UserModel.LOGIN];
+        [self observeNotification:UserModel.LOGOUT];
+        [self observeNotification:UserModel.KICKOUT];
+        //		[self observeNotification:BeeNetworkReachability.WIFI_REACHABLE];
+        //		[self observeNotification:BeeNetworkReachability.WLAN_REACHABLE];
+        //		[self observeNotification:BeeNetworkReachability.UNREACHABLE];
+        
         _tabbarOriginY = self.viewBound.size.height - TAB_HEIGHT + 1;
-	}
-	else if ( [signal is:BeeUIBoard.DELETE_VIEWS] )
-	{
-		[self unobserveAllNotifications];
-	}
-	else if ( [signal is:BeeUIBoard.LAYOUT_VIEWS] )
-	{
-		bee.ui.tabbar.frame = CGRectMake( 0, _tabbarOriginY, self.viewBound.size.width, TAB_HEIGHT );
-		bee.ui.router.view.frame = CGRectMake( 0, 0, self.viewBound.size.width, self.viewBound.size.height );
-	}
+    }
+    else if ( [signal is:BeeUIBoard.DELETE_VIEWS] )
+    {
+        [self unobserveAllNotifications];
+    }
+    else if ( [signal is:BeeUIBoard.LAYOUT_VIEWS] )
+    {
+        bee.ui.tabbar.frame = CGRectMake( 0, _tabbarOriginY, self.viewBound.size.width, TAB_HEIGHT );
+        bee.ui.router.view.frame = CGRectMake( 0, 0, self.viewBound.size.width, self.viewBound.size.height );
+    }
     else if ( [signal is:BeeUIBoard.LOAD_DATAS] )
     {
     }
@@ -128,7 +128,7 @@ ON_SIGNAL2( BeeUIBoard, signal )
     }
     else if ( [signal is:BeeUIBoard.DID_APPEAR] )
     {
-		[self.configModel reload];
+        [self.configModel reload];
     }
     else if ( [signal is:BeeUIBoard.DID_APPEAR] )
     {
@@ -142,7 +142,7 @@ ON_SIGNAL2( BeeUIBoard, signal )
     }
     else if ( [signal is:BeeUIBoard.ORIENTATION_WILL_CHANGE] )
     {
-		
+        
     }
     else if ( [signal is:BeeUIBoard.ORIENTATION_DID_CHANGED] )
     {
@@ -153,59 +153,59 @@ ON_SIGNAL2( BeeUIBoard, signal )
 
 ON_SIGNAL3( AppBoard_iPhone, EXPIRE_TOUCHED, signal )
 {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ecmobile.me"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ecmobile.me"]];
 }
 
 #pragma mark -
 
 ON_NOTIFICATION3( BeeNetworkReachability, WIFI_REACHABLE, notification )
 {
-	[self presentMessageTips:__TEXT(@"network_wifi")];
+    [self presentMessageTips:__TEXT(@"network_wifi")];
 }
 
 ON_NOTIFICATION3( BeeNetworkReachability, WLAN_REACHABLE, notification )
 {
-	[self presentMessageTips:__TEXT(@"network_wlan")];
+    [self presentMessageTips:__TEXT(@"network_wlan")];
 }
 
 ON_NOTIFICATION3( BeeNetworkReachability, UNREACHABLE, notification )
 {
-	[self presentMessageTips:__TEXT(@"network_unreachable")];
+    [self presentMessageTips:__TEXT(@"network_unreachable")];
 }
 
 #pragma mark -
 
 ON_SIGNAL3( AppTabbar_iPhone, home_button, signal )
 {
-	[bee.ui.tabbar selectHome];
-	[bee.ui.router open:AppBoard_iPhone.TAB_HOME animated:NO];
+    [bee.ui.tabbar selectHome];
+    [bee.ui.router open:AppBoard_iPhone.TAB_HOME animated:NO];
 }
 
 ON_SIGNAL3( AppTabbar_iPhone, category_button, signal )
 {
-	[bee.ui.tabbar selectSearch];
-	[bee.ui.router open:AppBoard_iPhone.TAB_SEARCH animated:NO];
+    [bee.ui.tabbar selectSearch];
+    [bee.ui.router open:AppBoard_iPhone.TAB_SEARCH animated:NO];
 }
 
 ON_SIGNAL3( AppTabbar_iPhone, cart_button, signal )
 {
-	[bee.ui.tabbar selectCart];
-	[bee.ui.router open:AppBoard_iPhone.TAB_CART animated:NO];
+    [bee.ui.tabbar selectCart];
+    [bee.ui.router open:AppBoard_iPhone.TAB_CART animated:NO];
 }
 
 ON_SIGNAL3( AppTabbar_iPhone, user_button, signal )
 {
-	[bee.ui.tabbar selectUser];
-	[bee.ui.router open:AppBoard_iPhone.TAB_USER animated:NO];
+    [bee.ui.tabbar selectUser];
+    [bee.ui.router open:AppBoard_iPhone.TAB_USER animated:NO];
 }
 
 #pragma mark -
 
 ON_NOTIFICATION3( UserModel, KICKOUT, n )
 {
-	[self showLogin];
-	// 登录用户过期后，执行当前页面viewWillApper
-	[bee.ui.router.currentBoard viewWillAppear:YES];
+    [self showLogin];
+    // 登录用户过期后，执行当前页面viewWillApper
+    [bee.ui.router.currentBoard viewWillAppear:YES];
 }
 
 ON_NOTIFICATION3( UserModel, LOGOUT, n )
@@ -221,9 +221,9 @@ ON_NOTIFICATION3( UserModel, LOGIN, n )
 
 - (void)showLogin
 {
-	if ( self.modalStack )
+    if ( self.modalStack )
     {
-		return;
+        return;
     }
     
     A0_SigninBoard_iPhone   *singin = [[A0_SigninBoard_iPhone alloc] initWithNibName:@"A0_SigninBoard_iPhone" bundle:nil];
@@ -237,46 +237,46 @@ ON_NOTIFICATION3( UserModel, LOGIN, n )
 
 - (void)hideLogin
 {
-	if ( nil == self.modalStack )
-	{
-		return;
-	}
-	
+    if ( nil == self.modalStack )
+    {
+        return;
+    }
+    
 }
 
 #pragma mark -
 
 - (void)showTabbar
 {
-	_tabbarOriginY = self.view.height - TAB_HEIGHT + 1;
-	
+    _tabbarOriginY = self.view.height - TAB_HEIGHT + 1;
+    
     CGRect tabbarFrame = bee.ui.tabbar.frame;
     tabbarFrame.origin.y = _tabbarOriginY;
-	
+    
     [UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.3];
+    [UIView setAnimationDuration:0.3];
     [UIView setAnimationDelay:0.2];
     [UIView setAnimationBeginsFromCurrentState:YES];
-	
+    
     bee.ui.tabbar.frame = tabbarFrame;
-	
+    
     [UIView commitAnimations];
 }
 
 - (void)hideTabbar
 {
-	_tabbarOriginY = self.view.height;
-
+    _tabbarOriginY = self.view.height;
+    
     CGRect tabbarFrame = bee.ui.tabbar.frame;
     tabbarFrame.origin.y = _tabbarOriginY;
-
+    
     [UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.3];
+    [UIView setAnimationDuration:0.3];
     [UIView setAnimationDelay:0.2];
     [UIView setAnimationBeginsFromCurrentState:YES];
-
+    
     bee.ui.tabbar.frame = tabbarFrame;
-	
+    
     [UIView commitAnimations];
 }
 

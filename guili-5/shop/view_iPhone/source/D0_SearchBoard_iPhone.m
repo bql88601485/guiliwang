@@ -208,6 +208,7 @@ ON_SIGNAL3( D0_SearchCategory_iPhone, mask, signal )
             board.category = category.name;
             board.searchByHotModel.filter.category_id = category.id;
             board.searchByCheapestModel.filter.category_id = category.id;
+            board.isfromHome = YES;
             board.searchByExpensiveModel.filter.category_id = category.id;
             [self.stack pushBoard:board animated:YES];
         }
@@ -226,6 +227,7 @@ ON_SIGNAL3( D0_SearchCategory_iPhone, mask, signal )
         board.searchByHotModel.filter.keywords = keyword;
         board.searchByCheapestModel.filter.keywords = keyword;
         board.searchByExpensiveModel.filter.keywords = keyword;
+        board.isfromHome = YES;
         [self.stack pushBoard:board animated:YES];
     }
 }
