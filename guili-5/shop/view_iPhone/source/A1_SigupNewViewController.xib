@@ -47,15 +47,15 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon180.png" translatesAutoresizingMaskIntoConstraints="NO" id="StL-dM-pyv">
-                    <rect key="frame" x="270" y="95" width="60" height="60"/>
+                    <rect key="frame" x="260" y="95" width="80" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="CBy-q9-DZR"/>
-                        <constraint firstAttribute="height" constant="60" id="G6B-SC-7bF"/>
+                        <constraint firstAttribute="width" constant="80" id="CBy-q9-DZR"/>
+                        <constraint firstAttribute="height" constant="80" id="G6B-SC-7bF"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elc-4a-nvU">
-                    <rect key="frame" x="0.0" y="185" width="600" height="122"/>
+                    <rect key="frame" x="0.0" y="205" width="600" height="122"/>
                     <subviews>
                         <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="maL-Md-Xfa">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="122"/>
@@ -346,7 +346,7 @@
                         <constraint firstAttribute="width" constant="69" id="hFh-bn-gWJ"/>
                         <constraint firstAttribute="height" constant="75" id="mnh-cZ-Kd7"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="提交"/>
                     <connections>
                         <action selector="registerAction:" destination="-1" eventType="touchUpInside" id="rqQ-85-bh4"/>

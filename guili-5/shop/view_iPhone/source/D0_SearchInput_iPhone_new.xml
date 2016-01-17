@@ -2,16 +2,9 @@
 <ui namespace="D0_SearchInput_iPhone_new">
     
     <row class="container">
-        
-        <row class="search-input-wrapper">
-            <!--<image class="search-input-bg"/>-->
-            <image class="search-bg"/>
-            <image class="search-icon"/>
-            <input id="search-input" ></input>
-        </row>
-        
-        
+        <button id="sear-button" class="icon-search"></button>
         <image class="logo"/>
+        <button id="home-button" class="icon-home"></button>
     </row>
     
     <style>
@@ -23,9 +16,9 @@
         }
         .logo{
         position:absolute;
-        image-src:url(guililogo);
+        image-src:url(homeIcon.png);
         width:auto;
-        left:0px;
+        left:43%;
         top:0px;
         }
         .search-input-wrapper {
@@ -58,7 +51,30 @@
         input-return-key: search;
         }
         
+        .item-icon {
         
+        }
+        
+        .icon-home {
+        position:absolute;
+        width:20px;
+        height:20px;
+        top:10px;
+        left:10px;
+        image: url(扫码.png);
+        image-selected: url(扫码.png);
+        }
+        
+        .icon-search {
+        position:absolute;
+        width:20px;
+        height:20px;
+        top:10px;
+        right:10px;
+        image: url(searchIcon.png);
+        image-selected: url(searchIcon.png);
+        
+        }
         
         
     </style>

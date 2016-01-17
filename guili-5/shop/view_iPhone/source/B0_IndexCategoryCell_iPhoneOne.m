@@ -60,7 +60,7 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
         $(@"#goods-price1").SHOW();
         $(@"#goods-price1").TEXT( goods.shop_price );
         
-        if (![goods.market_price isEqualToString:@"￥0.0"]){
+        if (NO){
             $(@"#goods-old1").SHOW();
             $(@"#goods-old1").TEXT( goods.market_price );
             $(@"#goods-subprice-line").SHOW();

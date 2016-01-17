@@ -66,7 +66,7 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
             $(@"#goods-image1").IMAGE( goods.img.thumbURL );
             
             
-            if (![goods.market_price isEqualToString:@"￥0.0"]){
+            if (NO){
                 $(@"#goods-old1").SHOW();
                 $(@"#goods-old1").TEXT( goods.market_price );
                 $(@"#goods-subprice-line").SHOW();
@@ -97,7 +97,7 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
             $(@"#goods-image2").SHOW();
             $(@"#goods-image2").IMAGE( goods.img.thumbURL );
             
-            if (![goods.market_price isEqualToString:@"￥0.0"]){
+            if (NO){
                 $(@"#goods-old2").SHOW();
                 $(@"#goods-old2").TEXT( goods.market_price );
                 $(@"#goods-subprice-line2").SHOW();
@@ -127,7 +127,7 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
             $(@"#goods-image3").IMAGE( goods.img.thumbURL );
             
             
-            if (![goods.market_price isEqualToString:@"￥0.0"]){
+            if (NO){
                 $(@"#goods-old3").SHOW();
                 $(@"#goods-old3").TEXT( goods.market_price );
                 $(@"#goods-subprice-line3").SHOW();

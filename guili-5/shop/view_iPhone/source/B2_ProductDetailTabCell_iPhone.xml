@@ -7,8 +7,8 @@
         
 		<button id="buy" class="btn button-orange">@{gooddetail_buy}</button>
         <button id="add" class="btn button-red">@{gooddetail_shoppingcart}</button>
-        <button id="saoma" class="btn button-red">@{gooddetail_shaoma}</button>
-		
+<!--        <button id="saoma" class="btn button-red">@{gooddetail_shaoma}</button>-->
+
         <col class="cart-wrapper">
             <button id="cart" class="cart-icon"/>
 			<col class="badge-wrapper">
@@ -40,7 +40,7 @@
         font: 11px bold;
         text-align: center;
         color: #fff;
-        width: 76px;
+        width: 35%;
         height: 28px;
         line-height: 28px;
         background-mode: stretch;
@@ -137,7 +137,7 @@
 		
         #buy {
         
-        margin-left: 5px;
+        margin-left: 10px;
         }
         
         #add {

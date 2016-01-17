@@ -31,4 +31,6 @@ AS_MODEL( CategoryModel,	categoryModel );
 
 AS_OUTLET( BeeUIScrollView, list )
 
+AS_OUTLET( BeeUITextField, search_input);
+
 @end

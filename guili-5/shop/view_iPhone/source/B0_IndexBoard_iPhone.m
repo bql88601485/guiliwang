@@ -33,12 +33,18 @@
 #import "B0_IndexCategoryCell_iPhoneOne.h"
 #pragma mark -
 
-@interface B0_IndexBoard_iPhone()
+@interface B0_IndexBoard_iPhone()<ZBarReaderDelegate>
 {
     NSMutableArray *newCargories;
     NSMutableArray *onelist;
     NSMutableArray *twolist;
     NSMutableArray *threelist;
+    
+    
+    int num;
+    BOOL upOrdown;
+    NSTimer * timer;
+    UIImageView * _line;
 }
 
 @end
@@ -52,6 +58,9 @@ DEF_MODEL( BannerModel,		bannerModel );
 DEF_MODEL( CategoryModel,	categoryModel );
 
 DEF_OUTLET( BeeUIScrollView, list )
+
+DEF_OUTLET( BeeUITextField, search_input);
+
 
 #pragma mark -
 
@@ -81,6 +90,10 @@ ON_CREATE_VIEWS( signal )
      * BeeUIScrollView的block方式写法可以从它对应的delegate方法中转换而来
      */
     
+    
+    self.search_input.delegate = self;
+    self.search_input.text = @"贵州 礼品";
+    
     @weakify(self);
     
     self.list.headerClass = [CommonPullLoader class];
@@ -93,6 +106,11 @@ ON_CREATE_VIEWS( signal )
     self.list.whenReloading = ^
     {
         @normalize(self);
+        //        [UIView animateWithDuration:0.2 animations:^{
+        //            [self.view setTop:20];
+        //        }];
+        
+        
         
         self.list.total = self.bannerModel.banners.count ? 1 : 0;
         self.list.total += self.bannerModel.goods.count ? 1 : 0;
@@ -113,6 +131,7 @@ ON_CREATE_VIEWS( signal )
             
             offset += 1;
         }
+        
         BeeUIScrollItem * categories = self.list.items[offset];
         categories.clazz = [IndexCategoryTabCell class];
         categories.data = nil;
@@ -208,6 +227,9 @@ ON_CREATE_VIEWS( signal )
         }
         
         offset += self.categoryModel.categories.count;
+        
+        
+        
     };
     self.list.whenHeaderRefresh = ^
     {
@@ -216,6 +238,7 @@ ON_CREATE_VIEWS( signal )
         
         [[CartModel sharedInstance] reload];
     };
+    
 }
 
 - (void)dataYh:(NSArray *)tmp :(int )num :(id)item{
@@ -258,27 +281,21 @@ ON_WILL_APPEAR( signal )//导航
     
     [bee.ui.appBoard showTabbar];
     
-    D0_SearchInput_iPhone_new * searchBar = [[D0_SearchInput_iPhone_new alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44.0f)];
-    $(searchBar).FIND(@"#search-input").TEXT(@"贵州 礼品");
-    
-    for (UIView * vi in searchBar.subviews) {
-        if([vi isKindOfClass:[UITextField class]]){
-            ((UITextField *)vi).clearButtonMode = UITextFieldViewModeNever;
-            ((UITextField *)vi).delegate = self;
-            searchField = vi;
-        }
-        
-    }
-    
+    D0_SearchInput_iPhone_new * searchBar = [[D0_SearchInput_iPhone_new alloc] initWithFrame:CGRectMake(0, 0., self.view.width, 44.0f)];
     
     self.titleView = searchBar;
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.view setTop:20];
+    });
+    
+    [self.search_input resignFirstResponder];
 }
 ON_SIGNAL2( UIView, signal ){
     
-    if(![signal.source isKindOfClass:[BeeUITextField class]]){
-        [self.titleView endEditing:YES];
-        
-    }
+    
+    [self    cancelText];
     
 }
 - (void)doIntro:(NSString *)keyword
@@ -320,10 +337,9 @@ ON_SIGNAL2( UIView, signal ){
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    D0_SearchInput_iPhone_new * searchBar= (D0_SearchInput_iPhone_new *)self.titleView;
-    NSString *sea=$(searchBar).FIND(@"#search-input").text;
+    NSString *sea=textField.text;
     if ([sea isEqualToString:@"贵州 礼品"]) {
-        $(searchBar).FIND(@"#search-input").TEXT(@"");
+        textField.text = @"";
     }
     
 }
@@ -577,9 +593,9 @@ ON_SIGNAL3( IndexCategoryTabCell, tea_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
     board.category = @"生态好茶";
-    board.searchByHotModel.filter.category_id =@(61);
-    board.searchByCheapestModel.filter.category_id = @(61);
-    board.searchByExpensiveModel.filter.category_id = @(61);
+    board.searchByHotModel.filter.category_id =@(138);
+    board.searchByCheapestModel.filter.category_id = @(138);
+    board.searchByExpensiveModel.filter.category_id = @(138);
     board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
@@ -587,9 +603,9 @@ ON_SIGNAL3( IndexCategoryTabCell, food_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
     board.category = @"食品";
-    board.searchByHotModel.filter.category_id =@(62);
-    board.searchByCheapestModel.filter.category_id = @(62);
-    board.searchByExpensiveModel.filter.category_id = @(62);
+    board.searchByHotModel.filter.category_id =@(139);
+    board.searchByCheapestModel.filter.category_id = @(139);
+    board.searchByExpensiveModel.filter.category_id = @(139);
     board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
@@ -597,9 +613,9 @@ ON_SIGNAL3( IndexCategoryTabCell, drink_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
     board.category = @"酒";
-    board.searchByHotModel.filter.category_id =@(63);
-    board.searchByCheapestModel.filter.category_id = @(63);
-    board.searchByExpensiveModel.filter.category_id = @(63);
+    board.searchByHotModel.filter.category_id =@(137);
+    board.searchByCheapestModel.filter.category_id = @(137);
+    board.searchByExpensiveModel.filter.category_id = @(137);
     board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
@@ -607,9 +623,9 @@ ON_SIGNAL3( IndexCategoryTabCell, health_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
     board.category = @"保健品";
-    board.searchByHotModel.filter.category_id =@(112);
-    board.searchByCheapestModel.filter.category_id = @(112);
-    board.searchByExpensiveModel.filter.category_id = @(112);
+    board.searchByHotModel.filter.category_id =@(141);
+    board.searchByCheapestModel.filter.category_id = @(141);
+    board.searchByExpensiveModel.filter.category_id = @(141);
     board.isfromHome = YES;
     board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
@@ -618,9 +634,9 @@ ON_SIGNAL3( IndexCategoryTabCell, art_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
     board.category = @"工艺品";
-    board.searchByHotModel.filter.category_id =@(136);
-    board.searchByCheapestModel.filter.category_id = @(136);
-    board.searchByExpensiveModel.filter.category_id = @(136);
+    board.searchByHotModel.filter.category_id =@(122);
+    board.searchByCheapestModel.filter.category_id = @(122);
+    board.searchByExpensiveModel.filter.category_id = @(122);
     board.isfromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
@@ -651,7 +667,7 @@ ON_SIGNAL3( B0_IndexRecommendGoodsCell_iPhone, mask, signal )
      if ( goods )
      {
 	    B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
-     board.goodsModel.goods_id = goods.id;
+     board.goodsModel.goods_ id = goods.id;
      [self.stack pushBoard:board animated:YES];
      }*/
 }
@@ -676,6 +692,9 @@ ON_MESSAGE3( API, home_data, msg )
         if ( msg.succeed )
         {
             [self.list asyncReloadData];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.list asyncReloadData];
+            });
         }
         else if ( msg.failed )
         {
@@ -702,10 +721,103 @@ ON_MESSAGE3( API, home_category, msg )
         if ( msg.succeed )
         {
             [self.list asyncReloadData];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.list asyncReloadData];
+            });
         }
         else if ( msg.failed )
         {
             [self showErrorTips:msg];
+        }
+    }
+}
+ON_SIGNAL3( D0_SearchInput_iPhone_new, sear_button, signal ){
+    [UIView animateWithDuration:0.2 animations:^{
+        if (self.view.top == 20) {
+            self.view.top = 64;
+        }else{
+            [self.search_input resignFirstResponder];
+            self.view.top = 20;
+        }
+    }];
+}
+ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
+    //初始话ZBar
+    ZBarReaderViewController * reader = [ZBarReaderViewController new];
+    //设置代理
+    reader.readerDelegate = self;
+    reader.showsHelpOnFail = NO;
+    //        reader.scanCrop = CGRectMake(0.1, 0.2, 0.8, 0.8);//扫描的感应框
+    //        [reader.view setFrame:CGRectMake(0, 20 + 44, self.view.bounds.size.width, self.view.frame.size.height)];
+    
+    ZBarImageScanner * scanner = reader.scanner;
+    [scanner setSymbology:ZBAR_I25
+                   config:ZBAR_CFG_ENABLE
+                       to:0];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 420)];
+    view.backgroundColor = [UIColor clearColor];
+    reader.cameraOverlayView = view;
+    
+    NSLog(@"reader.view = %@",reader.view.subviews);
+    UIView * downView = [reader.view.subviews firstObject];
+    for (UIView * vi in reader.view.subviews) {
+        if(vi.frame.origin.y > downView.frame.origin.y){
+            downView = vi;
+        }
+    }
+    UIView * rightView = [downView.subviews.firstObject subviews].firstObject;
+    NSLog(@"[downView.subviews.firstObject subviews] = %@",[downView.subviews.firstObject subviews]);
+    for(UIView * vi in [downView.subviews.firstObject subviews]){
+        if(vi.frame.origin.x > rightView.frame.origin.y){
+            rightView = vi;
+        }
+    }
+    [rightView setHidden:YES];
+    
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 280, 50)];
+    label.text = @"请将扫描的二维码至于下面的框内";
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = 1;
+    label.lineBreakMode = 0;
+    label.numberOfLines = 2;
+    label.backgroundColor = [UIColor clearColor];
+    [view addSubview:label];
+    
+    UIImageView * image = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"PEPhotoCropEditorBorder"] stretchableImageWithLeftCapWidth:23/2 topCapHeight:23/2]];
+    image.frame = CGRectMake(20, 110, 280, 280);
+    [view addSubview:image];
+    
+    _line = [[UIImageView alloc] initWithFrame:CGRectMake(30, 10, 220, 2)];
+    _line.image = [UIImage imageNamed:@"line.png"];
+    [image addSubview:_line];
+    //定时器，设定时间过1.5秒，
+    timer = [NSTimer scheduledTimerWithTimeInterval:.02 target:self selector:@selector(animation1) userInfo:nil repeats:YES];
+    
+    NSLog(@"navig =%@",self.navigationController);
+    [self presentViewController:reader animated:YES completion:^{
+        
+    }];
+}
+
+- (void)cancelText{
+    [self.search_input resignFirstResponder];
+}
+
+-(void)animation1
+{
+    if (upOrdown == NO) {
+        num ++;
+        _line.frame = CGRectMake(30, 10+2*num, 220, 2);
+        if (2*num == 260) {
+            upOrdown = YES;
+        }
+    }
+    else {
+        num --;
+        _line.frame = CGRectMake(30, 10+2*num, 220, 2);
+        if (num == 0) {
+            upOrdown = NO;
         }
     }
 }
