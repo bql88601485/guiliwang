@@ -110,7 +110,7 @@ ON_CREATE_VIEWS( signal )
         //            [self.view setTop:20];
         //        }];
         
-        
+        [self.view setTop:20];
         
         self.list.total = self.bannerModel.banners.count ? 1 : 0;
         self.list.total += self.bannerModel.goods.count ? 1 : 0;
@@ -286,7 +286,7 @@ ON_WILL_APPEAR( signal )//导航
     self.titleView = searchBar;
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.view setTop:20];
     });
     

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui namespace="B2_KBCell">
+    
+    <col class="container">
+    </col>
+    
+    <style>
+        .container {
+        width: 100%;
+        height: 10px;
+        }
+    </style>
+</ui>

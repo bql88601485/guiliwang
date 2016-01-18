@@ -25,27 +25,29 @@ DEF_OUTLET( BeeUIImageView, background )
 DEF_OUTLET( BeeUILabel, creator )
 DEF_OUTLET( BeeUILabel, date )
 DEF_OUTLET( BeeUILabel, content );
-
+DEF_OUTLET( BeeUILabel, Kongbai );
 - (void)dataDidChanged
 {
     COMMENT * comment = self.data;
-
+    
     if ( comment )
     {
-        self.creator.text = [NSString stringWithFormat:@"%@:", comment.author];
+        self.creator.text = [NSString stringWithFormat:@"%@", comment.author];
         self.content.text = comment.content;
-        self.date.text = [[comment.create asNSDate] timeAgo];
+        self.date.text = [[comment.create asNSDate] stringWithDateFormat:@"YYYY-MM-DD HH:MM:SS"];
+        self.Kongbai.text = nil;
         
         switch ( comment.scrollIndex )
         {
             case UIScrollViewIndexFirst:
-                self.background.data = @"cell_bg_header.png";
+                self.Kongbai.text = @"     ";
+                self.background.data = @"cell_bg_headerNew.png";
                 break;
             case UIScrollViewIndexLast:
-                self.background.data = @"cell_bg_footer.png";
+                self.background.data = @"cell_bg_content.png";
                 break;
             case UIScrollViewIndexSingle:
-                self.background.data = @"cell_bg_single.png";
+                self.background.data = @"cell_bg_content.png";
                 break;
             case UIScrollViewIndexDefault:
                 self.background.data = @"cell_bg_content.png";

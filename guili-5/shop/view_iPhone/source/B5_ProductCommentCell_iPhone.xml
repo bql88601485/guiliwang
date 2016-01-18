@@ -2,60 +2,69 @@
 <ui namespace="B5_ProductCommentCell_iPhone">
     
     <col class="comment-wrapper">
+        <label id="Kongbai"></label>
         <image id="background" class="background" />
-        <row class="comment-header">
-            <label id="creator"></label>
-            <label id="date"></label>
-        </row>
-        
+        <label id="creator"></label>
         <label id="content"></label>
+        <label id="date"></label>
     </col>
     
     <style type="text/css">
         
         .comment-wrapper {
-        margin-left: 10px;
-        width: 300px;
+        margin-left: -1px;
+        width: 101%;
         height: auto;
         }
         
         .background {
         position: absolute;
-        width: 300px;
+        width: 100%;
         height: 100%;
         image-mode: stretched;
         }
-       
+        
         .comment-header {
-        margin-left: 10px;
+        margin-left: 20px;
         height: 20px;
-        width: 280px;
+        width: 100%;
         }
         
         #creator {
         font: 13px;
-        width: 200px;
-        height: 20px;
+        width: 100%;
+        height: 15px;
         text-align: left;
-        margin-top: 8px;
+        margin-top: 5px;
+        left:20px;
+        color: #999;
         }
         
         #date {
         font: 13px;
         color: #999;
-        width: 80px;
+        width: 100%;
         height: 20px;
-        text-align: right;
-        float: right;
-        margin-top: 8px;
+        text-align: left;
+        margin-top: 2px;
+        margin-left: 20px;
+        margin-bottom: 5px;
         }
         
         #content {
         text-align: left;
-        margin-top: 8px;
-        margin-left: 10px;
-        margin-bottom: 8px;
+        margin-top: 2px;
+        margin-left: 20px;
         font: 14px;
+        width: 280px;
+        line-num: 0;
+        height: auto;
+        }
+        #Kongbai {
+        text-align: left;
+        margin-top: 2px;
+        margin-left: 10px;
+        font: 6px;
         width: 280px;
         line-num: 0;
         height: auto;

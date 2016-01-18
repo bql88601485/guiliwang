@@ -44,7 +44,7 @@
 
 #import "../../QRScan/libqrencode/QRCodeGenerator.h"
 
-
+#import "B2_KBCell.h"
 @implementation B2_ProductDetailBoard_iPhone
 
 SUPPORT_RESOURCE_LOADING( YES )
@@ -78,9 +78,9 @@ DEF_MODEL( CommentModel, commentModel )
 @synthesize htmlString=_htmlString;
 - (void)load
 {
-	self.cartModel = [CartModel modelWithObserver:self];
-	self.goodsModel = [GoodsInfoModel modelWithObserver:self];
-	self.collectionModel = [CollectionModel modelWithObserver:self];
+    self.cartModel = [CartModel modelWithObserver:self];
+    self.goodsModel = [GoodsInfoModel modelWithObserver:self];
+    self.collectionModel = [CollectionModel modelWithObserver:self];
     self.goodsPageModel = [GoodsPageModel modelWithObserver:self];
     self.commentModel = [CommentModel modelWithObserver:self];
     
@@ -95,9 +95,9 @@ DEF_MODEL( CommentModel, commentModel )
 {
     self.specs = nil;
     
-	SAFE_RELEASE_MODEL( self.cartModel );
-	SAFE_RELEASE_MODEL( self.goodsModel );
-	SAFE_RELEASE_MODEL( self.collectionModel );
+    SAFE_RELEASE_MODEL( self.cartModel );
+    SAFE_RELEASE_MODEL( self.goodsModel );
+    SAFE_RELEASE_MODEL( self.collectionModel );
     SAFE_RELEASE_MODEL( self.goodsPageModel );
     SAFE_RELEASE_MODEL( self.commentModel );
 }
@@ -109,8 +109,8 @@ ON_CREATE_VIEWS( signal )
     self.navigationBarTitle = __TEXT(@"gooddetail_product");
     self.navigationBarShown = YES;
     self.navigationBarLeft  = [UIImage imageNamed:@"nav_back.png"];;
-	self.navigationBarRight = [UIImage imageNamed:@"item_info_header_share_icon.png"];
-  
+    self.navigationBarRight = [UIImage imageNamed:@"item_info_header_share_icon.png"];
+    
     self.specfied = @(YES);
     
     [self observeNotification:UserModel.LOGIN];
@@ -119,10 +119,10 @@ ON_CREATE_VIEWS( signal )
     [self observeNotification:UserModel.UPDATED];
     
     @weakify(self);
-
+    
     self.list.headerClass = [CommonPullLoader class];
     self.list.headerShown = YES;
-	
+    
     self.list.lineCount = 1;
     self.list.animationDuration = 0.25f;
     self.menu_action=self.ITERM1;
@@ -131,12 +131,12 @@ ON_CREATE_VIEWS( signal )
         @normalize(self);
         self.list.footerShown = NO;
         
-
+        
         if ( self.goodsModel.goods &&self.menu_action==self.ITERM1)
         {
             self.list.total = self.goodsModel.loaded ? 1 : 0;
             NSArray * specs = nil;
-
+            
             if ( 0 == self.specs.count )
             {
                 specs = nil; // [self specsFromGoods:self.goodsModel.goods];
@@ -199,9 +199,9 @@ ON_CREATE_VIEWS( signal )
                 }
             }
         }
+        
         if (self.menu_action==self.ITERM4) {
             self.list.footerShown = YES;
-            self.list.total = self.commentModel.comments.count;
             if ( 0 == self.commentModel.comments.count )
             {
                 self.list.total = 1;
@@ -213,6 +213,8 @@ ON_CREATE_VIEWS( signal )
             }
             else
             {
+                self.list.total = self.commentModel.comments.count;
+                
                 for ( int i = 0; i < self.commentModel.comments.count; i++ )
                 {
                     COMMENT * comment = [self.commentModel.comments safeObjectAtIndex:i];
@@ -241,14 +243,14 @@ ON_CREATE_VIEWS( signal )
                     item.clazz = [B5_ProductCommentCell_iPhone class];
                     item.size = CGSizeAuto;
                     item.data = comment;
-                    item.rule = BeeUIScrollLayoutRule_Tile;
+                    item.rule = BeeUIScrollLayoutRule_Line;
                 }
             }
         }
         
     };
     
-
+    
     self.list.whenHeaderRefresh = ^
     {
         @normalize(self);
@@ -262,25 +264,25 @@ ON_CREATE_VIEWS( signal )
             [self.commentModel firstPage];
         }
     };
-
+    
     self.list.whenFooterRefresh = ^
     {
         @normalize(self);
         if (self.menu_action==self.ITERM4) {
-        [self.commentModel nextPage];
+            [self.commentModel nextPage];
         }
     };
     self.list.whenReachBottom = ^
     {
         @normalize(self);
         if (self.menu_action==self.ITERM4) {
-        [self.commentModel nextPage];
+            [self.commentModel nextPage];
         }
     };
     
     [self.cartModel clearCache];
-
-	[self observeNotification:CartModel.UPDATED];
+    
+    [self observeNotification:CartModel.UPDATED];
 }
 -(void)deSelcetMenu{
     $(@"#topMenuList").FIND(@"item-indicator1").HIDE();
@@ -379,7 +381,7 @@ ON_MESSAGE3( API, goods_desc, msg )
     if ( msg.sending )
     {
         
-            [self presentLoadingTips:__TEXT(@"tips_loading")];
+        [self presentLoadingTips:__TEXT(@"tips_loading")];
         
     }
     else
@@ -412,13 +414,13 @@ ON_LAYOUT_VIEWS( signal )
 
 ON_WILL_APPEAR( signal )
 {
-	[self.goodsModel reload];
-	[self.cartModel reload];
+    [self.goodsModel reload];
+    [self.cartModel reload];
     [self deSelcetMenu];
-	[bee.ui.appBoard hideLogin];
-	[bee.ui.appBoard hideTabbar];
-
-	[self.list reloadData];
+    [bee.ui.appBoard hideLogin];
+    [bee.ui.appBoard hideTabbar];
+    
+    [self.list reloadData];
 }
 
 ON_DID_APPEAR( signal )
@@ -428,23 +430,23 @@ ON_DID_APPEAR( signal )
     
     $(@"#topMenuList").FIND(@"item-indicator1").SHOW();
     $(@"#topMenuList").FIND(@"item1").ADD_CLASS(@"filter-title-active");
-	ALIAS( bee.services.share.weixin,		weixin );
-	ALIAS( bee.services.share.tencentweibo,	tweibo );
-	ALIAS( bee.services.share.sinaweibo,	sweibo );
-
-	if ( sweibo.ready || tweibo.ready || weixin.ready )
-	{
-		self.navigationBarRight = [UIImage imageNamed:@"item_info_header_share_icon.png"];
-	}
-	else
-	{
-		self.navigationBarRight = nil;
-	}
+    ALIAS( bee.services.share.weixin,		weixin );
+    ALIAS( bee.services.share.tencentweibo,	tweibo );
+    ALIAS( bee.services.share.sinaweibo,	sweibo );
+    
+    if ( sweibo.ready || tweibo.ready || weixin.ready )
+    {
+        self.navigationBarRight = [UIImage imageNamed:@"item_info_header_share_icon.png"];
+    }
+    else
+    {
+        self.navigationBarRight = nil;
+    }
 }
 
 ON_WILL_DISAPPEAR( signal )
 {
-	[CartModel sharedInstance].loaded = NO;
+    [CartModel sharedInstance].loaded = NO;
 }
 
 ON_DID_DISAPPEAR( signal )
@@ -476,41 +478,41 @@ ON_LEFT_BUTTON_TOUCHED( signal )
 
 ON_RIGHT_BUTTON_TOUCHED( signal )
 {
-	ALIAS( bee.services.share.weixin,		weixin );
-	ALIAS( bee.services.share.tencentweibo,	tweibo );
-	ALIAS( bee.services.share.sinaweibo,	sweibo );
-
-	BOOL valid = NO;
-	
+    ALIAS( bee.services.share.weixin,		weixin );
+    ALIAS( bee.services.share.tencentweibo,	tweibo );
+    ALIAS( bee.services.share.sinaweibo,	sweibo );
+    
+    BOOL valid = NO;
+    
     BeeUIActionSheet * sheet = [BeeUIActionSheet spawn];
-	
-	if ( sweibo.ready )
-	{
-		[sheet addButtonTitle:__TEXT(@"share_sina") signal:self.SHARE_TO_SINA];
-		
-		valid = YES;
-	}
-	
-	if ( tweibo.ready )
-	{
-		[sheet addButtonTitle:__TEXT(@"share_tencent") signal:self.SHARE_TO_TENCENT];
-		
-		valid = YES;
-	}
-	
-	if ( weixin.ready )
-	{
-		[sheet addButtonTitle:__TEXT(@"share_weixin") signal:self.SHARE_TO_WEIXIN_FRIEND];
-		[sheet addButtonTitle:__TEXT(@"share_weixin_timeline") signal:self.SHARE_TO_WEIXIN_TIMELINE];
-		
-		valid = YES;
-	}
-
-	if ( valid )
-	{
-		[sheet addCancelTitle:__TEXT(@"button_cancel")];
-		[sheet showInViewController:self];
-	}
+    
+    if ( sweibo.ready )
+    {
+        [sheet addButtonTitle:__TEXT(@"share_sina") signal:self.SHARE_TO_SINA];
+        
+        valid = YES;
+    }
+    
+    if ( tweibo.ready )
+    {
+        [sheet addButtonTitle:__TEXT(@"share_tencent") signal:self.SHARE_TO_TENCENT];
+        
+        valid = YES;
+    }
+    
+    if ( weixin.ready )
+    {
+        [sheet addButtonTitle:__TEXT(@"share_weixin") signal:self.SHARE_TO_WEIXIN_FRIEND];
+        [sheet addButtonTitle:__TEXT(@"share_weixin_timeline") signal:self.SHARE_TO_WEIXIN_TIMELINE];
+        
+        valid = YES;
+    }
+    
+    if ( valid )
+    {
+        [sheet addCancelTitle:__TEXT(@"button_cancel")];
+        [sheet showInViewController:self];
+    }
 }
 
 #pragma mark -
@@ -520,41 +522,41 @@ ON_SIGNAL3( B2_ProductDetailBoard_iPhone, SHARE_TO_SINA, signal )
     NSString * text = __TEXT(@"share_blog");				// self.goodsModel.goods.goods_name
     NSString * imageUrl = self.goodsModel.goods.img.thumb;
     NSObject * image = [[BeeImageCache sharedInstance] imageForURL:imageUrl];
-//	NSString * title = self.goodsModel.goods.goods_name;	// __TEXT(@"ecmobile")
-//	NSString * thumb = self.goodsModel.goods.img.thumb;
-
+    //	NSString * title = self.goodsModel.goods.goods_name;	// __TEXT(@"ecmobile")
+    //	NSString * thumb = self.goodsModel.goods.img.thumb;
+    
     ALIAS( bee.services.share.sinaweibo, sweibo );
     
-	if ( image )
+    if ( image )
     {
         sweibo.post.photo = image;
     }
-
-	sweibo.post.text = text;
-	sweibo.post.url = [[ConfigModel sharedInstance].config.goods_url stringByAppendingFormat:@"%@",self.goodsModel.goods_id];
-
-	@weakify(self);
-	
-	sweibo.whenShareBegin = ^
-	{
-		@normalize(self);
-		
-		[self presentLoadingTips:__TEXT(@"uploading")];
-	};
-	sweibo.whenShareSucceed = ^
-	{
-		@normalize(self);
-		
-		[self presentSuccessTips:__TEXT(@"share_succeed")];
-	};
-	sweibo.whenShareFailed = ^
-	{
-		@normalize(self);
-		
-		[self presentFailureTips:sweibo.errorDesc];
-	};
-
-	sweibo.SHARE();
+    
+    sweibo.post.text = text;
+    sweibo.post.url = [[ConfigModel sharedInstance].config.goods_url stringByAppendingFormat:@"%@",self.goodsModel.goods_id];
+    
+    @weakify(self);
+    
+    sweibo.whenShareBegin = ^
+    {
+        @normalize(self);
+        
+        [self presentLoadingTips:__TEXT(@"uploading")];
+    };
+    sweibo.whenShareSucceed = ^
+    {
+        @normalize(self);
+        
+        [self presentSuccessTips:__TEXT(@"share_succeed")];
+    };
+    sweibo.whenShareFailed = ^
+    {
+        @normalize(self);
+        
+        [self presentFailureTips:sweibo.errorDesc];
+    };
+    
+    sweibo.SHARE();
 }
 
 ON_SIGNAL3( B2_ProductDetailBoard_iPhone, SHARE_TO_TENCENT, signal )
@@ -562,52 +564,52 @@ ON_SIGNAL3( B2_ProductDetailBoard_iPhone, SHARE_TO_TENCENT, signal )
     NSString * text = __TEXT(@"share_blog");				// self.goodsModel.goods.goods_name
     NSString * imageUrl = self.goodsModel.goods.img.thumb;
     NSObject * image = [[BeeImageCache sharedInstance] imageForURL:imageUrl];
-//    NSString * title = self.goodsModel.goods.goods_name;	// __TEXT(@"ecmobile")
-//    NSString * thumb = self.goodsModel.goods.img.thumb;
-
-	ALIAS( bee.services.share.tencentweibo, tweibo );
-
+    //    NSString * title = self.goodsModel.goods.goods_name;	// __TEXT(@"ecmobile")
+    //    NSString * thumb = self.goodsModel.goods.img.thumb;
+    
+    ALIAS( bee.services.share.tencentweibo, tweibo );
+    
     if ( image )
     {
         tweibo.post.photo = image;
     }
     
-	tweibo.post.text = text;
-	tweibo.post.url = [[ConfigModel sharedInstance].config.goods_url stringByAppendingFormat:@"%@",self.goodsModel.goods_id];
+    tweibo.post.text = text;
+    tweibo.post.url = [[ConfigModel sharedInstance].config.goods_url stringByAppendingFormat:@"%@",self.goodsModel.goods_id];
     
-	@weakify(self);
-	
-	tweibo.whenShareBegin = ^
-	{
-		@normalize(self);
-		
-		[self presentLoadingTips:__TEXT(@"uploading")];
-	};
-	tweibo.whenShareSucceed = ^
-	{
-		@normalize(self);
-		
-		[self presentSuccessTips:__TEXT(@"share_succeed")];
-	};
-	tweibo.whenShareFailed = ^
-	{
-		@normalize(self);
-		
-		[self presentFailureTips:tweibo.errorMsg];
-	};
-	
-	tweibo.SHARE();
+    @weakify(self);
+    
+    tweibo.whenShareBegin = ^
+    {
+        @normalize(self);
+        
+        [self presentLoadingTips:__TEXT(@"uploading")];
+    };
+    tweibo.whenShareSucceed = ^
+    {
+        @normalize(self);
+        
+        [self presentSuccessTips:__TEXT(@"share_succeed")];
+    };
+    tweibo.whenShareFailed = ^
+    {
+        @normalize(self);
+        
+        [self presentFailureTips:tweibo.errorMsg];
+    };
+    
+    tweibo.SHARE();
 }
 
 ON_SIGNAL3( B2_ProductDetailBoard_iPhone, SHARE_TO_WEIXIN_FRIEND, signal)
 {
-	ALIAS( bee.services.share.weixin, weixin );
-
-	NSString * text = __TEXT(@"share_blog");				// self.goodsModel.goods.goods_name
-	NSString * title = self.goodsModel.goods.goods_name;	// __TEXT(@"ecmobile")
+    ALIAS( bee.services.share.weixin, weixin );
+    
+    NSString * text = __TEXT(@"share_blog");				// self.goodsModel.goods.goods_name
+    NSString * title = self.goodsModel.goods.goods_name;	// __TEXT(@"ecmobile")
     UIImage * image = [[BeeImageCache sharedInstance] imageForURL:self.goodsModel.goods.img.url];
     UIImage * thumb = [[BeeImageCache sharedInstance] imageForURL:self.goodsModel.goods.img.thumb];
-
+    
     if ( image )
     {
         weixin.post.photo = image;
@@ -622,38 +624,38 @@ ON_SIGNAL3( B2_ProductDetailBoard_iPhone, SHARE_TO_WEIXIN_FRIEND, signal)
         weixin.post.thumb = [UIImage imageNamed:@"icon.png"];
     }
     
-	weixin.post.text = text;
-	weixin.post.title = title;
-	weixin.post.url = [[ConfigModel sharedInstance].config.goods_url stringByAppendingFormat:@"%@",self.goodsModel.goods_id];
-	
-	@weakify(self);
-	
-	weixin.whenShareSucceed = ^
-	{
-		@normalize(self);
-		
-		[self presentSuccessTips:__TEXT(@"share_succeed")];
-	};
-	
-	weixin.whenShareFailed = ^
-	{
-		@normalize(self);
-		
-		[self presentFailureTips:weixin.errorDesc];
-	};
-	
-	weixin.SHARE_TO_FRIEND();
+    weixin.post.text = text;
+    weixin.post.title = title;
+    weixin.post.url = [[ConfigModel sharedInstance].config.goods_url stringByAppendingFormat:@"%@",self.goodsModel.goods_id];
+    
+    @weakify(self);
+    
+    weixin.whenShareSucceed = ^
+    {
+        @normalize(self);
+        
+        [self presentSuccessTips:__TEXT(@"share_succeed")];
+    };
+    
+    weixin.whenShareFailed = ^
+    {
+        @normalize(self);
+        
+        [self presentFailureTips:weixin.errorDesc];
+    };
+    
+    weixin.SHARE_TO_FRIEND();
 }
 
 ON_SIGNAL3( B2_ProductDetailBoard_iPhone, SHARE_TO_WEIXIN_TIMELINE, signal)
 {
-	NSString * text = __TEXT(@"share_blog");				// self.goodsModel.goods.goods_name
+    NSString * text = __TEXT(@"share_blog");				// self.goodsModel.goods.goods_name
     NSString * title = self.goodsModel.goods.goods_name;	// __TEXT(@"ecmobile")
     UIImage * image = [[BeeImageCache sharedInstance] imageForURL:self.goodsModel.goods.img.url];
     UIImage * thumb = [[BeeImageCache sharedInstance] imageForURL:self.goodsModel.goods.img.thumb];
-	
-	ALIAS( bee.services.share.weixin, weixin );
-	
+    
+    ALIAS( bee.services.share.weixin, weixin );
+    
     if ( image )
     {
         weixin.post.photo = image;
@@ -668,27 +670,27 @@ ON_SIGNAL3( B2_ProductDetailBoard_iPhone, SHARE_TO_WEIXIN_TIMELINE, signal)
         weixin.post.thumb = [UIImage imageNamed:@"icon.png"];
     }
     
-	weixin.post.text = text;
-	weixin.post.title = title;
-	weixin.post.url = [[ConfigModel sharedInstance].config.goods_url stringByAppendingFormat:@"%@",self.goodsModel.goods_id];
-	
-	@weakify(self);
-	
-	weixin.whenShareSucceed = ^
-	{
-		@normalize(self);
-		
-		[self presentSuccessTips:__TEXT(@"share_succeed")];
-	};
-	
-	weixin.whenShareFailed = ^
-	{
-		@normalize(self);
-		
-		[self presentFailureTips:weixin.errorDesc];
-	};
-	
-	weixin.SHARE_TO_TIMELINE();
+    weixin.post.text = text;
+    weixin.post.title = title;
+    weixin.post.url = [[ConfigModel sharedInstance].config.goods_url stringByAppendingFormat:@"%@",self.goodsModel.goods_id];
+    
+    @weakify(self);
+    
+    weixin.whenShareSucceed = ^
+    {
+        @normalize(self);
+        
+        [self presentSuccessTips:__TEXT(@"share_succeed")];
+    };
+    
+    weixin.whenShareFailed = ^
+    {
+        @normalize(self);
+        
+        [self presentFailureTips:weixin.errorDesc];
+    };
+    
+    weixin.SHARE_TO_TIMELINE();
 }
 
 #pragma mark - B2_ProductDetailSlideCell_iPhone
@@ -698,11 +700,11 @@ ON_SIGNAL3( B2_ProductDetailBoard_iPhone, SHARE_TO_WEIXIN_TIMELINE, signal)
  */
 ON_SIGNAL2( B2_ProductDetailSlideCell_iPhone, signal)
 {
-	PHOTO * photo = signal.sourceCell.data;
-
+    PHOTO * photo = signal.sourceCell.data;
+    
     B3_ProductPhotoBoard_iPhone * board = [B3_ProductPhotoBoard_iPhone board];
     board.goods = self.goodsModel.goods;
-	board.pageIndex = [self.goodsModel.goods.pictures indexOfObject:photo];
+    board.pageIndex = [self.goodsModel.goods.pictures indexOfObject:photo];
     [self.stack pushBoard:board animated:YES];
 }
 
@@ -765,28 +767,28 @@ ON_SIGNAL3( B2_ProductDetailTabCell_iPhone, favorite, signal )
 {
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {
-		if ( NO == self.goodsModel.loaded )
-			return;
+        if ( NO == self.goodsModel.loaded )
+            return;
         
-		if ( NO == [UserModel online] )
-		{
-			[bee.ui.appBoard showLogin];
-			return;
-		}
+        if ( NO == [UserModel online] )
+        {
+            [bee.ui.appBoard showLogin];
+            return;
+        }
         
-		BeeUIButton * button = (BeeUIButton *)signal.source;
-		if ( button.selected )
-		{
-			[self presentFailureTips:__TEXT(@"favorite_added")];
-			return;
-		}
-		else
-		{
-			if ( self.goodsModel.goods )
-			{
-				[self.collectionModel collect:self.goodsModel.goods];
-			}
-		}
+        BeeUIButton * button = (BeeUIButton *)signal.source;
+        if ( button.selected )
+        {
+            [self presentFailureTips:__TEXT(@"favorite_added")];
+            return;
+        }
+        else
+        {
+            if ( self.goodsModel.goods )
+            {
+                [self.collectionModel collect:self.goodsModel.goods];
+            }
+        }
     }
 }
 
@@ -828,7 +830,7 @@ ON_SIGNAL3( B2_ProductDetailTabCell_iPhone, cart, signal)
 {
     if ( NO == [UserModel online] )
     {
-       // self.isOpt=YES;
+        // self.isOpt=YES;
         [bee.ui.appBoard showLogin];
         return;
     }
@@ -843,26 +845,26 @@ ON_SIGNAL3( B2_ProductDetailTabCell_iPhone, cart, signal)
 - (void)showSpecifyBoard
 {
     @weakify(self);
-
+    
     B2_ProductSpecifyBoard_iPhone * board = [B2_ProductSpecifyBoard_iPhone board];
     board.goods = self.goodsModel.goods;
     board.count = self.count;
     [board setSpecsFromArray:self.specs];
-
+    
     board.whenSpecified = ^( NSArray * specs, NSNumber * count ) {
         @normalize(self);
-
-		[self.specs removeAllObjects];
-		[self.specs addObjectsFromArray:specs];
-
-		self.count = count;
-		self.specfied = @(YES);
-
-		[self hideSpecifyBoard];
-[self.list reloadData];
-		if ( self.ACTION_SPEC == self.action )
+        
+        [self.specs removeAllObjects];
+        [self.specs addObjectsFromArray:specs];
+        
+        self.count = count;
+        self.specfied = @(YES);
+        
+        [self hideSpecifyBoard];
+        [self.list reloadData];
+        if ( self.ACTION_SPEC == self.action )
             return;
-
+        
         if ( !self.isSpecified )
         {
             [self presentFailureTips:__TEXT(@"select_specification_first")];
@@ -880,7 +882,7 @@ ON_SIGNAL3( B2_ProductDetailTabCell_iPhone, cart, signal)
         @normalize(self);
         [self hideSpecifyBoard];
     };
-	
+    
     if ( IOS7_OR_LATER )
     {
         [self presentModalBoard:board animated:YES];
@@ -913,7 +915,7 @@ ON_SIGNAL3( B2_ProductDetailTabCell_iPhone, cart, signal)
     }
     
     [self setAction:action];
-	
+    
     if ( !self.isSpecified )
     {
         [self showSpecifyBoard];
@@ -934,8 +936,8 @@ ON_SIGNAL3( B2_ProductDetailTabCell_iPhone, cart, signal)
     //设置代理
     reader.readerDelegate = self;
     reader.showsHelpOnFail = NO;
-//        reader.scanCrop = CGRectMake(0.1, 0.2, 0.8, 0.8);//扫描的感应框
-//        [reader.view setFrame:CGRectMake(0, 20 + 44, self.view.bounds.size.width, self.view.frame.size.height)];
+    //        reader.scanCrop = CGRectMake(0.1, 0.2, 0.8, 0.8);//扫描的感应框
+    //        [reader.view setFrame:CGRectMake(0, 20 + 44, self.view.bounds.size.width, self.view.frame.size.height)];
     
     ZBarImageScanner * scanner = reader.scanner;
     [scanner setSymbology:ZBAR_I25
@@ -1120,161 +1122,161 @@ ON_SIGNAL3( B2_ProductDetailTabCell_iPhone, cart, signal)
 
 ON_NOTIFICATION3( CartModel, UPDATED, n )
 {
-	NSUInteger count = 0;
-	
-	for ( CART_GOODS * goods in [CartModel sharedInstance].goods )
-	{
-		count += goods.goods_number.intValue;
-	}
-
-	_tabbar.data = __INT( count );
+    NSUInteger count = 0;
+    
+    for ( CART_GOODS * goods in [CartModel sharedInstance].goods )
+    {
+        count += goods.goods_number.intValue;
+    }
+    
+    _tabbar.data = __INT( count );
 }
 
 #pragma mark -
 
 ON_MESSAGE3( API, goods, msg )
 {
-	if ( msg.sending )
-	{
-		if ( NO == self.goodsModel.loaded )
-		{
-			[self presentLoadingTips:__TEXT(@"tips_loading")];
-		}
-	}
-	else
-	{
-		[self.list setHeaderLoading:NO];
-		
-		[self dismissTips];
-	}
-	
-	if ( msg.succeed )
-	{
-		STATUS *	status = msg.GET_OUTPUT(@"status");
-		GOODS *		goods = msg.GET_OUTPUT(@"data");
-		
-		if ( status && status.succeed.boolValue )
-		{
-			if ( goods )
-			{
-				if ( goods.collected && goods.collected.boolValue )
-				{
-					$(_tabbar).FIND(@"#favorite").SELECT();
-				}
-				else
-				{
-					$(_tabbar).FIND(@"#favorite").UNSELECT();
-				}
-			}
-			
-			[self.list asyncReloadData];
-		}
-		else
-		{
-			[self showErrorTips:msg];
-		}
-	}
-	else if ( msg.failed )
-	{
-		[self showErrorTips:msg];
-	}
+    if ( msg.sending )
+    {
+        if ( NO == self.goodsModel.loaded )
+        {
+            [self presentLoadingTips:__TEXT(@"tips_loading")];
+        }
+    }
+    else
+    {
+        [self.list setHeaderLoading:NO];
+        
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS *	status = msg.GET_OUTPUT(@"status");
+        GOODS *		goods = msg.GET_OUTPUT(@"data");
+        
+        if ( status && status.succeed.boolValue )
+        {
+            if ( goods )
+            {
+                if ( goods.collected && goods.collected.boolValue )
+                {
+                    $(_tabbar).FIND(@"#favorite").SELECT();
+                }
+                else
+                {
+                    $(_tabbar).FIND(@"#favorite").UNSELECT();
+                }
+            }
+            
+            [self.list asyncReloadData];
+        }
+        else
+        {
+            [self showErrorTips:msg];
+        }
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
 }
 
 ON_MESSAGE3( API, user_collect_create, msg )
 {
-	if ( msg.sending )
-	{
-		[self presentLoadingTips:__TEXT(@"tips_loading")];
-	}
-	else
-	{
-		[self dismissTips];
-	}
-	
-	if ( msg.succeed )
-	{
-		STATUS * status = msg.GET_OUTPUT(@"status");
-		
-		if ( status && status.succeed.boolValue )
-		{
-			[self presentSuccessTips:__TEXT(@"collection_success")];
-			
-			$(self.tabbar).FIND(@"#favorite").SELECT();
-		}
-	}
-	else if ( msg.failed )
-	{	
-		$(self.tabbar).FIND(@"#favorite").SELECT();
-	}
+    if ( msg.sending )
+    {
+        [self presentLoadingTips:__TEXT(@"tips_loading")];
+    }
+    else
+    {
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS * status = msg.GET_OUTPUT(@"status");
+        
+        if ( status && status.succeed.boolValue )
+        {
+            [self presentSuccessTips:__TEXT(@"collection_success")];
+            
+            $(self.tabbar).FIND(@"#favorite").SELECT();
+        }
+    }
+    else if ( msg.failed )
+    {	
+        $(self.tabbar).FIND(@"#favorite").SELECT();
+    }
 }
 
 ON_MESSAGE3( API, user_collect_delete, msg )
 {
-	if ( msg.sending )
-	{
-		[self presentLoadingTips:__TEXT(@"tips_loading")];
-	}
-	else
-	{
-		[self dismissTips];
-	}
-	
-	if ( msg.succeed )
-	{
-		STATUS * status = msg.GET_OUTPUT(@"status");
-		
-		if ( status && status.succeed.boolValue )
-		{
-			$(_tabbar).FIND(@"#favorite").UNSELECT();
-		}
-	}
-	else if ( msg.failed )
-	{
-		$(_tabbar).FIND(@"#favorite").UNSELECT();
-	}
+    if ( msg.sending )
+    {
+        [self presentLoadingTips:__TEXT(@"tips_loading")];
+    }
+    else
+    {
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS * status = msg.GET_OUTPUT(@"status");
+        
+        if ( status && status.succeed.boolValue )
+        {
+            $(_tabbar).FIND(@"#favorite").UNSELECT();
+        }
+    }
+    else if ( msg.failed )
+    {
+        $(_tabbar).FIND(@"#favorite").UNSELECT();
+    }
 }
 
 ON_MESSAGE3( API, cart_create, msg )
 {
-	if ( msg.sending )
-	{
-		[self presentLoadingTips:__TEXT(@"tips_loading")];
-	}
-	else
-	{
-		[self dismissTips];
-	}
-	
-	if ( msg.succeed )
-	{
-		STATUS * status = msg.GET_OUTPUT(@"status");
-
-		if ( status && status.succeed.boolValue )
-		{
-		//	[self presentSuccessTips:__TEXT(@"add_to_cart_success")];
-
-			if ( self.ACTION_BUY == self.action )
-			{
-				[self.stack pushBoard:[C0_ShoppingCartBoard_iPhone board] animated:YES];
-			}
-
-			NSNumber * count = (NSNumber *)_tabbar.data;
-			if ( count )
-			{
-				_tabbar.data = __INT( count.intValue + 1 );
-			}
-
-			[[CartModel sharedInstance] reload];
-		}
-		else
-		{
-			[self showErrorTips:msg];
-		}
-	}
-	else if ( msg.failed )
-	{
-		[self showErrorTips:msg];
-	}
+    if ( msg.sending )
+    {
+        [self presentLoadingTips:__TEXT(@"tips_loading")];
+    }
+    else
+    {
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS * status = msg.GET_OUTPUT(@"status");
+        
+        if ( status && status.succeed.boolValue )
+        {
+            //	[self presentSuccessTips:__TEXT(@"add_to_cart_success")];
+            
+            if ( self.ACTION_BUY == self.action )
+            {
+                [self.stack pushBoard:[C0_ShoppingCartBoard_iPhone board] animated:YES];
+            }
+            
+            NSNumber * count = (NSNumber *)_tabbar.data;
+            if ( count )
+            {
+                _tabbar.data = __INT( count.intValue + 1 );
+            }
+            
+            [[CartModel sharedInstance] reload];
+        }
+        else
+        {
+            [self showErrorTips:msg];
+        }
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
 }
 
 #pragma mark -
@@ -1297,14 +1299,14 @@ ON_NOTIFICATION3( UserModel, LOGIN, notification )
 
 ON_NOTIFICATION3( UserModel, LOGOUT, notification )
 {
-   
+    
 }
 
 ON_NOTIFICATION3( UserModel, KICKOUT, notification )
 {
     
-  //  [self.list reloadData];
-   // self.RELAYOUT();
+    //  [self.list reloadData];
+    // self.RELAYOUT();
 }
 
 
