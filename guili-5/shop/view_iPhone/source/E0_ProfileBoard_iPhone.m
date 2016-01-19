@@ -11,7 +11,7 @@
 //
 //  Powered by BeeFramework
 //
-	
+
 #import "E0_ProfileBoard_iPhone.h"
 #import "E0_ProfileHelpCell_iPhone.h"
 #import "E0_ProfileCell_iPhone.h"
@@ -50,12 +50,13 @@ DEF_OUTLET( BeeUIScrollView, list )
 
 - (void)load
 {
-	self.userModel = [UserModel modelWithObserver:self];
+    self.isHome = YES;
+    self.userModel = [UserModel modelWithObserver:self];
 }
 
 - (void)unload
 {
-	SAFE_RELEASE_MODEL( self.userModel );
+    SAFE_RELEASE_MODEL( self.userModel );
 }
 
 #pragma mark -
@@ -94,14 +95,14 @@ ON_CREATE_VIEWS( signal )
     {
         [[UserModel sharedInstance] updateProfile];
         
-		[[CartModel sharedInstance] reload];
+        [[CartModel sharedInstance] reload];
     };
     
     [self observeNotification:UserModel.LOGIN];
     [self observeNotification:UserModel.LOGOUT];
     [self observeNotification:UserModel.KICKOUT];
     [self observeNotification:UserModel.UPDATED];
-
+    
 }
 
 ON_DELETE_VIEWS( signal )
@@ -130,8 +131,8 @@ ON_DID_APPEAR( signal )
 
 ON_WILL_DISAPPEAR( signal )
 {
-	[CartModel sharedInstance].loaded = NO;
-	
+    [CartModel sharedInstance].loaded = NO;
+    
     [bee.ui.appBoard hideTabbar];
 }
 
@@ -226,11 +227,11 @@ ON_SIGNAL3( E0_ProfileBoard_iPhone, PHOTO_REMOVE, signal )
  */
 ON_SIGNAL3( E0_ProfileCell_iPhone, signin, signal )
 {
-	if ( NO == [UserModel online] )
-	{
-		[bee.ui.appBoard showLogin];
-		return;
-	}	
+    if ( NO == [UserModel online] )
+    {
+        [bee.ui.appBoard showLogin];
+        return;
+    }	
 }
 
 /**
@@ -372,24 +373,24 @@ ON_NOTIFICATION3( ECMobilePushUnread, UPDATING, notification )
 
 ON_NOTIFICATION3( ECMobilePushUnread, UPDATED, notification )
 {
-	[self.list asyncReloadData];
+    [self.list asyncReloadData];
 }
 
 ON_NOTIFICATION3( UserModel, LOGIN, notification )
 {
-	[self updateState];
+    [self updateState];
 }
 
 #pragma mark - UserModel
 
 ON_NOTIFICATION3( UserModel, LOGOUT, notification )
 {
-	[self updateState];
+    [self updateState];
 }
 
 ON_NOTIFICATION3( UserModel, KICKOUT, notification )
 {
-	[self updateState];
+    [self updateState];
 }
 
 ON_NOTIFICATION3( UserModel, UPDATED, notification )
@@ -400,49 +401,49 @@ ON_NOTIFICATION3( UserModel, UPDATED, notification )
 
 - (void)updateState
 {
-	if ( [UserModel online] )
-	{
-		[[CartModel sharedInstance] reload];
-		
-//		if ( ![UserModel sharedInstance].loaded )
-		{
-			[[UserModel sharedInstance] updateProfile];
-		}
-		
-		if ( ![UserModel sharedInstance].loaded )
+    if ( [UserModel online] )
+    {
+        [[CartModel sharedInstance] reload];
+        
+        //		if ( ![UserModel sharedInstance].loaded )
+        {
+            [[UserModel sharedInstance] updateProfile];
+        }
+        
+        if ( ![UserModel sharedInstance].loaded )
         {
             [self.list showHeaderLoader:YES animated:NO];
         }
-	}
-	else
-	{
+    }
+    else
+    {
         if ( ![UserModel sharedInstance].loaded )
         {
             [self.list showHeaderLoader:NO animated:NO];
         }
-	}
+    }
     
-	[self.list reloadData];
+    [self.list reloadData];
 }
 
 #pragma mark -
 
 ON_MESSAGE3( API, user_info, msg )
 {
-	if ( msg.sending )
-	{
-	}
-	else
-	{
-		[self.list setHeaderLoading:NO];
-		
-		[self dismissTips];
-	}
-	
-	if ( msg.succeed )
-	{
-		[self.list asyncReloadData];
-	}
+    if ( msg.sending )
+    {
+    }
+    else
+    {
+        [self.list setHeaderLoading:NO];
+        
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        [self.list asyncReloadData];
+    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -454,17 +455,17 @@ ON_MESSAGE3( API, user_info, msg )
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-	UIImage * image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-	if ( image )
-	{
+    UIImage * image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    if ( image )
+    {
         UIView * item = ((BeeUIScrollItem *)self.list.items[0]).view;
         if ( nil == item )
             return;
         
         $(item).FIND(@"#header-avatar").IMAGE( image );
-
+        
         [[UserModel sharedInstance] setAvatar:image];
-	}
+    }
     
     [self dismissModalViewControllerAnimated:YES];
 }

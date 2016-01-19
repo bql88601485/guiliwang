@@ -109,6 +109,10 @@ AS_INT( STATE_ACTIVATED )			// 显示
 - (void)__enterBackground;
 - (void)__enterForeground;
 
+
+
+@property (assign, nonatomic )BOOL isHome;
+
 @end
 
 #pragma mark -

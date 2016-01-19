@@ -66,6 +66,7 @@ DEF_OUTLET( BeeUITextField, search_input);
 
 - (void)load
 {
+    self.isHome = YES;
     self.bannerModel	= [BannerModel modelWithObserver:self];
     self.categoryModel	= [CategoryModel modelWithObserver:self];
 }

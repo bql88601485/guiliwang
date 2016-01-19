@@ -64,6 +64,8 @@ DEF_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 
 - (void)load
 {
+    self.isHome = YES;
+    
     self.tabIndex = self.TAB_CHEAPEST;
     
     self.searchByHotModel = [SearchModel modelWithObserver:self];

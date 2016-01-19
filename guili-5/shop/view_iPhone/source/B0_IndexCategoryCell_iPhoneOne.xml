@@ -87,7 +87,7 @@
         color: #333;
         font-size: 16px;
         font-weight: bold;
-        text-align: left;
+        text-align: center;
         }
         
         .category-group-left {
@@ -122,20 +122,20 @@
         font-size: 14px;
         font-weight: lighter;
         color: #333;
-        text-align: left;
+        text-align: center;
         text-v-align: top;
         line-break: char-wrap;
         line-num: 2;
         }
         
         .category-goods-price {
-        width: 50%;
+        width: 100%;
         height: auto;
         margin-top: 4px;
         font-size: 10px;
         font-weight: bold;
         color: #c00;
-        text-align: left;
+        text-align: center;
         line-break: clip;
         line-num: 2;
         }

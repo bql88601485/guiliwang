@@ -70,7 +70,7 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
         }
         
         $(@"#goods-image1").SHOW();
-        $(@"#goods-image1").IMAGE( goods.img.thumbURL );
+        $(@"#goods-image1").IMAGE( goods.img.url );
     }
 }
 

@@ -52,6 +52,8 @@ DEF_MODEL( AddressListModel,	addressListModel )
 
 - (void)load
 {
+    
+    self.isHome = YES;
     self.cartModel = [CartModel modelWithObserver:self];
     self.addressListModel = [AddressListModel modelWithObserver:self];
     
@@ -61,8 +63,8 @@ DEF_MODEL( AddressListModel,	addressListModel )
 
 - (void)unload
 {
-	SAFE_RELEASE_MODEL( self.cartModel );
-	SAFE_RELEASE_MODEL( self.addressListModel );
+    SAFE_RELEASE_MODEL( self.cartModel );
+    SAFE_RELEASE_MODEL( self.addressListModel );
     
     self.editingState = nil;
 }
@@ -114,12 +116,12 @@ ON_CREATE_VIEWS( signal )
                 if ( 0 == self.cartModel.goods.count ) // 已加载，无数据
                 {
                     self.list.total = 1;
-
+                    
                     BeeUIScrollItem * item = self.list.items[0];
                     item.clazz = [C0_ShoppingCartEmptyCell_iPhone class];
                     item.size = self.list.size;
                     item.rule = BeeUIScrollLayoutRule_Tile;
-
+                    
                     [self handleEmpty:YES];
                 }
                 else // 已加载，有数据
@@ -174,7 +176,7 @@ ON_CREATE_VIEWS( signal )
             }
         }
     };
-
+    
     self.list.whenHeaderRefresh = ^
     {
         @normalize(self);
@@ -210,7 +212,7 @@ ON_WILL_APPEAR( signal )
     
     if ( [UserModel online] )
     {
-		[self.cartModel reload];
+        [self.cartModel reload];
     }
     else
     {
@@ -228,8 +230,8 @@ ON_WILL_DISAPPEAR( signal )
     {
         [bee.ui.appBoard hideTabbar];
     }
-	
-	self.cartModel.loaded = NO;
+    
+    self.cartModel.loaded = NO;
 }
 
 ON_DID_DISAPPEAR( signal )
@@ -375,14 +377,14 @@ ON_NOTIFICATION3( UserModel, LOGIN, notification )
 
 ON_NOTIFICATION3( UserModel, LOGOUT, notification )
 {
-	[self.list reloadData];
-
+    [self.list reloadData];
+    
     [self handleLogined:NO];
 }
 
 ON_NOTIFICATION3( UserModel, KICKOUT, notification )
 {
-	[self.list reloadData];
+    [self.list reloadData];
     
     [self handleLogined:NO];
 }
@@ -391,143 +393,143 @@ ON_NOTIFICATION3( UserModel, KICKOUT, notification )
 
 ON_MESSAGE3( API, cart_list, msg )
 {
-	if ( msg.sending )
-	{
+    if ( msg.sending )
+    {
         //		if ( NO == self.cartModel.loaded )
         //		{
         //			[self presentLoadingTips:__TEXT(@"tips_loading")];
         //		}
-	}
-	else
-	{
-		[self.list setHeaderLoading:NO];
-		
-		[self dismissTips];
-	}
-	
-	if ( msg.succeed )
-	{
-		STATUS * status = msg.GET_OUTPUT(@"status");
-		
-		if ( status && status.succeed.boolValue )
-		{
-			[self.editingState removeAllObjects];
-			[self setCheckoutEnabled:YES];
-			[self.list asyncReloadData];
-		}
-		else
-		{
-			[self showErrorTips:msg];
-		}
-	}
-	else if ( msg.failed )
-	{
-		[self showErrorTips:msg];
-	}
+    }
+    else
+    {
+        [self.list setHeaderLoading:NO];
+        
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS * status = msg.GET_OUTPUT(@"status");
+        
+        if ( status && status.succeed.boolValue )
+        {
+            [self.editingState removeAllObjects];
+            [self setCheckoutEnabled:YES];
+            [self.list asyncReloadData];
+        }
+        else
+        {
+            [self showErrorTips:msg];
+        }
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
 }
 
 ON_MESSAGE3( API, cart_delete, msg )
 {
-	if ( msg.sending )
-	{
-		[self presentLoadingTips:__TEXT(@"tips_removing")];
-	}
-	else
-	{
-		[self dismissTips];
-	}
-	
-	if ( msg.succeed )
-	{
-		STATUS * status = msg.GET_OUTPUT(@"status");
-		
-		if ( status && status.succeed.boolValue )
-		{
-			[self.cartModel reload];
-		}
-		else
-		{
-			[self showErrorTips:msg];
-		}
-	}
-	else if ( msg.failed )
-	{
-		[self showErrorTips:msg];
-	}
+    if ( msg.sending )
+    {
+        [self presentLoadingTips:__TEXT(@"tips_removing")];
+    }
+    else
+    {
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS * status = msg.GET_OUTPUT(@"status");
+        
+        if ( status && status.succeed.boolValue )
+        {
+            [self.cartModel reload];
+        }
+        else
+        {
+            [self showErrorTips:msg];
+        }
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
 }
 
 ON_MESSAGE3( API, address_list, msg )
 {
-	if ( msg.sending )
-	{
-		[self presentLoadingTips:__TEXT(@"tips_loading")];
-	}
-	else
-	{
-		[self dismissTips];
-	}
-	
-	if ( msg.succeed )
-	{
-		STATUS * status = msg.GET_OUTPUT(@"status");
-		
-		if ( status && status.succeed.boolValue )
-		{
-			if ( self.addressListModel.addresses.count )
-			{
-				C1_CheckOutBoard_iPhone * board = [C1_CheckOutBoard_iPhone board];
+    if ( msg.sending )
+    {
+        [self presentLoadingTips:__TEXT(@"tips_loading")];
+    }
+    else
+    {
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS * status = msg.GET_OUTPUT(@"status");
+        
+        if ( status && status.succeed.boolValue )
+        {
+            if ( self.addressListModel.addresses.count )
+            {
+                C1_CheckOutBoard_iPhone * board = [C1_CheckOutBoard_iPhone board];
                 board.shopingCartBod=self;
-				[self.stack pushBoard:board animated:YES];
-			}
-			else
-			{
+                [self.stack pushBoard:board animated:YES];
+            }
+            else
+            {
                 self.isShopCarAdd=YES;
-				F1_NewAddressBoard_iPhone * board = [F1_NewAddressBoard_iPhone board];
-				board.shouldShowMessage = YES;
+                F1_NewAddressBoard_iPhone * board = [F1_NewAddressBoard_iPhone board];
+                board.shouldShowMessage = YES;
                 board.isShopingCartBord = YES;
                 board.shopingCartBod=self;
-				[self.stack pushBoard:board animated:YES];
-			}
-		}
-		else
-		{
-			[self showErrorTips:msg];
-		}
-	}
-	else if ( msg.failed )
-	{
-		[self showErrorTips:msg];
-	}
+                [self.stack pushBoard:board animated:YES];
+            }
+        }
+        else
+        {
+            [self showErrorTips:msg];
+        }
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
 }
 
 ON_MESSAGE3( API, cart_update, msg )
 {
-	if ( msg.sending )
-	{
-		[self presentLoadingTips:__TEXT(@"tips_modifying")];
-	}
-	else
-	{
-		[self dismissTips];
-	}
-	
-	if ( msg.succeed )
-	{
-		STATUS * status = msg.GET_OUTPUT( @"status" );
+    if ( msg.sending )
+    {
+        [self presentLoadingTips:__TEXT(@"tips_modifying")];
+    }
+    else
+    {
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS * status = msg.GET_OUTPUT( @"status" );
         
-		if ( status.succeed.boolValue )
-		{
-			[self.cartModel reload];
-		}
-		else
-		{
-			[self presentFailureTips:__TEXT(@"error_8")];
-		}
-	}
-	else if ( msg.failed )
-	{
-		[self showErrorTips:msg];
-	}
+        if ( status.succeed.boolValue )
+        {
+            [self.cartModel reload];
+        }
+        else
+        {
+            [self presentFailureTips:__TEXT(@"error_8")];
+        }
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
 }
 
 #pragma mark -
@@ -536,8 +538,8 @@ ON_NOTIFICATION3( AddressListModel, ADD_SUCCESS, notification )
 {
     //地址新增回调
     if (self.isShopCarAdd) {
-       self.isShopCarAdd=NO;
-       if ( NO == self.currentCell.editing )
+        self.isShopCarAdd=NO;
+        if ( NO == self.currentCell.editing )
         {
             //[self.addressListModel reload];
         }

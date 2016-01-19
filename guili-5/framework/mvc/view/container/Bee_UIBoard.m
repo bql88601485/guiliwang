@@ -72,7 +72,7 @@
 
 @interface BeeUIBoardView : UIView
 {
-	BOOL _layouting;
+    BOOL _layouting;
 }
 @end
 
@@ -84,75 +84,75 @@ IS_CONTAINABLE( YES )
 
 - (void)setFrame:(CGRect)rect
 {
-	CGRect prevRect = [self frame];
-	
-	[super setFrame:rect];
+    CGRect prevRect = [self frame];
     
-	BeeUIBoard * receiver = self.signalReceiver;
-	if ( receiver )
-	{
-		if ( NO == _layouting )
-		{
-			BOOL changed = NO;
-			
-			if ( NO == CGSizeEqualToSize(rect.size, CGSizeZero) && NO == CGSizeEqualToSize(prevRect.size, rect.size) )
-			{
-				changed = YES;
-			}
-			
-			if ( changed )
-			{
-				_layouting = YES;
+    [super setFrame:rect];
+    
+    BeeUIBoard * receiver = self.signalReceiver;
+    if ( receiver )
+    {
+        if ( NO == _layouting )
+        {
+            BOOL changed = NO;
+            
+            if ( NO == CGSizeEqualToSize(rect.size, CGSizeZero) && NO == CGSizeEqualToSize(prevRect.size, rect.size) )
+            {
+                changed = YES;
+            }
+            
+            if ( changed )
+            {
+                _layouting = YES;
                 
-				[receiver sendUISignal:BeeUIBoard.LAYOUT_VIEWS];
-				
-				_layouting = NO;
-			}
-		}
-	}
+                [receiver sendUISignal:BeeUIBoard.LAYOUT_VIEWS];
+                
+                _layouting = NO;
+            }
+        }
+    }
 }
 
 - (void)layoutSubviews
 {
-	[super layoutSubviews];
+    [super layoutSubviews];
     
-	BeeUIBoard * receiver = self.signalReceiver;
-	if ( receiver )
-	{
-		if ( NO == _layouting )
-		{
-			BOOL changed = NO;
+    BeeUIBoard * receiver = self.signalReceiver;
+    if ( receiver )
+    {
+        if ( NO == _layouting )
+        {
+            BOOL changed = NO;
             
-			if ( NO == CGSizeEqualToSize( self.frame.size, CGSizeZero ) )
-			{
-				changed = YES;
-			}
+            if ( NO == CGSizeEqualToSize( self.frame.size, CGSizeZero ) )
+            {
+                changed = YES;
+            }
             
-			if ( changed )
-			{
-				_layouting = YES;
+            if ( changed )
+            {
+                _layouting = YES;
                 
-				[receiver sendUISignal:BeeUIBoard.LAYOUT_VIEWS];
-				
-				_layouting = NO;
-			}
-		}
-	}
+                [receiver sendUISignal:BeeUIBoard.LAYOUT_VIEWS];
+                
+                _layouting = NO;
+            }
+        }
+    }
 }
 
 #pragma mark -
 
 - (void)handleUISignal:(BeeUISignal *)signal
 {
-	BeeUIBoard * receiver = self.signalReceiver;
-	if ( receiver )
-	{
-		[signal forward:receiver];
-	}
-	else
-	{
-		SIGNAL_FORWARD( signal );
-	}
+    BeeUIBoard * receiver = self.signalReceiver;
+    if ( receiver )
+    {
+        [signal forward:receiver];
+    }
+    else
+    {
+        SIGNAL_FORWARD( signal );
+    }
 }
 
 @end
@@ -161,32 +161,32 @@ IS_CONTAINABLE( YES )
 
 @interface BeeUIBoard()
 {
-	BeeUIBoard *				_parent;
-	NSString *					_name;
-	
-	BOOL						_inited;
-	BOOL						_firstEnter;
-	BOOL						_presenting;
-	BOOL						_viewBuilt;
-	BOOL						_dataLoaded;
-	NSInteger					_state;
+    BeeUIBoard *				_parent;
+    NSString *					_name;
     
-	NSDate *					_createDate;
-	NSTimeInterval				_lastSleep;
-	NSTimeInterval				_lastWeekup;
-	
-	BOOL						_allowedPortrait;
-	BOOL						_allowedLandscape;
-	BOOL						_allowedSwipeToBack;
-	BOOL						_disableLayout;
-	
-	UISwipeGestureRecognizer *	_swipeGesture;
-	
+    BOOL						_inited;
+    BOOL						_firstEnter;
+    BOOL						_presenting;
+    BOOL						_viewBuilt;
+    BOOL						_dataLoaded;
+    NSInteger					_state;
+    
+    NSDate *					_createDate;
+    NSTimeInterval				_lastSleep;
+    NSTimeInterval				_lastWeekup;
+    
+    BOOL						_allowedPortrait;
+    BOOL						_allowedLandscape;
+    BOOL						_allowedSwipeToBack;
+    BOOL						_disableLayout;
+    
+    UISwipeGestureRecognizer *	_swipeGesture;
+    
 #if __BEE_DEVELOPMENT__
-	NSUInteger					_createSeq;
-	NSUInteger					_signalSeq;
-	NSMutableArray *			_signals;
-	NSMutableArray *			_callstack;
+    NSUInteger					_createSeq;
+    NSUInteger					_signalSeq;
+    NSMutableArray *			_signals;
+    NSMutableArray *			_callstack;
 #endif	// #if __BEE_DEVELOPMENT__
 }
 
@@ -272,213 +272,213 @@ static NSMutableArray *		__allBoards = nil;
 
 + (NSString *)generateName
 {
-	static NSUInteger __seed = 0;
-	return [NSString stringWithFormat:@"board_%u", __seed++];
+    static NSUInteger __seed = 0;
+    return [NSString stringWithFormat:@"board_%u", __seed++];
 }
 
 + (NSArray *)allBoards
 {
 #if __BEE_DEVELOPMENT__
-	return __allBoards;
+    return __allBoards;
 #else	// #if __BEE_DEVELOPMENT__
-	return nil;
+    return nil;
 #endif	// #if __BEE_DEVELOPMENT__
 }
 
 + (id)board
 {
-	return [[[[self class] alloc] init] autorelease];
+    return [[[[self class] alloc] init] autorelease];
 }
 
 + (id)boardWithNibName:(NSString *)nibNameOrNil
 {
-	return [[[self alloc] initWithNibName:nibNameOrNil bundle:nil] autorelease];
+    return [[[self alloc] initWithNibName:nibNameOrNil bundle:nil] autorelease];
 }
 
 - (void)initSelf
 {
-	if ( NO == _inited )
-	{
-		_inited = YES;
-		
+    if ( NO == _inited )
+    {
+        _inited = YES;
+        
 #if __BEE_DEVELOPMENT__
-		if ( nil == __allBoards )
-		{
-			__allBoards = [[NSMutableArray nonRetainingArray] retain];
-		}
-		
-		[__allBoards insertObject:self atIndex:0];
+        if ( nil == __allBoards )
+        {
+            __allBoards = [[NSMutableArray nonRetainingArray] retain];
+        }
+        
+        [__allBoards insertObject:self atIndex:0];
 #endif	// #if __BEE_DEVELOPMENT__
-		
-		_firstEnter = YES;
-		_presenting = NO;
-		_viewBuilt = NO;
-		_dataLoaded = NO;
-		_state = self.STATE_DEACTIVATED;
-		
-		_createDate = [[NSDate date] retain];
-		_lastSleep = [NSDate timeIntervalSinceReferenceDate];
-		_lastWeekup = [NSDate timeIntervalSinceReferenceDate];
-		
-		_allowedPortrait = YES;
-		_allowedLandscape = YES;
-		_allowedSwipeToBack = YES;
-		
+        
+        _firstEnter = YES;
+        _presenting = NO;
+        _viewBuilt = NO;
+        _dataLoaded = NO;
+        _state = self.STATE_DEACTIVATED;
+        
+        _createDate = [[NSDate date] retain];
+        _lastSleep = [NSDate timeIntervalSinceReferenceDate];
+        _lastWeekup = [NSDate timeIntervalSinceReferenceDate];
+        
+        _allowedPortrait = YES;
+        _allowedLandscape = YES;
+        _allowedSwipeToBack = YES;
+        
 #if __BEE_DEVELOPMENT__
-		_createSeq = __createSeed++;
-		_signalSeq = 0;
-		_signals = [[NSMutableArray alloc] init];
-		
-		_callstack = [[NSMutableArray alloc] init];
-		[_callstack addObjectsFromArray:[BeeRuntime callstack:16]];
+        _createSeq = __createSeed++;
+        _signalSeq = 0;
+        _signals = [[NSMutableArray alloc] init];
+        
+        _callstack = [[NSMutableArray alloc] init];
+        [_callstack addObjectsFromArray:[BeeRuntime callstack:16]];
 #endif	// #if __BEE_DEVELOPMENT__
-		
-		self.name = [BeeUIBoard generateName];
-		
+        
+        self.name = [BeeUIBoard generateName];
+        
         //		[self load];
-		[self performLoad];
-	}
+        [self performLoad];
+    }
 }
 
 - (id)init
 {
     //	self = [super init];
-	self = [super initWithNibName:nil bundle:nil];
-	if ( self )
-	{
-		[self initSelf];
-	}
-	return self;
+    self = [super initWithNibName:nil bundle:nil];
+    if ( self )
+    {
+        [self initSelf];
+    }
+    return self;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if ( self )
-	{
-		[self initSelf];
-	}
-	return self;
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if ( self )
+    {
+        [self initSelf];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
     //	[self unload];
-	[self performUnload];
+    [self performUnload];
     
-	[self cancelMessages];
-	[self cancelRequests];
-	
-	[self unobserveTick];
-	[self unobserveAllNotifications];
-	
-	[self freeDatas];
-	[self deleteViews];
+    [self cancelMessages];
+    [self cancelRequests];
     
-#if __BEE_DEVELOPMENT__
-	[_signals removeAllObjects];
-	[_signals release];
-	
-	[_callstack removeAllObjects];
-	[_callstack release];
-#endif	// #if __BEE_DEVELOPMENT__
-	
-	self.createDate = nil;
-	self.name = nil;
-	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self unobserveTick];
+    [self unobserveAllNotifications];
+    
+    [self freeDatas];
+    [self deleteViews];
     
 #if __BEE_DEVELOPMENT__
-	[__allBoards removeObject:self];
+    [_signals removeAllObjects];
+    [_signals release];
+    
+    [_callstack removeAllObjects];
+    [_callstack release];
 #endif	// #if __BEE_DEVELOPMENT__
     
-	[super dealloc];
+    self.createDate = nil;
+    self.name = nil;
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
+#if __BEE_DEVELOPMENT__
+    [__allBoards removeObject:self];
+#endif	// #if __BEE_DEVELOPMENT__
+    
+    [super dealloc];
 }
 
 #pragma mark -
 
 - (BOOL)allowedSwipeToBack
 {
-	return _allowedSwipeToBack;
+    return _allowedSwipeToBack;
 }
 
 - (void)setAllowedSwipeToBack:(BOOL)flag
 {
-	_allowedSwipeToBack = flag;
+    _allowedSwipeToBack = flag;
     
-	if ( _allowedSwipeToBack )
-	{
-		if ( nil == _swipeGesture )
-		{
-			_swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipedRight:)];
-			_swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
-			[self.view addGestureRecognizer:_swipeGesture];
-		}
-	}
-	else
-	{
-		if ( _swipeGesture )
-		{
-			[self.view removeGestureRecognizer:_swipeGesture];
-		
-			[_swipeGesture setDelegate:nil];
-			[_swipeGesture release];
-			_swipeGesture = nil;
-		}
-	}
+    if ( _allowedSwipeToBack )
+    {
+        if ( nil == _swipeGesture )
+        {
+            _swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipedRight:)];
+            _swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
+            [self.view addGestureRecognizer:_swipeGesture];
+        }
+    }
+    else
+    {
+        if ( _swipeGesture )
+        {
+            [self.view removeGestureRecognizer:_swipeGesture];
+            
+            [_swipeGesture setDelegate:nil];
+            [_swipeGesture release];
+            _swipeGesture = nil;
+        }
+    }
 }
 
 - (void)didSwipedRight:(UISwipeGestureRecognizer *)swipeGesture
 {
-	if ( UIGestureRecognizerStateEnded == swipeGesture.state )
-	{
-		if ( _allowedSwipeToBack )
-		{
-			[self.stack popBoardAnimated:YES];
-		}
-	}
+    if ( UIGestureRecognizerStateEnded == swipeGesture.state )
+    {
+        if ( _allowedSwipeToBack )
+        {
+            [self.stack popBoardAnimated:YES];
+        }
+    }
 }
 
 #pragma mark -
 
 - (void)changeStateDeactivated
 {
-	if ( self.STATE_DEACTIVATED != _state )
-	{
-		_state = self.STATE_DEACTIVATED;
-		
-		[self sendUISignal:BeeUIBoard.DID_DISAPPEAR];
-	}
+    if ( self.STATE_DEACTIVATED != _state )
+    {
+        _state = self.STATE_DEACTIVATED;
+        
+        [self sendUISignal:BeeUIBoard.DID_DISAPPEAR];
+    }
 }
 
 - (void)changeStateDeactivating
 {
-	if ( self.STATE_DEACTIVATING != _state )
-	{
-		_state = self.STATE_DEACTIVATING;
-		
-		[self sendUISignal:BeeUIBoard.WILL_DISAPPEAR];
-	}
+    if ( self.STATE_DEACTIVATING != _state )
+    {
+        _state = self.STATE_DEACTIVATING;
+        
+        [self sendUISignal:BeeUIBoard.WILL_DISAPPEAR];
+    }
 }
 
 - (void)changeStateActivated
 {
-	if ( self.STATE_ACTIVATED != _state )
-	{
-		_state = self.STATE_ACTIVATED;
-		
-		[self sendUISignal:BeeUIBoard.DID_APPEAR];
-	}
+    if ( self.STATE_ACTIVATED != _state )
+    {
+        _state = self.STATE_ACTIVATED;
+        
+        [self sendUISignal:BeeUIBoard.DID_APPEAR];
+    }
 }
 
 - (void)changeStateActivating
 {
-	if ( self.STATE_ACTIVATING != _state )
-	{
-		_state = self.STATE_ACTIVATING;
-		
-		[self sendUISignal:BeeUIBoard.WILL_APPEAR];
-	}
+    if ( self.STATE_ACTIVATING != _state )
+    {
+        _state = self.STATE_ACTIVATING;
+        
+        [self sendUISignal:BeeUIBoard.WILL_APPEAR];
+    }
 }
 
 #pragma mark -
@@ -487,39 +487,39 @@ static NSMutableArray *		__allBoards = nil;
 - (void)loadView
 {
     //	INFO( @"'%@' loadView", [[self class] description] );
-	
+    
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-	if ( IOS7_OR_LATER )
-	{
-		if ( [BeeUIConfig sharedInstance].iOS6Mode )
-		{
-			self.edgesForExtendedLayout = UIRectEdgeNone;
-			self.extendedLayoutIncludesOpaqueBars = NO;
-			self.modalPresentationCapturesStatusBarAppearance = NO;
-		}
-		else
-		{
-			self.edgesForExtendedLayout = UIRectEdgeAll;
-			self.extendedLayoutIncludesOpaqueBars = YES;
-			self.modalPresentationCapturesStatusBarAppearance = YES;
-		}
-	}
+    if ( IOS7_OR_LATER )
+    {
+        if ( [BeeUIConfig sharedInstance].iOS6Mode )
+        {
+            self.edgesForExtendedLayout = UIRectEdgeNone;
+            self.extendedLayoutIncludesOpaqueBars = NO;
+            self.modalPresentationCapturesStatusBarAppearance = NO;
+        }
+        else
+        {
+            self.edgesForExtendedLayout = UIRectEdgeAll;
+            self.extendedLayoutIncludesOpaqueBars = YES;
+            self.modalPresentationCapturesStatusBarAppearance = YES;
+        }
+    }
 #endif	// #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     
-	if ( self.nibName )
-	{
-		[super loadView];
-		
-		self.view.signalReceiver = self;
-	}
-	else
-	{
-		self.view = [[[BeeUIBoardView alloc] initWithFrame:CGRectZero] autorelease];
-		self.view.signalReceiver = self;
+    if ( self.nibName )
+    {
+        [super loadView];
+        
+        self.view.signalReceiver = self;
+    }
+    else
+    {
+        self.view = [[[BeeUIBoardView alloc] initWithFrame:CGRectZero] autorelease];
+        self.view.signalReceiver = self;
         //		self.view.userInteractionEnabled = YES;
-		self.view.backgroundColor = [UIColor clearColor];
-		self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	}
+        self.view.backgroundColor = [UIColor clearColor];
+        self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    }
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -527,8 +527,8 @@ static NSMutableArray *		__allBoards = nil;
 {
     //	INFO( @"'%@' viewDidLoad", [[self class] description] );
     
-	[self createViews];
-	[self loadDatas];
+    [self createViews];
+    [self loadDatas];
     
     [super viewDidLoad];
 }
@@ -536,31 +536,31 @@ static NSMutableArray *		__allBoards = nil;
 - (void)viewDidUnload
 {
     //	INFO( @"'%@' viewDidUnload", [[self class] description] );
-	
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     
-	if ( _viewBuilt )
-	{
-		[self.view removeAllSubviews];
-		self.view = nil;
-	}
+    if ( _viewBuilt )
+    {
+        [self.view removeAllSubviews];
+        self.view = nil;
+    }
     
-	[self deleteViews];
-	[self freeDatas];
-	
+    [self deleteViews];
+    [self freeDatas];
+    
     [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
 {
     //	INFO( @"'%@' didReceiveMemoryWarning", [[self class] description] );
-	
+    
     // Releases the view if it doesn't have a superview.
-	if ( YES == _viewBuilt )
-	{
-		[super didReceiveMemoryWarning];
-	}
+    if ( YES == _viewBuilt )
+    {
+        [super didReceiveMemoryWarning];
+    }
     
     // Release any cached data, images, etc. that aren't in use.
     //	if ( NO == _presenting )
@@ -578,96 +578,142 @@ static NSMutableArray *		__allBoards = nil;
 // Called when the view is about to made visible. Default does nothing
 - (void)viewWillAppear:(BOOL)animated
 {
-	if ( NO == _viewBuilt )
-		return;
-	
-	_presenting = YES;
-	
+    if ( NO == _viewBuilt )
+        return;
+    
+    _presenting = YES;
+    
     //	self.view.layer.shouldRasterize = YES;
     
-	[super viewWillAppear:animated];
-	
-	[self createViews];
-	[self loadDatas];
+    [super viewWillAppear:animated];
     
-	[self disableUserInteraction];
-	[self changeStateActivating];
-	
-	_lastWeekup = [NSDate timeIntervalSinceReferenceDate];
+    [self createViews];
+    [self loadDatas];
+    
+    [self disableUserInteraction];
+    [self changeStateActivating];
+    
+    _lastWeekup = [NSDate timeIntervalSinceReferenceDate];
+    
+    if (!_isHome) {
+        
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+        
+        // 配置导航条
+        {
+            [BeeUINavigationBar setTitleColor:[UIColor blackColor]];
+            [BeeUINavigationBar setBackgroundColor:[UIColor whiteColor]];
+            
+            if ( IOS7_OR_LATER )
+            {
+                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg_iphone5Two.png"]];
+            }
+            else
+            {
+                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"]];
+            }
+            
+            UILabel *line = [[UILabel alloc] init];
+            line.frame = CGRectMake(0, self.navigationController.navigationBar.height - 1, self.navigationController.navigationBar.width, 1);
+            line.backgroundColor = [UIColor lightGrayColor];
+            [self.navigationController.navigationBar addSubview:line];
+            
+        }
+    }else{
+        
+        
+        // 配置导航条
+        {
+            [BeeUINavigationBar setTitleColor:[UIColor whiteColor]];
+            [BeeUINavigationBar setBackgroundColor:[UIColor blackColor]];
+            
+            if ( IOS7_OR_LATER )
+            {
+                
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+                
+                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg_iphone5.png"]];
+            }
+            else
+            {
+                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"]];
+            }
+        }
+    }
 }
 
 // Called when the view has been fully transitioned onto the screen. Default does nothing
 - (void)viewDidAppear:(BOOL)animated
 {
-	if ( NO == _viewBuilt )
-		return;
-	
+    if ( NO == _viewBuilt )
+        return;
+    
     //	self.view.layer.shouldRasterize = NO;
-	
-	[super viewDidAppear:animated];
-	
-	[self enableUserInteraction];
-	[self changeStateActivated];
-	
-	_firstEnter = NO;
-	
-	[self setAllowedSwipeToBack:_allowedSwipeToBack];
+    
+    [super viewDidAppear:animated];
+    
+    [self enableUserInteraction];
+    [self changeStateActivated];
+    
+    _firstEnter = NO;
+    
+    [self setAllowedSwipeToBack:_allowedSwipeToBack];
 }
 
 // Called when the view is dismissed, covered or otherwise hidden. Default does nothing
 - (void)viewWillDisappear:(BOOL)animated
 {
-	if ( NO == _viewBuilt )
-		return;
-	
-	self.view.layer.shouldRasterize = YES;
+    if ( NO == _viewBuilt )
+        return;
     
-	[super viewWillDisappear:animated];
-	
-	[self disableUserInteraction];
-	[self changeStateDeactivating];
+    self.view.layer.shouldRasterize = YES;
+    
+    [super viewWillDisappear:animated];
+    
+    [self disableUserInteraction];
+    [self changeStateDeactivating];
 }
 
 // Called after the view was dismissed, covered or otherwise hidden. Default does nothing
 - (void)viewDidDisappear:(BOOL)animated
 {
-	if ( NO == _viewBuilt )
-		return;
-	
-	[super viewDidDisappear:animated];
-	
-	self.view.layer.shouldRasterize = NO;
-	
-	_presenting = NO;
-	
-	[self disableUserInteraction];
-	[self changeStateDeactivated];
-	
-	_lastSleep = [NSDate timeIntervalSinceReferenceDate];
+    if ( NO == _viewBuilt )
+        return;
+    
+    [super viewDidDisappear:animated];
+    
+    self.view.layer.shouldRasterize = NO;
+    
+    _presenting = NO;
+    
+    [self disableUserInteraction];
+    [self changeStateDeactivated];
+    
+    _lastSleep = [NSDate timeIntervalSinceReferenceDate];
 }
 
 - (NSTimeInterval)sleepDuration
 {
-	if ( YES == _presenting )
-	{
-		return 0.0f;
-	}
-	else
-	{
-		return [NSDate timeIntervalSinceReferenceDate] - _lastSleep;
-	}
+    if ( YES == _presenting )
+    {
+        return 0.0f;
+    }
+    else
+    {
+        return [NSDate timeIntervalSinceReferenceDate] - _lastSleep;
+    }
 }
 
 - (NSTimeInterval)weekupDuration
 {
-	if ( YES == _presenting )
-	{
-		return [NSDate timeIntervalSinceReferenceDate] - _lastWeekup;
-	}
-	else
-	{
-		return 0.0f;
-	}
+    if ( YES == _presenting )
+    {
+        return [NSDate timeIntervalSinceReferenceDate] - _lastWeekup;
+    }
+    else
+    {
+        return 0.0f;
+    }
 }
 
 #pragma mark -
@@ -675,68 +721,68 @@ static NSMutableArray *		__allBoards = nil;
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	if ( interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown )
-	{
-		return _allowedPortrait ? YES : NO;
-	}
-	else if ( interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight )
-	{
-		return _allowedLandscape ? YES : NO;
-	}
-	
-	return NO;
+    if ( interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown )
+    {
+        return _allowedPortrait ? YES : NO;
+    }
+    else if ( interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight )
+    {
+        return _allowedLandscape ? YES : NO;
+    }
+    
+    return NO;
 }
 
 -(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-	if ( _viewBuilt )
-	{
-		[self sendUISignal:BeeUIBoard.ORIENTATION_WILL_CHANGE];
-	}
+    if ( _viewBuilt )
+    {
+        [self sendUISignal:BeeUIBoard.ORIENTATION_WILL_CHANGE];
+    }
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	if ( _viewBuilt )
-	{
-		[self sendUISignal:BeeUIBoard.ORIENTATION_DID_CHANGED];
-	}
+    if ( _viewBuilt )
+    {
+        [self sendUISignal:BeeUIBoard.ORIENTATION_DID_CHANGED];
+    }
 }
 
 #if defined(__IPHONE_6_0)
 
 -(NSUInteger)supportedInterfaceOrientations
 {
-	NSUInteger orientation = 0;
+    NSUInteger orientation = 0;
     
-	if ( _allowedPortrait )
-	{
-		orientation |= UIInterfaceOrientationMaskPortrait;
-	}
+    if ( _allowedPortrait )
+    {
+        orientation |= UIInterfaceOrientationMaskPortrait;
+    }
     
-	if ( _allowedLandscape )
-	{
-		orientation |= UIInterfaceOrientationMaskLandscape;
-	}
+    if ( _allowedLandscape )
+    {
+        orientation |= UIInterfaceOrientationMaskLandscape;
+    }
     
-	return orientation;
+    return orientation;
 }
 
 - (BOOL)shouldAutorotate
 {
-	return YES;
-	
-	if ( _allowedLandscape )
-	{
-		return YES;
-	}
-	
-	if ( _allowedPortrait )
-	{
-		return YES;
-	}
-	
-	return NO;
+    return YES;
+    
+    if ( _allowedLandscape )
+    {
+        return YES;
+    }
+    
+    if ( _allowedPortrait )
+    {
+        return YES;
+    }
+    
+    return NO;
 }
 
 #endif	// #if defined(__IPHONE_6_0)
@@ -745,133 +791,133 @@ static NSMutableArray *		__allBoards = nil;
 
 - (void)createViews
 {
-	if ( NO == _viewBuilt )
-	{
-		[self sendUISignal:BeeUIBoard.CREATE_VIEWS];
+    if ( NO == _viewBuilt )
+    {
+        [self sendUISignal:BeeUIBoard.CREATE_VIEWS];
         //		[self sendUISignal:BeeUIBoard.LAYOUT_VIEWS];
-		
-		_viewBuilt = YES;
-	}
+        
+        _viewBuilt = YES;
+    }
 }
 
 - (void)deleteViews
 {
-	if ( YES == _viewBuilt )
-	{
-		[self.view removeGestureRecognizer:_swipeGesture];
-
-		[self sendUISignal:BeeUIBoard.DELETE_VIEWS];
+    if ( YES == _viewBuilt )
+    {
+        [self.view removeGestureRecognizer:_swipeGesture];
         
-		_viewBuilt = NO;
-	}
-	
-	[_swipeGesture setDelegate:nil];
-	[_swipeGesture release];
-	_swipeGesture = nil;
+        [self sendUISignal:BeeUIBoard.DELETE_VIEWS];
+        
+        _viewBuilt = NO;
+    }
+    
+    [_swipeGesture setDelegate:nil];
+    [_swipeGesture release];
+    _swipeGesture = nil;
 }
 
 - (void)loadDatas
 {
-	if ( NO == _dataLoaded )
-	{
-		[self sendUISignal:BeeUIBoard.LOAD_DATAS];
-		
-		_dataLoaded = YES;
-	}
+    if ( NO == _dataLoaded )
+    {
+        [self sendUISignal:BeeUIBoard.LOAD_DATAS];
+        
+        _dataLoaded = YES;
+    }
 }
 
 - (void)reloadBoardDatas
 {
-	[self freeDatas];
-	[self loadDatas];
+    [self freeDatas];
+    [self loadDatas];
 }
 
 - (void)freeDatas
 {
-	if ( YES == _dataLoaded )
-	{
-		[self sendUISignal:BeeUIBoard.FREE_DATAS];
-		
-		_dataLoaded = NO;
-	}
+    if ( YES == _dataLoaded )
+    {
+        [self sendUISignal:BeeUIBoard.FREE_DATAS];
+        
+        _dataLoaded = NO;
+    }
 }
 
 - (void)enableUserInteraction
 {
-	if ( _viewBuilt )
-	{
+    if ( _viewBuilt )
+    {
         //		self.view.userInteractionEnabled = YES;
-	}
+    }
 }
 
 - (void)disableUserInteraction
 {
-	if ( _viewBuilt )
-	{
+    if ( _viewBuilt )
+    {
         //		self.view.userInteractionEnabled = NO;
-	}
+    }
 }
 
 - (void)__enterBackground
 {
-	[self freeDatas];
+    [self freeDatas];
 }
 
 - (void)__enterForeground
 {
-	[self loadDatas];
+    [self loadDatas];
 }
 
 #pragma mark -
 
 - (void)resignFirstResponderWalkThrough:(UIView *)rootView
 {
-	for ( UIView * subview in rootView.subviews )
-	{
-		if ( [subview respondsToSelector:@selector(resignFirstResponder)] )
-		{
-			[subview performSelector:@selector(resignFirstResponder)];
-		}
-		
-		[self resignFirstResponderWalkThrough:subview];
-	}
+    for ( UIView * subview in rootView.subviews )
+    {
+        if ( [subview respondsToSelector:@selector(resignFirstResponder)] )
+        {
+            [subview performSelector:@selector(resignFirstResponder)];
+        }
+        
+        [self resignFirstResponderWalkThrough:subview];
+    }
 }
 
 - (BOOL)resignFirstResponder
 {
-	[self resignFirstResponderWalkThrough:self.view];
-	return YES;
+    [self resignFirstResponderWalkThrough:self.view];
+    return YES;
 }
 
 - (BOOL)deactivated
 {
-	return self.STATE_DEACTIVATED == _state ? YES : NO;
+    return self.STATE_DEACTIVATED == _state ? YES : NO;
 }
 
 - (BOOL)deactivating
 {
-	return self.STATE_DEACTIVATING == _state ? YES : NO;
+    return self.STATE_DEACTIVATING == _state ? YES : NO;
 }
 
 - (BOOL)activating
 {
-	return self.STATE_ACTIVATING == _state ? YES : NO;
+    return self.STATE_ACTIVATING == _state ? YES : NO;
 }
 
 - (BOOL)activated
 {
-	return self.STATE_ACTIVATED == _state ? YES : NO;
+    return self.STATE_ACTIVATED == _state ? YES : NO;
 }
 
 - (BeeUIBoardBlock)RELAYOUT
 {
-	BeeUIBoardBlock block = ^ BeeUIBoard * ( void )
-	{
-		[self sendUISignal:BeeUIBoard.LAYOUT_VIEWS withObject:[NSNumber numberWithBool:YES]];
-		return self;
-	};
+    BeeUIBoardBlock block = ^ BeeUIBoard * ( void )
+    {
+        [self sendUISignal:BeeUIBoard.LAYOUT_VIEWS withObject:[NSNumber numberWithBool:YES]];
+        return self;
+    };
     
-	return [[block copy] autorelease];
+    return [[block copy] autorelease];
 }
 
 #pragma mark -
@@ -888,188 +934,188 @@ static NSMutableArray *		__allBoards = nil;
 - (void)handleUISignal:(BeeUISignal *)signal
 {
 #if __BEE_DEVELOPMENT__
-	_signalSeq += 1;
-	
-	[_signals addObject:signal];
-	[_signals keepTail:MAX_SIGNALS];
+    _signalSeq += 1;
+    
+    [_signals addObject:signal];
+    [_signals keepTail:MAX_SIGNALS];
 #endif	// #if __BEE_DEVELOPMENT__
     
-	SIGNAL_FORWARD( signal );
+    SIGNAL_FORWARD( signal );
     
-	if ( [signal isKindOf:BeeUIBoard.SIGNAL] )
-	{
-		if ( [signal is:BeeUIBoard.CREATE_VIEWS] )
-		{
-			if ( nil == self.view.layout )
-			{
-				self.view.FROM_NAME( [self UIResourceName] );
-			}
+    if ( [signal isKindOf:BeeUIBoard.SIGNAL] )
+    {
+        if ( [signal is:BeeUIBoard.CREATE_VIEWS] )
+        {
+            if ( nil == self.view.layout )
+            {
+                self.view.FROM_NAME( [self UIResourceName] );
+            }
             
-			if ( nil == self.view.layout )
-			{
-				Class boardClass = [self class];
-				for ( ;; )
-				{
-					if ( [boardClass supportForUIResourceLoading] )
-					{
-						self.view.FROM_NAME( [boardClass description] );
-						if ( nil != self.view.layout )
-							break;
-					}
-					
-					boardClass = class_getSuperclass( boardClass );
-					if ( nil == boardClass || boardClass == [UIResponder class] )
-						break;
-				}
-			}
-            
-			if ( nil == self.view.layout )
-			{
-				Class boardClass = [self.view class];
-				for ( ;; )
-				{
-					if ( [boardClass supportForUIResourceLoading] )
-					{
-						self.view.FROM_NAME( [boardClass description] );
-						if ( nil != self.view.layout )
-							break;
-					}
-					
-					boardClass = class_getSuperclass( boardClass );
-					if ( nil == boardClass || boardClass == [UIResponder class] )
-						break;
-				}
-			}
-            
-			self.view.autoresizesSubviews = YES;
-			self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-            
-			// TODO:
-		}
-		else if ( [signal is:BeeUIBoard.DELETE_VIEWS] )
-		{
-			if ( self.viewBuilt )
-			{
-				self.view.signalReceiver = nil;
-                
-				NSArray * array = [[self.view.subviews copy] autorelease];
-				for ( UIView * view in array )
-				{
-					[view removeFromSuperview];
-				}
-			}
-			
-			// TODO:
-		}
-		else if ( [signal is:BeeUIBoard.LAYOUT_VIEWS] )
-		{
-			if ( self.viewBuilt )
-			{
-				if ( NO == _disableLayout )
-				{
-					self.view.RELAYOUT();
-				}
-			}
-			
-			UIView * titleView	= self.navigationItem.titleView;
-			UIView * leftView	= self.navigationItem.leftBarButtonItem.customView;
-			UIView * rightView	= self.navigationItem.rightBarButtonItem.customView;
-            
-			if ( titleView )
-			{
-				if ( CGSizeEqualToSize( CGSizeZero, titleView.frame.size ) )
-				{
-					CGRect titleFrame;
-					titleFrame.origin = titleView.frame.origin;
-					titleFrame.size.width = 200.0f;
-					titleFrame.size.height = 34.0f;
-					
-					titleView.frame = titleFrame;
-				}
-				else
-				{
-					titleView.RELAYOUT();
-				}
-			}
-			
-			if ( leftView )
-			{
-				if ( CGSizeEqualToSize( CGSizeZero, leftView.frame.size ) )
-				{
-					CGRect leftFrame;
-					leftFrame.origin = leftView.frame.origin;
-					leftFrame.size = [BeeUINavigationBar buttonSize];
-					
-					if ( CGSizeEqualToSize(leftFrame.size, CGSizeZero) )
-					{
-						leftFrame.size = CGSizeMake( 48.0f, 34.0f );
-					}
+            if ( nil == self.view.layout )
+            {
+                Class boardClass = [self class];
+                for ( ;; )
+                {
+                    if ( [boardClass supportForUIResourceLoading] )
+                    {
+                        self.view.FROM_NAME( [boardClass description] );
+                        if ( nil != self.view.layout )
+                            break;
+                    }
                     
-					leftView.frame = leftFrame;
-				}
-				else
-				{
-					leftView.RELAYOUT();
-				}
-			}
+                    boardClass = class_getSuperclass( boardClass );
+                    if ( nil == boardClass || boardClass == [UIResponder class] )
+                        break;
+                }
+            }
             
-			if ( rightView )
-			{
-				if ( CGSizeEqualToSize( CGSizeZero, rightView.frame.size ) )
-				{
-					CGRect rightFrame;
-					rightFrame.origin = rightView.frame.origin;
-					rightFrame.size = [BeeUINavigationBar buttonSize];
-					
-					if ( CGSizeEqualToSize(rightFrame.size, CGSizeZero) )
-					{
-						rightFrame.size = CGSizeMake( 48.0f, 34.0f );
-					}
-					
-					rightView.frame = rightFrame;
-				}
-				else
-				{
-					rightView.RELAYOUT();
-				}
-			}
-		}
-		else if ( [signal is:BeeUIBoard.WILL_APPEAR] )
-		{
-			// TODO:
-		}
-		else if ( [signal is:BeeUIBoard.DID_APPEAR] )
-		{
-			// TODO:
-		}
-		else if ( [signal is:BeeUIBoard.WILL_DISAPPEAR] )
-		{
-			// TODO:
-		}
-		else if ( [signal is:BeeUIBoard.DID_DISAPPEAR] )
-		{
-			// TODO:
-		}
-	}
-	else
-	{
-		if ( [signal is:UIView.SWIPE_RIGHT] )
-		{
-			if ( _allowedSwipeToBack )
-			{
-				[self.stack popBoardAnimated:YES];
-			}
-		}
+            if ( nil == self.view.layout )
+            {
+                Class boardClass = [self.view class];
+                for ( ;; )
+                {
+                    if ( [boardClass supportForUIResourceLoading] )
+                    {
+                        self.view.FROM_NAME( [boardClass description] );
+                        if ( nil != self.view.layout )
+                            break;
+                    }
+                    
+                    boardClass = class_getSuperclass( boardClass );
+                    if ( nil == boardClass || boardClass == [UIResponder class] )
+                        break;
+                }
+            }
+            
+            self.view.autoresizesSubviews = YES;
+            self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+            
+            // TODO:
+        }
+        else if ( [signal is:BeeUIBoard.DELETE_VIEWS] )
+        {
+            if ( self.viewBuilt )
+            {
+                self.view.signalReceiver = nil;
+                
+                NSArray * array = [[self.view.subviews copy] autorelease];
+                for ( UIView * view in array )
+                {
+                    [view removeFromSuperview];
+                }
+            }
+            
+            // TODO:
+        }
+        else if ( [signal is:BeeUIBoard.LAYOUT_VIEWS] )
+        {
+            if ( self.viewBuilt )
+            {
+                if ( NO == _disableLayout )
+                {
+                    self.view.RELAYOUT();
+                }
+            }
+            
+            UIView * titleView	= self.navigationItem.titleView;
+            UIView * leftView	= self.navigationItem.leftBarButtonItem.customView;
+            UIView * rightView	= self.navigationItem.rightBarButtonItem.customView;
+            
+            if ( titleView )
+            {
+                if ( CGSizeEqualToSize( CGSizeZero, titleView.frame.size ) )
+                {
+                    CGRect titleFrame;
+                    titleFrame.origin = titleView.frame.origin;
+                    titleFrame.size.width = 200.0f;
+                    titleFrame.size.height = 34.0f;
+                    
+                    titleView.frame = titleFrame;
+                }
+                else
+                {
+                    titleView.RELAYOUT();
+                }
+            }
+            
+            if ( leftView )
+            {
+                if ( CGSizeEqualToSize( CGSizeZero, leftView.frame.size ) )
+                {
+                    CGRect leftFrame;
+                    leftFrame.origin = leftView.frame.origin;
+                    leftFrame.size = [BeeUINavigationBar buttonSize];
+                    
+                    if ( CGSizeEqualToSize(leftFrame.size, CGSizeZero) )
+                    {
+                        leftFrame.size = CGSizeMake( 48.0f, 34.0f );
+                    }
+                    
+                    leftView.frame = leftFrame;
+                }
+                else
+                {
+                    leftView.RELAYOUT();
+                }
+            }
+            
+            if ( rightView )
+            {
+                if ( CGSizeEqualToSize( CGSizeZero, rightView.frame.size ) )
+                {
+                    CGRect rightFrame;
+                    rightFrame.origin = rightView.frame.origin;
+                    rightFrame.size = [BeeUINavigationBar buttonSize];
+                    
+                    if ( CGSizeEqualToSize(rightFrame.size, CGSizeZero) )
+                    {
+                        rightFrame.size = CGSizeMake( 48.0f, 34.0f );
+                    }
+                    
+                    rightView.frame = rightFrame;
+                }
+                else
+                {
+                    rightView.RELAYOUT();
+                }
+            }
+        }
+        else if ( [signal is:BeeUIBoard.WILL_APPEAR] )
+        {
+            // TODO:
+        }
+        else if ( [signal is:BeeUIBoard.DID_APPEAR] )
+        {
+            // TODO:
+        }
+        else if ( [signal is:BeeUIBoard.WILL_DISAPPEAR] )
+        {
+            // TODO:
+        }
+        else if ( [signal is:BeeUIBoard.DID_DISAPPEAR] )
+        {
+            // TODO:
+        }
+    }
+    else
+    {
+        if ( [signal is:UIView.SWIPE_RIGHT] )
+        {
+            if ( _allowedSwipeToBack )
+            {
+                [self.stack popBoardAnimated:YES];
+            }
+        }
         //		else if ( [signal is:BeeUINavigationBar.LEFT_TOUCHED] )
         //		{
         //			[self.stack popBoardAnimated:YES];
         //		}
         
-		if ( self.parentBoard )
-		{
-			[signal forward:self.parentBoard.view];
-		}
-	}
+        if ( self.parentBoard )
+        {
+            [signal forward:self.parentBoard.view];
+        }
+    }
 }
 
 #pragma mark -
@@ -1078,21 +1124,21 @@ static NSMutableArray *		__allBoards = nil;
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-	if ( IOS7_OR_LATER )
-	{
-		if ( [BeeUIConfig sharedInstance].iOS6Mode )
-		{
-			return UIStatusBarStyleBlackTranslucent;
-		}
-		else
-		{
-			return UIStatusBarStyleLightContent;
-		}
-	}
-	else
-	{
-		return UIStatusBarStyleDefault;
-	}
+    if ( IOS7_OR_LATER )
+    {
+        if ( [BeeUIConfig sharedInstance].iOS6Mode )
+        {
+            return UIStatusBarStyleBlackTranslucent;
+        }
+        else
+        {
+            return UIStatusBarStyleLightContent;
+        }
+    }
+    else
+    {
+        return UIStatusBarStyleDefault;
+    }
 }
 
 #endif	// #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
