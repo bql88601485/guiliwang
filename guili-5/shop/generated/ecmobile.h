@@ -210,6 +210,7 @@ enum RANK_LEVEL
 @property (nonatomic, retain) PRICE_RANGE *		price_range;
 @property (nonatomic, retain) NSString *		sort_by;
 @property (nonatomic, retain) NSString *		intro;
+@property (nonatomic, retain) NSString *        ids;
 @end
 
 @interface GOODS : NSObject
@@ -299,6 +300,7 @@ enum RANK_LEVEL
 @property (nonatomic, retain) NSString *		name;
 @property (nonatomic, retain) NSString *		subtotal;
 @property (nonatomic, retain) NSNumber *		goods_id;
+@property (nonatomic, assign) BOOL              isFromHistory;
 @end
 
 @interface PAGINATED : NSObject

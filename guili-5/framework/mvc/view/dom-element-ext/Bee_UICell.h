@@ -72,6 +72,8 @@ AS_INT( STATE_HIGHLIGHTED )
 @property (nonatomic, assign) BOOL				layoutOnce;
 @property (nonatomic, readonly) BeeUICellBlock	RELAYOUT;
 
+@property (nonatomic, retain) id                beeBorad;
+
 + (id)cell;
 
 - (BOOL)frameWillChange:(CGRect)newRect;

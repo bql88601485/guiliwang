@@ -533,6 +533,8 @@
 		41485AE81AC504B1003FD9DF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41485AE71AC504B1003FD9DF /* CoreTelephony.framework */; };
 		41485AEA1AC50524003FD9DF /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41485AE91AC50524003FD9DF /* libstdc++.dylib */; };
 		41485AEC1AC50540003FD9DF /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41485AEB1AC50540003FD9DF /* libiconv.dylib */; };
+		522B92F31C5126A2002E761A /* G0_CommentVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 522B92F11C5126A2002E761A /* G0_CommentVController.m */; };
+		522B92F41C5126A2002E761A /* G0_CommentVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 522B92F21C5126A2002E761A /* G0_CommentVController.xib */; };
 		525119CC1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 525119C71C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.m */; };
 		525119CD1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml in Resources */ = {isa = PBXBuildFile; fileRef = 525119C81C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml */; };
 		525119CE1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 525119CA1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.m */; };
@@ -1747,6 +1749,9 @@
 		41485AE71AC504B1003FD9DF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		41485AE91AC50524003FD9DF /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		41485AEB1AC50540003FD9DF /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		522B92F01C5126A2002E761A /* G0_CommentVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = G0_CommentVController.h; sourceTree = "<group>"; };
+		522B92F11C5126A2002E761A /* G0_CommentVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = G0_CommentVController.m; sourceTree = "<group>"; };
+		522B92F21C5126A2002E761A /* G0_CommentVController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = G0_CommentVController.xib; sourceTree = "<group>"; };
 		525119C61C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B0_IndexCategoryCell_iPhoneTwo.h; sourceTree = "<group>"; };
 		525119C71C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B0_IndexCategoryCell_iPhoneTwo.m; sourceTree = "<group>"; };
 		525119C81C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = B0_IndexCategoryCell_iPhoneTwo.xml; sourceTree = "<group>"; };
@@ -3477,6 +3482,9 @@
 				414857E01AC4FCFD003FD9DF /* E4_HistoryCell_iPhone.h */,
 				414857E11AC4FCFD003FD9DF /* E4_HistoryCell_iPhone.m */,
 				414857E21AC4FCFD003FD9DF /* E4_HistoryCell_iPhone.xml */,
+				522B92F01C5126A2002E761A /* G0_CommentVController.h */,
+				522B92F11C5126A2002E761A /* G0_CommentVController.m */,
+				522B92F21C5126A2002E761A /* G0_CommentVController.xib */,
 				414857E31AC4FCFD003FD9DF /* E4_HistoryCellFooter_iPhone.h */,
 				414857E41AC4FCFD003FD9DF /* E4_HistoryCellFooter_iPhone.m */,
 				414857E51AC4FCFD003FD9DF /* E4_HistoryCellFooter_iPhone.xml */,
@@ -5964,6 +5972,7 @@
 				4148584E1AC4FCFE003FD9DF /* AppTabbar_iPhone.xml in Resources */,
 				1848BD8A18B4D8690007238A /* messages_right_bubble@2x.png in Resources */,
 				414858711AC4FCFE003FD9DF /* accsessory_arrow_down@2x.png in Resources */,
+				522B92F41C5126A2002E761A /* G0_CommentVController.xib in Resources */,
 				E56C747D1C31264100EE0630 /* 06@2x.png in Resources */,
 				4148591A1AC4FCFE003FD9DF /* trade_info_cont_bg1@2x.png in Resources */,
 				E5ACD65C1C13BF42001BD537 /* AddressChoicePickerView.xib in Resources */,
@@ -6515,6 +6524,7 @@
 				414859821AC4FCFE003FD9DF /* C0_ShoppingCartEditCell_iPhone.m in Sources */,
 				9D67C6491A4A7BBC003ABA05 /* ServiceWizard_CustomCell.m in Sources */,
 				9D67CB911A4A7EAB003ABA05 /* Bee_SystemInfo.mm in Sources */,
+				522B92F31C5126A2002E761A /* G0_CommentVController.m in Sources */,
 				4148597D1AC4FCFE003FD9DF /* C0_ShoppingCartBoard_iPhone.m in Sources */,
 				414859C91AC4FCFE003FD9DF /* E2_PendingShippedCellFooter_iPhone.m in Sources */,
 				9D67C62A1A4A7BBC003ABA05 /* ServiceShare_SinaWeibo_API.m in Sources */,

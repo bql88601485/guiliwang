@@ -17,4 +17,9 @@
 #pragma mark -
 
 @interface OrderCellBody_iPhone : BeeUICell
+
+@property (nonatomic, retain) id kisBeeVc;
+
+@property (nonatomic, retain) ORDER_GOODS * goods;
+
 @end

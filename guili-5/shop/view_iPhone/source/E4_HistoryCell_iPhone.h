@@ -29,7 +29,7 @@ AS_SIGNAL( ORDER_EXPRESS )
 AS_OUTLET( BeeUIScrollView, list )
 
 @property (nonatomic, retain) ORDER * order;
-
+@property (nonatomic, retain) id kbeeVC;
 + (CGFloat)heightByCount:(NSInteger)count;
 
 @end

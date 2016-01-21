@@ -426,7 +426,12 @@ ON_SIGNAL3( B0_BannerPhotoCell_iPhone, mask, signal )
             }else if (tmplist.count >= 2){
                 
                 
-                
+                B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
+                board.category = @"发现";
+                board.isfromHome = YES;
+                board.isfromBanner = YES;
+                board.kids = newUrl;
+                [self.stack pushBoard:board animated:YES];
                 
                 
                 return;
@@ -608,7 +613,7 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, GOODS1_TOUCHED, signal )
 ON_SIGNAL3( IndexCategoryTabCell, seasoning_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
-    board.category = @"调料";
+    board.category = @"特色调料";
     board.searchByHotModel.filter.category_id =@(140);
     board.searchByCheapestModel.filter.category_id = @(140);
     board.searchByExpensiveModel.filter.category_id = @(140);
@@ -618,7 +623,7 @@ ON_SIGNAL3( IndexCategoryTabCell, seasoning_button, signal )
 ON_SIGNAL3( IndexCategoryTabCell, tea_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
-    board.category = @"生态好茶";
+    board.category = @"有机茶叶";
     board.searchByHotModel.filter.category_id =@(138);
     board.searchByCheapestModel.filter.category_id = @(138);
     board.searchByExpensiveModel.filter.category_id = @(138);
@@ -628,7 +633,7 @@ ON_SIGNAL3( IndexCategoryTabCell, tea_button, signal )
 ON_SIGNAL3( IndexCategoryTabCell, food_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
-    board.category = @"食品";
+    board.category = @"原生食品";
     board.searchByHotModel.filter.category_id =@(139);
     board.searchByCheapestModel.filter.category_id = @(139);
     board.searchByExpensiveModel.filter.category_id = @(139);
@@ -638,7 +643,7 @@ ON_SIGNAL3( IndexCategoryTabCell, food_button, signal )
 ON_SIGNAL3( IndexCategoryTabCell, drink_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
-    board.category = @"酒";
+    board.category = @"酒类直供";
     board.searchByHotModel.filter.category_id =@(137);
     board.searchByCheapestModel.filter.category_id = @(137);
     board.searchByExpensiveModel.filter.category_id = @(137);
@@ -648,7 +653,7 @@ ON_SIGNAL3( IndexCategoryTabCell, drink_button, signal )
 ON_SIGNAL3( IndexCategoryTabCell, health_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
-    board.category = @"保健品";
+    board.category = @"养生保健";
     board.searchByHotModel.filter.category_id =@(141);
     board.searchByCheapestModel.filter.category_id = @(141);
     board.searchByExpensiveModel.filter.category_id = @(141);
@@ -659,7 +664,7 @@ ON_SIGNAL3( IndexCategoryTabCell, health_button, signal )
 ON_SIGNAL3( IndexCategoryTabCell, art_button, signal )
 {
     B1_ProductListBoard_iPhone * board = [B1_ProductListBoard_iPhone board];
-    board.category = @"工艺品";
+    board.category = @"艺术收藏";
     board.searchByHotModel.filter.category_id =@(122);
     board.searchByCheapestModel.filter.category_id = @(122);
     board.searchByExpensiveModel.filter.category_id = @(122);

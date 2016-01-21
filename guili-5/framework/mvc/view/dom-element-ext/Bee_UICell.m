@@ -46,10 +46,10 @@
 
 @interface BeeUICell()
 {
-	id			_data;
-	NSUInteger	_state;
-	BOOL		_layouted;
-	BOOL		_layoutOnce;
+    id			_data;
+    NSUInteger	_state;
+    BOOL		_layouted;
+    BOOL		_layoutOnce;
 }
 
 + (BeeUICell *)temporary;
@@ -81,7 +81,7 @@ DEF_INT( STATE_HIGHLIGHTED,	3 )
 
 SUPPORT_RESOURCE_LOADING( YES )
 SUPPORT_SIZE_ESTIMATING( YES )
-
+@synthesize beeBorad = _beeBorad;
 @dynamic data;
 @dynamic state;
 
@@ -98,439 +98,439 @@ SUPPORT_SIZE_ESTIMATING( YES )
 
 + (id)cell
 {
-	return [[[self alloc] init] autorelease];
+    return [[[self alloc] init] autorelease];
 }
 
 + (BeeUICell *)temporary
 {
-	BeeUICell * cell = nil;
-
-	if ( [self supportForUIAutomaticLayout] )
-	{
-		static NSMutableDictionary * __temporaries = nil;
-
-		if ( nil == __temporaries )
-		{
-			__temporaries = [[NSMutableDictionary alloc] init];
-		}
-
-		if ( __temporaries )
-		{
-			NSString * identifier = [[self class] description];
-
-			cell = [__temporaries objectForKey:identifier];
-			if ( nil == cell )
-			{
-				cell = [[[[self class] alloc] init] autorelease];
-				cell.frame = CGRectZero;
-
-				[__temporaries setObject:cell forKey:identifier];
-			}
-		}
-	}
-	
-	return cell;
+    BeeUICell * cell = nil;
+    
+    if ( [self supportForUIAutomaticLayout] )
+    {
+        static NSMutableDictionary * __temporaries = nil;
+        
+        if ( nil == __temporaries )
+        {
+            __temporaries = [[NSMutableDictionary alloc] init];
+        }
+        
+        if ( __temporaries )
+        {
+            NSString * identifier = [[self class] description];
+            
+            cell = [__temporaries objectForKey:identifier];
+            if ( nil == cell )
+            {
+                cell = [[[[self class] alloc] init] autorelease];
+                cell.frame = CGRectZero;
+                
+                [__temporaries setObject:cell forKey:identifier];
+            }
+        }
+    }
+    
+    return cell;
 }
 
 #pragma mark -
 
 + (CGSize)estimateUISizeByBound:(CGSize)bound forData:(id)data
 {
-	BeeUICell * cell = [self temporary];
-	if ( cell )
-	{
-		cell.data = data;
-
-		CGRect cellBound = CGRectMake( 0, 0, bound.width, bound.height );
-		CGRect cellFrame = [cell.layout estimateFor:cell inBound:cellBound];
-		return cellFrame.size;
-	}
-	
-	return [super estimateUISizeByBound:bound forData:data];
+    BeeUICell * cell = [self temporary];
+    if ( cell )
+    {
+        cell.data = data;
+        
+        CGRect cellBound = CGRectMake( 0, 0, bound.width, bound.height );
+        CGRect cellFrame = [cell.layout estimateFor:cell inBound:cellBound];
+        return cellFrame.size;
+    }
+    
+    return [super estimateUISizeByBound:bound forData:data];
 }
 
 + (CGSize)estimateUISizeByWidth:(CGFloat)width forData:(id)data
 {
-	BeeUICell * cell = [self temporary];
-	if ( cell )
-	{
-		cell.data = data;
-		
-		CGRect cellBound = CGRectMake( 0.0f, 0.0f, width, -1.0f );
-		CGRect cellFrame = [cell.layout estimateFor:cell inBound:cellBound];
-		return cellFrame.size;
-	}
-	
-	return [super estimateUISizeByWidth:width forData:data];
+    BeeUICell * cell = [self temporary];
+    if ( cell )
+    {
+        cell.data = data;
+        
+        CGRect cellBound = CGRectMake( 0.0f, 0.0f, width, -1.0f );
+        CGRect cellFrame = [cell.layout estimateFor:cell inBound:cellBound];
+        return cellFrame.size;
+    }
+    
+    return [super estimateUISizeByWidth:width forData:data];
 }
 
 + (CGSize)estimateUISizeByHeight:(CGFloat)height forData:(id)data
 {
-	BeeUICell * cell = [self temporary];
-	if ( cell )
-	{
-		cell.data = data;
-
-		CGRect cellBound = CGRectMake( 0.0f, 0.0f, -1.0f, height );
-		CGRect cellFrame = [cell.layout estimateFor:cell inBound:cellBound];
-		return cellFrame.size;
-	}
-	
-	return [super estimateUISizeByHeight:height forData:data];
+    BeeUICell * cell = [self temporary];
+    if ( cell )
+    {
+        cell.data = data;
+        
+        CGRect cellBound = CGRectMake( 0.0f, 0.0f, -1.0f, height );
+        CGRect cellFrame = [cell.layout estimateFor:cell inBound:cellBound];
+        return cellFrame.size;
+    }
+    
+    return [super estimateUISizeByHeight:height forData:data];
 }
 
 - (CGSize)estimateUISizeByBound:(CGSize)bound
 {
-	BeeUILayout * layout = self.layout;
-	if ( layout )
-	{
-		CGRect cellBound = CGRectMake( 0, 0, bound.width, bound.height );
-		CGRect cellFrame = [layout estimateFor:self inBound:cellBound];
-		return cellFrame.size;
-	}
-	else
-	{
-		return CGSizeZero;
-	}
+    BeeUILayout * layout = self.layout;
+    if ( layout )
+    {
+        CGRect cellBound = CGRectMake( 0, 0, bound.width, bound.height );
+        CGRect cellFrame = [layout estimateFor:self inBound:cellBound];
+        return cellFrame.size;
+    }
+    else
+    {
+        return CGSizeZero;
+    }
 }
 
 - (CGSize)estimateUISizeByWidth:(CGFloat)width
 {
-	BeeUILayout * layout = self.layout;
-	if ( layout )
-	{
-		CGRect cellBound = CGRectMake( 0.0f, 0.0f, width, -1.0f );
-		CGRect cellFrame = [layout estimateFor:self inBound:cellBound];
-		return cellFrame.size;
-	}
-	else
-	{
-		return CGSizeZero;
-	}	
+    BeeUILayout * layout = self.layout;
+    if ( layout )
+    {
+        CGRect cellBound = CGRectMake( 0.0f, 0.0f, width, -1.0f );
+        CGRect cellFrame = [layout estimateFor:self inBound:cellBound];
+        return cellFrame.size;
+    }
+    else
+    {
+        return CGSizeZero;
+    }	
 }
 
 - (CGSize)estimateUISizeByHeight:(CGFloat)height
 {
-	BeeUILayout * layout = self.layout;
-	if ( layout )
-	{
-		CGRect cellBound = CGRectMake( 0.0f, 0.0f, -1.0f, height );
-		CGRect cellFrame = [layout estimateFor:self inBound:cellBound];
-		return cellFrame.size;
-	}
-	else
-	{
-		return CGSizeZero;
-	}	
+    BeeUILayout * layout = self.layout;
+    if ( layout )
+    {
+        CGRect cellBound = CGRectMake( 0.0f, 0.0f, -1.0f, height );
+        CGRect cellFrame = [layout estimateFor:self inBound:cellBound];
+        return cellFrame.size;
+    }
+    else
+    {
+        return CGSizeZero;
+    }	
 }
 
 #pragma mark -
 
 - (void)initSelf
 {
-	self.backgroundColor = [UIColor clearColor];
-	self.alpha = 1.0f;
-	self.layer.opaque = YES;
-	self.layer.masksToBounds = YES;
-
-	_data = nil;
-	_state = self.STATE_NORMAL;
-
-//	[self load];
-	[self performLoad];
+    self.backgroundColor = [UIColor clearColor];
+    self.alpha = 1.0f;
+    self.layer.opaque = YES;
+    self.layer.masksToBounds = YES;
+    
+    _data = nil;
+    _state = self.STATE_NORMAL;
+    
+    //	[self load];
+    [self performLoad];
 }
 
 - (id)init
 {
-	self = [super initWithFrame:CGRectZero];
-	if ( self )
-	{
-		[self initSelf];
-	}
-	return self;
+    self = [super initWithFrame:CGRectZero];
+    if ( self )
+    {
+        [self initSelf];
+    }
+    return self;
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
-	self = [super initWithFrame:frame];
-	if ( self )
-	{
-		[self initSelf];
-		[self setNeedsLayout];
-	}
-	return self;
+    self = [super initWithFrame:frame];
+    if ( self )
+    {
+        [self initSelf];
+        [self setNeedsLayout];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
-//	[self unload];
-	[self performUnload];
-
-	[_data release];
-	_data = nil;
-
-	[super dealloc];
+    //	[self unload];
+    [self performUnload];
+    
+    [_data release];
+    _data = nil;
+    
+    [super dealloc];
 }
 
 - (void)setFrame:(CGRect)rc
 {
-	BOOL shouldChange = [self frameWillChange:rc];
-	if ( shouldChange )
-	{
-		[self frameWillChange];	// backward compatible
-		
-		[super setFrame:rc];
-
-		if ( NO == CGSizeEqualToSize( [super frame].size, CGSizeZero ) )
-		{
-			CGRect bound = CGRectMake( 0, 0, rc.size.width, rc.size.height );
-			
-			[self relayoutSubviews:bound];
-		//	[self setNeedsDisplay];
-		}
-		
-		[self frameDidChanged];
-	}
+    BOOL shouldChange = [self frameWillChange:rc];
+    if ( shouldChange )
+    {
+        [self frameWillChange];	// backward compatible
+        
+        [super setFrame:rc];
+        
+        if ( NO == CGSizeEqualToSize( [super frame].size, CGSizeZero ) )
+        {
+            CGRect bound = CGRectMake( 0, 0, rc.size.width, rc.size.height );
+            
+            [self relayoutSubviews:bound];
+            //	[self setNeedsDisplay];
+        }
+        
+        [self frameDidChanged];
+    }
 }
 
 - (void)setCenter:(CGPoint)pt
 {
-	[super setCenter:pt];
-
-	if ( NO == CGSizeEqualToSize( [super frame].size, CGSizeZero ) )
-	{
-		CGRect bound = CGRectMake( 0, 0, self.frame.size.width, self.frame.size.height );
-		
-		[self relayoutSubviews:bound];
-	//	[self setNeedsDisplay];
-	}
+    [super setCenter:pt];
+    
+    if ( NO == CGSizeEqualToSize( [super frame].size, CGSizeZero ) )
+    {
+        CGRect bound = CGRectMake( 0, 0, self.frame.size.width, self.frame.size.height );
+        
+        [self relayoutSubviews:bound];
+        //	[self setNeedsDisplay];
+    }
 }
 
 - (void)relayoutSubviews:(CGRect)bound
 {
-	if ( CGSizeEqualToSize( bound.size, CGSizeZero ) )
-	{
-//		WARN( @"'%@' relayoutSubviews, zero size", [[self class] description] );
-		return;
-	}
-	
-	if ( self.layouted && self.layoutOnce )
-	{
-		return;
-	}
-
-PERF_ENTER_( ______layout1 )
-
-	[self layoutWillBegin];
-
-PERF_LEAVE_( ______layout1 )
-PERF_ENTER_( ______layout2 )
-	
-	BeeUILayout * viewLayout = [self layout];
-	if ( viewLayout )
-	{
-		[viewLayout layoutFor:self inBound:bound];
-	}
-	else
-	{
-		[self layoutSubviews];
-	}
-	
-PERF_LEAVE_( ______layout2 )
-PERF_ENTER_( ______layout3 )
-	
-	for ( UIView * subview in self.subviews )
-	{
-		if ( [subview isKindOfClass:[BeeUICell class]] )
-		{
-			CGRect subviewBound = CGRectMake( 0, 0, subview.frame.size.width, subview.frame.size.height );
-			[(BeeUICell *)subview relayoutSubviews:subviewBound];
-		}
-	}
-	
-PERF_LEAVE_( ______layout3 )
-PERF_ENTER_( ______layout4 )
-	
-	[self layoutDidFinish];
-	
-PERF_LEAVE_( ______layout4 )
-	
-	self.layouted = YES;
-	
-//	[self setNeedsDisplay];
+    if ( CGSizeEqualToSize( bound.size, CGSizeZero ) )
+    {
+        //		WARN( @"'%@' relayoutSubviews, zero size", [[self class] description] );
+        return;
+    }
+    
+    if ( self.layouted && self.layoutOnce )
+    {
+        return;
+    }
+    
+    PERF_ENTER_( ______layout1 )
+    
+    [self layoutWillBegin];
+    
+    PERF_LEAVE_( ______layout1 )
+    PERF_ENTER_( ______layout2 )
+    
+    BeeUILayout * viewLayout = [self layout];
+    if ( viewLayout )
+    {
+        [viewLayout layoutFor:self inBound:bound];
+    }
+    else
+    {
+        [self layoutSubviews];
+    }
+    
+    PERF_LEAVE_( ______layout2 )
+    PERF_ENTER_( ______layout3 )
+    
+    for ( UIView * subview in self.subviews )
+    {
+        if ( [subview isKindOfClass:[BeeUICell class]] )
+        {
+            CGRect subviewBound = CGRectMake( 0, 0, subview.frame.size.width, subview.frame.size.height );
+            [(BeeUICell *)subview relayoutSubviews:subviewBound];
+        }
+    }
+    
+    PERF_LEAVE_( ______layout3 )
+    PERF_ENTER_( ______layout4 )
+    
+    [self layoutDidFinish];
+    
+    PERF_LEAVE_( ______layout4 )
+    
+    self.layouted = YES;
+    
+    //	[self setNeedsDisplay];
 }
 
 - (BeeUICellBlock)RELAYOUT
 {
-	BeeUICellBlock block = ^ BeeUICell * ( void )
-	{
-		CGRect bound = CGRectMake( 0, 0, self.frame.size.width, self.frame.size.height );
-		[self relayoutSubviews:bound];
-		
-		return self;
-	};
-	
-	return [[block copy] autorelease];
+    BeeUICellBlock block = ^ BeeUICell * ( void )
+    {
+        CGRect bound = CGRectMake( 0, 0, self.frame.size.width, self.frame.size.height );
+        [self relayoutSubviews:bound];
+        
+        return self;
+    };
+    
+    return [[block copy] autorelease];
 }
 
 #pragma mark -
 
 - (id)bindedData
 {
-	return _data;
+    return _data;
 }
 
 - (void)bindData:(id)newData
 {
-PERF_ENTER_( ______bindData1 )
-
-	BOOL shouldChange = [self dataWillChange:newData];
-	
-PERF_LEAVE_( ______bindData1 )
-PERF_ENTER_( ______bindData2 )
-	
-	if ( shouldChange )
-	{
-	PERF_ENTER_( ______bindData3 )
-		[self dataWillChange];
-	PERF_LEAVE_( ______bindData3 )
-
-		[newData retain];
-		[_data release];
-		_data = newData;
-		
-	PERF_ENTER_( ______bindData4 )
-		[self dataDidChanged];
-	PERF_LEAVE_( ______bindData4 )
-		
-	PERF_ENTER_( ______bindData5 )
-		[self relayoutSubviews:self.bounds];
-	PERF_LEAVE_( ______bindData5 )
-	}
-	
-PERF_LEAVE_( ______bindData2 )
+    PERF_ENTER_( ______bindData1 )
+    
+    BOOL shouldChange = [self dataWillChange:newData];
+    
+    PERF_LEAVE_( ______bindData1 )
+    PERF_ENTER_( ______bindData2 )
+    
+    if ( shouldChange )
+    {
+        PERF_ENTER_( ______bindData3 )
+        [self dataWillChange];
+        PERF_LEAVE_( ______bindData3 )
+        
+        [newData retain];
+        [_data release];
+        _data = newData;
+        
+        PERF_ENTER_( ______bindData4 )
+        [self dataDidChanged];
+        PERF_LEAVE_( ______bindData4 )
+        
+        PERF_ENTER_( ______bindData5 )
+        [self relayoutSubviews:self.bounds];
+        PERF_LEAVE_( ______bindData5 )
+    }
+    
+    PERF_LEAVE_( ______bindData2 )
 }
 
 - (void)unbindData
 {
-PERF_ENTER_( ______unbindData1 )
-	
-	BOOL shouldChange = [self dataWillChange:nil];
-	
-PERF_LEAVE_( ______unbindData1 )
-PERF_ENTER_( ______unbindData2 )
-	
-	if ( shouldChange )
-	{
-	PERF_ENTER_( ______unbindData3 )
-		[self dataWillChange];
-	PERF_LEAVE_( ______unbindData3 )
-				
-		[_data release];
-		_data = nil;
-		
-	PERF_ENTER_( ______unbindData4 )
-		[self dataDidChanged];
-	PERF_LEAVE_( ______unbindData4 )
-
-	PERF_ENTER_( ______unbindData5 )
-		[self relayoutSubviews:self.bounds];
-	PERF_LEAVE_( ______unbindData5 )
-	}
-	
-PERF_LEAVE_( ______unbindData2 )
+    PERF_ENTER_( ______unbindData1 )
+    
+    BOOL shouldChange = [self dataWillChange:nil];
+    
+    PERF_LEAVE_( ______unbindData1 )
+    PERF_ENTER_( ______unbindData2 )
+    
+    if ( shouldChange )
+    {
+        PERF_ENTER_( ______unbindData3 )
+        [self dataWillChange];
+        PERF_LEAVE_( ______unbindData3 )
+        
+        [_data release];
+        _data = nil;
+        
+        PERF_ENTER_( ______unbindData4 )
+        [self dataDidChanged];
+        PERF_LEAVE_( ______unbindData4 )
+        
+        PERF_ENTER_( ______unbindData5 )
+        [self relayoutSubviews:self.bounds];
+        PERF_LEAVE_( ______unbindData5 )
+    }
+    
+    PERF_LEAVE_( ______unbindData2 )
 }
 
 #pragma mark -
 
 - (id)data
 {
-	return _data;
+    return _data;
 }
 
 - (void)setData:(id)data
 {
-	[self bindData:data];
+    [self bindData:data];
 }
 
 - (NSUInteger)state
 {
-	return _state;
+    return _state;
 }
 
 - (void)setState:(NSUInteger)value
 {
-	if ( value != _state )
-	{
-		[self stateWillChange];
-		
-		_state = value;
-		
-		[self stateDidChanged];
-
-		CGRect bound = CGRectMake( 0, 0, self.frame.size.width, self.frame.size.height );
-		
-		[self relayoutSubviews:bound];
-	//	[self setNeedsDisplay];
-	}
+    if ( value != _state )
+    {
+        [self stateWillChange];
+        
+        _state = value;
+        
+        [self stateDidChanged];
+        
+        CGRect bound = CGRectMake( 0, 0, self.frame.size.width, self.frame.size.height );
+        
+        [self relayoutSubviews:bound];
+        //	[self setNeedsDisplay];
+    }
 }
 
 - (BOOL)disabled
 {
-	return (self.STATE_DISABLED == _state) ? YES : NO;
+    return (self.STATE_DISABLED == _state) ? YES : NO;
 }
 
 - (void)setDisabled:(BOOL)flag
 {
-	if ( flag )
-	{
-		[self setState:self.STATE_DISABLED];
-	}
-	else
-	{
-		[self setState:self.STATE_NORMAL];
-	}
+    if ( flag )
+    {
+        [self setState:self.STATE_DISABLED];
+    }
+    else
+    {
+        [self setState:self.STATE_NORMAL];
+    }
 }
 
 - (BOOL)selected
 {
-	return (self.STATE_SELECTED == _state) ? YES : NO;
+    return (self.STATE_SELECTED == _state) ? YES : NO;
 }
 
 - (void)setSelected:(BOOL)flag
 {
-	if ( flag )
-	{
-		[self setState:self.STATE_SELECTED];
-	}
-	else
-	{
-		[self setState:self.STATE_NORMAL];
-	}
+    if ( flag )
+    {
+        [self setState:self.STATE_SELECTED];
+    }
+    else
+    {
+        [self setState:self.STATE_NORMAL];
+    }
 }
 
 - (BOOL)highlighted
 {
-	return (self.STATE_HIGHLIGHTED == _state) ? YES : NO;
+    return (self.STATE_HIGHLIGHTED == _state) ? YES : NO;
 }
 
 - (void)setHighlighted:(BOOL)flag
 {
-	if ( flag )
-	{
-		[self setState:self.STATE_HIGHLIGHTED];
-	}
-	else
-	{
-		[self setState:self.STATE_NORMAL];
-	}
+    if ( flag )
+    {
+        [self setState:self.STATE_HIGHLIGHTED];
+    }
+    else
+    {
+        [self setState:self.STATE_NORMAL];
+    }
 }
 
 #pragma mark -
 
 - (BOOL)frameWillChange:(CGRect)newRect
 {
-	return CGRectEqualToRect(newRect, self.frame) ? NO : YES;
+    return CGRectEqualToRect(newRect, self.frame) ? NO : YES;
 }
 
 - (void)frameWillChange
@@ -543,7 +543,7 @@ PERF_LEAVE_( ______unbindData2 )
 
 - (BOOL)dataWillChange:(id)newData
 {
-	return YES;
+    return YES;
 }
 
 - (void)dataWillChange
@@ -572,22 +572,22 @@ PERF_LEAVE_( ______unbindData2 )
 
 - (void)viewWillAppear
 {
-	
+    
 }
 
 - (void)viewDidAppear
 {
-	
+    
 }
 
 - (void)viewWillDisappear
 {
-	
+    
 }
 
 - (void)viewDidDisappear
 {
-	
+    
 }
 
 @end

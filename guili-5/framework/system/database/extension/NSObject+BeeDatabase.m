@@ -41,44 +41,44 @@
 
 + (BeeDatabase *)DB
 {
-	BeeDatabase * db = [BeeDatabase sharedDatabase];
-	if ( nil == db )
-	{
-		NSBundle * bundle = [NSBundle mainBundle];
-		NSString * bundleName = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
-		if ( nil == bundleName )
-		{
-			bundleName = @"default";
-		}
-
-		NSString * dbName = [NSString stringWithFormat:@"%@.sqlite", bundleName];
-		BOOL succeed = [BeeDatabase openSharedDatabase:dbName];
-		if ( succeed )
-		{
-			db = [BeeDatabase sharedDatabase];
-		}
-
-		if ( db )
-		{
-			[db clearState];	
-		}
-	}
-	return db;
+    BeeDatabase * db = [BeeDatabase sharedDatabase];
+    if ( nil == db )
+    {
+        NSBundle * bundle = [NSBundle mainBundle];
+        NSString * bundleName = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
+        if ( nil == bundleName )
+        {
+            bundleName = @"default";
+        }
+        
+        NSString * dbName = [NSString stringWithFormat:@"%@.sqlite", bundleName];
+        BOOL succeed = [BeeDatabase openSharedDatabase:dbName];
+        if ( succeed )
+        {
+            db = [BeeDatabase sharedDatabase];
+        }
+        
+        if ( db )
+        {
+            [db clearState];	
+        }
+    }
+    return db;
 }
 
 - (BeeDatabase *)DB
 {
-	return [NSObject DB];
+    return [NSObject DB];
 }
 
 - (NSString *)tableName
 {
-	return [[self class] tableName];
+    return [[self class] tableName];
 }
 
 + (NSString *)tableName
 {
-	return [BeeDatabase tableNameForClass:self];
+    return [BeeDatabase tableNameForClass:self];
 }
 
 @end

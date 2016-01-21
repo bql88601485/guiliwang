@@ -64,17 +64,7 @@ DEF_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 
 - (void)load
 {
-    
     self.tabIndex = self.TAB_CHEAPEST;
-    
-    self.searchByHotModel = [SearchModel modelWithObserver:self];
-    self.searchByHotModel.filter.sort_by = @"add_time_desc";
-    
-    self.searchByCheapestModel = [SearchModel modelWithObserver:self];
-    self.searchByCheapestModel.filter.sort_by = @"add_time_desc";
-    
-    self.searchByExpensiveModel = [SearchModel modelWithObserver:self];
-    self.searchByExpensiveModel.filter.sort_by = @"add_time_desc";
 }
 
 - (void)unload
@@ -90,6 +80,20 @@ DEF_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 
 ON_CREATE_VIEWS( signal )
 {
+    
+    self.searchByHotModel = [SearchModel modelWithObserver:self];
+    self.searchByHotModel.filter.sort_by = @"add_time_desc";
+    self.searchByHotModel.filter.ids = self.kids;
+    
+    
+    self.searchByCheapestModel = [SearchModel modelWithObserver:self];
+    self.searchByCheapestModel.filter.sort_by = @"add_time_desc";
+    self.searchByCheapestModel.filter.ids = self.kids;
+    
+    self.searchByExpensiveModel = [SearchModel modelWithObserver:self];
+    self.searchByExpensiveModel.filter.sort_by = @"add_time_desc";
+    self.searchByExpensiveModel.filter.ids = self.kids;
+    
     [self showNavigationBarAnimated:NO];
     //    [self showBarButton:BeeUINavigationBar.RIGHT title:__TEXT(@"filter") image:[UIImage imageNamed:@"nav_right.png"]];
     

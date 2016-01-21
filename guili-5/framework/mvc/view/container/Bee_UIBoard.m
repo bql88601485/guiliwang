@@ -612,11 +612,17 @@ static NSMutableArray *		__allBoards = nil;
             {
                 [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"]];
             }
-            
-            UILabel *line = [[UILabel alloc] init];
-            line.frame = CGRectMake(0, self.navigationController.navigationBar.height - 1, self.navigationController.navigationBar.width, 1);
-            line.backgroundColor = [UIColor lightGrayColor];
-            [self.navigationController.navigationBar addSubview:line];
+            UILabel *line = (id )[self.navigationController.navigationBar viewWithTag:10010];
+            if (line) {
+                line.backgroundColor = [UIColor lightGrayColor];
+            }
+            else{
+                line = [[UILabel alloc] init];
+                line.frame = CGRectMake(0, self.navigationController.navigationBar.height - 1, self.navigationController.navigationBar.width, 1);
+                line.tag = 10010;
+                line.backgroundColor = [UIColor lightGrayColor];
+                [self.navigationController.navigationBar addSubview:line];
+            }
             
         }
     }else{
@@ -639,10 +645,10 @@ static NSMutableArray *		__allBoards = nil;
                 [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"]];
             }
             
-            UILabel *line = [[UILabel alloc] init];
-            line.frame = CGRectMake(0, self.navigationController.navigationBar.height - 1, self.navigationController.navigationBar.width, 1);
-            line.backgroundColor = [UIColor clearColor];
-            [self.navigationController.navigationBar addSubview:line];
+            UILabel *line = (id )[self.navigationController.navigationBar viewWithTag:10010];
+            if (line) {
+                [line setBackgroundColor:[UIColor clearColor]];
+            }
         }
     }
 }
