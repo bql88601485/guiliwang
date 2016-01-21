@@ -130,6 +130,7 @@ ON_LAYOUT_VIEWS( signal )
 
 ON_WILL_APPEAR( signal )
 {
+    [bee.ui.appBoard hideTabbar];
 }
 
 ON_DID_APPEAR( signal )
