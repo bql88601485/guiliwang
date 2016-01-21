@@ -638,6 +638,11 @@ static NSMutableArray *		__allBoards = nil;
             {
                 [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"]];
             }
+            
+            UILabel *line = [[UILabel alloc] init];
+            line.frame = CGRectMake(0, self.navigationController.navigationBar.height - 1, self.navigationController.navigationBar.width, 1);
+            line.backgroundColor = [UIColor clearColor];
+            [self.navigationController.navigationBar addSubview:line];
         }
     }
 }

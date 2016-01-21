@@ -338,10 +338,10 @@ static BeeUIApplication * __sharedApp = nil;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [self.window.rootViewController viewWillAppear:NO];
-    [self.window.rootViewController viewDidAppear:NO];
-    
-    [self postNotification:BeeUIApplication.STATE_CHANGED];
+//    [self.window.rootViewController viewWillAppear:NO];
+//    [self.window.rootViewController viewDidAppear:NO];
+//    
+//    [self postNotification:BeeUIApplication.STATE_CHANGED];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

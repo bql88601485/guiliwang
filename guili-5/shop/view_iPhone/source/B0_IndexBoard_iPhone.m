@@ -31,6 +31,7 @@
 #import "B0_IndexRecommendGoodsCell_iPhone.h"
 #import "B0_IndexCategoryCell_iPhoneTwo.h"
 #import "B0_IndexCategoryCell_iPhoneOne.h"
+#import "WebViewController.h"
 #pragma mark -
 
 @interface B0_IndexBoard_iPhone()<ZBarReaderDelegate>
@@ -672,7 +673,10 @@ ON_SIGNAL3( B0_IndexRecommendGoodsCell_iPhone, mask, signal )
      [self.stack pushBoard:board animated:YES];
      }*/
 }
-
+ON_SIGNAL3(IndexBannerCell, XQ_button, signal){
+    WebViewController *web = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];
+    [self.stack pushBoard:web animated:YES];
+}
 #pragma mark -
 
 ON_MESSAGE3( API, home_data, msg )
