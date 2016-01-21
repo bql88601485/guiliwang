@@ -137,7 +137,7 @@ ON_CREATE_VIEWS( signal )
         BeeUIScrollItem * categories = self.list.items[offset];
         categories.clazz = [IndexCategoryTabCell class];
         categories.data = nil;
-        categories.size = CGSizeMake(self.list.width, 160); // TODO:分类
+        categories.size = CGSizeMake(self.list.width, 165); // TODO:分类
         categories.rule = BeeUIScrollLayoutRule_Line;
         categories.insets = UIEdgeInsetsMake(0, 0, 0, 0);
         categories.view.backgroundColor = [UIColor whiteColor];
@@ -410,6 +410,29 @@ ON_SIGNAL3( B0_BannerPhotoCell_iPhone, mask, signal )
     
     if ( banner )
     {
+        NSRange findHttp = [banner.url rangeOfString:@"http://goods/"];
+        
+        if (findHttp.location != NSNotFound) {
+            
+            NSString *newUrl = [banner.url stringByReplacingOccurrencesOfString:@"http://goods/" withString:@""];
+            
+            NSArray *tmplist = [newUrl componentsSeparatedByString:@","];
+            
+            if (tmplist.count == 1) {
+                B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
+                board.goodsModel.goods_id = [NSNumber numberWithFloat:[[tmplist firstObject] floatValue]];
+                [self.stack pushBoard:board animated:YES];
+                return;
+            }else if (tmplist.count >= 2){
+                
+                
+                
+                
+                
+                return;
+            }
+        }
+        
         if ( [banner.action isEqualToString:BANNER_ACTION_GOODS] )
         {
             B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
@@ -442,6 +465,7 @@ ON_SIGNAL3( B0_BannerPhotoCell_iPhone, mask, signal )
             board.urlString = banner.url;
             [self.stack pushBoard:board animated:YES];
         }
+        
     }
 }
 
