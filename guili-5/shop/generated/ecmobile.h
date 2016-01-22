@@ -188,6 +188,14 @@ enum RANK_LEVEL
 @property (nonatomic, retain) NSNumber *		id;
 @end
 
+@interface SENDCOMMENT : NSObject
+@property (nonatomic, strong) NSString *goods_id;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) NSString *user_name;
+@property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSString *user_id;
+@end
+
 @interface CONFIG : NSObject
 @property (nonatomic, retain) NSString *		close_comment;
 @property (nonatomic, retain) NSString *		service_phone;

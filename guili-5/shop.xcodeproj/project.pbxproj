@@ -535,6 +535,7 @@
 		41485AEC1AC50540003FD9DF /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41485AEB1AC50540003FD9DF /* libiconv.dylib */; };
 		522B92F31C5126A2002E761A /* G0_CommentVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 522B92F11C5126A2002E761A /* G0_CommentVController.m */; };
 		522B92F41C5126A2002E761A /* G0_CommentVController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 522B92F21C5126A2002E761A /* G0_CommentVController.xib */; };
+		522B92F71C51AC17002E761A /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 522B92F61C51AC17002E761A /* Comment.m */; };
 		525119CC1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 525119C71C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.m */; };
 		525119CD1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml in Resources */ = {isa = PBXBuildFile; fileRef = 525119C81C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml */; };
 		525119CE1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 525119CA1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneOne.m */; };
@@ -1752,6 +1753,8 @@
 		522B92F01C5126A2002E761A /* G0_CommentVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = G0_CommentVController.h; sourceTree = "<group>"; };
 		522B92F11C5126A2002E761A /* G0_CommentVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = G0_CommentVController.m; sourceTree = "<group>"; };
 		522B92F21C5126A2002E761A /* G0_CommentVController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = G0_CommentVController.xib; sourceTree = "<group>"; };
+		522B92F51C51AC17002E761A /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		522B92F61C51AC17002E761A /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		525119C61C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B0_IndexCategoryCell_iPhoneTwo.h; sourceTree = "<group>"; };
 		525119C71C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B0_IndexCategoryCell_iPhoneTwo.m; sourceTree = "<group>"; };
 		525119C81C469CE1000F543D /* B0_IndexCategoryCell_iPhoneTwo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = B0_IndexCategoryCell_iPhoneTwo.xml; sourceTree = "<group>"; };
@@ -3657,6 +3660,8 @@
 				41485A501AC4FDF4003FD9DF /* UserModel.m */,
 				41485A511AC4FDF4003FD9DF /* ValidateModel.h */,
 				41485A521AC4FDF4003FD9DF /* ValidateModel.m */,
+				522B92F51C51AC17002E761A /* Comment.h */,
+				522B92F61C51AC17002E761A /* Comment.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -6564,6 +6569,7 @@
 				9D67CB121A4A7EAA003ABA05 /* UIView+Manipulation.m in Sources */,
 				9D67C6101A4A7BBC003ABA05 /* RSADataSigner.m in Sources */,
 				41485A091AC4FCFE003FD9DF /* TimeStamp.m in Sources */,
+				522B92F71C51AC17002E761A /* Comment.m in Sources */,
 				41485AE01AC50355003FD9DF /* mask.c in Sources */,
 				9D67CB3B1A4A7EAA003ABA05 /* UITextView+BeeUILayout.m in Sources */,
 				41485AE21AC50355003FD9DF /* qrencode.c in Sources */,

@@ -129,6 +129,16 @@ CONVERT_PROPERTY_CLASS( children, CATEGORY );
 
 @end
 
+@implementation SENDCOMMENT
+
+@synthesize goods_id = _goods_id;
+@synthesize email = _email;
+@synthesize user_name = _user_name;
+@synthesize user_id = _user_id;
+@synthesize content = _content;
+
+@end
+
 @implementation CONFIG
 
 @synthesize close_comment = _close_comment;
