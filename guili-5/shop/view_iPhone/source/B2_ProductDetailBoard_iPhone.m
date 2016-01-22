@@ -414,6 +414,8 @@ ON_LAYOUT_VIEWS( signal )
 
 ON_WILL_APPEAR( signal )
 {
+ //   self.isHome = NO;
+    
     [self.goodsModel reload];
     [self.cartModel reload];
     [self deSelcetMenu];

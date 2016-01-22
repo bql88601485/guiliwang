@@ -81,6 +81,14 @@ DEF_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 ON_CREATE_VIEWS( signal )
 {
     
+    if (_isfromHome) {
+        self.isHome = NO;
+        [self setTitle:self.category];
+    }else{
+        self.isHome = YES;
+        [self setTitle:@"发现"];
+    }
+    
     self.searchByHotModel = [SearchModel modelWithObserver:self];
     self.searchByHotModel.filter.sort_by = @"add_time_desc";
     self.searchByHotModel.filter.ids = self.kids;
@@ -190,13 +198,6 @@ ON_LAYOUT_VIEWS( signal )
 
 ON_WILL_APPEAR( signal )
 {
-    if (_isfromHome) {
-        self.isHome = NO;
-        [self setTitle:self.category];
-    }else{
-        self.isHome = YES;
-        [self setTitle:@"发现"];
-    }
     
     //	[self.list reloadData];
     if (_isfromHome) {

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ui namespace="B0_IndexCategoryCell_iPhoneOne">
-    <col class="cate-title">
-        <label class="cate-image" id="cate_image"/>
-        <label id="cate_name" class="cate-name">-</label>
-    </col>
+<ui namespace="B0_IndexCategoryCell_iPhoneOne_1">
     <row class="category-wrapper">
         <row class="category-group">
             <col class="category-group-mid">
@@ -51,7 +47,8 @@
         }
         .category-wrapper {
         width: 100%;
-        height: 170px;
+        height: 100%;
+        padding: 0px 2px;
         float: center;
         align: center;
         v-align: center;

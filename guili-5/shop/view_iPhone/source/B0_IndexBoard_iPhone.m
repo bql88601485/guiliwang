@@ -32,16 +32,14 @@
 #import "B0_IndexCategoryCell_iPhoneTwo.h"
 #import "B0_IndexCategoryCell_iPhoneOne.h"
 #import "WebViewController.h"
+#import "B0_IndexCategoryCell_iPhone_3.h"
+#import "B0_IndexCategoryCell_iPhoneOne_1.h"
+#import "B0_IndexCategoryCell_iPhoneTwo_2.h"
 #pragma mark -
 
 @interface B0_IndexBoard_iPhone()
 {
     NSMutableArray *newCargories;
-    NSMutableArray *onelist;
-    NSMutableArray *twolist;
-    NSMutableArray *threelist;
-    
-    
     int num;
     BOOL upOrdown;
     NSTimer * timer;
@@ -96,7 +94,7 @@ ON_CREATE_VIEWS( signal )
      * BeeUIScrollView的block方式写法可以从它对应的delegate方法中转换而来
      */
     
-    
+    self.isHome = YES;
     self.search_input.delegate = self;
     self.search_input.text = @"贵州 礼品";
     
@@ -174,11 +172,8 @@ ON_CREATE_VIEWS( signal )
         
         for (CATEGORY *objec in self.categoryModel.categories) {
             
-            newCargories = [[NSMutableArray alloc] initWithObjects:@"1",@"2",@"3", nil];
+            newCargories = [[NSMutableArray alloc] initWithObjects:@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3",@"1",@"2",@"3", nil];
             
-            onelist = [[NSMutableArray alloc] init];
-            twolist = [[NSMutableArray alloc] init];
-            threelist = [[NSMutableArray alloc] init];
             
             for (SIMPLE_GOODS *item in objec.goods) {
                 
@@ -186,14 +181,7 @@ ON_CREATE_VIEWS( signal )
                 
                 NSArray *tmp = [seller_note componentsSeparatedByString:@"|"];
                 
-                if ([[tmp firstObject] intValue] == 1) {
-                    [self dataYh:tmp :0 :item];
-                }else if ([[tmp firstObject] intValue] == 2){
-                    [self dataYh:tmp :1 :item];
-                }else if ([[tmp firstObject] intValue] == 3){
-                    [self dataYh:tmp :2 :item];
-                }
-                
+                [self dataYh:tmp :[[tmp firstObject] intValue]-1 :item];
             }
             
             int change = 0;
@@ -220,14 +208,32 @@ ON_CREATE_VIEWS( signal )
             BeeUIScrollItem * categoryItem = self.list.items[ i + offset ];
             CATEGORY *object = [allData safeObjectAtIndex:i];
             if (object.goods.count == 1) {
-                categoryItem.clazz = [B0_IndexCategoryCell_iPhoneOne class];
+                if (object.change > 0) {
+                    categoryItem.clazz = [B0_IndexCategoryCell_iPhoneOne_1 class];
+                    categoryItem.size = CGSizeMake( self.list.width, 170.0f );
+                }else{
+                    categoryItem.clazz = [B0_IndexCategoryCell_iPhoneOne class];
+                    categoryItem.size = CGSizeMake( self.list.width, 190.0f );
+                }
             }else if (object.goods.count == 2){
-                categoryItem.clazz = [B0_IndexCategoryCell_iPhoneTwo class];
+                if (object.change > 0) {
+                    categoryItem.clazz = [B0_IndexCategoryCell_iPhoneTwo_2 class];
+                    categoryItem.size = CGSizeMake( self.list.width, 170.0f );
+                }else{
+                    categoryItem.clazz = [B0_IndexCategoryCell_iPhoneTwo class];
+                    categoryItem.size = CGSizeMake( self.list.width, 190.0f );
+                }
             }else if (object.goods.count == 3){
-                categoryItem.clazz = [B0_IndexCategoryCell_iPhone class];
+                if (object.change > 0) {
+                    categoryItem.clazz = [B0_IndexCategoryCell_iPhone_3 class];
+                    categoryItem.size = CGSizeMake( self.list.width, 170.0f );
+                }else{
+                    categoryItem.clazz = [B0_IndexCategoryCell_iPhone class];
+                    categoryItem.size = CGSizeMake( self.list.width, 190.0f );
+                }
             }
+            
             categoryItem.data = object;
-            categoryItem.size = CGSizeMake( self.list.width, 180.0f );
             categoryItem.rule = BeeUIScrollLayoutRule_Line;
             categoryItem.insets = UIEdgeInsetsMake(0, 0, 0, 0);
         }
@@ -247,29 +253,19 @@ ON_CREATE_VIEWS( signal )
     
 }
 
-- (void)dataYh:(NSArray *)tmp :(int )num :(id)item{
+- (void)dataYh:(NSArray *)tmp :(NSUInteger )num :(id)item{
+    
+    NSMutableArray *tmepArray = [newCargories objectAtIndex:num];
+    if ([tmepArray isKindOfClass:[NSMutableArray class]]) {
+    }else{
+        tmepArray = [[NSMutableArray alloc] init];
+    }
     
     [newCargories removeObjectAtIndex:num];
     
-    if ([[tmp lastObject] intValue] == 1) {
-        
-        [onelist addObject:item];
-        
-        [newCargories insertObject:onelist atIndex:num];
-        
-    }else if ([[tmp lastObject] intValue] == 2) {
-        
-        [twolist addObject:item];
-        
-        [newCargories insertObject:twolist atIndex:num];
-        
-    }else if ([[tmp lastObject] intValue] == 3) {
-        
-        [threelist addObject:item];
-        
-        [newCargories insertObject:threelist atIndex:num];
-    }
+    [tmepArray addObject:item];
     
+    [newCargories insertObject:tmepArray atIndex:num];
 }
 
 ON_DELETE_VIEWS( signal )
@@ -781,6 +777,13 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, sear_button, signal ){
     }];
 }
 ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
+    
+    if ( NO == [UserModel online] )
+    {
+        [bee.ui.appBoard showLogin];
+        return;
+    }
+    
     num = 0;
     upOrdown = NO;
     //初始话ZBar

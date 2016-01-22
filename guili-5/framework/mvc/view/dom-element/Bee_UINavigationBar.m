@@ -41,10 +41,10 @@
 
 @interface BeeUINavigationBar()
 {
-	BOOL						_inited;
-	UILabel *					_titleLabel;
-	UIImage *					_backgroundImage;
-	UINavigationController *	_navigationController;
+    BOOL						_inited;
+    UILabel *					_titleLabel;
+    UIImage *					_backgroundImage;
+    UINavigationController *	_navigationController;
 }
 
 - (void)initSelf;
@@ -81,8 +81,8 @@ static UIImage *	__backgroundImage = nil;
 {
     self = [super initWithFrame:CGRectZero];
     if ( self )
-	{
-		[self initSelf];
+    {
+        [self initSelf];
     }
     return self;
 }
@@ -91,229 +91,229 @@ static UIImage *	__backgroundImage = nil;
 {
     self = [super initWithFrame:frame];
     if ( self )
-	{
-		[self initSelf];
+    {
+        [self initSelf];
     }
     return self;
 }
 
 - (void)initSelf
 {
-	if ( NO == _inited )
-	{
-		if ( IOS7_OR_LATER )
-		{
-			self.translucent = NO;
-			self.shadowImage = [[UIImage new] autorelease];
-		}
-		
-		[self observeNotification:self.STYLE_CHANGED];
-		[self applyBarStyle];
-		
-		_inited = YES;
-		
-//		[self load];
-		[self performLoad];
-	}
+    if ( NO == _inited )
+    {
+        if ( IOS7_OR_LATER )
+        {
+            self.translucent = NO;
+            self.shadowImage = [[UIImage new] autorelease];
+        }
+        
+        [self observeNotification:self.STYLE_CHANGED];
+        [self applyBarStyle];
+        
+        _inited = YES;
+        
+        //		[self load];
+        [self performLoad];
+    }
 }
 
 - (void)dealloc
 {
-//	[self unload];
-	[self performUnload];
-	
-	[self unobserveAllNotifications];
-	
+    //	[self unload];
+    [self performUnload];
+    
+    [self unobserveAllNotifications];
+    
     [_backgroundImage release];
-	_backgroundImage = nil;
-	
-	[_titleLabel removeFromSuperview];
-	[_titleLabel release];
-	_titleLabel = nil;
-	
+    _backgroundImage = nil;
+    
+    [_titleLabel removeFromSuperview];
+    [_titleLabel release];
+    _titleLabel = nil;
+    
     [super dealloc];
 }
 
 - (void)setFrame:(CGRect)frame
 {
-	[super setFrame:frame];
-
-	[self applyBarStyle];
+    [super setFrame:frame];
+    
+    [self applyBarStyle];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-	
-	[self applyBarStyle];
+    
+    [self applyBarStyle];
 }
 
 - (void)applyBarStyle
 {
-	if ( __backgroundColor )
-	{
-		[self setBackgroundColor:__backgroundColor];
-	}
-
+    if ( __backgroundColor )
+    {
+        [self setBackgroundColor:__backgroundColor];
+    }
+    
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-	if ( IOS7_OR_LATER )
-	{
-//        for ( id subview in self.subviews )
-//		{
-//            if ( [subview isKindOfClass:[UIImageView class]] )
-//			{
-//				UIImageView * imageView = subview;
-//				imageView.layer.shadowColor = [UIColor clearColor].CGColor;
-//				imageView.layer.shadowOffset = CGSizeZero;
-//				imageView.layer.shadowOpacity = 0.0f;
-//            }
-//        }
-
-		if ( __backgroundTintColor )
-		{
-			[self setTintColor:__backgroundTintColor];
-			[self setBarTintColor:__backgroundTintColor];
-		}
-	}
+    if ( IOS7_OR_LATER )
+    {
+        //        for ( id subview in self.subviews )
+        //		{
+        //            if ( [subview isKindOfClass:[UIImageView class]] )
+        //			{
+        //				UIImageView * imageView = subview;
+        //				imageView.layer.shadowColor = [UIColor clearColor].CGColor;
+        //				imageView.layer.shadowOffset = CGSizeZero;
+        //				imageView.layer.shadowOpacity = 0.0f;
+        //            }
+        //        }
+        
+        if ( __backgroundTintColor )
+        {
+            [self setTintColor:__backgroundTintColor];
+            [self setBarTintColor:__backgroundTintColor];
+        }
+    }
 #endif	// #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-
-	if ( IOS6_OR_LATER )
-	{
-		NSMutableDictionary * attributes = [NSMutableDictionary dictionary];
-
-		if ( __titleShadowColor )
-		{
-			[attributes setObject:__titleShadowColor forKey:UITextAttributeTextShadowColor];
-		}
+    
+    if ( IOS6_OR_LATER )
+    {
+        NSMutableDictionary * attributes = [NSMutableDictionary dictionary];
         
-		if ( __titleColor )
-		{
-			[attributes setObject:__titleColor forKey:UITextAttributeTextColor];
-		}
-
-		if ( __titleFont )
-		{
-			[attributes setObject:__titleFont forKey:UITextAttributeFont];
-		}
+        if ( __titleShadowColor )
+        {
+            [attributes setObject:__titleShadowColor forKey:UITextAttributeTextShadowColor];
+        }
         
-		if ( attributes.count )
-		{
-			[self setTitleTextAttributes:attributes];
-		}
-	}
-
-	if ( IOS5_OR_LATER )
-	{
-		if ( IOS7_OR_LATER )
-		{
-		#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-			[self setBackgroundImage:(_backgroundImage ? _backgroundImage : __backgroundImage) forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
-		#endif	// #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-		}
-		else
-		{
-		#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 50000
-			[self setBackgroundImage:(_backgroundImage ? _backgroundImage : __backgroundImage) forBarMetrics:UIBarMetricsDefault];
-		#endif	// #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 50000
-		}
-	}
-	
-//	self.layer.shadowOpacity = 0.7f;
-//	self.layer.shadowRadius = 1.5f;
-//	self.layer.shadowOffset = CGSizeMake(0.0f, 0.6f);
-//	self.layer.shadowColor = [UIColor blackColor].CGColor;
-//	self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
-//	self.layer.shouldRasterize = YES;
-
-//	CAShapeLayer * maskLayer = nil;
-//
-//	for ( CALayer * layer in self.layer.sublayers )
-//	{
-//		if ( [layer isKindOfClass:[CAShapeLayer class]] && [layer.name isEqualToString:@"maskLayer"] )
-//		{
-//			maskLayer = (CAShapeLayer *)layer;
-//			break;
-//		}
-//	}
-//
-//	if ( nil == maskLayer )
-//	{
-//		maskLayer = [CAShapeLayer layer];
-//		[self.layer addSublayer:maskLayer];
-//		[self.layer setMask:maskLayer];
-//	}
-//
-//	CGRect bounds = self.bounds;
-//	UIBezierPath * maskPath = [UIBezierPath bezierPathWithRoundedRect:bounds
-//													byRoundingCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)
-//														  cornerRadii:CGSizeMake(4.0, 4.0)];
-//	if ( maskPath && maskLayer )
-//	{
-//		maskLayer.frame = bounds;
-//		maskLayer.path = maskPath.CGPath;
-//		maskLayer.name = @"maskLayer";
-//	}
-
-	[self setNeedsDisplay];
+        if ( __titleColor )
+        {
+            [attributes setObject:__titleColor forKey:UITextAttributeTextColor];
+        }
+        
+        if ( __titleFont )
+        {
+            [attributes setObject:__titleFont forKey:UITextAttributeFont];
+        }
+        
+        if ( attributes.count )
+        {
+            [self setTitleTextAttributes:attributes];
+        }
+    }
+    
+    if ( IOS5_OR_LATER )
+    {
+        if ( IOS7_OR_LATER )
+        {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+            [self setBackgroundImage:(_backgroundImage ? _backgroundImage : __backgroundImage) forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
+#endif	// #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        }
+        else
+        {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 50000
+            [self setBackgroundImage:(_backgroundImage ? _backgroundImage : __backgroundImage) forBarMetrics:UIBarMetricsDefault];
+#endif	// #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 50000
+        }
+    }
+    
+    //	self.layer.shadowOpacity = 0.7f;
+    //	self.layer.shadowRadius = 1.5f;
+    //	self.layer.shadowOffset = CGSizeMake(0.0f, 0.6f);
+    //	self.layer.shadowColor = [UIColor blackColor].CGColor;
+    //	self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+    //	self.layer.shouldRasterize = YES;
+    
+    //	CAShapeLayer * maskLayer = nil;
+    //
+    //	for ( CALayer * layer in self.layer.sublayers )
+    //	{
+    //		if ( [layer isKindOfClass:[CAShapeLayer class]] && [layer.name isEqualToString:@"maskLayer"] )
+    //		{
+    //			maskLayer = (CAShapeLayer *)layer;
+    //			break;
+    //		}
+    //	}
+    //
+    //	if ( nil == maskLayer )
+    //	{
+    //		maskLayer = [CAShapeLayer layer];
+    //		[self.layer addSublayer:maskLayer];
+    //		[self.layer setMask:maskLayer];
+    //	}
+    //
+    //	CGRect bounds = self.bounds;
+    //	UIBezierPath * maskPath = [UIBezierPath bezierPathWithRoundedRect:bounds
+    //													byRoundingCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)
+    //														  cornerRadii:CGSizeMake(4.0, 4.0)];
+    //	if ( maskPath && maskLayer )
+    //	{
+    //		maskLayer.frame = bounds;
+    //		maskLayer.path = maskPath.CGPath;
+    //		maskLayer.name = @"maskLayer";
+    //	}
+    
+    [self setNeedsDisplay];
 }
 
 - (void)handleUISignal:(BeeUISignal *)signal
 {
-//	if ( _navigationController )
-//	{
-//		UIViewController * vc = _navigationController.topViewController;
-//		if ( vc )
-//		{
-//			[signal forward:vc];
-//		}
-//	}
-//	else
-	{
-		SIGNAL_FORWARD( signal );
-	}
+    //	if ( _navigationController )
+    //	{
+    //		UIViewController * vc = _navigationController.topViewController;
+    //		if ( vc )
+    //		{
+    //			[signal forward:vc];
+    //		}
+    //	}
+    //	else
+    {
+        SIGNAL_FORWARD( signal );
+    }
 }
 
 - (void)handleNotification:(NSNotification *)notification
 {
-	if ( [notification is:BeeUINavigationBar.STYLE_CHANGED] )
-	{
-		[self applyBarStyle];
-	}
+    if ( [notification is:BeeUINavigationBar.STYLE_CHANGED] )
+    {
+        [self applyBarStyle];
+    }
 }
 
 - (void)setBackgroundImage:(UIImage *)image
 {
-	if ( image != _backgroundImage )
-	{
-		[_backgroundImage release];
-		_backgroundImage = [image retain];
-
-		[self applyBarStyle];
-	}
+    if ( image != _backgroundImage )
+    {
+        [_backgroundImage release];
+        _backgroundImage = [image retain];
+        
+        [self applyBarStyle];
+    }
 }
 
 #pragma mark -
 
 + (void)setTitleColor:(UIColor *)color
 {
-	if ( color != __titleColor )
-	{
-		[__titleColor release];
-		__titleColor = [color retain];
-
-		[[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
-	}
+    if ( color != __titleColor )
+    {
+        [__titleColor release];
+        __titleColor = [color retain];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
+    }
 }
 
 + (void)setTitleFont:(UIFont *)font
 {
-	if ( font != __titleFont )
-	{
-		[__titleFont release];
-		__titleFont = [font retain];
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
-	}
+    if ( font != __titleFont )
+    {
+        [__titleFont release];
+        __titleFont = [font retain];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
+    }
 }
 
 + (void)setTitleShadowColor:(UIColor *)color
@@ -329,77 +329,77 @@ static UIImage *	__backgroundImage = nil;
 
 + (CGSize)buttonSize
 {
-	return __buttonSize;
+    return __buttonSize;
 }
 
 + (void)setButtonSize:(CGSize)size
 {
-	__buttonSize = size;
+    __buttonSize = size;
 }
 
 + (UIColor *)buttonColor
 {
-	return __buttonColor;
+    return __buttonColor;
 }
 
 + (void)setButtonColor:(UIColor *)color
 {
-	if ( color != __buttonColor )
-	{
-		[__buttonColor release];
-		__buttonColor = [color retain];
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
-	}
+    if ( color != __buttonColor )
+    {
+        [__buttonColor release];
+        __buttonColor = [color retain];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
+    }
 }
 
 + (UIFont *)buttonFont
 {
-	return __buttonFont;
+    return __buttonFont;
 }
 
 + (void)setButtonFont:(UIFont *)font
 {
-	if ( font != __buttonFont )
-	{
-		[__buttonFont release];
-		__buttonFont = [font retain];
-
-		[[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
-	}
+    if ( font != __buttonFont )
+    {
+        [__buttonFont release];
+        __buttonFont = [font retain];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
+    }
 }
 
 + (void)setBackgroundColor:(UIColor *)color
 {
-	if ( color != __backgroundColor )
-	{
-		[__backgroundColor release];
-		__backgroundColor = [color retain];
-
-		[[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
-	}
+    if ( color != __backgroundColor )
+    {
+        [__backgroundColor release];
+        __backgroundColor = [color retain];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
+    }
 }
 
 + (void)setBackgroundTintColor:(UIColor *)color
 {
-	if ( color != __backgroundTintColor )
-	{
-		[__backgroundTintColor release];
-		__backgroundTintColor = [color retain];
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
-	}
+    if ( color != __backgroundTintColor )
+    {
+        [__backgroundTintColor release];
+        __backgroundTintColor = [color retain];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
+    }
 }
 
 + (void)setBackgroundImage:(UIImage *)image
 {
-	if ( image != __backgroundImage )
-	{
-		[__backgroundImage release];
-		__backgroundImage = [image retain];
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
-	}
+    if ( image != __backgroundImage )
+    {
+        [__backgroundImage release];
+        __backgroundImage = [image retain];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.STYLE_CHANGED object:nil];
+    }
 }
 
 @end

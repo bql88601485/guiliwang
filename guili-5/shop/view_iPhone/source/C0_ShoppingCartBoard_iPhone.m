@@ -73,6 +73,7 @@ DEF_MODEL( AddressListModel,	addressListModel )
 
 ON_CREATE_VIEWS( signal )
 {
+    self.isHome = YES;
     self.navigationBarShown = YES;
     self.navigationBarTitle = __TEXT(@"shopcar_shopcar");
     

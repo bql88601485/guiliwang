@@ -63,6 +63,7 @@ DEF_OUTLET( BeeUIScrollView, list )
 
 ON_CREATE_VIEWS( signal )
 {
+    self.isHome = YES;
     self.navigationBarTitle = __TEXT(@"profile_personal");
     
     [self showNavigationBarAnimated:NO];

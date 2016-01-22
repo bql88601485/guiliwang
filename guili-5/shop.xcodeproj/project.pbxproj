@@ -997,6 +997,12 @@
 		E56C747F1C313E7F00EE0630 /* drd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E56C747E1C313E7F00EE0630 /* drd@2x.png */; };
 		E57817621C4623D0004A4431 /* footer_category_active_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E57817611C4623D0004A4431 /* footer_category_active_icon@2x.png */; };
 		E578176C1C48FDCF004A4431 /* 扫码@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E578176B1C48FDCF004A4431 /* 扫码@2x.png */; };
+		E57AEE491C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.m in Sources */ = {isa = PBXBuildFile; fileRef = E57AEE411C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.m */; };
+		E57AEE4A1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.xml in Resources */ = {isa = PBXBuildFile; fileRef = E57AEE421C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.xml */; };
+		E57AEE4B1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.m in Sources */ = {isa = PBXBuildFile; fileRef = E57AEE441C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.m */; };
+		E57AEE4C1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.xml in Resources */ = {isa = PBXBuildFile; fileRef = E57AEE451C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.xml */; };
+		E57AEE4D1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.m in Sources */ = {isa = PBXBuildFile; fileRef = E57AEE471C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.m */; };
+		E57AEE4E1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.xml in Resources */ = {isa = PBXBuildFile; fileRef = E57AEE481C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.xml */; };
 		E58F7FA91C071CBE00A0393E /* A0_SigninBoard_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E58F7FA81C071CBE00A0393E /* A0_SigninBoard_iPhone.xib */; };
 		E58F7FAB1C071D1900A0393E /* denglu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E58F7FAA1C071D1900A0393E /* denglu.jpg */; };
 		E58F7FBA1C0736BD00A0393E /* Icon180@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58F7FB91C0736BD00A0393E /* Icon180@2x.png */; };
@@ -2710,6 +2716,15 @@
 		E56C747E1C313E7F00EE0630 /* drd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drd@2x.png"; sourceTree = "<group>"; };
 		E57817611C4623D0004A4431 /* footer_category_active_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "footer_category_active_icon@2x.png"; sourceTree = "<group>"; };
 		E578176B1C48FDCF004A4431 /* 扫码@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫码@2x.png"; sourceTree = "<group>"; };
+		E57AEE401C52848E00A0FE52 /* B0_IndexCategoryCell_iPhone_3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B0_IndexCategoryCell_iPhone_3.h; sourceTree = "<group>"; };
+		E57AEE411C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B0_IndexCategoryCell_iPhone_3.m; sourceTree = "<group>"; };
+		E57AEE421C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = B0_IndexCategoryCell_iPhone_3.xml; sourceTree = "<group>"; };
+		E57AEE431C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B0_IndexCategoryCell_iPhoneOne_1.h; sourceTree = "<group>"; };
+		E57AEE441C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B0_IndexCategoryCell_iPhoneOne_1.m; sourceTree = "<group>"; };
+		E57AEE451C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = B0_IndexCategoryCell_iPhoneOne_1.xml; sourceTree = "<group>"; };
+		E57AEE461C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B0_IndexCategoryCell_iPhoneTwo_2.h; sourceTree = "<group>"; };
+		E57AEE471C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B0_IndexCategoryCell_iPhoneTwo_2.m; sourceTree = "<group>"; };
+		E57AEE481C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = B0_IndexCategoryCell_iPhoneTwo_2.xml; sourceTree = "<group>"; };
 		E58F7FA81C071CBE00A0393E /* A0_SigninBoard_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = A0_SigninBoard_iPhone.xib; sourceTree = "<group>"; };
 		E58F7FAA1C071D1900A0393E /* denglu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = denglu.jpg; sourceTree = "<group>"; };
 		E58F7FB91C0736BD00A0393E /* Icon180@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon180@2x.png"; sourceTree = "<group>"; };
@@ -3267,6 +3282,15 @@
 				52F4863C1C4E6A8A00E9D649 /* WebViewController.h */,
 				52F4863D1C4E6A8A00E9D649 /* WebViewController.m */,
 				52F4863E1C4E6A8A00E9D649 /* WebViewController.xib */,
+				E57AEE401C52848E00A0FE52 /* B0_IndexCategoryCell_iPhone_3.h */,
+				E57AEE411C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.m */,
+				E57AEE421C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.xml */,
+				E57AEE431C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.h */,
+				E57AEE441C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.m */,
+				E57AEE451C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.xml */,
+				E57AEE461C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.h */,
+				E57AEE471C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.m */,
+				E57AEE481C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.xml */,
 				414857121AC4FCFD003FD9DF /* B0_IndexCategoryCell_iPhone.h */,
 				414857131AC4FCFD003FD9DF /* B0_IndexCategoryCell_iPhone.m */,
 				414857141AC4FCFD003FD9DF /* B0_IndexCategoryCell_iPhone.xml */,
@@ -5833,6 +5857,7 @@
 				414858D61AC4FCFE003FD9DF /* nav_back@2x.png in Resources */,
 				414858C21AC4FCFE003FD9DF /* item_grid_header_view_icon@2x.png in Resources */,
 				414859B81AC4FCFE003FD9DF /* E0_ProfileBoard_iPhone.xml in Resources */,
+				E57AEE4E1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.xml in Resources */,
 				414858D91AC4FCFE003FD9DF /* nav_right@2x.png in Resources */,
 				6302390F177C1676004C052D /* Default-568h@2x.png in Resources */,
 				E5E483221C4E3E5000589A3E /* nav_bg_iphone5Two@2x.png in Resources */,
@@ -6012,6 +6037,7 @@
 				414859B01AC4FCFE003FD9DF /* D0_SearchRecoder_iPhone.xml in Resources */,
 				414859561AC4FCFE003FD9DF /* B1_ProductListCartCell_iPhone.xml in Resources */,
 				414858941AC4FCFE003FD9DF /* filter_blue_btn@2x.png in Resources */,
+				E57AEE4A1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.xml in Resources */,
 				E5B62DC21C4B7C9400284623 /* searchIcon@2x.png in Resources */,
 				414859CC1AC4FCFE003FD9DF /* E3_PendingReceivedBoard_iPhone.xml in Resources */,
 				4148590F1AC4FCFE003FD9DF /* shopping_checkout_body_bg@2x.png in Resources */,
@@ -6025,6 +6051,7 @@
 				E5ACD6661C13C71D001BD537 /* AreaPlist.plist in Resources */,
 				4148598B1AC4FCFE003FD9DF /* C1_CheckOutBoard_iPhone.xml in Resources */,
 				414858D51AC4FCFE003FD9DF /* nav_add@2x.png in Resources */,
+				E57AEE4C1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.xml in Resources */,
 				414858ED1AC4FCFE003FD9DF /* profile_refresh_site_icon@2x.png in Resources */,
 				1848BD8C18B4D8690007238A /* messages_tableview_background@2x.png in Resources */,
 				4148588F1AC4FCFE003FD9DF /* drink@2x.png in Resources */,
@@ -6392,6 +6419,7 @@
 				9D67CBB91A4A7EAB003ABA05 /* Bee_HTTPServerConfig2.m in Sources */,
 				9D67C6441A4A7BBC003ABA05 /* bee.services.wizard.md in Sources */,
 				414859D11AC4FCFE003FD9DF /* E4_HistoryBoard_iPhone.m in Sources */,
+				E57AEE4B1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneOne_1.m in Sources */,
 				9D67CBD91A4A7EAB003ABA05 /* CXHTMLDocument.m in Sources */,
 				9D67CAF51A4A7EAA003ABA05 /* Bee_UIButton.m in Sources */,
 				9D67CB051A4A7EAA003ABA05 /* Bee_UISlider.m in Sources */,
@@ -6446,6 +6474,7 @@
 				9D67CBD11A4A7EAB003ABA05 /* FMDatabaseAdditions.m in Sources */,
 				9D67CB771A4A7EAB003ABA05 /* Bee_CacheProtocol.mm in Sources */,
 				9D67CB0C1A4A7EAA003ABA05 /* Bee_UIVideoEditorController.m in Sources */,
+				E57AEE4D1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.m in Sources */,
 				9D67CB491A4A7EAA003ABA05 /* BeeUIQuery+Dimensions.m in Sources */,
 				41485A711AC4FDF4003FD9DF /* SearchModel.m in Sources */,
 				414858651AC4FCFE003FD9DF /* FormPlainOptionCell.m in Sources */,
@@ -6790,6 +6819,7 @@
 				414859611AC4FCFE003FD9DF /* B2_ProductDetailBoard_iPhone.m in Sources */,
 				9D67CAF91A4A7EAA003ABA05 /* Bee_UIImageView.m in Sources */,
 				9D67CAD91A4A7EAA003ABA05 /* CSSSelector.m in Sources */,
+				E57AEE491C52848F00A0FE52 /* B0_IndexCategoryCell_iPhone_3.m in Sources */,
 				41485A641AC4FDF4003FD9DF /* NSObject+ScrollViewExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
