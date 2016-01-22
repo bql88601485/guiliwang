@@ -34,7 +34,7 @@
 #import "WebViewController.h"
 #pragma mark -
 
-@interface B0_IndexBoard_iPhone()<ZBarReaderDelegate>
+@interface B0_IndexBoard_iPhone()
 {
     NSMutableArray *newCargories;
     NSMutableArray *onelist;
@@ -51,6 +51,10 @@
 @end
 
 @implementation B0_IndexBoard_iPhone
+
+DEF_INT( ACTION_ADD,    1)
+DEF_INT( ACTION_BUY,    2)
+DEF_INT( ACTION_SPEC,   3)
 
 SUPPORT_RESOURCE_LOADING( YES )
 SUPPORT_AUTOMATIC_LAYOUT( YES )
@@ -777,6 +781,8 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, sear_button, signal ){
     }];
 }
 ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
+    num = 0;
+    upOrdown = NO;
     //初始话ZBar
     ZBarReaderViewController * reader = [ZBarReaderViewController new];
     //设置代理
@@ -832,6 +838,7 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
     [self presentViewController:reader animated:YES completion:^{
         
     }];
+    
 }
 
 - (void)cancelText{
@@ -855,5 +862,64 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
         }
     }
 }
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    [navigationController.navigationBar setBackgroundImage:[self
+                                                            imageWithColor:[UIColor colorWithRed:50.0/255 green:50.0/255 blue:50.0/255 alpha:1]
+                                                            size:CGSizeMake(self.view.frame.size.width, 44)]
+                                             forBarMetrics:UIBarMetricsDefault];
+    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [UIColor whiteColor],UITextAttributeTextColor,
+                                               [UIColor blackColor], UITextAttributeTextShadowColor,
+                                               [NSValue valueWithUIOffset:UIOffsetMake(-1, 0)], UITextAttributeTextShadowOffset,
+                                               [UIFont boldSystemFontOfSize:22],UITextAttributeFont, nil];
+    
+    [navigationController.navigationBar setTitleTextAttributes:navbarTitleTextAttributes];
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
+    UIGraphicsBeginImageContextWithOptions(size, NO, .0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [color set];
+    CGContextFillRect(context, CGRectMake(.0, .0, size.width, size.height));
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+- (void) imagePickerController: (UIImagePickerController*) reader
+ didFinishPickingMediaWithInfo: (NSDictionary*) info
+{
+    id<NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
+    ZBarSymbol *symbol = nil;
+    for(symbol in results)
+        break;
+    
+    [reader dismissModalViewControllerAnimated: YES];
+    
+    //判断是否包含 头'http:'
+    NSString *regex = @"http+:[^\\s]*";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    
+    //判断是否包含 头'ssid:'
+    NSString *ssid = @"ssid+:[^\\s]*";;
+    NSPredicate *ssidPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",ssid];
+    
+    if ([predicate evaluateWithObject:symbol.data]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:symbol.data]];
+    }
+    else {
+        //[UserModel sharedInstance].session.member=symbol.data;
+        [[BeeFileCache sharedInstance] setObject:symbol.data forKey:@"qrcodedata"];
+        [self addToCart:self.ACTION_ADD];
+        //[self doSearch:symbol.data];
+    }
+}
+- (void)addToCart:(NSUInteger)action
+{
+    
+}
+
 
 @end

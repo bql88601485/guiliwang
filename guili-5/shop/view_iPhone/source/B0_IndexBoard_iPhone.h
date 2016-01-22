@@ -19,13 +19,18 @@
 #import "controller.h"
 
 #import "UIViewController+ErrorTips.h"
-
+#import "ZBarSDK.h"
 #pragma mark -
 
-@interface B0_IndexBoard_iPhone : BaseBoard_iPhone<UITextFieldDelegate>
+@interface B0_IndexBoard_iPhone : BaseBoard_iPhone<UITextFieldDelegate,ZBarReaderDelegate>
 {
     UITextField * searchField;
 }
+
+AS_INT( ACTION_ADD )
+AS_INT( ACTION_BUY )
+AS_INT( ACTION_SPEC )
+
 AS_MODEL( BannerModel,		bannerModel );
 AS_MODEL( CategoryModel,	categoryModel );
 
