@@ -5777,11 +5777,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "geek-zoo studio";
-				TargetAttributes = {
-					63249C9A1754E07900372FD7 = {
-						DevelopmentTeam = LPRAXT87C5;
-					};
-				};
 			};
 			buildConfigurationList = 63249C961754E07900372FD7 /* Build configuration list for PBXProject "shop" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -6874,8 +6869,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: San Meditech Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: San Meditech Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lianwu Yu (5GKAVLNJLR)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6919,7 +6914,7 @@
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sanmeditech.Glucose;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "23426613-4460-4cc3-b179-c0caa7bf832b";
+				PROVISIONING_PROFILE = "54dd9427-12c1-497f-bb45-b40010ebef4a";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -6935,8 +6930,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: San Meditech Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: San Meditech Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lianwu Yu (5GKAVLNJLR)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6980,7 +6975,7 @@
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sanmeditech.Glucose;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "23426613-4460-4cc3-b179-c0caa7bf832b";
+				PROVISIONING_PROFILE = "54dd9427-12c1-497f-bb45-b40010ebef4a";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -7025,8 +7020,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: San Meditech Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: San Meditech Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lianwu Yu (5GKAVLNJLR)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7070,7 +7065,7 @@
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sanmeditech.Glucose;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "23426613-4460-4cc3-b179-c0caa7bf832b";
+				PROVISIONING_PROFILE = "54dd9427-12c1-497f-bb45-b40010ebef4a";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
 				WRAPPER_EXTENSION = app;

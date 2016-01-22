@@ -479,6 +479,10 @@ AS_MESSAGE( category );
 // POST comments
 AS_MESSAGE( comments );
 
+
+// POST SENDcomments
+AS_MESSAGE( SENDCOMMENT );
+
 // POST config
 AS_MESSAGE( config );
 

@@ -7,9 +7,11 @@
 //
 
 #import "Bee_UIBoard.h"
-
+#import "Comment.h"
 @interface G0_CommentVController : BeeUIBoard
 
 @property (nonatomic, retain) ORDER_GOODS * Kgoods;
+
+AS_MODEL( Comment, commet )
 
 @end

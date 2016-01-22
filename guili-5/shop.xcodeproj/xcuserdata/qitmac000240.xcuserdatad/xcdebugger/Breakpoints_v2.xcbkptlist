@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shop/generated/ecmobile.mm"
-            timestampString = "474432966.763839"
+            timestampString = "475123216.456431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1818"
-            endingLineNumber = "1818"
-            landmarkName = "DEF_MESSAGE_( searchKeywords, msg )"
+            startingLineNumber = "1863"
+            endingLineNumber = "1863"
+            landmarkName = "DEF_MESSAGE_( search, msg )"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -33,6 +33,38 @@
             endingLineNumber = "200"
             landmarkName = "-REMOVE"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__34-[BeeUIQuery(Manipulation) REMOVE]_block_invoke"
+                  moduleName = "ECMobile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/qitmac000240/Music/guiliwang/guili-5/framework/mvc/view/dom-query/extension/BeeUIQuery+Manipulation.m"
+                  timestampString = "475124610.621721"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "200"
+                  endingLineNumber = "200"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__34-[BeeUIQuery(Manipulation) REMOVE]_block_invoke"
+                  moduleName = "ECMobile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/qitmac000240/Music/guiliwang/guili-5/framework/mvc/view/dom-query/extension/BeeUIQuery+Manipulation.m"
+                  timestampString = "475124610.62198"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "200"
+                  endingLineNumber = "200"
+                  offsetFromSymbolStart = "100">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

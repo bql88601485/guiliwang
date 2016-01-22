@@ -1101,6 +1101,51 @@ DEF_MESSAGE_( comments, msg )
     {
     }
 }
+#pragma mark - POST SENDCOMMENT
+
+DEF_MESSAGE_( SENDCOMMENT, msg )
+{
+    if ( msg.sending ){
+        
+        NSString * goods_id = msg.GET_INPUT( @"goods_id" );
+        NSString * email = msg.GET_INPUT( @"email" );
+        NSString * user_name = msg.GET_INPUT( @"user_name" );
+        NSString * content = msg.GET_INPUT( @"content" );
+        NSString * user_id = msg.GET_INPUT( @"user_id" );
+        
+        PAGINATION * pagination = msg.GET_INPUT( @"pagination" );
+        
+        NSMutableDictionary * requestBody = [NSMutableDictionary dictionary];
+        requestBody.APPEND( @"goods_id", goods_id );
+        requestBody.APPEND( @"email", email );
+        requestBody.APPEND( @"user_name", user_name );
+        requestBody.APPEND( @"content", content );
+        requestBody.APPEND( @"user_id", user_id );
+        
+        requestBody.APPEND( @"pagination", pagination );
+        
+        //		NSString * requestURI = @"http://shop.ecmobile.me/ecmobile/?url=comments";
+        NSString * requestURI = [NSString stringWithFormat:@"%@/commentsAdd", [ServerConfig sharedInstance].url];
+        
+        msg.HTTP_POST( requestURI ).PARAM( @"json", requestBody.objectToString );
+    }
+    else if ( msg.succeed )
+    {
+        NSDictionary * response = msg.responseJSONDictionary;
+        STATUS * status = [STATUS objectFromDictionary:[response dictAtPath:@"status"]];
+        NSArray * data = [COMMENT objectsFromArray:[response arrayAtPath:@"data"]];
+        
+        msg.OUTPUT( @"status", status );
+        msg.OUTPUT( @"data", data );
+        
+    }
+    else if ( msg.failed )
+    {
+    }
+    else if ( msg.cancelled )
+    {
+    }
+}
 
 #pragma mark - POST config
 

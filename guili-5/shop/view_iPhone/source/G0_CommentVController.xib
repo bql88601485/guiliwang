@@ -10,6 +10,7 @@
                 <outlet property="iconImage" destination="4t6-jd-qQy" id="hqU-ey-RPU"/>
                 <outlet property="kTitle" destination="khc-Ez-jQi" id="XWG-Zw-z55"/>
                 <outlet property="pricelable" destination="h1i-Pm-Q0g" id="Azw-lk-rJt"/>
+                <outlet property="sendBUtton" destination="fiD-Oz-0Sb" id="HZM-KO-Y28"/>
                 <outlet property="textView" destination="MPu-xw-6Rm" id="uWh-mZ-ckw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
