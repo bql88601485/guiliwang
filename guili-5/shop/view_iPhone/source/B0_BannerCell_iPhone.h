@@ -22,6 +22,8 @@
 
 @interface B0_BannerCell_iPhone : BeeUICell
 
+@property (nonatomic, strong) NSTimer *pollTime;
+
 AS_OUTLET( BeeUIScrollView, list )
 AS_OUTLET( BeeUIPageControl, pager )
 

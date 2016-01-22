@@ -17,6 +17,10 @@
 
 #pragma mark -
 
+@interface B0_BannerCell_iPhone()
+@property (nonatomic, assign) CGFloat count;
+@end
+
 @implementation B0_BannerCell_iPhone
 
 SUPPORT_AUTOMATIC_LAYOUT( YES )
@@ -32,7 +36,7 @@ DEF_OUTLET( BeeUIPageControl, pager )
      * 将board中BeeUIScrollView对应的signal转换为block的实现方式
      * BeeUIScrollView的block方式写法可以从它对应的delegate方法中转换而来
      */
-
+    self.count = 0;
     @weakify(self);
     
     self.list.animationDuration = 0.25f;
@@ -45,7 +49,7 @@ DEF_OUTLET( BeeUIPageControl, pager )
         
         self.list.total = datas.count;
         self.pager.hidesForSinglePage = YES;
-		
+        
         for ( BeeUIScrollItem * item in self.list.items )
         {
             item.clazz = [B0_BannerPhotoCell_iPhone class];
@@ -53,15 +57,21 @@ DEF_OUTLET( BeeUIPageControl, pager )
             item.data = [datas safeObjectAtIndex:item.index];
             item.rule = BeeUIScrollLayoutRule_Tile;
         }
+        
+        if (self.list.items.count > 0) {
+            if (!self.pollTime) {
+                self.pollTime = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(play) userInfo:nil repeats:YES];
+            }
+        }
     };
     self.list.whenReloaded = ^
     {
         @normalize(self);
-		
+        
         self.pager.numberOfPages = self.list.total;
         self.pager.currentPage = self.list.pageIndex;
-		
-		[self.pager setNeedsDisplay];
+        
+        [self.pager setNeedsDisplay];
     };
     self.list.whenStop = ^
     {
@@ -69,11 +79,25 @@ DEF_OUTLET( BeeUIPageControl, pager )
         
         self.pager.numberOfPages = self.list.total;
         self.pager.currentPage = self.list.pageIndex;
-		
-		[self.pager setNeedsDisplay];
+        self.count = self.list.pageIndex;
+        [self.pager setNeedsDisplay];
     };
 }
-
+- (void)play{
+    if (self.width > 0) {
+        
+        [self.pager setCurrentPage:self.count];
+        
+        [self.list setContentOffset:CGPointMake(self.width*self.count, 0) animated:YES];
+        
+        self.count++;
+        
+        if (self.count > self.list.items.count -1) {
+            self.count = 0;
+        }
+    }
+    
+}
 - (void)dataDidChanged
 {
     [self.list reloadData];
