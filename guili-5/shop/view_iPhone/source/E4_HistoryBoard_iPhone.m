@@ -24,7 +24,7 @@
 #import "CommonNoResultCell.h"
 #import "CommonPullLoader.h"
 #import "CommonFootLoader.h"
-
+#import "G0_CommentVController.h"
 #pragma mark -
 
 @implementation E4_HistoryBoard_iPhone
@@ -44,7 +44,7 @@ DEF_MODEL( OrderModel, orderModel )
 
 - (void)unload
 {
-	SAFE_RELEASE_MODEL( self.orderModel );
+    SAFE_RELEASE_MODEL( self.orderModel );
 }
 
 #pragma mark -
@@ -89,7 +89,7 @@ ON_CREATE_VIEWS( signal )
                 BeeUIScrollItem * item = self.list.items[i];
                 item.clazz = [E4_HistoryCell_iPhone class];
                 item.size = CGSizeAuto;
-                item.data = [self.orderModel.orders safeObjectAtIndex:i];
+                item.data = @{@"bee":self,@"data":[self.orderModel.orders safeObjectAtIndex:i]};
                 item.rule = BeeUIScrollLayoutRule_Tile;
             }
         }
@@ -126,8 +126,8 @@ ON_LAYOUT_VIEWS( signal )
 ON_WILL_APPEAR( signal )
 {
     [bee.ui.appBoard hideTabbar];
-
-	[self.list reloadData];
+    
+    [self.list reloadData];
 }
 
 ON_DID_APPEAR( signal )
@@ -168,59 +168,59 @@ ON_SIGNAL2( E4_HistoryCell_iPhone, signal )
     E4_HistoryCell_iPhone * cell = (E4_HistoryCell_iPhone *)signal.source;
     
     if ( [ExpressModel kuaidi100Key] )
-	{
-		E6_ShippingStatusBoard_iPhone * board = [E6_ShippingStatusBoard_iPhone board];
-		board.expressModel.order = cell.order;
-		[self.stack pushBoard:board animated:YES];
-	}
+    {
+        E6_ShippingStatusBoard_iPhone * board = [E6_ShippingStatusBoard_iPhone board];
+        board.expressModel.order = cell.order;
+        [self.stack pushBoard:board animated:YES];
+    }
 }
 
 #pragma mark -
 
 ON_MESSAGE3( API, order_list, msg )
 {
-	if ( msg.sending )
-	{
-		if ( NO == self.orderModel.loaded )
-		{
-			[self presentLoadingTips:__TEXT(@"tips_loading")];
-		}
-		
-		if ( self.orderModel.orders.count )
-		{
-			[self.list setFooterLoading:YES];
-		}
-		else
-		{
-			[self.list setFooterLoading:NO];
-		}
-	}
-	else
-	{
-		[self dismissTips];
-		
-		[self.list setHeaderLoading:NO];
-		[self.list setFooterLoading:NO];
-	}
-	
-	if ( msg.succeed )
-	{
-		STATUS * status = msg.GET_OUTPUT(@"status");
-		
-		if ( status && status.succeed.boolValue )
-		{
-			[self.list setFooterMore:self.orderModel.more];
-			[self.list asyncReloadData];
-		}
-		else
-		{
-			[self showErrorTips:msg];
-		}
-	}
-	else if ( msg.failed )
-	{
-		[self showErrorTips:msg];
-	}
+    if ( msg.sending )
+    {
+        if ( NO == self.orderModel.loaded )
+        {
+            [self presentLoadingTips:__TEXT(@"tips_loading")];
+        }
+        
+        if ( self.orderModel.orders.count )
+        {
+            [self.list setFooterLoading:YES];
+        }
+        else
+        {
+            [self.list setFooterLoading:NO];
+        }
+    }
+    else
+    {
+        [self dismissTips];
+        
+        [self.list setHeaderLoading:NO];
+        [self.list setFooterLoading:NO];
+    }
+    
+    if ( msg.succeed )
+    {
+        STATUS * status = msg.GET_OUTPUT(@"status");
+        
+        if ( status && status.succeed.boolValue )
+        {
+            [self.list setFooterMore:self.orderModel.more];
+            [self.list asyncReloadData];
+        }
+        else
+        {
+            [self showErrorTips:msg];
+        }
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
 }
 
 @end

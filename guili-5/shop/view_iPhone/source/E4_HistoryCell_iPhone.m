@@ -29,7 +29,14 @@ DEF_OUTLET( BeeUIScrollView, list )
 
 + (CGSize)estimateUISizeByWidth:(CGFloat)width forData:(id)data
 {
-    ORDER * order = data;
+    ORDER * order = nil;
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        order = [data objectForKey:@"data"];
+    }
+    else{
+        order = data;
+    }
+    
     
     CGSize size = CGSizeMake( width, [self.class heightByCount:order.goods_list.count] );
     return size;
@@ -44,8 +51,16 @@ DEF_OUTLET( BeeUIScrollView, list )
 {
     if ( self.data )
     {
-        self.order = self.data;
-
+        ORDER * order = nil;
+        if ([self.data isKindOfClass:[NSDictionary class]]) {
+            order = [self.data objectForKey:@"data"];
+            self.kbeeVC = [self.data objectForKey:@"bee"];
+        }
+        else{
+            order = self.data;
+        }
+        self.order = order;
+        
         [self.list reloadData];
     }
 }
@@ -86,7 +101,13 @@ DEF_OUTLET( BeeUIScrollView, list )
             BeeUIScrollItem * item = [self.list.items safeObjectAtIndex:( i + offset  )];
             item.clazz = [OrderCellBody_iPhone class];
             item.size = CGSizeMake( self.list.width , 90 );
-            item.data = [self.order.goods_list safeObjectAtIndex:i];
+            ORDER_GOODS *data = [self.order.goods_list safeObjectAtIndex:i];
+            data.isFromHistory = YES;
+            if (self.kbeeVC) {
+                item.data = @{@"bee":self.kbeeVC,@"data":data};
+            }else{
+                item.data = data;
+            }
             item.rule = BeeUIScrollLayoutRule_Tile;
         }
         

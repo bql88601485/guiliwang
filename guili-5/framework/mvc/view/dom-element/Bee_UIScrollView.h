@@ -52,15 +52,15 @@ typedef	void (^BeeUIScrollViewBlockI)( BeeUIScrollItem * item );
 
 typedef enum
 {
-	BeeUIScrollLayoutRuleVertical = 0,
-	BeeUIScrollLayoutRuleHorizontal,
-	
-	// Backward compatible
-	BeeUIScrollLayoutRule_Tile = BeeUIScrollLayoutRuleVertical,
-	BeeUIScrollLayoutRule_Fall = BeeUIScrollLayoutRuleVertical,
-	BeeUIScrollLayoutRule_Fill = BeeUIScrollLayoutRuleVertical,
-	BeeUIScrollLayoutRule_Line = BeeUIScrollLayoutRuleHorizontal,
-	BeeUIScrollLayoutRule_Inject = BeeUIScrollLayoutRuleVertical
+    BeeUIScrollLayoutRuleVertical = 0,
+    BeeUIScrollLayoutRuleHorizontal,
+    
+    // Backward compatible
+    BeeUIScrollLayoutRule_Tile = BeeUIScrollLayoutRuleVertical,
+    BeeUIScrollLayoutRule_Fall = BeeUIScrollLayoutRuleVertical,
+    BeeUIScrollLayoutRule_Fill = BeeUIScrollLayoutRuleVertical,
+    BeeUIScrollLayoutRule_Line = BeeUIScrollLayoutRuleHorizontal,
+    BeeUIScrollLayoutRule_Inject = BeeUIScrollLayoutRuleVertical
 } BeeUIScrollLayoutRule;
 
 #pragma mark -
@@ -79,6 +79,8 @@ typedef enum
 @property (nonatomic, retain) Class					clazz;
 @property (nonatomic, assign) UIEdgeInsets			insets;
 @property (nonatomic, assign) CGSize				size;
+
+@property (nonatomic, retain) id                    beeBorad;
 
 @property (nonatomic, retain) id					viewData;	// equals to 'data'
 @property (nonatomic, retain) Class					viewClass;	// equals to 'clazz'

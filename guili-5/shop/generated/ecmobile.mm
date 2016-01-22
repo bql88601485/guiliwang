@@ -129,6 +129,16 @@ CONVERT_PROPERTY_CLASS( children, CATEGORY );
 
 @end
 
+@implementation SENDCOMMENT
+
+@synthesize goods_id = _goods_id;
+@synthesize email = _email;
+@synthesize user_name = _user_name;
+@synthesize user_id = _user_id;
+@synthesize content = _content;
+
+@end
+
 @implementation CONFIG
 
 @synthesize close_comment = _close_comment;
@@ -156,7 +166,7 @@ CONVERT_PROPERTY_CLASS( children, CATEGORY );
 @synthesize price_range = _price_range;
 @synthesize sort_by = _sort_by;
 @synthesize intro=_intro;
-
+@synthesize ids = _ids;
 @end
 
 @implementation GOODS
@@ -268,7 +278,7 @@ CONVERT_PROPERTY_CLASS( goods_list, ORDER_GOODS );
 @synthesize img = _img;
 @synthesize name = _name;
 @synthesize subtotal = _subtotal;
-
+@synthesize isFromHistory = _isFromHistory;
 @end
 
 @implementation PAGINATED

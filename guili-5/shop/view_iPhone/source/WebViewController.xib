@@ -15,10 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K4f-Xr-nyp">
-                    <rect key="frame" x="10" y="10" width="579" height="590"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K4f-Xr-nyp">
+                    <rect key="frame" x="0.0" y="0.0" width="599" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <mutableString key="text">物流说明
+                    <string key="text">物流说明
 欢迎您光临贵礼网，下面对贵礼网的物流方式进行说明：
 1、当日达： 仅限于贵阳市区17：00前下单客户
             云岩区、南明区按照15元/2.5KG（以内）收取物流费用；
@@ -32,7 +32,7 @@
              贵阳市区如不需要当日送达，亦可根据情况手动选择该物流服务。
 按照12元/1KG计算，每超出0.5KG加收2元，超出不足 0.5KG
 按2元收取。
-</mutableString>
+</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
@@ -41,8 +41,8 @@
             <constraints>
                 <constraint firstItem="K4f-Xr-nyp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="93t-1a-lyg"/>
                 <constraint firstAttribute="bottom" secondItem="K4f-Xr-nyp" secondAttribute="bottom" id="PvM-OL-eOg"/>
-                <constraint firstItem="K4f-Xr-nyp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Vc4-2i-qeg"/>
-                <constraint firstItem="K4f-Xr-nyp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="k1j-PD-GGY"/>
+                <constraint firstItem="K4f-Xr-nyp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vc4-2i-qeg"/>
+                <constraint firstItem="K4f-Xr-nyp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="k1j-PD-GGY"/>
             </constraints>
         </view>
     </objects>

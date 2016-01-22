@@ -50,4 +50,8 @@ AS_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 
 @property (nonatomic, assign) BOOL isfromHome;
 
+@property (nonatomic, assign) BOOL isfromBanner;
+
+@property (nonatomic, strong) NSString *kids;
+
 @end
