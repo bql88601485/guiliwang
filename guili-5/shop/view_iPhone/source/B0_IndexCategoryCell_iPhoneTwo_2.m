@@ -96,7 +96,7 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
     }
 }
 
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, category, signal )
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo_2, category, signal )
 {
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {
@@ -104,7 +104,7 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, category, signal )
     }
 }
 
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, goods1, signal )
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo_2, goods1, signal )
 {
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {
@@ -112,7 +112,7 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, goods1, signal )
     }
 }
 
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, goods2, signal )
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo_2, goods2, signal )
 {
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {

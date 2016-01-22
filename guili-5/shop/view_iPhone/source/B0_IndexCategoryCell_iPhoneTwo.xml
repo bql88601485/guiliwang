@@ -130,9 +130,9 @@
         }
         
         .category-left {
-        width: 96%;
+        width: 90%;
         height: 60px;
-        margin-left: 4px;
+        margin-left: 10px;
         }
         
         .category-goods-title {

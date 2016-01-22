@@ -74,7 +74,7 @@ SUPPORT_AUTOMATIC_LAYOUT( YES )
     }
 }
 
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, category, signal )
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne_1, category, signal )
 {
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {
@@ -82,7 +82,7 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, category, signal )
     }
 }
 
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, goods1, signal )
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne_1, goods1, signal )
 {
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {
@@ -90,21 +90,21 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, goods1, signal )
     }
 }
 
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, goods2, signal )
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne_1, goods2, signal )
 {
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {
         [self sendUISignal:self.GOODS2_TOUCHED];
     }
 }
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, goods3, signal )
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne_1, goods3, signal )
 {
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {
         [self sendUISignal:self.GOODS3_TOUCHED];
     }
 }
-ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, goods4, signal )
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne_1, goods4, signal )
 {
     if ( [signal is:BeeUIButton.TOUCH_UP_INSIDE] )
     {

@@ -17,7 +17,6 @@
                 </col>
                 <button id="goods1" class="mask"></button>
             </row>
-            <!--            <view class="v-line1"/>-->
         </col>
         <col class="category-group-mid">
             <image class="category-group-bg"/>
@@ -121,13 +120,13 @@
         .category-goods {
         margin-top: 10px;
         width: 100%;
-        height: 80px;
+        height: 100%;
         }
         
         .category-left {
-        width: 96%;
+        width: 90%;
         height: 60px;
-        margin-left: 4px;
+        margin-left: 10px;
         }
         
         .category-goods-title {

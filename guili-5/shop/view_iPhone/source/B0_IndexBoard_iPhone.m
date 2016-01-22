@@ -550,12 +550,44 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhone, GOODS3_TOUCHED, signal )
         }
     }
 }
+ON_SIGNAL3( B0_IndexCategoryCell_iPhone_3, GOODS3_TOUCHED, signal )
+{
+    CATEGORY * category = signal.sourceCell.data;
+    
+    if ( category )
+    {
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:2];
+        
+        if ( goods )
+        {
+            B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
+            board.goodsModel.goods_id = goods.id;
+            [self.stack pushBoard:board animated:YES];
+        }
+    }
+}
 //sss
 
 /**
  * 首页-分类商品-商品2，点击事件触发时执行的操作
  */
 ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, GOODS1_TOUCHED, signal )
+{
+    CATEGORY * category = signal.sourceCell.data;
+    
+    if ( category )
+    {
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:0];
+        
+        if ( goods )
+        {
+            B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
+            board.goodsModel.goods_id = goods.id;
+            [self.stack pushBoard:board animated:YES];
+        }
+    }
+}
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo_2, GOODS1_TOUCHED, signal )
 {
     CATEGORY * category = signal.sourceCell.data;
     
@@ -587,7 +619,22 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo, GOODS2_TOUCHED, signal )
         }
     }
 }
-
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneTwo_2, GOODS2_TOUCHED, signal )
+{
+    CATEGORY * category = signal.sourceCell.data;
+    
+    if ( category )
+    {
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:1];
+        
+        if ( goods )
+        {
+            B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
+            board.goodsModel.goods_id = goods.id;
+            [self.stack pushBoard:board animated:YES];
+        }
+    }
+}
 
 
 //ss
@@ -607,7 +654,22 @@ ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne, GOODS1_TOUCHED, signal )
         }
     }
 }
-
+ON_SIGNAL3( B0_IndexCategoryCell_iPhoneOne_1, GOODS1_TOUCHED, signal )
+{
+    CATEGORY * category = signal.sourceCell.data;
+    
+    if ( category )
+    {
+        SIMPLE_GOODS * goods = [category.goods safeObjectAtIndex:0];
+        
+        if ( goods )
+        {
+            B2_ProductDetailBoard_iPhone * board = [B2_ProductDetailBoard_iPhone board];
+            board.goodsModel.goods_id = goods.id;
+            [self.stack pushBoard:board animated:YES];
+        }
+    }
+}
 
 
 ON_SIGNAL3( IndexCategoryTabCell, seasoning_button, signal )
