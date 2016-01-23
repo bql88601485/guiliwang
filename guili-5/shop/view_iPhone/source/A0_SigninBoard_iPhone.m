@@ -59,7 +59,7 @@ DEF_MODEL( UserModel, userModel )
     A1_SigupNewViewController *sigup = [[A1_SigupNewViewController alloc] initWithNibName:@"A1_SigupNewViewController" bundle:nil];
     
     sigup.goBack = ^(){
-    
+        
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     
@@ -69,11 +69,14 @@ DEF_MODEL( UserModel, userModel )
 }
 
 - (IBAction)showPawwEvent:(id)sender {
-
+    
     A2__ForgetBoard_iPhone *fogot = [[A2__ForgetBoard_iPhone alloc] initWithNibName:@"A2_ ForgetBoard_iPhone" bundle:nil];
+    
+    
+    __block A0_SigninBoard_iPhone *blck = self;
     fogot.goBack = ^(){
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [blck dismissViewControllerAnimated:YES completion:nil];
     };
     
     [self presentViewController:fogot animated:YES completion:^{
@@ -86,27 +89,26 @@ DEF_MODEL( UserModel, userModel )
 #pragma mark - KVO
 - (void)textFieldDidChange
 {
-
-
-
+    
+    
+    
 }
 
 - (IBAction)goback:(id)sender {
     
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 - (IBAction)qqloge:(id)sender {
     
     TencentLogin *tenLogin = [TencentLogin sharedInstance];
+    __block A0_SigninBoard_iPhone *blck = self;
     [tenLogin TencentLogin:^(TenCentLoginStatus status, NSDictionary *userInfo) {
         
-        [self presentLoadingTips:__TEXT(@"manage2_over")];
+        [blck presentLoadingTips:__TEXT(@"manage2_over")];
         
         if (status == TenCentLoginStatus_OK) {
-            [self.userModel OtherUpApp:@"qq" username:[userInfo objectForKey:@"nickname"] openid:[userInfo objectForKey:@"openId"]];
+            [blck.userModel OtherUpApp:@"qq" username:[userInfo objectForKey:@"nickname"] openid:[userInfo objectForKey:@"openId"]];
         }
         
     }];
@@ -116,18 +118,18 @@ DEF_MODEL( UserModel, userModel )
     if ([WXApi isWXAppInstalled]) {
         
         [self presentLoadingTips:__TEXT(@"tips_loading")];
-        
+        __block A0_SigninBoard_iPhone *blck = self;
         WeiXinLogin *login = [WeiXinLogin sharedInstance];
         [login WeiXinLogin:^(WeiXinLoginStatus status, NSDictionary *userInfo) {
             
-            [self presentLoadingTips:__TEXT(@"manage2_over")];
+            [blck presentLoadingTips:__TEXT(@"manage2_over")];
             
-            [self.userModel OtherUpApp:@"wx" username:[userInfo objectForKey:@"nickname"] openid:[userInfo objectForKey:@"openid"]];
+            [blck.userModel OtherUpApp:@"wx" username:[userInfo objectForKey:@"nickname"] openid:[userInfo objectForKey:@"openid"]];
             
         }];
         
     }
-
+    
     
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -147,7 +149,6 @@ DEF_MODEL( UserModel, userModel )
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
     [self.userTe addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
     [self.passW addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
     
@@ -155,7 +156,7 @@ DEF_MODEL( UserModel, userModel )
     
     [self.userTe setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.passW setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
- 
+    
     
     
     [self observeNotification:UserModel.LOGIN];
@@ -174,79 +175,79 @@ DEF_MODEL( UserModel, userModel )
 
 - (void)doLogin
 {
-	NSString * userName = self.userTe.text;
-	NSString * password = self.passW.text;
-	
-	if ( 0 == userName.length || NO == [userName isChineseUserName] )
-	{
-		[self presentMessageTips:__TEXT(@"wrong_username")];
-		return;
-	}
+    NSString * userName = self.userTe.text;
+    NSString * password = self.passW.text;
     
-	if ( userName.length < 2 )
-	{
-		[self presentMessageTips:__TEXT(@"username_too_short")];
-		return;
-	}
+    if ( 0 == userName.length || NO == [userName isChineseUserName] )
+    {
+        [self presentMessageTips:__TEXT(@"wrong_username")];
+        return;
+    }
     
-	if ( userName.length > 20 )
-	{
-		[self presentMessageTips:__TEXT(@"username_too_long")];
-		return;
-	}
+    if ( userName.length < 2 )
+    {
+        [self presentMessageTips:__TEXT(@"username_too_short")];
+        return;
+    }
     
-	if ( 0 == password.length || NO == [password isPassword] )
-	{
-		[self presentMessageTips:__TEXT(@"wrong_password")];
-		return;
-	}
+    if ( userName.length > 20 )
+    {
+        [self presentMessageTips:__TEXT(@"username_too_long")];
+        return;
+    }
     
-	if ( password.length < 6 )
-	{
-		[self presentMessageTips:__TEXT(@"password_too_short")];
-		return;
-	}
-	
-	if ( password.length > 20 )
-	{
-		[self presentMessageTips:__TEXT(@"password_too_long")];
-		return;
-	}
-
-	[self.userModel signinWithUser:userName password:password];
+    if ( 0 == password.length || NO == [password isPassword] )
+    {
+        [self presentMessageTips:__TEXT(@"wrong_password")];
+        return;
+    }
+    
+    if ( password.length < 6 )
+    {
+        [self presentMessageTips:__TEXT(@"password_too_short")];
+        return;
+    }
+    
+    if ( password.length > 20 )
+    {
+        [self presentMessageTips:__TEXT(@"password_too_long")];
+        return;
+    }
+    
+    [self.userModel signinWithUser:userName password:password];
 }
 
 #pragma mark -
 
 ON_MESSAGE3( API, user_signin, msg )
 {
-	if ( msg.sending )
-	{
-		[self presentLoadingTips:__TEXT(@"signing_in")];
-	}
-	else
-	{
-		[self dismissTips];
-	}
-
-	if ( msg.succeed )
-	{
-		if ( [UserModel sharedInstance].firstUse )
-		{
-			[bee.ui.appBoard presentSuccessTips:__TEXT(@"welcome")];
-		}
-		else
-		{
-			[bee.ui.appBoard presentSuccessTips:__TEXT(@"welcome_back")];
-		}
-		
+    if ( msg.sending )
+    {
+        [self presentLoadingTips:__TEXT(@"signing_in")];
+    }
+    else
+    {
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        if ( [UserModel sharedInstance].firstUse )
+        {
+            [bee.ui.appBoard presentSuccessTips:__TEXT(@"welcome")];
+        }
+        else
+        {
+            [bee.ui.appBoard presentSuccessTips:__TEXT(@"welcome_back")];
+        }
+        
         
         [self dismissViewControllerAnimated:YES completion:nil];
-	}
-	else if ( msg.failed )
-	{
-		[self showErrorTips:msg];
-	}
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
 }
 ON_MESSAGE3( API, existuser, msg )
 {
@@ -277,7 +278,9 @@ ON_MESSAGE3( API, existuser, msg )
         [self.userModel setOnline:YES];
         
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self release];
+        }];
         
     }
     else if ( msg.failed )

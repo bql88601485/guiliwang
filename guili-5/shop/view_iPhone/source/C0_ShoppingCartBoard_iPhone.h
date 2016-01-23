@@ -11,7 +11,7 @@
 //
 //  Powered by BeeFramework
 //
-	
+
 #import "Bee.h"
 #import "BaseBoard_iPhone.h"
 
@@ -43,5 +43,7 @@ AS_MODEL( AddressListModel,	addressListModel )
 @property (nonatomic, retain) NSMutableArray *				editingState;
 @property (nonatomic, assign) C0_ShoppingCartCell_iPhone *	currentCell;
 @property (nonatomic, assign) BOOL 	isShopCarAdd;
+
+@property (nonatomic, assign) BOOL isKFromHome;
 
 @end

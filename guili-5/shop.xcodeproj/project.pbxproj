@@ -980,6 +980,12 @@
 		CB60E56A179E2B100094F91C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB60E569179E2B100094F91C /* icon.png */; };
 		CB60E56C179E2B360094F91C /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB60E56B179E2B360094F91C /* icon@2x.png */; };
 		CB81D5A318ABB41F00F277EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB81D5A218ABB41F00F277EA /* CoreLocation.framework */; };
+		E52248F11C5370CC00503D6A /* FenLeiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E52248EF1C5370CC00503D6A /* FenLeiTableViewCell.m */; };
+		E52248F21C5370CC00503D6A /* FenLeiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E52248F01C5370CC00503D6A /* FenLeiTableViewCell.xib */; };
+		E52248F61C5379FF00503D6A /* TwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E52248F41C5379FF00503D6A /* TwoTableViewCell.m */; };
+		E52248F71C5379FF00503D6A /* TwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E52248F51C5379FF00503D6A /* TwoTableViewCell.xib */; };
+		E52248FB1C537D4300503D6A /* ItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E52248F91C537D4300503D6A /* ItemTableViewCell.m */; };
+		E52248FC1C537D4300503D6A /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E52248FA1C537D4300503D6A /* ItemTableViewCell.xib */; };
 		E5383F221C0426930076488D /* zhuce.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E5383F211C0426930076488D /* zhuce.jpg */; };
 		E5383F241C0427330076488D /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5383F231C0427330076488D /* Images-2.xcassets */; };
 		E5383F261C04276D0076488D /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E5383F251C04276D0076488D /* Icon-60.png */; };
@@ -1020,6 +1026,8 @@
 		E5B62DC61C4B9B3E00284623 /* B2_KBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B62DC41C4B9B3E00284623 /* B2_KBCell.m */; };
 		E5B62DC71C4B9B3E00284623 /* B2_KBCell.xml in Resources */ = {isa = PBXBuildFile; fileRef = E5B62DC51C4B9B3E00284623 /* B2_KBCell.xml */; };
 		E5B62DC91C4B9D2B00284623 /* cell_bg_headerNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B62DC81C4B9D2B00284623 /* cell_bg_headerNew@2x.png */; };
+		E5DE327F1C5359E1004A8D2A /* body_cont_bgNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DE327E1C5359E1004A8D2A /* body_cont_bgNew@2x.png */; };
+		E5DE32831C535FCB004A8D2A /* NewViewHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE32811C535FCB004A8D2A /* NewViewHomeController.m */; };
 		E5E0B7F51C168690008D8EE3 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E0B7F31C168690008D8EE3 /* line.png */; };
 		E5E0B7F61C168690008D8EE3 /* PEPhotoCropEditorBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E0B7F41C168690008D8EE3 /* PEPhotoCropEditorBorder@2x.png */; };
 		E5E483221C4E3E5000589A3E /* nav_bg_iphone5Two@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E483211C4E3E5000589A3E /* nav_bg_iphone5Two@2x.png */; };
@@ -2691,6 +2699,15 @@
 		CB60E569179E2B100094F91C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		CB60E56B179E2B360094F91C /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		CB81D5A218ABB41F00F277EA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E52248EE1C5370CC00503D6A /* FenLeiTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FenLeiTableViewCell.h; sourceTree = "<group>"; };
+		E52248EF1C5370CC00503D6A /* FenLeiTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FenLeiTableViewCell.m; sourceTree = "<group>"; };
+		E52248F01C5370CC00503D6A /* FenLeiTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FenLeiTableViewCell.xib; sourceTree = "<group>"; };
+		E52248F31C5379FF00503D6A /* TwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoTableViewCell.h; sourceTree = "<group>"; };
+		E52248F41C5379FF00503D6A /* TwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoTableViewCell.m; sourceTree = "<group>"; };
+		E52248F51C5379FF00503D6A /* TwoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoTableViewCell.xib; sourceTree = "<group>"; };
+		E52248F81C537D4300503D6A /* ItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableViewCell.h; sourceTree = "<group>"; };
+		E52248F91C537D4300503D6A /* ItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableViewCell.m; sourceTree = "<group>"; };
+		E52248FA1C537D4300503D6A /* ItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
 		E5383F211C0426930076488D /* zhuce.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zhuce.jpg; sourceTree = "<group>"; };
 		E5383F231C0427330076488D /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		E5383F251C04276D0076488D /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
@@ -2745,6 +2762,9 @@
 		E5B62DC41C4B9B3E00284623 /* B2_KBCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B2_KBCell.m; sourceTree = "<group>"; };
 		E5B62DC51C4B9B3E00284623 /* B2_KBCell.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = B2_KBCell.xml; sourceTree = "<group>"; };
 		E5B62DC81C4B9D2B00284623 /* cell_bg_headerNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_bg_headerNew@2x.png"; sourceTree = "<group>"; };
+		E5DE327E1C5359E1004A8D2A /* body_cont_bgNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "body_cont_bgNew@2x.png"; sourceTree = "<group>"; };
+		E5DE32801C535FCB004A8D2A /* NewViewHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewViewHomeController.h; sourceTree = "<group>"; };
+		E5DE32811C535FCB004A8D2A /* NewViewHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewViewHomeController.m; sourceTree = "<group>"; };
 		E5E0B7F31C168690008D8EE3 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		E5E0B7F41C168690008D8EE3 /* PEPhotoCropEditorBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PEPhotoCropEditorBorder@2x.png"; sourceTree = "<group>"; };
 		E5E483211C4E3E5000589A3E /* nav_bg_iphone5Two@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bg_iphone5Two@2x.png"; sourceTree = "<group>"; };
@@ -2990,6 +3010,7 @@
 		414856291AC4FCFC003FD9DF /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				E5DE327E1C5359E1004A8D2A /* body_cont_bgNew@2x.png */,
 				E5E483211C4E3E5000589A3E /* nav_bg_iphone5Two@2x.png */,
 				E5B62DC81C4B9D2B00284623 /* cell_bg_headerNew@2x.png */,
 				E5B62DC11C4B7C9400284623 /* searchIcon@2x.png */,
@@ -3279,6 +3300,17 @@
 				4148570F1AC4FCFD003FD9DF /* B0_IndexBoard_iPhone.h */,
 				414857101AC4FCFD003FD9DF /* B0_IndexBoard_iPhone.m */,
 				414857111AC4FCFD003FD9DF /* B0_IndexBoard_iPhone.xml */,
+				E5DE32801C535FCB004A8D2A /* NewViewHomeController.h */,
+				E5DE32811C535FCB004A8D2A /* NewViewHomeController.m */,
+				E52248EE1C5370CC00503D6A /* FenLeiTableViewCell.h */,
+				E52248EF1C5370CC00503D6A /* FenLeiTableViewCell.m */,
+				E52248F01C5370CC00503D6A /* FenLeiTableViewCell.xib */,
+				E52248F31C5379FF00503D6A /* TwoTableViewCell.h */,
+				E52248F41C5379FF00503D6A /* TwoTableViewCell.m */,
+				E52248F51C5379FF00503D6A /* TwoTableViewCell.xib */,
+				E52248F81C537D4300503D6A /* ItemTableViewCell.h */,
+				E52248F91C537D4300503D6A /* ItemTableViewCell.m */,
+				E52248FA1C537D4300503D6A /* ItemTableViewCell.xib */,
 				52F4863C1C4E6A8A00E9D649 /* WebViewController.h */,
 				52F4863D1C4E6A8A00E9D649 /* WebViewController.m */,
 				52F4863E1C4E6A8A00E9D649 /* WebViewController.xib */,
@@ -5909,6 +5941,7 @@
 				414859761AC4FCFE003FD9DF /* B4_ProductParamCell_iPhone.xml in Resources */,
 				63023910177C1676004C052D /* Default.png in Resources */,
 				414859F01AC4FCFE003FD9DF /* F2_EditAddressCell_iPhone.xml in Resources */,
+				E52248FC1C537D4300503D6A /* ItemTableViewCell.xib in Resources */,
 				414859091AC4FCFE003FD9DF /* shopping_cart_edit_choose_num_bg@2x.png in Resources */,
 				414858861AC4FCFE003FD9DF /* cell_bg_content_small@2x.png in Resources */,
 				414859B21AC4FCFE003FD9DF /* D1_CategoryBoard_iPhone.xml in Resources */,
@@ -5929,6 +5962,7 @@
 				4148591F1AC4FCFE003FD9DF /* trade_info_stream_body_bg_02@2x.png in Resources */,
 				414858A91AC4FCFE003FD9DF /* home_body_titleimg_2@2x.png in Resources */,
 				E5B2E7701C05849A00CF98E2 /* 组-2_03_02@2x.png in Resources */,
+				E5DE327F1C5359E1004A8D2A /* body_cont_bgNew@2x.png in Resources */,
 				414858FA1AC4FCFE003FD9DF /* searcher_new_voice_cont_voice_icon@2x.png in Resources */,
 				414858BF1AC4FCFE003FD9DF /* item_grid_float_bg_grey@2x.png in Resources */,
 				1848BD9818B4D8690007238A /* umFeedback.bundle in Resources */,
@@ -5940,6 +5974,7 @@
 				414859F21AC4FCFE003FD9DF /* F3_RegionPickBoard_iPhone.xml in Resources */,
 				4148589F1AC4FCFE003FD9DF /* footer_shopping_cart_active_icon@2x.png in Resources */,
 				414859441AC4FCFE003FD9DF /* A1_SignupBoard_iPhone.xml in Resources */,
+				E52248F21C5370CC00503D6A /* FenLeiTableViewCell.xib in Resources */,
 				414859131AC4FCFE003FD9DF /* shopping_checkout_phone_icon@2x.png in Resources */,
 				41485A021AC4FCFE003FD9DF /* IndexBannerCell.xml in Resources */,
 				414858E11AC4FCFE003FD9DF /* profile_no_avatar_icon@2x.png in Resources */,
@@ -5970,6 +6005,7 @@
 				4148592E1AC4FCFE003FD9DF /* tuitional_img_1@2x.png in Resources */,
 				4148593B1AC4FCFE003FD9DF /* wizard.css in Resources */,
 				414858D71AC4FCFE003FD9DF /* nav_bg@2x.png in Resources */,
+				E52248F71C5379FF00503D6A /* TwoTableViewCell.xib in Resources */,
 				414859321AC4FCFE003FD9DF /* tuitional_img_2_4@2x.png in Resources */,
 				414858811AC4FCFE003FD9DF /* button_narrow_gray@2x.png in Resources */,
 				4148593C1AC4FCFE003FD9DF /* wizard_1.xml in Resources */,
@@ -6253,6 +6289,7 @@
 				9D67CBE61A4A7EAB003ABA05 /* mztools.c in Sources */,
 				4148597C1AC4FCFE003FD9DF /* BaseBoard_iPhone.m in Sources */,
 				414859F11AC4FCFE003FD9DF /* F3_RegionPickBoard_iPhone.m in Sources */,
+				E52248F11C5370CC00503D6A /* FenLeiTableViewCell.m in Sources */,
 				4148585A1AC4FCFE003FD9DF /* UIViewController+ErrorTips.m in Sources */,
 				9D67CA9E1A4A7EAA003ABA05 /* Bee_Controller.mm in Sources */,
 				9D67CB9F1A4A7EAB003ABA05 /* NSObject+BeeProperty.mm in Sources */,
@@ -6413,6 +6450,7 @@
 				9D67C6401A4A7BBC003ABA05 /* bee.services.uppayplugin.m in Sources */,
 				9D67CAA61A4A7EAA003ABA05 /* BeeMessage+BeeNetwork.mm in Sources */,
 				414859A01AC4FCFE003FD9DF /* C4_InvoiceBoard_iPhone.m in Sources */,
+				E5DE32831C535FCB004A8D2A /* NewViewHomeController.m in Sources */,
 				9D67CB431A4A7EAA003ABA05 /* UITextView+LayoutParser.m in Sources */,
 				414859861AC4FCFE003FD9DF /* C0_ShoppingCartHeaderCell_iPhone.m in Sources */,
 				414859A31AC4FCFE003FD9DF /* C5_BonusBoard_iPhone.m in Sources */,
@@ -6594,6 +6632,7 @@
 				9D67CAEE1A4A7EAA003ABA05 /* UINavigationBar+BeeExtension.m in Sources */,
 				9D67CBB81A4A7EAB003ABA05 /* Bee_HTTPServer2.m in Sources */,
 				9D67CAB41A4A7EAA003ABA05 /* Bee_UIRouter.m in Sources */,
+				E52248FB1C537D4300503D6A /* ItemTableViewCell.m in Sources */,
 				9D67CBBB1A4A7EAB003ABA05 /* Bee_HTTPUtility2.m in Sources */,
 				9D67CB121A4A7EAA003ABA05 /* UIView+Manipulation.m in Sources */,
 				9D67C6101A4A7BBC003ABA05 /* RSADataSigner.m in Sources */,
@@ -6605,6 +6644,7 @@
 				9D67CAF21A4A7EAA003ABA05 /* Bee_UIActivity.m in Sources */,
 				4148599C1AC4FCFE003FD9DF /* C2_PaymentCell_iPhone.m in Sources */,
 				4148584C1AC4FCFE003FD9DF /* AppBoard_iPhone.m in Sources */,
+				E52248F61C5379FF00503D6A /* TwoTableViewCell.m in Sources */,
 				9D67C61A1A4A7BBC003ABA05 /* ServicePush.m in Sources */,
 				41485AE51AC50355003FD9DF /* rscode.c in Sources */,
 				9D67CB291A4A7EAA003ABA05 /* Bee_UISignal.m in Sources */,
@@ -6904,7 +6944,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: San Meditech Co., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: San Meditech Co., Ltd.";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6965,7 +7005,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: San Meditech Co., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: San Meditech Co., Ltd.";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7055,7 +7095,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: San Meditech Co., Ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: San Meditech Co., Ltd.";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

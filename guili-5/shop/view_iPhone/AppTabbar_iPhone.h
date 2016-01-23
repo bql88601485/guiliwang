@@ -22,6 +22,8 @@ AS_UI( AppTabbar_iPhone, tabbar )
 
 @interface AppTabbar_iPhone : BeeUICell
 
+@property (nonatomic, assign) NSInteger selectNUm;
+
 AS_SINGLETON( AppTabbar_iPhone )
 
 AS_OUTLET( BeeUILabel, hometext );

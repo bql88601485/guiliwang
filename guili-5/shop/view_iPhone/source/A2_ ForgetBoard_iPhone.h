@@ -15,7 +15,7 @@
 #import "controller.h"
 #import "model.h"
 typedef void(^BackGO)();
-@interface A2__ForgetBoard_iPhone : BaseBoard_iPhone
+@interface A2__ForgetBoard_iPhone : BeeUIBoard
 
 AS_MODEL(UserModel, userModel);
 

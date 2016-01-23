@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isHome = NO;
     // Do any additional setup after loading the view from its nib.
     self.title= @"物流说明";
     self.navigationBarLeft  = [UIImage imageNamed:@"nav_back.png"];;

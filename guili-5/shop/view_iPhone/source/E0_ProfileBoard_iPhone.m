@@ -119,11 +119,17 @@ ON_LAYOUT_VIEWS( signal )
 
 ON_WILL_APPEAR( signal )
 {
-    [bee.ui.appBoard showTabbar];
+    if (bee.ui.tabbar.selectNUm == 3) {
+        self.isHome = YES;
+        
+        [bee.ui.appBoard showTabbar];
+        
+        [[CartModel sharedInstance] reload];
+        
+        [self updateState];
+    }
     
-    [[CartModel sharedInstance] reload];
     
-    [self updateState];
 }
 
 ON_DID_APPEAR( signal )

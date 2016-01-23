@@ -383,6 +383,7 @@ CONVERT_PROPERTY_CLASS( goods_list, ORDER_GOODS );
 @synthesize promote_price = _promote_price;
 @synthesize shop_price = _shop_price;
 @synthesize seller_note = _seller_note;
+@synthesize teshuGG = _teshuGG;
 @end
 
 @implementation STATUS

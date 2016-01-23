@@ -43,6 +43,7 @@ DEF_OUTLET( BeeUIScrollView, list )
         
         self.list.total = _pictures.count;
         
+        
         for ( BeeUIScrollItem * item in self.list.items )
         {
             item.clazz = [B2_ProductDetailSlideCell_iPhone class];

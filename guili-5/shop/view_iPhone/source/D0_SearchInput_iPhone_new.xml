@@ -60,7 +60,7 @@
         width:20px;
         height:20px;
         top:10px;
-        left:10px;
+        right:10px;
         image: url(扫码.png);
         image-selected: url(扫码.png);
         }
@@ -70,7 +70,7 @@
         width:20px;
         height:20px;
         top:10px;
-        right:10px;
+        left:10px;
         image: url(searchIcon.png);
         image-selected: url(searchIcon.png);
         

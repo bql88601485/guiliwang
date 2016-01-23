@@ -5,25 +5,15 @@
         <label id="cate_name" class="cate-name">-</label>
     </col>
     <row class="category-wrapper">
-        <row class="category-group">
-            <col class="category-group-mid">
-                <image class="category-group-bg"/>
-                <row class="category-goods">
-                    <image id="goods-image1" class="category-goods-image"/>
-                    <col class="category-left">
-                        <label id="goods-title1" class="category-goods-title"></label>
-                        <row class="goods-subprice-wrapper">
-                            <label id="goods-price1" class="category-goods-price"></label>
-                            <row class="goods-subprice-wrapper_">
-                                <label id="goods-old1" class="category-goods-old"></label>
-                                <view id="goods-subprice-line"/>
-                            </row>
-                        </row>
-                    </col>
-                    <button id="goods1" class="mask"></button>
-                </row>
+        <image class="category-group-bg"/>
+        <image class="category-group-bg1"/>
+        <row class="category-goods">
+            <image id="goods-image1" class="category-goods-image"/>
+            <col class="category-left">
+                <label id="goods-title1" class="category-goods-title"></label>
+                <label id="goods-price1" class="category-goods-price"></label>
             </col>
-            <!--            <view class="h-line"/>-->
+            <button id="goods1" class="mask"></button>
         </row>
     </row>
     
@@ -31,40 +21,50 @@
         
         .cate-title{
         width:100%;
-        height:20px;
+        height:25px;
         
         }
         .cate-name{
         top:2px;
         width:200px;
-        height:100%;
-        font-weight: bold;
+        height:20%;
         text-align:left;
         color: #212767;
-        font-size: 15px;
+        font-size: 12px;
+        left:2px;
         }
         .cate-image{
         top:2px;
-        width:5px;
+        width:4px;
         height:20px;
         background-color: #212767;
         }
         .category-wrapper {
         width: 100%;
-        height: 170px;
+        height: 100%;
         float: center;
         align: center;
         v-align: center;
         }
         
         .category-group-bg {
+        top:3px;
         width: 100%;
-        height: 100%;
-        padding: 4px;
+        height: 90%;
         position: absolute;
         image-mode: stretch;
-        <!--        background-color: #ffffff;-->
-        image-src: url(body_cont_bg.png);
+        background-color: #ffffff;
+        <!--        image-src: url(body_cont_bgNew.png);-->
+        }
+        
+        .category-group-bg1 {
+        top:2px;
+        width: 100%;
+        height: 89%;
+        padding: 0px;
+        position: absolute;
+        image-mode: stretch;
+        image-src: url(body_cont_bgNew.png);
         }
         
         .category-image {

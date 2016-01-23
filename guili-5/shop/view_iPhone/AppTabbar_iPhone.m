@@ -80,7 +80,7 @@ SUPPORT_RESOURCE_LOADING( YES )
 - (void)selectHome
 {
     [self deselectAll];
-    
+    self.selectNUm = 0;
     $(@"#home-bg").SHOW();
     $(@"#home-button").SELECT();
     
@@ -92,7 +92,7 @@ SUPPORT_RESOURCE_LOADING( YES )
 - (void)selectSearch
 {
     [self deselectAll];
-    
+    self.selectNUm = 1;
     $(@"#category-bg").SHOW();
     $(@"#category-button").SELECT();
     
@@ -104,7 +104,7 @@ SUPPORT_RESOURCE_LOADING( YES )
 - (void)selectCart
 {
     [self deselectAll];
-    
+    self.selectNUm = 2;
     $(@"#cart-bg").SHOW();
     $(@"#cart-button").SELECT();
     
@@ -116,7 +116,7 @@ SUPPORT_RESOURCE_LOADING( YES )
 - (void)selectUser
 {
     [self deselectAll];
-    
+    self.selectNUm = 3;
     $(@"#user-bg").SHOW();
     $(@"#user-button").SELECT();
     

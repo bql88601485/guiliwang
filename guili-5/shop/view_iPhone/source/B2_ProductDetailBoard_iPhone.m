@@ -414,7 +414,7 @@ ON_LAYOUT_VIEWS( signal )
 
 ON_WILL_APPEAR( signal )
 {
- //   self.isHome = NO;
+    //   self.isHome = NO;
     
     [self.goodsModel reload];
     [self.cartModel reload];
@@ -836,8 +836,9 @@ ON_SIGNAL3( B2_ProductDetailTabCell_iPhone, cart, signal)
         [bee.ui.appBoard showLogin];
         return;
     }
-    
-    [self.stack pushBoard:[C0_ShoppingCartBoard_iPhone board] animated:YES];
+    C0_ShoppingCartBoard_iPhone *bod = [C0_ShoppingCartBoard_iPhone board];
+    bod.isKFromHome = YES;
+    [self.stack pushBoard:bod animated:YES];
 }
 
 
@@ -1259,7 +1260,9 @@ ON_MESSAGE3( API, cart_create, msg )
             
             if ( self.ACTION_BUY == self.action )
             {
-                [self.stack pushBoard:[C0_ShoppingCartBoard_iPhone board] animated:YES];
+                C0_ShoppingCartBoard_iPhone *bod = [C0_ShoppingCartBoard_iPhone board];
+                bod.isKFromHome = YES;
+                [self.stack pushBoard:bod animated:YES];
             }
             
             NSNumber * count = (NSNumber *)_tabbar.data;

@@ -63,6 +63,12 @@
 #import "Bee_UICapability.h"
 #import "NSObject+UIPropertyMapping.h"
 
+#import "NewViewHomeController.h"
+#import "B1_ProductListBoard_iPhone.h"
+#import "C0_ShoppingCartBoard_iPhone.h"
+#import "E0_ProfileBoard_iPhone.h"
+#import "BaseBoard_iPhone.h"
+#import "AppTabbar_iPhone.h"
 #pragma mark -
 
 #undef	MAX_SIGNALS
@@ -479,6 +485,8 @@ static NSMutableArray *		__allBoards = nil;
         
         [self sendUISignal:BeeUIBoard.WILL_APPEAR];
     }
+    
+    [self performSelector:@selector(setNav) withObject:nil afterDelay:0.0];
 }
 
 #pragma mark -
@@ -576,6 +584,117 @@ static NSMutableArray *		__allBoards = nil;
 }
 
 // Called when the view is about to made visible. Default does nothing
+- (void)setNav{
+    
+    
+    if ([self.stack.topViewController isKindOfClass:[NewViewHomeController class]] ||
+        [self.stack.topViewController isKindOfClass:[B1_ProductListBoard_iPhone class]] ||
+        [self.stack.topViewController isKindOfClass:[C0_ShoppingCartBoard_iPhone class]] ||
+        [self.stack.topViewController isKindOfClass:[E0_ProfileBoard_iPhone class]]) {
+        
+        CGFloat nn = bee.ui.tabbar.selectNUm;
+        
+        
+        if ([self.stack.topViewController isKindOfClass:[B1_ProductListBoard_iPhone class]]) {
+            B1_ProductListBoard_iPhone *to = (id )self.stack.topViewController;
+            if (nn != 1) {
+                self.isHome = NO;
+            }else{
+                self.isHome = YES;
+                
+                if (to.isfromHome) {
+                    self.isHome = NO;
+                }else{
+                    self.isHome = YES;
+                }
+            }
+        }
+        else if([self.stack.topViewController isKindOfClass:[NewViewHomeController class]]){
+            
+            if (nn == 3) {
+                self.isHome = YES;
+            }
+            else{
+                if (nn != 0) {
+                    self.isHome = NO;
+                }else{
+                    self.isHome = YES;
+                }
+            }
+        }else if([self.stack.topViewController isKindOfClass:[C0_ShoppingCartBoard_iPhone class]]){
+            if (nn != 2) {
+                self.isHome = NO;
+            }else{
+                self.isHome = YES;
+            }
+        }else if([self.stack.topViewController isKindOfClass:[E0_ProfileBoard_iPhone class]]){
+            if (nn != 3) {
+                self.isHome = NO;
+            }else{
+                self.isHome = YES;
+            }
+        }
+        
+    }else{
+        self.isHome = NO;
+    }
+    
+    
+    if (!self.isHome) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+        
+        // 配置导航条
+        {
+            [BeeUINavigationBar setTitleColor:[UIColor blackColor]];
+            [BeeUINavigationBar setBackgroundColor:[UIColor whiteColor]];
+            
+            if ( IOS7_OR_LATER )
+            {
+                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg_iphone5Two.png"]];
+            }
+            else
+            {
+                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"]];
+            }
+            UILabel *line = (id )[self.navigationController.navigationBar viewWithTag:10010];
+            if (line) {
+                line.backgroundColor = [UIColor lightGrayColor];
+            }
+            else{
+                line = [[UILabel alloc] init];
+                line.frame = CGRectMake(0, self.navigationController.navigationBar.height - 1, self.navigationController.navigationBar.width, 1);
+                line.tag = 10010;
+                line.backgroundColor = [UIColor lightGrayColor];
+                [self.navigationController.navigationBar addSubview:line];
+            }
+            
+        }
+    }else{
+        // 配置导航条
+        {
+            [BeeUINavigationBar setTitleColor:[UIColor whiteColor]];
+            [BeeUINavigationBar setBackgroundColor:[UIColor blackColor]];
+            
+            if ( IOS7_OR_LATER )
+            {
+                
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+                
+                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg_iphone5.png"]];
+            }
+            else
+            {
+                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"]];
+            }
+            
+            UILabel *line = (id )[self.navigationController.navigationBar viewWithTag:10010];
+            if (line) {
+                [line setBackgroundColor:[UIColor clearColor]];
+            }
+        }
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     if ( NO == _viewBuilt )

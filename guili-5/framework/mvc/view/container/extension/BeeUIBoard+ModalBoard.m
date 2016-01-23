@@ -56,66 +56,66 @@
 
 - (BeeUIBoard *)modalBoard
 {
-	return objc_getAssociatedObject( self, KEY_MODAL_BOARD );
+    return objc_getAssociatedObject( self, KEY_MODAL_BOARD );
 }
 
 - (void)setModalBoard:(BeeUIBoard *)board
 {
-	objc_setAssociatedObject( self, KEY_MODAL_BOARD, board, OBJC_ASSOCIATION_RETAIN_NONATOMIC );
+    objc_setAssociatedObject( self, KEY_MODAL_BOARD, board, OBJC_ASSOCIATION_RETAIN_NONATOMIC );
 }
 
 #pragma mark -
 
 - (void)presentModalBoard:(BeeUIBoard *)board animated:(BOOL)animated
 {
-	if ( self.modalBoard )
-		return;
-	
-	[self sendUISignal:BeeUIBoard.MODALVIEW_WILL_SHOW];
-	
-	if ( animated )
-	{
-		CATransition * transition = [CATransition animation];
-		[transition setDuration:0.2f];
-		[transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-//		[transition setType:kCATransitionMoveIn];
-//		[transition setSubtype:kCATransitionFromBottom];
-		[transition setType:kCATransitionFade];
-		[self.view.layer addAnimation:transition forKey:nil];
-	}
-
-	self.modalBoard = board;
-	self.modalBoard.view.frame = self.view.bounds;
-	[self.view addSubview:self.modalBoard.view];
-
-	board.parentBoard = (BeeUIBoard *)self;
-
-	[self sendUISignal:BeeUIBoard.MODALVIEW_DID_SHOWN];
+    if ( self.modalBoard )
+        return;
+    
+    [self sendUISignal:BeeUIBoard.MODALVIEW_WILL_SHOW];
+    
+    if ( animated )
+    {
+        CATransition * transition = [CATransition animation];
+        [transition setDuration:0.2f];
+        [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+        //		[transition setType:kCATransitionMoveIn];
+        //		[transition setSubtype:kCATransitionFromBottom];
+        [transition setType:kCATransitionFade];
+        [self.view.layer addAnimation:transition forKey:nil];
+    }
+    
+    self.modalBoard = board;
+    self.modalBoard.view.frame = self.view.bounds;
+    [self.view addSubview:self.modalBoard.view];
+    
+    board.parentBoard = (BeeUIBoard *)self;
+    
+    [self sendUISignal:BeeUIBoard.MODALVIEW_DID_SHOWN];
 }
 
 - (void)dismissModalBoardAnimated:(BOOL)animated
 {
-	if ( nil == self.modalBoard )
-		return;
-	
-	[self sendUISignal:BeeUIBoard.MODALVIEW_WILL_HIDE];
-	
-	if ( animated )
-	{
-		CATransition * transition = [CATransition animation];
-		[transition setDuration:0.2f];
-		[transition setTimingFunction:[CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear]];
-//		[transition setType:kCATransitionReveal];
-//		[transition setSubtype:kCATransitionFromTop];
-		[transition setType:kCATransitionFade];
-		[self.view.layer addAnimation:transition forKey:nil];
-	}
-	
-	[self.modalBoard.view removeFromSuperview];
-	self.modalBoard.parentBoard = nil;
-	self.modalBoard = nil;
-
-	[self sendUISignal:BeeUIBoard.MODALVIEW_DID_HIDDEN];
+    if ( nil == self.modalBoard )
+        return;
+    
+    [self sendUISignal:BeeUIBoard.MODALVIEW_WILL_HIDE];
+    
+    if ( animated )
+    {
+        CATransition * transition = [CATransition animation];
+        [transition setDuration:0.2f];
+        [transition setTimingFunction:[CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear]];
+        //		[transition setType:kCATransitionReveal];
+        //		[transition setSubtype:kCATransitionFromTop];
+        [transition setType:kCATransitionFade];
+        [self.view.layer addAnimation:transition forKey:nil];
+    }
+    
+    [self.modalBoard.view removeFromSuperview];
+    self.modalBoard.parentBoard = nil;
+    self.modalBoard = nil;
+    
+    [self sendUISignal:BeeUIBoard.MODALVIEW_DID_HIDDEN];
 }
 
 @end

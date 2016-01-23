@@ -118,6 +118,7 @@ ON_SIGNAL3( D0_SearchCategory_iPhone, mask, signal )
     board.searchByCheapestModel.filter.category_id = category.id;
     board.searchByExpensiveModel.filter.category_id = category.id;
     board.isfromHome = YES;
+    board.kid = category.id;
     [self.stack pushBoard:board animated:YES];
 }
 

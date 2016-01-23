@@ -65,6 +65,15 @@ DEF_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 - (void)load
 {
     self.tabIndex = self.TAB_CHEAPEST;
+    
+    self.searchByHotModel = [SearchModel modelWithObserver:self];
+    self.searchByHotModel.filter.sort_by = SEARCH_ORDER_BY_HOT;
+    
+    self.searchByCheapestModel = [SearchModel modelWithObserver:self];
+    self.searchByCheapestModel.filter.sort_by = SEARCH_ORDER_BY_CHEAPEST;
+    
+    self.searchByExpensiveModel = [SearchModel modelWithObserver:self];
+    self.searchByExpensiveModel.filter.sort_by = SEARCH_ORDER_BY_EXPENSIVE;
 }
 
 - (void)unload
@@ -89,18 +98,19 @@ ON_CREATE_VIEWS( signal )
         [self setTitle:@"发现"];
     }
     
-    self.searchByHotModel = [SearchModel modelWithObserver:self];
     self.searchByHotModel.filter.sort_by = @"add_time_desc";
     self.searchByHotModel.filter.ids = self.kids;
+    self.searchByHotModel.filter.category_id = self.kid;
     
     
-    self.searchByCheapestModel = [SearchModel modelWithObserver:self];
     self.searchByCheapestModel.filter.sort_by = @"add_time_desc";
     self.searchByCheapestModel.filter.ids = self.kids;
+    self.searchByCheapestModel.filter.category_id = self.kid;
     
-    self.searchByExpensiveModel = [SearchModel modelWithObserver:self];
+    
     self.searchByExpensiveModel.filter.sort_by = @"add_time_desc";
     self.searchByExpensiveModel.filter.ids = self.kids;
+    self.searchByExpensiveModel.filter.category_id = self.kid;
     
     [self showNavigationBarAnimated:NO];
     //    [self showBarButton:BeeUINavigationBar.RIGHT title:__TEXT(@"filter") image:[UIImage imageNamed:@"nav_right.png"]];
@@ -198,47 +208,79 @@ ON_LAYOUT_VIEWS( signal )
 
 ON_WILL_APPEAR( signal )
 {
-    
-    //	[self.list reloadData];
     if (_isfromHome) {
         [bee.ui.appBoard hideTabbar];
+        if ( nil == _titleSearch )
+        {
+            //        _searchBackground = [[B1_ProductListSearchBackgroundCell_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
+            //        [self.view insertSubview:_searchBackground atIndex:self.view.subviews.count];
+            //
+            //        _titleSearch = [[B1_ProductListSearchBarCell_iPhone alloc] initWithFrame:CGRectZero];
+            //        for (UIView * vi in _titleSearch.subviews) {
+            //            if([vi isKindOfClass:[UITextField class]]){
+            //                ((UITextField *)vi).clearButtonMode = UITextFieldViewModeNever;
+            //                ((UITextField *)vi).delegate = self;
+            //
+            //            }
+            //
+            //        }
+            //        _titleSearch.frame = CGRectMake(0, 0, self.view.width, 44.0f);
+            //        $(_titleSearch).FIND(@"#search-input").TEXT(@"贵州 礼品");
+            
+            
+            
+            //        self.navigationBarTitle = _titleSearch;
+        }
+        
+        //    self.navigationBarTitle = [[D0_SearchInput_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44.0f)];
+        //    $(self.navigationBarTitle).FIND(@"#search-input").TEXT(@"贵州 礼品");
+        
+        
+        [self updateViews];
+        
+        [[CartModel sharedInstance] addObserver:self];
+        
+        [[CartModel sharedInstance] reload];
     }else{
-        [bee.ui.appBoard showTabbar];
+        if (bee.ui.tabbar.selectNUm == 1) {
+            [bee.ui.appBoard showTabbar];
+            if ( nil == _titleSearch )
+            {
+                //        _searchBackground = [[B1_ProductListSearchBackgroundCell_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
+                //        [self.view insertSubview:_searchBackground atIndex:self.view.subviews.count];
+                //
+                //        _titleSearch = [[B1_ProductListSearchBarCell_iPhone alloc] initWithFrame:CGRectZero];
+                //        for (UIView * vi in _titleSearch.subviews) {
+                //            if([vi isKindOfClass:[UITextField class]]){
+                //                ((UITextField *)vi).clearButtonMode = UITextFieldViewModeNever;
+                //                ((UITextField *)vi).delegate = self;
+                //
+                //            }
+                //
+                //        }
+                //        _titleSearch.frame = CGRectMake(0, 0, self.view.width, 44.0f);
+                //        $(_titleSearch).FIND(@"#search-input").TEXT(@"贵州 礼品");
+                
+                
+                
+                //        self.navigationBarTitle = _titleSearch;
+            }
+            
+            //    self.navigationBarTitle = [[D0_SearchInput_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44.0f)];
+            //    $(self.navigationBarTitle).FIND(@"#search-input").TEXT(@"贵州 礼品");
+            
+            
+            [self updateViews];
+            
+            [[CartModel sharedInstance] addObserver:self];
+            
+            [[CartModel sharedInstance] reload];
+        }
+        
     }
     
     
-    if ( nil == _titleSearch )
-    {
-        //        _searchBackground = [[B1_ProductListSearchBackgroundCell_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
-        //        [self.view insertSubview:_searchBackground atIndex:self.view.subviews.count];
-        //        
-        //        _titleSearch = [[B1_ProductListSearchBarCell_iPhone alloc] initWithFrame:CGRectZero];
-        //        for (UIView * vi in _titleSearch.subviews) {
-        //            if([vi isKindOfClass:[UITextField class]]){
-        //                ((UITextField *)vi).clearButtonMode = UITextFieldViewModeNever;
-        //                ((UITextField *)vi).delegate = self;
-        //                
-        //            }
-        //            
-        //        }
-        //        _titleSearch.frame = CGRectMake(0, 0, self.view.width, 44.0f);
-        //        $(_titleSearch).FIND(@"#search-input").TEXT(@"贵州 礼品");
-        
-        
-        
-        //        self.navigationBarTitle = _titleSearch;
-    }
-    
-    //    self.navigationBarTitle = [[D0_SearchInput_iPhone alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44.0f)];
-    //    $(self.navigationBarTitle).FIND(@"#search-input").TEXT(@"贵州 礼品");
-    
-    
-    [self updateViews];
-    
-    [[CartModel sharedInstance] addObserver:self];
-    
-    [[CartModel sharedInstance] reload];
-    
+    //	[self.list reloadData];
     
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -415,6 +457,7 @@ ON_SIGNAL3( B1_ProductListFilterCell_iPhone, item_expensive_button, signal )
 ON_SIGNAL3( B1_ProductListCartCell_iPhone, cart, signal )
 {
     C0_ShoppingCartBoard_iPhone * board = [C0_ShoppingCartBoard_iPhone board];
+    board.isKFromHome = YES;
     [self.stack pushBoard:board animated:YES];
 }
 

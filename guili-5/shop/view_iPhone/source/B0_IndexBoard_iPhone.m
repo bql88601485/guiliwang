@@ -35,6 +35,8 @@
 #import "B0_IndexCategoryCell_iPhone_3.h"
 #import "B0_IndexCategoryCell_iPhoneOne_1.h"
 #import "B0_IndexCategoryCell_iPhoneTwo_2.h"
+
+#import "A0_SigninBoard_iPhone.h"
 #pragma mark -
 
 @interface B0_IndexBoard_iPhone()
@@ -81,7 +83,14 @@ DEF_OUTLET( BeeUITextField, search_input);
 }
 
 #pragma mark -
-
+- (void)loging{
+    
+    A0_SigninBoard_iPhone   *singin = [[[A0_SigninBoard_iPhone alloc] initWithNibName:@"A0_SigninBoard_iPhone" bundle:nil] autorelease];
+    
+    [self presentViewController:singin animated:NO completion:^{
+        
+    }];
+}
 ON_CREATE_VIEWS( signal )
 {
     self.navigationBarShown = YES;
@@ -93,6 +102,9 @@ ON_CREATE_VIEWS( signal )
      * 将board中BeeUIScrollView对应的signal转换为block的实现方式
      * BeeUIScrollView的block方式写法可以从它对应的delegate方法中转换而来
      */
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loging) name:@"dengluqu" object:nil];
     
     self.isHome = YES;
     self.search_input.delegate = self;
@@ -110,11 +122,6 @@ ON_CREATE_VIEWS( signal )
     self.list.whenReloading = ^
     {
         @normalize(self);
-        //        [UIView animateWithDuration:0.2 animations:^{
-        //            [self.view setTop:20];
-        //        }];
-        
-        [self.view setTop:20];
         
         self.list.total = self.bannerModel.banners.count ? 1 : 0;
         self.list.total += self.bannerModel.goods.count ? 1 : 0;
@@ -280,19 +287,24 @@ ON_LAYOUT_VIEWS( signal )
 ON_WILL_APPEAR( signal )//导航
 {
     //[self.list reloadData];
-    
-    [bee.ui.appBoard showTabbar];
-    
-    D0_SearchInput_iPhone_new * searchBar = [[D0_SearchInput_iPhone_new alloc] initWithFrame:CGRectMake(0, 0., self.view.width, 44.0f)];
-    
-    self.titleView = searchBar;
-    
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.view setTop:20];
-    });
-    
-    [self.search_input resignFirstResponder];
+    if (bee.ui.tabbar.selectNUm == 0) {
+        self.isHome = YES;
+        
+        [bee.ui.appBoard showTabbar];
+        
+        D0_SearchInput_iPhone_new * searchBar = [[D0_SearchInput_iPhone_new alloc] initWithFrame:CGRectMake(0, 0., self.view.width, 44.0f)];
+        
+        self.titleView = searchBar;
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.view setTop:20];
+        });
+        
+        [self.search_input resignFirstResponder];
+    }else{
+        
+    }
 }
 ON_SIGNAL2( UIView, signal ){
     

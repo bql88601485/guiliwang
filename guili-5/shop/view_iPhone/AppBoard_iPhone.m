@@ -37,6 +37,11 @@
 #import "bee.services.share.sinaweibo.h"
 #import "bee.services.share.tencentweibo.h"
 
+#import "AppDelegate.h"
+
+
+#import "NewViewHomeController.h"
+
 #pragma mark -
 
 #undef	TAB_HEIGHT
@@ -88,7 +93,7 @@ ON_SIGNAL2( BeeUIBoard, signal )
     {
         self.view.backgroundColor = [UIColor whiteColor];
         
-        bee.ui.router[self.TAB_HOME]	= [B0_IndexBoard_iPhone class];
+        bee.ui.router[self.TAB_HOME]	= [NewViewHomeController class];
         bee.ui.router[self.TAB_SEARCH]	= [B1_ProductListBoard_iPhone class];
         bee.ui.router[self.TAB_CART]	= [C0_ShoppingCartBoard_iPhone class];
         bee.ui.router[self.TAB_USER]	= [E0_ProfileBoard_iPhone sharedInstance];
@@ -226,11 +231,7 @@ ON_NOTIFICATION3( UserModel, LOGIN, n )
         return;
     }
     
-    A0_SigninBoard_iPhone   *singin = [[A0_SigninBoard_iPhone alloc] initWithNibName:@"A0_SigninBoard_iPhone" bundle:nil];
-    
-    [self presentViewController:singin animated:YES completion:^{
-        
-    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dengluqu" object:nil];
 }
 
 

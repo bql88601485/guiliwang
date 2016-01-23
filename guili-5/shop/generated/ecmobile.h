@@ -393,6 +393,8 @@ enum RANK_LEVEL
 @property (nonatomic, retain) NSNumber *		goods_id;
 @property (nonatomic, retain) NSString *        seller_note;
 
+
+@property (nonatomic, assign) BOOL teshuGG;
 @end
 
 @interface STATUS : NSObject

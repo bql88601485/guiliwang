@@ -54,4 +54,6 @@ AS_OUTLET( B1_ProductListCartCell_iPhone, listcart )
 
 @property (nonatomic, strong) NSString *kids;
 
+@property (nonatomic, strong) NSNumber *kid;
+
 @end

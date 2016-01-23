@@ -20,7 +20,7 @@
 
 #import "UIViewController+ErrorTips.h"
 
-@interface A0_SigninBoard_iPhone : BaseBoard_iPhone
+@interface A0_SigninBoard_iPhone : BeeUIBoard
 
 AS_MODEL( UserModel, userModel )
 

@@ -15,7 +15,7 @@
 #import "controller.h"
 #import "model.h"
 typedef void(^BackGO)();
-@interface A1_SigupNewViewController : BaseBoard_iPhone
+@interface A1_SigupNewViewController : BeeUIBoard
 
 AS_MODEL(UserModel, userModel);
 
