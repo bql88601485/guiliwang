@@ -6,10 +6,10 @@
 		<label class="goods-title-large"></label>
 		<row class="goods-info-large">
 			<label class="goods-price-large"></label>
-			<row class="goods-subprice-group">
-                <label class="goods-subprice-large"></label>
-                <view id="goods-subprice-line"></view>
-            </row>
+<!--			<row class="goods-subprice-group">-->
+<!--                <label class="goods-subprice-large"></label>-->
+<!--                <view id="goods-subprice-line"></view>-->
+<!--            </row>-->
 		</row>
     </col>
     

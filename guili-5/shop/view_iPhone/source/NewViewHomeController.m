@@ -708,6 +708,7 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
     NSString *ssid = @"ssid+:[^\\s]*";;
     NSPredicate *ssidPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",ssid];
     
+    
     if ([predicate evaluateWithObject:symbol.data]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:symbol.data]];
     }
@@ -718,9 +719,14 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
         //[self doSearch:symbol.data];
     }
 }
+
 - (void)addToCart:(NSUInteger)action
 {
-    
+    if ( NO == [UserModel online] )
+    {
+        [bee.ui.appBoard showLogin];
+        return;
+    }
 }
 
 

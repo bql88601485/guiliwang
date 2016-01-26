@@ -11,4 +11,8 @@
 #import "BaseBoard_iPhone.h"
 @interface WebViewController : BaseBoard_iPhone
 
+@property (retain, nonatomic) IBOutlet BeeUIImageView *bgImge1;
+
+@property (retain, nonatomic) IBOutlet BeeUIImageView *bgImage;
+
 @end

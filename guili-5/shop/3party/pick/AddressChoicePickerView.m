@@ -45,7 +45,7 @@
         self.locate.cityID = self.cityArr[0][@"id"];
         if (self.areaArr.count) {
             self.locate.area = [self.areaArr[0] objectForKey:@"name"];
-            self.locate.area = [self.areaArr[0] objectForKey:@"id"];
+            self.locate.areaID = [self.areaArr[0] objectForKey:@"id"];
         }else{
             self.locate.area = @"";
             self.locate.areaID = [NSNumber numberWithInt:-1];
@@ -203,7 +203,7 @@
             }else{
                 self.locate.area = @"";
             }
-
+            
             
             break;
         }
@@ -228,7 +228,7 @@
             }else{
                 self.locate.area = @"";
             }
-
+            
             break;
         }
         case 2:{
@@ -244,7 +244,7 @@
             }else{
                 self.locate.area = @"";
             }
-
+            
             break;
         }
         case 3:{
@@ -254,7 +254,7 @@
             }else{
                 self.locate.area = @"";
             }
-
+            
             break;
         }
         default:
