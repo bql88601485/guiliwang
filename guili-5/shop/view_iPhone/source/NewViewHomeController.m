@@ -84,9 +84,12 @@ DEF_MODEL( CategoryModel,	categoryModel );
 #pragma mark -
 - (void)loging{
     
+    if ([self.stack.topViewController isKindOfClass:[A0_SigninBoard_iPhone class]]) {
+        return;
+    }
     A0_SigninBoard_iPhone   *singin = [[[A0_SigninBoard_iPhone alloc] initWithNibName:@"A0_SigninBoard_iPhone" bundle:nil] autorelease];
     
-    [self presentViewController:singin animated:NO completion:^{
+    [self.stack.topViewController presentViewController:singin animated:NO completion:^{
         
     }];
 }
@@ -274,6 +277,9 @@ DEF_MODEL( CategoryModel,	categoryModel );
                 
                 NSString *seller_note = item.seller_note;
                 
+                if (seller_note.length <= 0 ) {
+                    continue;
+                }
                 NSArray *tmp = [seller_note componentsSeparatedByString:@"|"];
                 
                 if (tmp.count > 2) {

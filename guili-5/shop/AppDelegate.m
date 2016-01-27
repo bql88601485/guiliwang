@@ -52,8 +52,8 @@
     
     // 配置ECSHOP
     //[ServerConfig sharedInstance].url = @"http://shop.ecmobile.me/ecmobile/?url=";
-    //    [ServerConfig sharedInstance].url = @"http://www.guiliwang.cn/ecmobile/?url=";
-    [ServerConfig sharedInstance].url = @"http://114.215.93.127/ecmobile/?url=";
+    [ServerConfig sharedInstance].url = @"http://www.guiliwang.cn/ecmobile/?url=";
+    //    [ServerConfig sharedInstance].url = @"http://114.215.93.127/ecmobile/?url=";
     [ServerConfig sharedInstance].app_root_url= @"http://www.guiliwang.cn/ecmobile";
     [ServerConfig sharedInstance].root_url= @"http://www.guiliwang.cn";
     

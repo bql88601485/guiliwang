@@ -279,7 +279,7 @@ ON_MESSAGE3( API, existuser, msg )
         
         
         [self dismissViewControllerAnimated:YES completion:^{
-            [self release];
+      
         }];
         
     }
