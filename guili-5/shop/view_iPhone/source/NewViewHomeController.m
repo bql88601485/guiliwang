@@ -607,7 +607,6 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
     view.backgroundColor = [UIColor clearColor];
     reader.cameraOverlayView = view;
     
-    NSLog(@"reader.view = %@",reader.view.subviews);
     UIView * downView = [reader.view.subviews firstObject];
     for (UIView * vi in reader.view.subviews) {
         if(vi.frame.origin.y > downView.frame.origin.y){

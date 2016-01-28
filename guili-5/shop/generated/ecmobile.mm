@@ -2134,6 +2134,7 @@ DEF_MESSAGE_( user_info, msg )
     }
     else if ( msg.cancelled )
     {
+        
     }
 }
 
