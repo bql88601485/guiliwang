@@ -37,7 +37,7 @@
 #import "FenLeiTableViewCell.h"
 #import "TwoTableViewCell.h"
 #import "ItemTableViewCell.h"
-@interface NewViewHomeController ()<UISearchBarDelegate>
+@interface NewViewHomeController ()<UISearchBarDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     NSMutableArray *newCargories;
     int num;
@@ -48,6 +48,9 @@
 
 @property (retain, nonatomic) BeeUIScrollView *homelist;
 @property (retain, nonatomic) TwoTableViewCell *searchIn;
+
+@property (strong, nonatomic) UIActionSheet *actionSheet;
+
 @end
 
 @implementation NewViewHomeController
@@ -589,13 +592,86 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
         return;
     }
     
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        self.actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择",nil];
+    }else{
+        self.actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消"destructiveButtonTitle:nil otherButtonTitles:@"从相册选择",nil];
+    }
+    
+    self.actionSheet.tag = 1000;
+    [self.actionSheet showInView:self.view];
+    
+}
+
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    
+    
+    if (actionSheet.tag == 1000) {
+        NSUInteger sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            switch (buttonIndex) {
+                case 0:
+                    //来源:相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 1:
+                    //来源:相册
+                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                case 2:
+                    return;
+            }
+            
+            if (buttonIndex == 0) {
+                [self ShowZbar:sourceType];
+                return;
+            }
+            
+        }
+        else {
+            if (buttonIndex == 2) {
+                return;
+            } else {
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
+        }
+        
+        [self showBendi];
+        
+    }
+}
+
+
+- (void)cancelText{
+    
+}
+- (void)showBendi{
+    
+    ZBarReaderController *reader = [ZBarReaderController new];
+    
+    reader.allowsEditing = NO   ;
+    
+    reader.showsHelpOnFail = NO;
+    
+    reader.readerDelegate = self;
+    
+    reader.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:reader animated:YES completion:nil];
+    
+}
+- (void)ShowZbar:(NSUInteger)sourceType{
+    
     num = 0;
     upOrdown = NO;
     //初始话ZBar
     ZBarReaderViewController * reader = [ZBarReaderViewController new];
     //设置代理
     reader.readerDelegate = self;
-    reader.showsHelpOnFail = NO;
+    reader.sourceType = sourceType;
     //        reader.scanCrop = CGRectMake(0.1, 0.2, 0.8, 0.8);//扫描的感应框
     //        [reader.view setFrame:CGRectMake(0, 20 + 44, self.view.bounds.size.width, self.view.frame.size.height)];
     
@@ -603,52 +679,52 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
     [scanner setSymbology:ZBAR_I25
                    config:ZBAR_CFG_ENABLE
                        to:0];
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 420)];
-    view.backgroundColor = [UIColor clearColor];
-    reader.cameraOverlayView = view;
-    
-    UIView * downView = [reader.view.subviews firstObject];
-    for (UIView * vi in reader.view.subviews) {
-        if(vi.frame.origin.y > downView.frame.origin.y){
-            downView = vi;
+    if (sourceType == UIImagePickerControllerSourceTypeCamera) {
+        
+        reader.showsHelpOnFail = NO;
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 420)];
+        view.backgroundColor = [UIColor clearColor];
+        reader.cameraOverlayView = view;
+        
+        UIView * downView = [reader.view.subviews firstObject];
+        for (UIView * vi in reader.view.subviews) {
+            if(vi.frame.origin.y > downView.frame.origin.y){
+                downView = vi;
+            }
         }
-    }
-    UIView * rightView = [downView.subviews.firstObject subviews].firstObject;
-    NSLog(@"[downView.subviews.firstObject subviews] = %@",[downView.subviews.firstObject subviews]);
-    for(UIView * vi in [downView.subviews.firstObject subviews]){
-        if(vi.frame.origin.x > rightView.frame.origin.y){
-            rightView = vi;
+        UIView * rightView = [downView.subviews.firstObject subviews].firstObject;
+        NSLog(@"[downView.subviews.firstObject subviews] = %@",[downView.subviews.firstObject subviews]);
+        for(UIView * vi in [downView.subviews.firstObject subviews]){
+            if(vi.frame.origin.x > rightView.frame.origin.y){
+                rightView = vi;
+            }
         }
+        [rightView setHidden:YES];
+        
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 280, 50)];
+        label.text = @"请将扫描的二维码至于下面的框内";
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = 1;
+        label.lineBreakMode = 0;
+        label.numberOfLines = 2;
+        label.backgroundColor = [UIColor clearColor];
+        [view addSubview:label];
+        
+        UIImageView * image = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"PEPhotoCropEditorBorder"] stretchableImageWithLeftCapWidth:23/2 topCapHeight:23/2]];
+        image.frame = CGRectMake(20, 110, 280, 280);
+        [view addSubview:image];
+        
+        _line = [[UIImageView alloc] initWithFrame:CGRectMake(30, 10, 220, 2)];
+        _line.image = [UIImage imageNamed:@"line.png"];
+        [image addSubview:_line];
+        //定时器，设定时间过1.5秒，
+        timer = [NSTimer scheduledTimerWithTimeInterval:.02 target:self selector:@selector(animation1) userInfo:nil repeats:YES];
     }
-    [rightView setHidden:YES];
-    
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 280, 50)];
-    label.text = @"请将扫描的二维码至于下面的框内";
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = 1;
-    label.lineBreakMode = 0;
-    label.numberOfLines = 2;
-    label.backgroundColor = [UIColor clearColor];
-    [view addSubview:label];
-    
-    UIImageView * image = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"PEPhotoCropEditorBorder"] stretchableImageWithLeftCapWidth:23/2 topCapHeight:23/2]];
-    image.frame = CGRectMake(20, 110, 280, 280);
-    [view addSubview:image];
-    
-    _line = [[UIImageView alloc] initWithFrame:CGRectMake(30, 10, 220, 2)];
-    _line.image = [UIImage imageNamed:@"line.png"];
-    [image addSubview:_line];
-    //定时器，设定时间过1.5秒，
-    timer = [NSTimer scheduledTimerWithTimeInterval:.02 target:self selector:@selector(animation1) userInfo:nil repeats:YES];
     
     NSLog(@"navig =%@",self.navigationController);
     [self presentViewController:reader animated:YES completion:^{
         
     }];
-    
-}
-
-- (void)cancelText{
     
 }
 
@@ -694,7 +770,6 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
     UIGraphicsEndImageContext();
     return image;
 }
-
 - (void) imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
@@ -703,7 +778,9 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
     for(symbol in results)
         break;
     
-    [reader dismissModalViewControllerAnimated: YES];
+    [reader dismissViewControllerAnimated:YES completion:^{
+        
+    }];
     
     //判断是否包含 头'http:'
     NSString *regex = @"http+:[^\\s]*";

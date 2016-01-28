@@ -986,6 +986,15 @@
 		E52248F71C5379FF00503D6A /* TwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E52248F51C5379FF00503D6A /* TwoTableViewCell.xib */; };
 		E52248FB1C537D4300503D6A /* ItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E52248F91C537D4300503D6A /* ItemTableViewCell.m */; };
 		E52248FC1C537D4300503D6A /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E52248FA1C537D4300503D6A /* ItemTableViewCell.xib */; };
+		E52CF37A1C59F44900236E63 /* UIApplication+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = E52CF36D1C59F44900236E63 /* UIApplication+Extend.m */; };
+		E52CF37B1C59F44A00236E63 /* UIView+NFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E52CF36F1C59F44900236E63 /* UIView+NFLayout.m */; };
+		E52CF37C1C59F44A00236E63 /* CoreNewFeatureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E52CF3711C59F44900236E63 /* CoreNewFeatureVC.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		E52CF37D1C59F44A00236E63 /* NewFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E52CF3741C59F44900236E63 /* NewFeatureModel.m */; };
+		E52CF37E1C59F44A00236E63 /* NewFeatureImageV.m in Sources */ = {isa = PBXBuildFile; fileRef = E52CF3771C59F44900236E63 /* NewFeatureImageV.m */; };
+		E52CF37F1C59F44A00236E63 /* NewFeatureScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E52CF3791C59F44900236E63 /* NewFeatureScrollView.m */; };
+		E52CF3831C59F53F00236E63 /* 首页1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52CF3801C59F53F00236E63 /* 首页1.jpg */; };
+		E52CF3841C59F53F00236E63 /* 首页2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52CF3811C59F53F00236E63 /* 首页2.jpg */; };
+		E52CF3851C59F53F00236E63 /* 首页3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52CF3821C59F53F00236E63 /* 首页3.jpg */; };
 		E5383F221C0426930076488D /* zhuce.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E5383F211C0426930076488D /* zhuce.jpg */; };
 		E5383F241C0427330076488D /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5383F231C0427330076488D /* Images-2.xcassets */; };
 		E5383F261C04276D0076488D /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E5383F251C04276D0076488D /* Icon-60.png */; };
@@ -2708,6 +2717,21 @@
 		E52248F81C537D4300503D6A /* ItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableViewCell.h; sourceTree = "<group>"; };
 		E52248F91C537D4300503D6A /* ItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableViewCell.m; sourceTree = "<group>"; };
 		E52248FA1C537D4300503D6A /* ItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
+		E52CF36C1C59F44900236E63 /* UIApplication+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Extend.h"; sourceTree = "<group>"; };
+		E52CF36D1C59F44900236E63 /* UIApplication+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Extend.m"; sourceTree = "<group>"; };
+		E52CF36E1C59F44900236E63 /* UIView+NFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NFLayout.h"; sourceTree = "<group>"; };
+		E52CF36F1C59F44900236E63 /* UIView+NFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NFLayout.m"; sourceTree = "<group>"; };
+		E52CF3701C59F44900236E63 /* CoreNewFeatureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreNewFeatureVC.h; sourceTree = "<group>"; };
+		E52CF3711C59F44900236E63 /* CoreNewFeatureVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreNewFeatureVC.m; sourceTree = "<group>"; };
+		E52CF3731C59F44900236E63 /* NewFeatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureModel.h; sourceTree = "<group>"; };
+		E52CF3741C59F44900236E63 /* NewFeatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureModel.m; sourceTree = "<group>"; };
+		E52CF3761C59F44900236E63 /* NewFeatureImageV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureImageV.h; sourceTree = "<group>"; };
+		E52CF3771C59F44900236E63 /* NewFeatureImageV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureImageV.m; sourceTree = "<group>"; };
+		E52CF3781C59F44900236E63 /* NewFeatureScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureScrollView.h; sourceTree = "<group>"; };
+		E52CF3791C59F44900236E63 /* NewFeatureScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureScrollView.m; sourceTree = "<group>"; };
+		E52CF3801C59F53F00236E63 /* 首页1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "首页1.jpg"; sourceTree = "<group>"; };
+		E52CF3811C59F53F00236E63 /* 首页2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "首页2.jpg"; sourceTree = "<group>"; };
+		E52CF3821C59F53F00236E63 /* 首页3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "首页3.jpg"; sourceTree = "<group>"; };
 		E5383F211C0426930076488D /* zhuce.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zhuce.jpg; sourceTree = "<group>"; };
 		E5383F231C0427330076488D /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		E5383F251C04276D0076488D /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
@@ -3010,6 +3034,9 @@
 		414856291AC4FCFC003FD9DF /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				E52CF3801C59F53F00236E63 /* 首页1.jpg */,
+				E52CF3811C59F53F00236E63 /* 首页2.jpg */,
+				E52CF3821C59F53F00236E63 /* 首页3.jpg */,
 				E5DE327E1C5359E1004A8D2A /* body_cont_bgNew@2x.png */,
 				E5E483211C4E3E5000589A3E /* nav_bg_iphone5Two@2x.png */,
 				E5B62DC81C4B9D2B00284623 /* cell_bg_headerNew@2x.png */,
@@ -5745,9 +5772,61 @@
 			name = "Supporting files";
 			sourceTree = "<group>";
 		};
+		E52CF3691C59F44900236E63 /* CoreNewFeatureVC */ = {
+			isa = PBXGroup;
+			children = (
+				E52CF36A1C59F44900236E63 /* Category */,
+				E52CF3701C59F44900236E63 /* CoreNewFeatureVC.h */,
+				E52CF3711C59F44900236E63 /* CoreNewFeatureVC.m */,
+				E52CF3721C59F44900236E63 /* Model */,
+				E52CF3751C59F44900236E63 /* View */,
+			);
+			path = CoreNewFeatureVC;
+			sourceTree = "<group>";
+		};
+		E52CF36A1C59F44900236E63 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				E52CF36B1C59F44900236E63 /* UIApplication */,
+				E52CF36E1C59F44900236E63 /* UIView+NFLayout.h */,
+				E52CF36F1C59F44900236E63 /* UIView+NFLayout.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		E52CF36B1C59F44900236E63 /* UIApplication */ = {
+			isa = PBXGroup;
+			children = (
+				E52CF36C1C59F44900236E63 /* UIApplication+Extend.h */,
+				E52CF36D1C59F44900236E63 /* UIApplication+Extend.m */,
+			);
+			path = UIApplication;
+			sourceTree = "<group>";
+		};
+		E52CF3721C59F44900236E63 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E52CF3731C59F44900236E63 /* NewFeatureModel.h */,
+				E52CF3741C59F44900236E63 /* NewFeatureModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E52CF3751C59F44900236E63 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E52CF3761C59F44900236E63 /* NewFeatureImageV.h */,
+				E52CF3771C59F44900236E63 /* NewFeatureImageV.m */,
+				E52CF3781C59F44900236E63 /* NewFeatureScrollView.h */,
+				E52CF3791C59F44900236E63 /* NewFeatureScrollView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E53CDAFB1BF8AB7E0089C6F6 /* 3party */ = {
 			isa = PBXGroup;
 			children = (
+				E52CF3691C59F44900236E63 /* CoreNewFeatureVC */,
 				E5ACD6551C13BF33001BD537 /* pick */,
 				E53CDAFC1BF8ABB30089C6F6 /* QQ */,
 			);
@@ -5884,6 +5963,7 @@
 				E5383F241C0427330076488D /* Images-2.xcassets in Resources */,
 				414859AC1AC4FCFE003FD9DF /* D0_SearchInput_iPhone.xml in Resources */,
 				526229561C04C77400641CB0 /* sns_icon_22@2x.png in Resources */,
+				E52CF3831C59F53F00236E63 /* 首页1.jpg in Resources */,
 				414859741AC4FCFE003FD9DF /* B4_ProductParamBoard_iPhone.xml in Resources */,
 				41485ACA1AC5024C003FD9DF /* zbar-help.html in Resources */,
 				18DA609B1BB03EF0004D1E16 /* zh-Hans-CN.lang in Resources */,
@@ -6201,6 +6281,7 @@
 				1838B46C1AD01F1A00676C05 /* Images.xcassets in Resources */,
 				4148593E1AC4FCFE003FD9DF /* wizard_3.xml in Resources */,
 				41485ACC1AC5024C003FD9DF /* zbar-samples.png in Resources */,
+				E52CF3851C59F53F00236E63 /* 首页3.jpg in Resources */,
 				E57817621C4623D0004A4431 /* footer_category_active_icon@2x.png in Resources */,
 				414859C21AC4FCFE003FD9DF /* E1_PendingPaymentCell_iPhone.xml in Resources */,
 				414859BE1AC4FCFE003FD9DF /* E0_ProfileHelpCell_iPhone.xml in Resources */,
@@ -6221,6 +6302,7 @@
 				414858A21AC4FCFE003FD9DF /* footer_user_icon@2x.png in Resources */,
 				414859FB1AC4FCFE003FD9DF /* G1_HelpBoard_iPhone.xml in Resources */,
 				414859D01AC4FCFE003FD9DF /* E3_PendingReceivedCellFooter_iPhone.xml in Resources */,
+				E52CF3841C59F53F00236E63 /* 首页2.jpg in Resources */,
 				414859381AC4FCFE003FD9DF /* tuitional_img_5_1@2x.png in Resources */,
 				414858EA1AC4FCFE003FD9DF /* profile_refresh_receipt_icon@2x.png in Resources */,
 				414858641AC4FCFE003FD9DF /* FormPlainInputCell.xml in Resources */,
@@ -6426,6 +6508,7 @@
 				9D67CAE81A4A7EAA003ABA05 /* UILabel+UIDataBinding.m in Sources */,
 				9D67CB011A4A7EAA003ABA05 /* Bee_UIProgressView.m in Sources */,
 				9D67CAAE1A4A7EAA003ABA05 /* Bee_UIMetrics.m in Sources */,
+				E52CF37C1C59F44A00236E63 /* CoreNewFeatureVC.m in Sources */,
 				9D67CAA71A4A7EAA003ABA05 /* BeeMessage+BeeXML.mm in Sources */,
 				9D67CB6A1A4A7EAB003ABA05 /* Bee_UITemplateParserXMLImpl_v1.m in Sources */,
 				9D67C6321A4A7BBC003ABA05 /* ServiceShare_TencentWeibo_Config.m in Sources */,
@@ -6517,6 +6600,7 @@
 				9D67CBD11A4A7EAB003ABA05 /* FMDatabaseAdditions.m in Sources */,
 				9D67CB771A4A7EAB003ABA05 /* Bee_CacheProtocol.mm in Sources */,
 				9D67CB0C1A4A7EAA003ABA05 /* Bee_UIVideoEditorController.m in Sources */,
+				E52CF37F1C59F44A00236E63 /* NewFeatureScrollView.m in Sources */,
 				E57AEE4D1C52848F00A0FE52 /* B0_IndexCategoryCell_iPhoneTwo_2.m in Sources */,
 				9D67CB491A4A7EAA003ABA05 /* BeeUIQuery+Dimensions.m in Sources */,
 				41485A711AC4FDF4003FD9DF /* SearchModel.m in Sources */,
@@ -6629,6 +6713,7 @@
 				9D67CAFC1A4A7EAA003ABA05 /* Bee_UIMenuController.m in Sources */,
 				9D67CAFB1A4A7EAA003ABA05 /* Bee_UILabel.m in Sources */,
 				9D67CB7F1A4A7EAB003ABA05 /* Bee_ActiveObject.m in Sources */,
+				E52CF37A1C59F44900236E63 /* UIApplication+Extend.m in Sources */,
 				9D67CAEE1A4A7EAA003ABA05 /* UINavigationBar+BeeExtension.m in Sources */,
 				9D67CBB81A4A7EAB003ABA05 /* Bee_HTTPServer2.m in Sources */,
 				9D67CAB41A4A7EAA003ABA05 /* Bee_UIRouter.m in Sources */,
@@ -6654,6 +6739,7 @@
 				4148594F1AC4FCFE003FD9DF /* B0_IndexRecommendCell_iPhone.m in Sources */,
 				525119CC1C469CE2000F543D /* B0_IndexCategoryCell_iPhoneTwo.m in Sources */,
 				41485A5D1AC4FDF4003FD9DF /* CommentModel.m in Sources */,
+				E52CF37D1C59F44A00236E63 /* NewFeatureModel.m in Sources */,
 				9D67CB171A4A7EAA003ABA05 /* UIView+SwipeGesture.m in Sources */,
 				9D67CBA61A4A7EAB003ABA05 /* NSTimer+BeeExtension.mm in Sources */,
 				9D67CB321A4A7EAA003ABA05 /* Bee_UILayoutConfig.m in Sources */,
@@ -6690,6 +6776,7 @@
 				9D67CB7E1A4A7EAB003ABA05 /* Bee_ActiveBuilder.m in Sources */,
 				9D67CAEA1A4A7EAA003ABA05 /* UITextField+UIDataBinding.m in Sources */,
 				41485A6E1AC4FDF4003FD9DF /* RegionModel.m in Sources */,
+				E52CF37B1C59F44A00236E63 /* UIView+NFLayout.m in Sources */,
 				9D67CB8B1A4A7EAB003ABA05 /* Bee_Foundation.mm in Sources */,
 				414859C71AC4FCFE003FD9DF /* E2_PendingShippedCell_iPhone.m in Sources */,
 				414859FC1AC4FCFE003FD9DF /* G1_HelpCell_iPhone.m in Sources */,
@@ -6829,6 +6916,7 @@
 				9D67CB1B1A4A7EAA003ABA05 /* UIView+Visibility.m in Sources */,
 				9D67CBE71A4A7EAB003ABA05 /* unzip.c in Sources */,
 				9D67CA9D1A4A7EAA003ABA05 /* Bee_MVC.mm in Sources */,
+				E52CF37E1C59F44A00236E63 /* NewFeatureImageV.m in Sources */,
 				9D67C6361A4A7BBC003ABA05 /* ServiceShare_Weixin_Config.m in Sources */,
 				9D67CB021A4A7EAA003ABA05 /* Bee_UIScrollView.m in Sources */,
 				9D67CB031A4A7EAA003ABA05 /* Bee_UISearchBar.m in Sources */,

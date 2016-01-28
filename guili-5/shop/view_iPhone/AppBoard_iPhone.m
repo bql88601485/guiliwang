@@ -42,6 +42,8 @@
 
 #import "NewViewHomeController.h"
 
+
+
 #pragma mark -
 
 #undef	TAB_HEIGHT
@@ -112,6 +114,9 @@ ON_SIGNAL2( BeeUIBoard, signal )
         //		[self observeNotification:BeeNetworkReachability.UNREACHABLE];
         
         _tabbarOriginY = self.viewBound.size.height - TAB_HEIGHT + 1;
+        
+        
+        
     }
     else if ( [signal is:BeeUIBoard.DELETE_VIEWS] )
     {

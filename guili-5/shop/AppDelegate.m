@@ -32,11 +32,42 @@
 
 #import "TencentOAuth.h"
 #import "WeiXinLogin.h"
+
+#import "CoreNewFeatureVC.h"
+
 @implementation AppDelegate
 
 #pragma mark -
 - (void)load
 {
+    
+    //判断是否需要显示：（内部已经考虑版本及本地版本缓存）
+    BOOL canShow = [CoreNewFeatureVC canShowNewFeature];
+    
+//    //测试代码，正式版本应该删除
+//    canShow = YES;
+    
+    if(canShow){
+        
+        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:@"首页1.jpg"]];
+        
+        NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageNamed:@"首页2.jpg"]];
+        
+        NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageNamed:@"首页3.jpg"]];
+        
+        self.window.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3] enterBlock:^{
+            
+            NSLog(@"进入主页面");
+            [self enter];
+        }];
+    }else{
+        
+        [self enter];
+    }
+    
+    
+}
+-(void)enter{
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
@@ -105,8 +136,10 @@
     
     [MobClick appLaunched];
     
+    
+    
+    
 }
-
 - (void)unload
 {
     [self unobserveAllNotifications];
