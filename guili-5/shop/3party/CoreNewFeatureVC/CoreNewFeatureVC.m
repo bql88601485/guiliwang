@@ -55,8 +55,20 @@ NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
     
     //显示了版本新特性，保存版本号
     [self saveVersion];
+    
+    
+    UIButton *jumpButon = [UIButton buttonWithType:UIButtonTypeCustom];
+    [jumpButon setImage:[UIImage imageNamed:@"首页3图标.jpg"] forState:UIControlStateNormal];
+    UIImage *image = [UIImage imageNamed:@"首页3图标.jpg"];
+    [jumpButon setFrame:CGRectMake(self.width/2 - image.size.width/4, self.height - 100, image.size.width/2, image.size.height/2)];
+    [jumpButon addTarget:self action:@selector(jumpView) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:jumpButon];
+    
 }
-
+- (void)jumpView{
+    [self dismiss];
+}
 
 /*
  *  显示了版本新特性，保存版本号
@@ -81,7 +93,7 @@ NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
     NewFeatureScrollView *scrollView = [[NewFeatureScrollView alloc] init];
     
     _scrollView = scrollView;
-
+    
     //添加
     [self.view addSubview:scrollView];
     

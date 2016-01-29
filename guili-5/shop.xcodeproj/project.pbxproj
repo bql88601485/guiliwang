@@ -995,6 +995,7 @@
 		E52CF3831C59F53F00236E63 /* 首页1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52CF3801C59F53F00236E63 /* 首页1.jpg */; };
 		E52CF3841C59F53F00236E63 /* 首页2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52CF3811C59F53F00236E63 /* 首页2.jpg */; };
 		E52CF3851C59F53F00236E63 /* 首页3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52CF3821C59F53F00236E63 /* 首页3.jpg */; };
+		E52CF3871C5B04BD00236E63 /* 首页3图标.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52CF3861C5B04BD00236E63 /* 首页3图标.jpg */; };
 		E5383F221C0426930076488D /* zhuce.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E5383F211C0426930076488D /* zhuce.jpg */; };
 		E5383F241C0427330076488D /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5383F231C0427330076488D /* Images-2.xcassets */; };
 		E5383F261C04276D0076488D /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E5383F251C04276D0076488D /* Icon-60.png */; };
@@ -2732,6 +2733,7 @@
 		E52CF3801C59F53F00236E63 /* 首页1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "首页1.jpg"; sourceTree = "<group>"; };
 		E52CF3811C59F53F00236E63 /* 首页2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "首页2.jpg"; sourceTree = "<group>"; };
 		E52CF3821C59F53F00236E63 /* 首页3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "首页3.jpg"; sourceTree = "<group>"; };
+		E52CF3861C5B04BD00236E63 /* 首页3图标.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "首页3图标.jpg"; sourceTree = "<group>"; };
 		E5383F211C0426930076488D /* zhuce.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zhuce.jpg; sourceTree = "<group>"; };
 		E5383F231C0427330076488D /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		E5383F251C04276D0076488D /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
@@ -3034,6 +3036,7 @@
 		414856291AC4FCFC003FD9DF /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				E52CF3861C5B04BD00236E63 /* 首页3图标.jpg */,
 				E52CF3801C59F53F00236E63 /* 首页1.jpg */,
 				E52CF3811C59F53F00236E63 /* 首页2.jpg */,
 				E52CF3821C59F53F00236E63 /* 首页3.jpg */,
@@ -5914,7 +5917,7 @@
 				ORGANIZATIONNAME = "geek-zoo studio";
 				TargetAttributes = {
 					63249C9A1754E07900372FD7 = {
-						DevelopmentTeam = AT7FZWK9R9;
+						DevelopmentTeam = LPRAXT87C5;
 					};
 				};
 			};
@@ -6036,6 +6039,7 @@
 				414859021AC4FCFE003FD9DF /* shopping_cart_body_bg_01@2x.png in Resources */,
 				414859851AC4FCFE003FD9DF /* C0_ShoppingCartGoodCell_iPhone.xml in Resources */,
 				414858D81AC4FCFE003FD9DF /* nav_bg_iphone5@2x.png in Resources */,
+				E52CF3871C5B04BD00236E63 /* 首页3图标.jpg in Resources */,
 				414858A11AC4FCFE003FD9DF /* footer_user_active_icon@2x.png in Resources */,
 				414858D41AC4FCFE003FD9DF /* log_in_user_name_icon@2x.png in Resources */,
 				4148587E1AC4FCFE003FD9DF /* browser_baritem_stop@2x.png in Resources */,
@@ -7032,8 +7036,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lianwu Yu (5GKAVLNJLR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: JunJie Ma (AT7FZWK9R9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: San Meditech Co., Ltd.";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7075,9 +7079,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-fobjc-arc";
-				PRODUCT_BUNDLE_IDENTIFIER = com.shushentech.guiliwang1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sanmeditech.Glucose;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "54dd9427-12c1-497f-bb45-b40010ebef4a";
+				PROVISIONING_PROFILE = "23426613-4460-4cc3-b179-c0caa7bf832b";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -7093,8 +7097,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lianwu Yu (5GKAVLNJLR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: JunJie Ma (AT7FZWK9R9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: San Meditech Co., Ltd.";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7136,9 +7140,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-fobjc-arc";
-				PRODUCT_BUNDLE_IDENTIFIER = com.shushentech.guiliwang1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sanmeditech.Glucose;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "54dd9427-12c1-497f-bb45-b40010ebef4a";
+				PROVISIONING_PROFILE = "23426613-4460-4cc3-b179-c0caa7bf832b";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -7183,8 +7187,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lianwu Yu (5GKAVLNJLR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: JunJie Ma (AT7FZWK9R9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: San Meditech Co., Ltd.";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7226,9 +7230,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-fobjc-arc";
-				PRODUCT_BUNDLE_IDENTIFIER = com.shushentech.guiliwang1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sanmeditech.Glucose;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "54dd9427-12c1-497f-bb45-b40010ebef4a";
+				PROVISIONING_PROFILE = "23426613-4460-4cc3-b179-c0caa7bf832b";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
 				WRAPPER_EXTENSION = app;
