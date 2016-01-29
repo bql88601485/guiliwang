@@ -40,7 +40,7 @@
 #pragma mark -
 - (void)load
 {
-    
+    [NSThread sleepForTimeInterval:2.0];//设置启动页面时间
     //判断是否需要显示：（内部已经考虑版本及本地版本缓存）
     BOOL canShow = [CoreNewFeatureVC canShowNewFeature];
     
@@ -49,13 +49,13 @@
     
     if(canShow){
         
-        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:@"首页1.jpg"]];
+        //        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:@"首页1.jpg"]];
         
         NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageNamed:@"首页2.jpg"]];
         
         NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageNamed:@"首页3.jpg"]];
         
-        self.window.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3] enterBlock:^{
+        self.window.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m2,m3] enterBlock:^{
             
             NSLog(@"进入主页面");
             [self enter];
@@ -191,6 +191,7 @@
 
 
 #pragma mark - login
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     
     return [TencentOAuth HandleOpenURL:url] || [WXApi handleOpenURL:url delegate:[WeiXinLogin sharedInstance]];
