@@ -795,6 +795,10 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:symbol.data]];
     }
     else {
+        
+        UIAlertView *alter = [[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"二维码获取成功！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] autorelease];
+        [alter show];
+        
         //[UserModel sharedInstance].session.member=symbol.data;
         [[BeeFileCache sharedInstance] setObject:symbol.data forKey:@"qrcodedata"];
         [self addToCart:self.ACTION_ADD];
