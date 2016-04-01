@@ -26,7 +26,7 @@ AS_SINGLETON( UserModel )
 @property (nonatomic, retain) NSArray *	fields;
 @property (nonatomic, retain) USER *	user;
 @property (nonatomic, assign) BOOL		firstUse;
-
+@property (assign, nonatomic) BOOL  isShowCodeIcon;
 AS_NOTIFICATION( LOGIN )
 AS_NOTIFICATION( LOGOUT )
 AS_NOTIFICATION( KICKOUT )

@@ -475,6 +475,9 @@ AS_MESSAGE( cart_list );
 // POST cart/update
 AS_MESSAGE( cart_update );
 
+//POS cart/code
+AS_MESSAGE( cart_code );
+
 // POST category
 AS_MESSAGE( category );
 

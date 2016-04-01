@@ -44,7 +44,7 @@ AS_SIGNAL( PHOTO_FROM_LIBRARY )
 AS_SIGNAL( PHOTO_REMOVE )
 
 AS_MODEL( UserModel,			userModel );
-
+AS_MODEL(CartModel, carmodel);
 AS_OUTLET( BeeUIScrollView, list )
 
 @end

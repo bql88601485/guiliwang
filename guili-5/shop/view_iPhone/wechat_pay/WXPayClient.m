@@ -212,8 +212,8 @@ NSString *expiresInKey = @"expires_in";
     
     self.request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:getAccessTokenUrl]];
     
-    __weak WXPayClient *weakSelf = self;
-    __weak ASIHTTPRequest *weakRequest = self.request;
+    __block WXPayClient *weakSelf = self;
+    __block ASIHTTPRequest *weakRequest = self.request;
     
     [self.request setCompletionBlock:^{
         NSError *error = nil;
@@ -262,8 +262,8 @@ NSString *expiresInKey = @"expires_in";
     [self.request setRequestMethod:@"POST"];
     [self.request setPostBody:postData];
     
-    __weak WXPayClient *weakSelf = self;
-    __weak ASIHTTPRequest *weakRequest = self.request;
+    __block WXPayClient *weakSelf = self;
+    __block ASIHTTPRequest *weakRequest = self.request;
     
     [self.request setCompletionBlock:^{
         

@@ -512,7 +512,6 @@ ON_DID_APPEAR( signal )
 
 
 #pragma mark -
-
 ON_MESSAGE3( API, home_data, msg )
 {
     if ( msg.sending )
@@ -813,6 +812,10 @@ ON_SIGNAL3( D0_SearchInput_iPhone_new, home_button, signal ){
         [bee.ui.appBoard showLogin];
         return;
     }
+    
+    
+    [[CartModel sharedInstance] create:nil number:nil spec:nil];
+    
 }
 
 

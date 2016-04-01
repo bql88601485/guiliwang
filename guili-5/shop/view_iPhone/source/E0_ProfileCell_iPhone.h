@@ -17,4 +17,7 @@
 #pragma mark -
 
 @interface E0_ProfileCell_iPhone : BeeUICell
+
+- (void)showCartCode:(BOOL )isShow;
+
 @end

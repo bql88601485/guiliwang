@@ -112,6 +112,9 @@ SUPPORT_RESOURCE_LOADING( YES )
 				$(@"#header-avatar").IMAGE( [UIImage imageNamed:@"profile_no_avatar_icon.png"] );
 			}
 			
+            
+            $(@"#header-avatar1").HIDE();
+            
 			$(@"#header-carema").SHOW();
 			$(@"#carema").SHOW();
 			$(@"#signin").HIDE();
@@ -138,6 +141,23 @@ SUPPORT_RESOURCE_LOADING( YES )
             $(@"#header-level-icon").HIDE();
             $(@"#header-level-name").HIDE();
 		}
+        
+        if ([UserModel online]) {
+            [self showCartCode:userModel.isShowCodeIcon];
+        }else{
+           [self showCartCode:NO];
+        }
+        
+        
+
+    }
+}
+
+- (void)showCartCode:(BOOL )isShow{
+    if (isShow) {
+         $(@"#header-avatar1").SHOW();
+    }else{
+         $(@"#header-avatar1").HIDE();
     }
 }
 

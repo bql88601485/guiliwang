@@ -45,13 +45,14 @@ DEF_SIGNAL( PHOTO_FROM_LIBRARY )
 DEF_SIGNAL( PHOTO_REMOVE )
 
 DEF_MODEL( UserModel,			userModel );
-
+DEF_MODEL(CartModel, carmodel);
 DEF_OUTLET( BeeUIScrollView, list )
 
 - (void)load
 {
     self.isHome = YES;
     self.userModel = [UserModel modelWithObserver:self];
+    self.carmodel = [CartModel modelWithObserver:self];
 }
 
 - (void)unload
@@ -105,7 +106,6 @@ ON_CREATE_VIEWS( signal )
     [self observeNotification:UserModel.UPDATED];
     
 }
-
 ON_DELETE_VIEWS( signal )
 {
     [self unobserveAllNotifications];
@@ -128,8 +128,11 @@ ON_WILL_APPEAR( signal )
         
         [self updateState];
     }
-    
-    
+    if ([UserModel online]) {
+        self.userModel.isShowCodeIcon = NO;   
+    }else{
+        self.userModel.isShowCodeIcon = NO;
+    }
 }
 
 ON_DID_APPEAR( signal )
@@ -450,6 +453,36 @@ ON_MESSAGE3( API, user_info, msg )
     if ( msg.succeed )
     {
         [self.list asyncReloadData];
+        
+        [self.carmodel cartCode];
+    }
+}
+
+ON_MESSAGE3( API, cart_code, msg )
+{
+    if ( msg.sending )
+    {
+    }
+    else
+    {
+        
+    }
+    
+    if ( msg.succeed )
+    {
+        
+      STATUS * status = msg.GET_OUTPUT (@"status");
+        if ([status.succeed intValue] == 1) {
+            
+            //扫描用户 展示图标
+            self.userModel.isShowCodeIcon = YES;
+            
+        }else{
+             self.userModel.isShowCodeIcon = NO;
+        }
+        
+        [self.list reloadData];
+        
     }
 }
 

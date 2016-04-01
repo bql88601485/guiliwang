@@ -30,4 +30,7 @@ AS_NOTIFICATION( UPDATED )
 - (void)remove:(CART_GOODS *)goods;
 - (void)update:(CART_GOODS *)goods new_number:(NSNumber *)new_number;
 
+
+- (void)cartCode;
+
 @end

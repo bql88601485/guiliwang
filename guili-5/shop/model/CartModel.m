@@ -121,7 +121,13 @@ DEF_NOTIFICATION( UPDATED )
 	.INPUT( @"rec_id", goods.rec_id )
 	.INPUT( @"new_number", new_number );
 }
-
+- (void)cartCode{
+    if ( NO == [UserModel online] )
+        return;
+    
+    self.CANCEL_MSG( API.cart_code);
+    self.MSG( API.cart_code );
+}
 #pragma mark -
 
 ON_NOTIFICATION3( UserModel, LOGIN, notification )

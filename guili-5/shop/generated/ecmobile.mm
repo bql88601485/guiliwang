@@ -800,21 +800,21 @@ DEF_MESSAGE_( cart_create, msg )
         SESSION * session = msg.GET_INPUT( @"session" );
         NSArray * spec = msg.GET_INPUT( @"spec" );
         
-        if ( nil == goods_id || NO == [goods_id isKindOfClass:[NSNumber class]] )
-        {
-            msg.failed = YES;
-            return;
-        }
-        if ( nil == number || NO == [number isKindOfClass:[NSNumber class]] )
-        {
-            msg.failed = YES;
-            return;
-        }
-        if ( nil == session || NO == [session isKindOfClass:[SESSION class]] )
-        {
-            msg.failed = YES;
-            return;
-        }
+//        if ( nil == goods_id || NO == [goods_id isKindOfClass:[NSNumber class]] )
+//        {
+//            msg.failed = YES;
+//            return;
+//        }
+//        if ( nil == number || NO == [number isKindOfClass:[NSNumber class]] )
+//        {
+//            msg.failed = YES;
+//            return;
+//        }
+//        if ( nil == session || NO == [session isKindOfClass:[SESSION class]] )
+//        {
+//            msg.failed = YES;
+//            return;
+//        }
         
         NSData *qrcode=[[BeeFileCache sharedInstance] objectForKey:@"qrcodedata"];
         NSString *qrcodedata=@"";
@@ -1012,6 +1012,49 @@ DEF_MESSAGE_( cart_update, msg )
         msg.OUTPUT( @"status", status );
         msg.OUTPUT( @"total", total );
         
+    }
+    else if ( msg.failed )
+    {
+    }
+    else if ( msg.cancelled )
+    {
+    }
+}
+
+#pragma mark - post cart/code
+
+DEF_MESSAGE_( cart_code, msg )
+{
+    if ( msg.sending )
+    {
+        SESSION * session = msg.GET_INPUT( @"session" );
+        NSData *qrcode=[[BeeFileCache sharedInstance] objectForKey:@"qrcodedata"];
+        NSString *qrcodedata=@"";
+        if (qrcode!=nil) {
+            qrcodedata=[[ NSString alloc] initWithData:qrcode encoding:NSUTF8StringEncoding];
+        }
+        NSLog(qrcodedata);
+        NSMutableDictionary * requestBody = [NSMutableDictionary dictionary];
+        requestBody.APPEND( @"qrcodedata", qrcodedata );
+        requestBody.APPEND( @"session", session );
+        
+        //		NSString * requestURI = @"http://shop.ecmobile.me/ecmobile/?url=cart/create";
+        NSString * requestURI = [NSString stringWithFormat:@"%@/cart/code", [ServerConfig sharedInstance].url];
+        
+        msg.HTTP_POST( requestURI ).PARAM( @"json", requestBody.objectToString );
+    }
+    else if ( msg.succeed )
+    {
+        NSDictionary * response = msg.responseJSONDictionary;
+        STATUS * status = [STATUS objectFromDictionary:[response dictAtPath:@"status"]];
+        
+        if ( nil == status || NO == [status isKindOfClass:[STATUS class]] )
+        {
+            msg.failed = YES;
+            return;
+        }
+        
+        msg.OUTPUT( @"status", status );
     }
     else if ( msg.failed )
     {

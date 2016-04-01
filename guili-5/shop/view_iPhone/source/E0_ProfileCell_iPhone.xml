@@ -12,6 +12,7 @@
                     <image id="header-avatar" class="header-avatar"/>
                     <button id="header-carema" class="header-carema"/>
                     <button id="carema"/>
+                    <image id="header-avatar1" class="header-avatar1"/>
                 </col>
                 
                 <label id="name" class="header-name"></label>
@@ -269,6 +270,16 @@
         border-radius: 32px;
         border-width: 4px;
         border-color: #fff;
+        }
+        
+        .header-avatar1 {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 43;
+        left: 43;
+        image-mode: fill;
+        background-image: url(72.jpg);
         }
         
         .header-level-box {
