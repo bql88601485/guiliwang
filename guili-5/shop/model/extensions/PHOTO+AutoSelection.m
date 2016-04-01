@@ -23,14 +23,18 @@
 {
 	if ( [SettingModel sharedInstance].photoMode == SettingModel.PHOTO_MODE_AUTO )
 	{
-		if ( [BeeReachability isReachableViaWIFI] )
-		{
-			return self.img ? self.img : (self.url ? self.url : self.thumb);
-		}
-		else
-		{
-			return self.thumb ? self.thumb : self.small;
-		}
+        
+        
+        return self.img ? self.img : (self.url ? self.url : self.thumb);
+        
+//		if ( [BeeReachability isReachableViaWIFI] )
+//		{
+//			return self.img ? self.img : (self.url ? self.url : self.thumb);
+//		}
+//		else
+//		{
+//			return self.thumb ? self.thumb : self.small;
+//		}
 	}
 	else if ( [SettingModel sharedInstance].photoMode == SettingModel.PHOTO_MODE_HIGH )
 	{
@@ -44,25 +48,30 @@
 
 - (NSString *)thumbURL
 {
-	if ( [SettingModel sharedInstance].photoMode == SettingModel.PHOTO_MODE_AUTO )
-	{
-		if ( [BeeReachability isReachableViaWIFI] )
-		{
-			return self.thumb ? self.thumb : self.small;
-		}
-		else
-		{
-			return self.small ? self.small : self.thumb;
-		}
-	}
-	else if ( [SettingModel sharedInstance].photoMode == SettingModel.PHOTO_MODE_HIGH )
-	{
-		return self.thumb ? self.thumb : self.small;
-	}
-	else
-	{
-		return self.small ? self.small : self.thumb;
-	}
+    return self.thumb ? self.thumb : self.small;
+    
+//	if ( [SettingModel sharedInstance].photoMode == SettingModel.PHOTO_MODE_AUTO )
+//	{
+//        
+//        return self.thumb ? self.thumb : self.small;
+//        
+////		if ( [BeeReachability isReachableViaWIFI] )
+////		{
+////			return self.thumb ? self.thumb : self.small;
+////		}
+////		else
+////		{
+////			return self.small ? self.small : self.thumb;
+////		}
+//	}
+//	else if ( [SettingModel sharedInstance].photoMode == SettingModel.PHOTO_MODE_HIGH )
+//	{
+//		return self.thumb ? self.thumb : self.small;
+//	}
+//	else
+//	{
+//		return self.small ? self.small : self.thumb;
+//	}
 }
 
 @end
