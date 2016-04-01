@@ -7079,9 +7079,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-fobjc-arc";
-				PRODUCT_BUNDLE_IDENTIFIER = .guiliwang;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sanmeditech.Glucose2;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "1573e55e-efe9-4112-9fb8-fc0ff9d3ea7c";
+				PROVISIONING_PROFILE = "6f57b13a-63d2-4819-bfc7-0b15f07afda9";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -7140,9 +7140,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-fobjc-arc";
-				PRODUCT_BUNDLE_IDENTIFIER = .guiliwang;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sanmeditech.Glucose2;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "1573e55e-efe9-4112-9fb8-fc0ff9d3ea7c";
+				PROVISIONING_PROFILE = "6f57b13a-63d2-4819-bfc7-0b15f07afda9";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -7230,9 +7230,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-fobjc-arc";
-				PRODUCT_BUNDLE_IDENTIFIER = .guiliwang;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sanmeditech.Glucose2;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "1573e55e-efe9-4112-9fb8-fc0ff9d3ea7c";
+				PROVISIONING_PROFILE = "6f57b13a-63d2-4819-bfc7-0b15f07afda9";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
 				WRAPPER_EXTENSION = app;

@@ -27413,6 +27413,9 @@
 				<array>
 					<dict>
 					<key>areas</key>
+					<array>
+						<dict>
+					<key>areas</key>
 					<dict>
 						<key>id</key>
 						<string>3383</string>
@@ -27421,6 +27424,13 @@
 						<key>zipcode</key>
 						<string>246000</string>
 					</dict>
+					<key>id</key>
+					<string>396</string>
+					<key>name</key>
+					<string>澳门</string>
+				</dict>
+					</array>
+					
 					<key>id</key>
 					<string>396</string>
 					<key>name</key>
