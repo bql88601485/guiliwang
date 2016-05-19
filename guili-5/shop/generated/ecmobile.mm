@@ -1055,6 +1055,7 @@ DEF_MESSAGE_( cart_code, msg )
         }
         
         msg.OUTPUT( @"status", status );
+        msg.OUTPUT( @"data", [response objectForKey:@"data"] );
     }
     else if ( msg.failed )
     {

@@ -473,9 +473,14 @@ ON_MESSAGE3( API, cart_code, msg )
         
       STATUS * status = msg.GET_OUTPUT (@"status");
         if ([status.succeed intValue] == 1) {
+            NSDictionary *data = msg.GET_OUTPUT(@"data");
+            if ([[data objectForKey:@"codeStatus"] boolValue]) {
+                //扫描用户 展示图标
+                self.userModel.isShowCodeIcon = YES;
+            }else{
+                self.userModel.isShowCodeIcon = NO;
+            }
             
-            //扫描用户 展示图标
-            self.userModel.isShowCodeIcon = YES;
             
         }else{
              self.userModel.isShowCodeIcon = NO;

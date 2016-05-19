@@ -66,7 +66,6 @@ DEF_SINGLETON(WeiXinLogin);
 -(void)getUserInfo
 {
     NSString *url =[NSString stringWithFormat:@"https://api.weixin.qq.com/sns/userinfo?access_token=%@&openid=%@",access_token,openid];
-    __block NSString *weakS = openid;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURL *zoneUrl = [NSURL URLWithString:url];
         NSString *zoneStr = [NSString stringWithContentsOfURL:zoneUrl encoding:NSUTF8StringEncoding error:nil];
@@ -76,9 +75,7 @@ DEF_SINGLETON(WeiXinLogin);
                 NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                 
                 if (self.kblock) {
-                    NSMutableDictionary *dic1 = [[NSMutableDictionary alloc] initWithDictionary:dic];
-                    [dic1 setObject:weakS forKey:@"openid"];
-                    self.kblock(WeiXinLoginStatus_OK, dic1);
+                    self.kblock(WeiXinLoginStatus_OK, dic);
                 }
             }
         });
