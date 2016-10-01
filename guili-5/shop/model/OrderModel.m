@@ -86,6 +86,18 @@
 	.INPUT( @"pagination", page );
 }
 
+- (void)gotoOrder_paydata:(NSString *)out_trade_no order_id:(NSString *)order_id{
+    
+    if ( NO == [UserModel online] )
+        return;
+    
+    self.CANCEL_MSG( API.order_paydata );
+    self.MSG( API.order_paydata )
+    .INPUT( @"out_trade_no", out_trade_no )
+    .INPUT( @"order_id", order_id );
+
+}
+
 #pragma mark -
 
 - (void)affirmReceived:(ORDER *)order

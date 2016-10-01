@@ -521,6 +521,9 @@ AS_MESSAGE( order_cancel );
 // POST order/list
 AS_MESSAGE( order_list );
 
+// order/paydata
+AS_MESSAGE(order_paydata);
+
 // POST order/pay
 AS_MESSAGE( order_pay );
 

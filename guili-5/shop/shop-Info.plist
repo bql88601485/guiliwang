@@ -21,7 +21,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4.2</string>
+	<string>1.6.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -50,9 +50,19 @@
 				<string>tencent1104138285</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>guiliwang</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>guiliwang</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>16.05.19</string>
+	<string>16.10.01</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>weixin</string>
@@ -64,6 +74,7 @@
 		<string>mqqopensdkapiV3</string>
 		<string>mqqwpa</string>
 		<string>mqqopensdkapiV2</string>
+		<string>alipay</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -72,6 +83,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>贵礼网需要您的同意,才能访问相册</string>
+	<key>NSContactsUsageDescription</key>
+	<string>贵礼网需要您的同意,才能访问通信录</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>贵礼网需要您的同意,才能访问麦克风</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>贵礼网需要您的同意,才能访问相机</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>

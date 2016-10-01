@@ -30,9 +30,9 @@
 #import "E1_PendingPaymentBoard_iPhone.h"
 #import "E2_PendingShippedBoard_iPhone.h"
 
-#import "bee.services.alipay.h"
 #import "bee.services.uppayplugin.h"
-
+#import "AlisPay_Bai.h"
+#import "Order.h"
 #pragma mark -
 
 @interface C1_CheckOutBoard_iPhone()
@@ -225,40 +225,40 @@ ON_SIGNAL3( C1_CheckOutBoard_iPhone, ACTION_BACK, signal )
  */
 ON_SIGNAL3( C1_CheckOutBoard_iPhone, PAY_SDK, signal )
 {
-	ALIAS( bee.services.alipay,	alipay );
-
-	if ( alipay.installed )
-	{
-		@weakify(self);
-
-		alipay.order.no		= self.flowModel.order_info.order_sn;
-		alipay.order.name	= self.flowModel.order_info.subject;
-		alipay.order.desc	= self.flowModel.order_info.desc;
-		alipay.order.price	= self.flowModel.order_info.order_amount;
-
-		alipay.whenWaiting = ^
-		{
-		};
-		alipay.whenSucceed = ^
-		{
-			@normalize(self);
-			[self didPaySuccess];
-		};
-		alipay.whenFailed = ^
-		{
-			@normalize(self);
-			[self didPayFail];
-		};
-		alipay.PAY();
-	}
-	else
-	{
-		BeeUIAlertView * alert = [BeeUIAlertView spawn];
-		alert.message = @"未安装支付宝,是否安装";
-		[alert addCancelTitle:__TEXT(@"button_ignore") signal:self.CANCEL_APP];
-		[alert addButtonTitle:__TEXT(@"button_forward") signal:self.INSTALLATION_APP];
-		[alert showInViewController:self];
-	}
+//	ALIAS( bee.services.alipay,	alipay );
+//
+//	if ( alipay.installed )
+//	{
+//		@weakify(self);
+//
+//		alipay.order.no		= self.flowModel.order_info.order_sn;
+//		alipay.order.name	= self.flowModel.order_info.subject;
+//		alipay.order.desc	= self.flowModel.order_info.desc;
+//		alipay.order.price	= self.flowModel.order_info.order_amount;
+//
+//		alipay.whenWaiting = ^
+//		{
+//		};
+//		alipay.whenSucceed = ^
+//		{
+//			@normalize(self);
+//			[self didPaySuccess];
+//		};
+//		alipay.whenFailed = ^
+//		{
+//			@normalize(self);
+//			[self didPayFail];
+//		};
+//		alipay.PAY();
+//	}
+//	else
+//	{
+//		BeeUIAlertView * alert = [BeeUIAlertView spawn];
+//		alert.message = @"未安装支付宝,是否安装";
+//		[alert addCancelTitle:__TEXT(@"button_ignore") signal:self.CANCEL_APP];
+//		[alert addButtonTitle:__TEXT(@"button_forward") signal:self.INSTALLATION_APP];
+//		[alert showInViewController:self];
+//	}
 }
 
 /**
@@ -266,15 +266,32 @@ ON_SIGNAL3( C1_CheckOutBoard_iPhone, PAY_SDK, signal )
  */
 ON_SIGNAL3( C1_CheckOutBoard_iPhone, PAY_WAP, signal )
 {
-	ALIAS( bee.services.alipay,	alipay );
+	//ALIAS( bee.services.alipay,	alipay );
 
 	// 进行wap支付
-	H1_PayBoard_iPhone * board	= [H1_PayBoard_iPhone board];
-	board.backBoard				= self.shopingCartBod;
-	board.orderID				= self.flowModel.order_id;
-	board.order_info			= self.flowModel.order_info;
-	board.wapCallBackURL		= alipay.config.wapCallBackURL;
-	[self.stack pushBoard:board animated:YES];
+//	H1_PayBoard_iPhone * board	= [H1_PayBoard_iPhone board];
+//	board.backBoard				= self.shopingCartBod;
+//	board.orderID				= self.flowModel.order_id;
+//	board.order_info			= self.flowModel.order_info;
+//	//board.wapCallBackURL		= alipay.config.wapCallBackURL;
+    Order *order = [[Order alloc] init];
+    order.showUrl = @"m.alipay.com";
+    order.tradeNO = self.flowModel.order_info.order_sn;
+    order.amount = self.flowModel.order_info.order_amount;
+    order.productName = self.flowModel.order_info.subject;
+    order.productDescription = self.flowModel.order_info.desc;
+    [[AlisPay_Bai initAlisPay] PayOrder:order callback:^(NSDictionary *resultDic) {
+       
+        if ([[resultDic objectForKey:@"resultStatus"] integerValue] == 9000) {
+            
+            [self.orderModel gotoOrder_paydata:self.flowModel.order_info.order_sn order_id:self.flowModel.order_info.order_id];
+            
+        }
+        else {
+            [self presentFailureTips:[resultDic objectForKey:@"memo"]];
+        }
+        
+    }];
 }
 
 /**
@@ -443,6 +460,45 @@ ON_SIGNAL3( BeeUIPickerView, CONFIRMED, signal )
 }
 
 #pragma mark -
+
+
+
+ON_MESSAGE3( API, order_paydata, msg){
+    
+    if ( msg.sending )
+    {
+        if ( NO == self.flowModel.loaded )
+        {
+            [self presentLoadingTips:__TEXT(@"tips_loading")];
+        }
+    }
+    else
+    {
+        [self dismissTips];
+    }
+    
+    if ( msg.succeed )
+    {
+        NSDictionary * status = msg.GET_OUTPUT( @"data" );
+        
+        if ( [[status objectForKey:@"statusvalue"] boolValue] )
+        {
+            [self presentSuccessTips:@"支付成功"];
+            [self.stack popBoardAnimated:YES];
+        }
+        else
+        {
+            [self showErrorTips:msg];
+        }
+    }
+    else if ( msg.failed )
+    {
+        [self showErrorTips:msg];
+    }
+
+    
+}
+
 
 ON_MESSAGE3( API, flow_checkOrder, msg )
 {

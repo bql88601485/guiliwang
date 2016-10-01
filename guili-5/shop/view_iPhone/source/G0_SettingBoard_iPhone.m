@@ -161,7 +161,7 @@ ON_SIGNAL3( G0_SettingCell_iPhone, setting_rate, signal )
 
 ON_SIGNAL3( G0_SettingCell_iPhone, setting_service, signal )
 {
-    [self openTelephone:@"0851-86507523"];
+    [self openTelephone:@"0851-88599312"];
 }
 
 ON_SIGNAL3( G0_SettingCell_iPhone, setting_website, signal )

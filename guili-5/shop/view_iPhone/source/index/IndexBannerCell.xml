@@ -6,18 +6,19 @@
         <image id="bg" class="Icon_Image"/>
         <label class="line" ></label>
         <button id="XQ_button" class="XY"></button>
-        <label class="text" >贵阳主城区当日直达快到报! [详情]</label>
+        <label class="text" >            [详情]</label>
     </row>
     <style type="text/css">
         .wrapper {
         width: 100%;
         height: 32px;
+        background-color:#ffffff;
         }
         #bg {
         image: url(drd.png);
         image-mode: stretch;
-        width:60;
-        height:100%;
+        width:50;
+        height:15;
         left: 20px;
         
         }

@@ -21,7 +21,6 @@
 #import "ecmobile.h"
 #import "MobClick.h"
 
-#import "bee.services.alipay.h"
 #import "bee.services.location.h"
 #import "bee.services.share.weixin.h"
 #import "bee.services.share.sinaweibo.h"
@@ -35,6 +34,7 @@
 
 #import "CoreNewFeatureVC.h"
 
+#import <AlipaySDK/AlipaySDK.h>
 @implementation AppDelegate
 
 #pragma mark -
@@ -155,7 +155,6 @@
     //	ALIAS( bee.services.share.weixin,		weixin );
     //	ALIAS( bee.services.share.tencentweibo,	tweibo );
     //	ALIAS( bee.services.share.sinaweibo,	sweibo );
-    ALIAS( bee.services.alipay,				alipay );
     ALIAS( bee.services.siri,				siri );
     ALIAS( bee.services.location,			lbs );
     
@@ -164,15 +163,7 @@
     [userDefaults setObject:@"wxceee178a9a48a66a" forKey:@"K_WX_APPID"];
     [userDefaults setObject:@"d4624c36b6795d1d99dcf0547af5443d" forKey:@"K_PAY_SIGN_KEY"];
     [WXApi registerApp:[userDefaults objectForKey:@"K_WX_APPID"] withDescription:@"d4624c36b6795d1d99dcf0547af5443d"];
-    
-    
-    // 配置支付宝
-    alipay.config.parnter		= [userDefaults objectForKey:@"K_ALIPAY_PARTNER"];
-    alipay.config.seller		= [userDefaults objectForKey:@"K_ALIPAY_SELLER"];
-    alipay.config.privateKey	= [userDefaults objectForKey:@"K_ALIPAY_PRIVATE"];
-    alipay.config.publicKey		= [userDefaults objectForKey:@"K_ALIPAY_PUBLIC"];
-    alipay.config.notifyURL		= [userDefaults objectForKey:@"K_ALIPAY_CALLBACK"];
-    
+
     // 配置语音识别
     siri.config.showUI			= YES;
     siri.config.appID			= @"539980a8";
@@ -192,13 +183,47 @@
 
 #pragma mark - login
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    
-    return [TencentOAuth HandleOpenURL:url] || [WXApi handleOpenURL:url delegate:[WeiXinLogin sharedInstance]];
-}
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
     
     return [TencentOAuth HandleOpenURL:url] || [WXApi handleOpenURL:url delegate:[WeiXinLogin sharedInstance]];
 }
+
+
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        // 支付跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"GOTO_PAY_ZFB" object:resultDic];
+        }];
+    }
+    
+    
+    
+    [TencentOAuth HandleOpenURL:url] || [WXApi handleOpenURL:url delegate:[WeiXinLogin sharedInstance]];
+    
+    return YES;
+}
+
+// NOTE: 9.0以后使用新API接口
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        // 支付跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"GOTO_PAY_ZFB" object:resultDic];
+        }];
+    }
+    
+     [TencentOAuth HandleOpenURL:url] || [WXApi handleOpenURL:url delegate:[WeiXinLogin sharedInstance]];
+    return YES;
+}
+
 
 @end

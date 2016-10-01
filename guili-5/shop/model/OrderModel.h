@@ -27,4 +27,7 @@
 - (void)cancel:(ORDER *)order;
 - (void)pay:(ORDER *)order;
 
+
+- (void)gotoOrder_paydata:(NSString *)out_trade_no order_id:(NSString *)order_id;
+
 @end

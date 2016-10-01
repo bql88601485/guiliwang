@@ -486,7 +486,7 @@ static NSMutableArray *		__allBoards = nil;
         [self sendUISignal:BeeUIBoard.WILL_APPEAR];
     }
     
-    [self performSelector:@selector(setNav) withObject:nil afterDelay:0.0];
+    [self setNav];
 }
 
 #pragma mark -
@@ -646,16 +646,10 @@ static NSMutableArray *		__allBoards = nil;
         // 配置导航条
         {
             [BeeUINavigationBar setTitleColor:[UIColor blackColor]];
-            [BeeUINavigationBar setBackgroundColor:[UIColor whiteColor]];
+//            [BeeUINavigationBar setBackgroundColor:[UIColor whiteColor]];
             
-            if ( IOS7_OR_LATER )
-            {
-                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg_iphone5Two.png"]];
-            }
-            else
-            {
-                [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"]];
-            }
+            [BeeUINavigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg_iphone5Two.png"]];
+            
             UILabel *line = (id )[self.navigationController.navigationBar viewWithTag:10010];
             if (line) {
                 line.backgroundColor = [UIColor lightGrayColor];

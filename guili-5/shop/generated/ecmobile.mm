@@ -916,6 +916,7 @@ DEF_MESSAGE_( cart_list, msg )
 {
     if ( msg.sending )
     {
+        
         SESSION * session = msg.GET_INPUT( @"session" );
         
         if ( nil == session || NO == [session isKindOfClass:[SESSION class]] )
@@ -967,6 +968,7 @@ DEF_MESSAGE_( cart_update, msg )
 {
     if ( msg.sending )
     {
+        
         NSNumber * new_number = msg.GET_INPUT( @"new_number" );
         NSNumber * rec_id = msg.GET_INPUT( @"rec_id" );
         SESSION * session = msg.GET_INPUT( @"session" );
@@ -1706,6 +1708,68 @@ DEF_MESSAGE_( order_list, msg )
     }
 }
 
+#pragma mark - order_paydata
+DEF_MESSAGE_( order_paydata, msg )
+{
+    if ( msg.sending )
+    {
+        SESSION * session = msg.GET_INPUT( @"session" );
+        NSString * out_trade_no = msg.GET_INPUT( @"out_trade_no" );
+        NSString * order_id = msg.GET_INPUT( @"order_id" );
+        
+        if ( nil == session || NO == [session isKindOfClass:[SESSION class]] )
+        {
+            msg.failed = YES;
+            return;
+        }
+        if ( nil == out_trade_no || NO == [out_trade_no isKindOfClass:[NSString class]] )
+        {
+            msg.failed = YES;
+            return;
+        }
+        
+        if ( nil == order_id || NO == [order_id isKindOfClass:[NSString class]] )
+        {
+            msg.failed = YES;
+            return;
+        }
+        
+        NSMutableDictionary * requestBody = [NSMutableDictionary dictionary];
+        requestBody.APPEND( @"session", session );
+        requestBody.APPEND( @"out_trade_no", out_trade_no );
+        requestBody.APPEND( @"order_id", order_id );
+        
+        //		NSString * requestURI = @"http://shop.ecmobile.me/ecmobile/?url=order/list";
+        NSString * requestURI = [NSString stringWithFormat:@"%@/order/paydata", [ServerConfig sharedInstance].url];
+        
+        msg.HTTP_POST( requestURI ).PARAM( @"json", requestBody.objectToString );
+    }
+    else if ( msg.succeed )
+    {
+        NSDictionary * response = msg.responseJSONDictionary;
+        STATUS * status = [STATUS objectFromDictionary:[response dictAtPath:@"status"]];
+        NSArray * data = [ORDER objectsFromArray:[response arrayAtPath:@"data"]];
+       
+        if ( nil == status || NO == [status isKindOfClass:[STATUS class]] )
+        {
+            msg.failed = YES;
+            return;
+        }
+        
+        msg.OUTPUT( @"data", [response dictAtPath:@"data"] );
+        msg.OUTPUT( @"status", status );
+        msg.OUTPUT( @"data", data );
+        
+    }
+    else if ( msg.failed )
+    {
+    }
+    else if ( msg.cancelled )
+    {
+    }
+}
+
+
 #pragma mark - POST order/pay
 
 DEF_MESSAGE_( order_pay, msg )
@@ -2175,6 +2239,7 @@ DEF_MESSAGE_( user_info, msg )
     }
     else if ( msg.failed )
     {
+        
     }
     else if ( msg.cancelled )
     {
@@ -2381,9 +2446,7 @@ DEF_MESSAGE2( existuser, msg){
         NSString *type = msg.GET_INPUT ( @"type" );
         NSString *username = msg.GET_INPUT ( @"username" );
         NSString *openid = msg.GET_INPUT ( @"openid" );
-        if (openid.length > 25) {
-            openid = [openid substringWithRange:NSMakeRange(0, 20)];
-        }
+       
         
         
         if (nil == type || nil == username || nil ==openid ) {
@@ -2403,7 +2466,7 @@ DEF_MESSAGE2( existuser, msg){
         requestBody.APPEND( @"username", username );
         requestBody.APPEND( @"openid", openid);
         requestBody.APPEND( @"qrcodedata", qrcodedata );
-        requestBody.APPEND( @"password", @"qq123456");
+        requestBody.APPEND( @"password", @"123456");
         
         
         NSString * requestURI = [NSString stringWithFormat:@"%@/user/existuser", [ServerConfig sharedInstance].url];

@@ -135,27 +135,27 @@ DEF_MODEL( CategoryModel,	categoryModel );
     NSString *idd = @"";
     switch (num1) {
         case 1:
-            totle = @"酒类直供";
+            totle = @"手礼文化";
             idd = @"137";
             break;
         case 2:
-            totle = @"有机茶叶";
+            totle = @"地道特色";
             idd = @"138";
             break;
         case 3:
-            totle = @"原生食品";
+            totle = @"虔物文艺";
             idd = @"139";
             break;
         case 4:
-            totle = @"特色调料";
+            totle = @"生态美食";
             idd = @"140";
             break;
         case 5:
-            totle = @"养生保健";
+            totle = @"秘境山珍";
             idd = @"141";
             break;
         case 6:
-            totle = @"艺术收藏";
+            totle = @"虔物文艺";
             idd = @"122";
             break;
         default:
