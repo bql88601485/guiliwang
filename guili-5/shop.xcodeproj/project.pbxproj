@@ -7003,7 +7003,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: JunJie Ma (WP6KCFN4J8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = AT7FZWK9R9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7052,8 +7052,8 @@
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shushentech.guiliwang;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "7078162a-7c89-4561-9c10-5784d25c70c9";
-				PROVISIONING_PROFILE_SPECIFIER = guiliwang;
+				PROVISIONING_PROFILE = "71bae5be-cc92-4d61-9c77-a9c9832c0775";
+				PROVISIONING_PROFILE_SPECIFIER = dev_guiliwang;
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -7071,7 +7071,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: JunJie Ma (WP6KCFN4J8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = AT7FZWK9R9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7120,8 +7120,8 @@
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shushentech.guiliwang;
 				PRODUCT_NAME = ECMobile;
-				PROVISIONING_PROFILE = "7078162a-7c89-4561-9c10-5784d25c70c9";
-				PROVISIONING_PROFILE_SPECIFIER = guiliwang;
+				PROVISIONING_PROFILE = "71bae5be-cc92-4d61-9c77-a9c9832c0775";
+				PROVISIONING_PROFILE_SPECIFIER = dev_guiliwang;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 armv7s";
 				WRAPPER_EXTENSION = app;

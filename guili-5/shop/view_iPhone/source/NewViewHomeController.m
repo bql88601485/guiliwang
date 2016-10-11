@@ -143,7 +143,7 @@ DEF_MODEL( CategoryModel,	categoryModel );
             idd = @"138";
             break;
         case 3:
-            totle = @"虔物文艺";
+            totle = @"虔物手艺";
             idd = @"139";
             break;
         case 4:
@@ -155,7 +155,7 @@ DEF_MODEL( CategoryModel,	categoryModel );
             idd = @"141";
             break;
         case 6:
-            totle = @"虔物文艺";
+            totle = @"虔物艺术";
             idd = @"122";
             break;
         default:
