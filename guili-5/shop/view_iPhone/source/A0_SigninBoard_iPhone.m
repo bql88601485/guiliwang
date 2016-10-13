@@ -109,6 +109,8 @@ DEF_MODEL( UserModel, userModel )
         
         if (status == TenCentLoginStatus_OK) {
             [blck.userModel OtherUpApp:@"qq" username:[userInfo objectForKey:@"nickname"] openid:[userInfo objectForKey:@"openId"]];
+        }else{
+            [self presentFailureTips:@"登陆发生错误"];
         }
         
     }];
@@ -117,7 +119,6 @@ DEF_MODEL( UserModel, userModel )
     
     if ([WXApi isWXAppInstalled]) {
         
-        [self presentLoadingTips:__TEXT(@"tips_loading")];
         __block A0_SigninBoard_iPhone *blck = self;
         WeiXinLogin *login = [WeiXinLogin sharedInstance];
         [login WeiXinLogin:^(WeiXinLoginStatus status, NSDictionary *userInfo) {
